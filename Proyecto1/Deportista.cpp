@@ -4,7 +4,7 @@ Deportista::Deportista(string ced, string nom, string tel, Fecha* f) {
 	_cedula = ced;
 	_nombre = nom;
 	_telefono = tel;
-	this->_ptrFecha;
+	this->_ptrFecha = f;
 
 }
 Deportista::~Deportista() {

@@ -58,7 +58,7 @@ bool Menu::llamarMenus() {
 string Menu::menuPrincipal() {
 	stringstream s;
 	s << "QUE DESEA HACER?" << endl
-		<< "[1]Registrar o editar clientes-----------------" << endl
+		<< "[1]Registrar o editar clientes--------" << endl
 		<< "[2]Registro y control de pagos--------" << endl
 		<< "[3]Reportes generales-----------------" << endl
 		<< "[4]Registro y actualizacion de cursos-" << endl
@@ -71,8 +71,8 @@ string Menu::menuPrincipal() {
 string Menu::menuCliente() {
 	stringstream s;
 	s << "MENU CLIENTES" << endl
-		<< "[1]Registrar Clientes-----------------" << endl
-		<< "[2]Edicion e clientes--------" << endl
+		<< "[1]Registrar clientes-----------------" << endl
+		<< "[2]Edicion de clientes----------------" << endl
 		<< "[3]Eliminar clientess-----------------" << endl
 		<< "[4]Cancelar---------------------------" << endl;
 
@@ -138,6 +138,7 @@ bool Menu::opMenuCliente(int opC) {
 		imprimirString("Cantidad de triatlones ganados:");
 		canTriaGanados = recivirDouble();
 
+		system("pause");
 		cliente = new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
 		cout << cliente->toString();
 		enter();

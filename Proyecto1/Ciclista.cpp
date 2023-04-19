@@ -13,7 +13,7 @@ double Ciclista::getTempProm() { return _temPromedio; }
 
 string Ciclista::toString() {
 	stringstream s;
-	s << "\t\t" << this->_horasEntrenam << endl;
-	s << "\t\t" << this->_temPromedio << endl;
+	s << "\t" << "Horas entrnadas" << "................." << this->_horasEntrenam << endl;
+	s << "\t" << "Temperatura promedio" << "............" << this->_temPromedio << endl;
 	return s.str();
 }

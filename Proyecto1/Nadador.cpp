@@ -16,9 +16,9 @@ double Nadador::getPeso() { return _peso; }
 double Nadador::getIMC() { return _IMC; }
 string Nadador::toString() {
 	stringstream s;
-	s << "\t\t" << this->_IMC << endl;
-	s << "\t\t" << this->_masaMuscular << endl;
-	s << "\t\t" << this->_peso << endl;
+	s << "\t" << "Indice masa muscular" << "............" << this->_masaMuscular << endl;
+	s << "\t" << "Peso" << "............................" << this->_peso << endl;
+	s << "\t" << "Porcentaje grasa corporal" << "......." << this->_IMC << endl;
 	return s.str();
 
 }
