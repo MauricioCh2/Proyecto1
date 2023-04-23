@@ -1,6 +1,6 @@
 #include "Menu.h"
 void Menu::inicio() {
-
+	_gym = new Gym();
 	bool fin = false;
 	imprimirString("Bienvenido al GYM de triatlon");
 
@@ -140,7 +140,7 @@ bool Menu::opMenuCliente(int opC) {
 
 		system("pause");
 		cliente = new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
-		cout << cliente->toString();
+		_gym->ingresarListaClientes(cliente);
 		enter();
 		limpiarPantalla();
 		break;

@@ -30,6 +30,7 @@ Nada de esto es necesario pero para llevar un orden y que se vea coquete no esta
 #include "Utilities.h"
 #include "Gym.h"
 #include "Fecha.h"
+#include "Triatlonista.h"
 //#include "Archivos.h"
 using namespace std;
 

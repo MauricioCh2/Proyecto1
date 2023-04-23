@@ -24,8 +24,10 @@
     <ClInclude Include="Deportista.h" />
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="Gym.h" />
+    <ClInclude Include="Lista_Template.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Nadador.h" />
+    <ClInclude Include="Nodo_Template.h" />
     <ClInclude Include="Triatlonista.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
@@ -34,6 +36,7 @@
     <ClCompile Include="Corredor.cpp" />
     <ClCompile Include="Deportista.cpp" />
     <ClCompile Include="Fecha.cpp" />
+    <ClCompile Include="Gym.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Nadador.cpp" />
