@@ -16,6 +16,8 @@ public:
 	T* getInfo();
 	void setSiguiente(Nodo<T>*);
 	Nodo<T>* getSig();
+	string toStringNodo() const;
+
 	
 };
 template <class T>
@@ -47,4 +49,8 @@ void Nodo<T>::setSiguiente(Nodo* s) {
 template <class T>
 Nodo<T>* Nodo<T>::getSig() {
 	return _siguiente;
+}
+template <class T>
+string Nodo<T>::toStringNodo()const {
+	return _info->toString();
 }

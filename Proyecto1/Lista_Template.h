@@ -17,6 +17,7 @@ public:
 	virtual int contador();
 	template <class T> // NOta: jamas hacer esto dentro de la clase, solo serviria para un tipo de dato 
 	friend ostream& operator << (ostream& out, ListaT<T>& l);//friend le da acceso a todos los miembros de la clase por esto no serviria sin friend
+	string toString();
 };
 template <class T>
 ostream& operator << (ostream& out, ListaT<T>& l) { 
@@ -95,4 +96,14 @@ int ListaT<T>::contador() {
 		_actual = _actual->getSig();
 	}
 	return cont;
+}
+template <class T>
+string ListaT<T>::toString() {
+	stringstream s;
+	_actual = _primero;
+	while (_actual != NULL) {
+		s << _actual->toStringNodo();
+		_actual = _actual->getSig();
+	}
+	return s.str();
 }

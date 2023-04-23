@@ -43,21 +43,23 @@ public:
 	void inicio();
 	bool llamarMenus();
 	string menuPrincipal();
-	//clientes----------------------------------------------------------
-	string menuCliente();
-	bool opMenuCliente(int);
-	//Pagos-------------------------------------------------------------
-	string menuPagos();
-	bool opMenuPAgos(int);
-	//Cursos------------------------------------------------------------
+	//Administracion general--------------------------------------------
+	string menuAdministracion();
+	bool opMenuAdministracion(int);
+	//Control de deportistas--------------------------------------------
+	string menuDeportista();
+	bool opMenuDeportista(int);
+	//Control de Cursos-------------------------------------------------
 	string menuCursos();
 	bool opMenuCursos(int);
-	//Reporte generales-------------------------------------------------
-	string menuReportesGenerales();
-	bool opMenuReportes(int);
-	//Reservaciones-----------------------------------------------------
-	string menuReservaciones();
-	bool opMenuReservaciones(int);
+	//Control de Grupos-------------------------------------------------
+	string menuGrupos();
+	bool opMenuGrupos(int);
+	//Control de pagos--------------------------------------------------
+	string menuPagos();
+	bool opMenuPagos(int);
+	//Guardar en Archivos y salir 
+	//realmente esto no requiere metodo 
 
 
 
