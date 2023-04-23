@@ -48,6 +48,12 @@
     <ClInclude Include="Nodo_Template.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Curso.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Grupo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ciclista.cpp">
@@ -78,6 +84,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Gym.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Curso.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Grupo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

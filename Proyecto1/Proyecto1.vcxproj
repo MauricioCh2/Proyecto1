@@ -21,8 +21,10 @@
   <ItemGroup>
     <ClInclude Include="Ciclista.h" />
     <ClInclude Include="Corredor.h" />
+    <ClInclude Include="Curso.h" />
     <ClInclude Include="Deportista.h" />
     <ClInclude Include="Fecha.h" />
+    <ClInclude Include="Grupo.h" />
     <ClInclude Include="Gym.h" />
     <ClInclude Include="Lista_Template.h" />
     <ClInclude Include="Menu.h" />
@@ -34,8 +36,10 @@
   <ItemGroup>
     <ClCompile Include="Ciclista.cpp" />
     <ClCompile Include="Corredor.cpp" />
+    <ClCompile Include="Curso.cpp" />
     <ClCompile Include="Deportista.cpp" />
     <ClCompile Include="Fecha.cpp" />
+    <ClCompile Include="Grupo.cpp" />
     <ClCompile Include="Gym.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
