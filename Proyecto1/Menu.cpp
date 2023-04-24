@@ -24,7 +24,7 @@ void Menu::inicio() {
 
 string Menu::menuPrincipal() {
 	stringstream s;
-	  s << "	   <Menú Principal>		  " << endl
+	  s << "	   <Menu Principal>		  " << endl
 		<< "[1]Administracion General-------------" << endl
 		<< "[2]Control de Deportista--------------" << endl
 		<< "[3]Reportes generales-----------------" << endl
@@ -40,7 +40,7 @@ string Menu::menuPrincipal() {
 //Administracion General--------------------------------------------------
 string Menu::menuAdministracion() {
 	stringstream s;
-	  s << "	   <Menú Administracion>		  " << endl
+	  s << "	   <Menu Administracion>		  " << endl
 		<< "[1]Nombre del Gimnasio----------------" << endl
 		<< "[2]Monto de mensualidad---------------" << endl
 		<< "[3]Atras----------------------------\n\n"
@@ -52,19 +52,22 @@ string Menu::menuAdministracion() {
 bool Menu::opMenuAdministracion(int op) {
 
 	switch (op) {
-	case 1:
+	case 1://Nombre del Gimnasio
 		imprimirString("<1. Administración General > <1. Nombre del Gimnasio>  ");
 		imprimirString("Ingrese el nombre del Gimnasio : _ FitnessUNA");
 		_gym->setNombreDgym(" _ FitnessUNA");
 		imprimirString("<Digite Enter >");
 		break;
-	case 2:
+	case 2://Monto de mensualidad
 		imprimirString("<1. Administración General>  <2. Monto de mensualidad >  ");
 		imprimirString("Ingrese el Monto de mensualidad: 25000 ");
 		_gym->setMensualidadDgym(25000);
 		imprimirString("<Digite Enter >");
 		break;
-
+	case 3: 
+		limpiarPantalla();
+		return true;
+		break;
 	default:
 
 		break;
@@ -74,22 +77,34 @@ bool Menu::opMenuAdministracion(int op) {
 //Control  Deportistas --------------------------------------------------
 string Menu::menuDeportista() {
 	stringstream s;
-	s << "" << endl
-		<< "[1]Ingreso de nuevo deportista-----------" << endl
-		<< "[2]Modificacion de deportista------------" << endl
-		<< "[3]Listado de deportista-----------------" << endl
-		<< "[4]Detalle de deportista en especifico-" << endl
-		<< "[5]Atras\n\n"
+		s << "	   <Menu Deportista>		  " << endl
+		<< "[1]Ingreso de nuevo deportista--------" << endl
+		<< "[2]Modificacion de deportista---------" << endl
+		<< "[3]Listado de deportista--------------" << endl
+		<< "[4]Detalle de deportista en especifico" << endl
+		<< "[5]Atras------------------------------\n\n"
 		<< "Digite una opcion: ";
 	return s.str();
 }
+string Menu::subMenuListas(){
+	stringstream s;
+	  s << "[1]Listado general--------" << endl
+		<< "[2]Listado de deportistas activos ----" << endl
+		<< "[3]Listado de deportistas inactivos---" << endl
+		<< "[4]Listado de deportistas en morosidad" << endl
+		<< "[5]Atras------------------------------\n\n"
+		<< "Digite una opcion: ";
+	return s.str();
+}
+
 bool Menu::opMenuDeportista(int op)
 {
+	int opSub=0;
 	//Deportista
 	string cedula = "";
 	string nombre = "";
 	string telefono = "";
-	Fecha* fechaNa;
+	Fecha* fechaNa = NULL;
 	//Ciclista
 	int horasEntrenem = 0;
 	double temProm = 0;
@@ -103,6 +118,8 @@ bool Menu::opMenuDeportista(int op)
 	//triatlonista
 	int cantPartiEnIronMan = 0;
 	int canTriaGanados = 0;
+
+	bool ex = false;
 	//clientes (esto puede variar)
 	Deportista* cliente = NULL;
 	switch (op) {
@@ -111,50 +128,198 @@ bool Menu::opMenuDeportista(int op)
 
 		//deportista
 		imprimirString("Cedula: ");
-		cedula = recivirString();
+		while (ex == false) {
+			try {
+				cedula = recivirString();
+				ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		}
+		ex = false;
+
 		imprimirString("Nombre: ");
-		nombre = recivirString();
+		while (ex == false) {
+			try {
+				nombre = recivirString();
+				ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		}
+		ex = false;
 		imprimirString("Telefono: ");
-		telefono = recivirString();
+		while (ex == false) {
+			try {
+				telefono = recivirString();
+				ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		}
+			ex = false;
 		imprimirString("Fecha nacimiento: ");
-		fechaNa = validarFecha();
+		while (ex == false) {
+			try {
+				fechaNa = validarFecha();
+				ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		}
+		ex = false;
 		//Ciclista
 		imprimirString("Horas de entrenamiento: ");
-		horasEntrenem = recivirDouble();
+		while (ex == false) {
+			try {
+				horasEntrenem = recivirDouble();
+				ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		} 
+		ex = false;
 		imprimirString("Temperatura promedio al entrenar: ");
-		temProm = recivirDouble();
+		while (ex == false) {
+			try {
+					temProm = recivirDouble();
+					ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		} 
+		ex = false;
 		//Corredor
 		imprimirString("Sexo: ");
-		sexo = recivirChar();
+		while (ex == false) {
+			try {
+				sexo = recivirChar();
+				ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		} 
+		ex = false;
 		imprimirString("Estatura: ");
-		estatura = recivirDouble();
+		while (ex == false) {
+			try {
+					estatura = recivirDouble();
+					ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		} 
+		ex = false;
 		//Nadador
 		imprimirString("Porcentaje masa corporal: ");
-		masaMuscular = recivirDouble();
+		while (ex == false) {
+			try {
+				masaMuscular = recivirDouble();
+				ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		}
+		ex = false;
 		imprimirString("Peso: ");
-		peso = recivirDouble();
+		while (ex == false) {
+			try {
+				peso = recivirDouble();
+				ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		} 
+		ex = false;
 		imprimirString("Porcentaje de grasa corporal: ");
-		PgrasaCorporalMC = recivirDouble();
+		while (ex == false) {
+			try {
+				PgrasaCorporalMC = recivirDouble();
+				ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		} 
+		ex = false;
 		//triatlonista
 		imprimirString("Cantidad de participaciones en Iron Man");
-		cantPartiEnIronMan = recivirDouble();
+		while (ex == false) {
+			try {
+				cantPartiEnIronMan = recivirDouble();
+				ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		} 
+		ex = false;
 		imprimirString("Cantidad de triatlones ganados:");
-		canTriaGanados = recivirDouble();
+		while (ex == false) {
+			try {
+				canTriaGanados = recivirDouble();
+				ex = true;
+			}
+			catch (...) {
+				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			}
+		}
+		ex = false;
 
 		system("pause");
+
 		cliente = new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
 		_gym->ingresarListaClientes(cliente);
 		enter();
 		limpiarPantalla();
 		break;
 	case 2: //Modificacion de deportista
+		imprimirString("<2.Control Deportistas>  <2.Modificacion de deportista>");
 		imprimirString("en dersarrollo");
 		break;
 	case 3: //Listado de deportistas
-		imprimirString(_gym->imprimirListaClientes());
+		imprimirString("<2.Control Deportistas>  <3.Listado de deportistas>");
+		imprimirString(subMenuListas());
+		opSub = recivirInt();
+		switch (opSub){
+			case 1: //listado general
+				imprimirString(_gym->imprimirListaClientes());
+				break;
+			case 2://deportistas activos
+				imprimirString("en dersarrollo");
+				
+				break;
+			case 3://deportistas inactivos
+				imprimirString("en dersarrollo");
+				
+				break;
+			case 4:// deportistas con morosidad
+				imprimirString("en dersarrollo");
+				
+				break;
+			case 5://atras
+				limpiarPantalla();
+				return true;
+				break;
+			default:
+				
+				break;
+		}
+		
 		break;
 	case 4: //Detalle de deportista especificp
-
+		imprimirString("<2.Control Deportistas>  <4.Detalle deportista especifico>");
+		imprimirString("en dersarrollo");
 		break;
 	case 5: //Atras
 		limpiarPantalla();
@@ -170,10 +335,11 @@ bool Menu::opMenuDeportista(int op)
 string Menu::menuCursos()
 {
 	stringstream s;
-	s << "MENU CLIENTES" << endl
-		<< "[1].Ingreso nuevo curso" << endl
-		<< "[2]. Reporte de curso específico " << endl
-		<< "[3]. Modificación de curso específico " << endl
+		s << "	   <Menu Cursos>		  " << endl
+		<< "[1].Ingreso nuevo curso---------------" << endl
+		<< "[2]. Reporte de curso específico------" << endl
+		<< "[3]. Modificación de curso específico-" << endl
+		<< "[5]Atras------------------------------\n\n"
 		<< "Digite una opcion: ";
 
 	return s.str();
@@ -181,16 +347,16 @@ string Menu::menuCursos()
 bool Menu::opMenuCursos(int op)
 {
 	switch (op) {
-	case 1: // Ingreso nuevo grupo;
-		imprimirString("Opcion en desarrollo");
-		imprimirString("Opcion en desarrollo");
-		break;
-	case 2: //Modificacion de  grupo especifico
-		imprimirString("Opcion en desarrollo");
+	case 1: // Ingreso nuevo curso;
+		imprimirString("< 3.Control Cursos> < 1.Ingreso nuevo curso >");
 		imprimirString("Opcion en desarrollo");
 		break;
-	case 3:
+	case 2: //Reporte de curso específico 
+		imprimirString("< 3.Control Cursos> < 2.Reporte de curso especifico>");
 		imprimirString("Opcion en desarrollo");
+		break;
+	case 3://Modificación de curso específico 
+		imprimirString("< 3.Control Cursos> < 3. Modificación de  curso especifico >");
 		imprimirString("Opcion en desarrollo");
 		break;
 	default:
@@ -199,18 +365,17 @@ bool Menu::opMenuCursos(int op)
 	return false;
 }
 
-//mauricio
 //Control de grupos-------------------------------------------------------
 string Menu::menuGrupos()
 {
 	stringstream s;
-	s << "\t<4.Control de grupos>\n";
-	s << "[1]Ingreso nuevo grupo\n"
-		<< "[2]Modificacion de  grupo especifico\n"
-		<< "[3]Matricula en grupo especifico\n"
-		<< "[4]Reporte de grupo especifico\n"
-		<< "[5]Reporte deportistas matriculados en grupo\n"
-		<< "[6]Cancelacion de  matricula en grupo\n"
+	  s << "	   <Menu Grupos>		  " << endl
+	    << "[1]Ingreso nuevo grupo-----------------------" << endl
+		<< "[2]Modificacion de  grupo especifico---------" << endl
+		<< "[3]Matricula en grupo especifico-------------" << endl
+		<< "[4]Reporte de grupo especifico---------------" << endl
+		<< "[5]Reporte deportistas matriculados en grupo-" << endl
+		<< "[6]Cancelacion de  matricula en grupo--------" << endl
 		<< "[7]Atras\n\n"
 		<< "Digite una opcion: "
 		<< endl;
@@ -225,25 +390,25 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 2: //Modificacion de  grupo especifico
-		imprimirString("Opcion en desarrollo");
+		imprimirString("< 4.Control Grupos>  <2. Modificación  de  grupo especifico>");
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 3: //matricula de grupo especifico
-		imprimirString("Opcion en desarrollo");
+		imprimirString("< 4.Control Grupos>  <3.Matricula en grupo especifico>");
 		imprimirString("Opcion en desarrollo");
 
 		break;
 	case 4: //Reporte de grupo especifico 
-		imprimirString("Opcion en desarrollo");
+		imprimirString("< 5.Control Grupos> < 4.Reporte de grupo especifico >");
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 5: //Reporte deportistas matriculados en grupo
-		imprimirString("Opcion en desarrollo");
+		imprimirString("< 5.Control Grupos> < 5. Reporte deportistas matriculados por grupo>");
 		imprimirString("Opcion en desarrollo");
 
 		break;
 	case 6://Cancelacion de  matricula en grupo
-		imprimirString("Opcion en desarrollo");
+		imprimirString("< 5.Control Grupos>  <6. Cancelación de  matricula en grupo>");
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 7:
@@ -260,10 +425,10 @@ bool Menu::opMenuGrupos(int op)
 string Menu::menuPagos()
 {
 	stringstream s;
-	s << "\t<3.Control de deportistas>\n";
-	s << "[1]Registro nuevo de pago\n"
-		<< "[2]Reporte de pagos por deportista\n"
-		<< "[3]Atras"
+	  s << "	   <Menu Pagos>		  " << endl
+	    << "[1]Registro nuevo de pago-------------" << endl
+		<< "[2]Reporte de pagos por deportista----" << endl
+		<< "[3]Atras------------------------------\n\n"
 		<< "Digite una opcion: "
 		<< endl;
 	return s.str();
