@@ -59,7 +59,7 @@ void imprimirDouble(double d) {
 //VALIDACIONES-----------------
 Fecha* validarFecha() {
 
-	string leer = recivirString();
+	string leer = recivirString();//1/11/11
 	stringstream input_stringstream(leer);
 	string dia = "";
 	string mes = "";
@@ -72,6 +72,8 @@ Fecha* validarFecha() {
 	m = validarMes(mes);
 	a = validarAnnio(annio);
 	Fecha* fech = new Fecha(d, m, a);
+
+
 	return fech;
 
 
@@ -85,7 +87,7 @@ int validarDia(string s) {
 			return d;
 		}
 		else {
-			throw new string("ERROR: Digite un dia valido\n");
+			throw new string("ERROR: Digite un fecha valido\n");
 		}
 	}
 	return 0;
@@ -99,7 +101,7 @@ int validarMes(string s) {
 			return m;
 		}
 		else {
-			throw new string("ERROR: Digite un mes valido\n");
+			throw new string("ERROR: Digite un fecha valido\n");
 		}
 	}
 	return 0;
@@ -112,7 +114,7 @@ int validarAnnio(string s) {
 			return a;
 		}
 		else {
-			throw new string("ERROR: Digite un annio valido\n");
+			throw new string("ERROR: Digite un fecha valido\n");
 		}
 	}
 	return 0;

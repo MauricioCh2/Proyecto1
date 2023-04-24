@@ -2,19 +2,29 @@
 void Menu::inicio() {
 	_gym = new Gym();
 	bool fin = false;
+	bool ex = false;
 	imprimirString("Bienvenido al GYM de triatlon");
 
 	imprimirString("Digite la Fecha en formato dia/mes/annio");
-	fecha = validarFecha();
+	do {
+		try {
+			fecha = validarFecha();
+			ex = true;
+		}
+		catch (...) {
+			imprimirString("ERROR: Digite un fecha valido");
+		}
+	} while (ex == false);
 	//cout<<fecha->toString()<< "prueba ";
 	while (!fin) {
 		llamarMenus();
 	}
 }
 
+
 string Menu::menuPrincipal() {
 	stringstream s;
-	s << "	 <Menú Principal>		  " << endl
+	  s << "	   <Menú Principal>		  " << endl
 		<< "[1]Administracion General-------------" << endl
 		<< "[2]Control de Deportista--------------" << endl
 		<< "[3]Reportes generales-----------------" << endl
@@ -30,10 +40,10 @@ string Menu::menuPrincipal() {
 //Administracion General--------------------------------------------------
 string Menu::menuAdministracion() {
 	stringstream s;
-	s << "	 <Menú Administracion>		  " << endl
-		<< "[1]. Nombre del Gimnasio" << endl
-		<< "[2]. Monto de mensualidad " << endl
-		<< "[3]. Atras\n\n"
+	  s << "	   <Menú Administracion>		  " << endl
+		<< "[1]Nombre del Gimnasio----------------" << endl
+		<< "[2]Monto de mensualidad---------------" << endl
+		<< "[3]Atras----------------------------\n\n"
 		<< "Digite una opcion: ";
 
 	return s.str();

@@ -5,7 +5,7 @@ using namespace std;
 template <class T>
 class Nodo {
 private:
-	T* _info;
+	T* _info;//Objeto DEL Nodo
 	Nodo<T>* _siguiente;
 public:
 	//Basico------------------------------
@@ -23,7 +23,7 @@ public:
 template <class T>
 Nodo<T>::Nodo() {
 	this->_info = NULL;
-	this->_info = NULL;
+	this->_siguiente = NULL;
 }
 template <class T>
 Nodo<T>::Nodo(T* p, Nodo* s) {
