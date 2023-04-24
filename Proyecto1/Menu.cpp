@@ -355,7 +355,7 @@ bool Menu::opMenuCursos(int op)
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 3://Modificación de curso específico 
-		imprimirString("Opcion en desarrollo");
+		imprimirString("< 3.Control Cursos> < 3. Modificación de  curso especifico >");
 		imprimirString("Opcion en desarrollo");
 		break;
 	default:
@@ -364,18 +364,17 @@ bool Menu::opMenuCursos(int op)
 	return false;
 }
 
-//mauricio
 //Control de grupos-------------------------------------------------------
 string Menu::menuGrupos()
 {
 	stringstream s;
-	s << "\t<4.Control de grupos>\n";
-	s << "[1]Ingreso nuevo grupo\n"
-		<< "[2]Modificacion de  grupo especifico\n"
-		<< "[3]Matricula en grupo especifico\n"
-		<< "[4]Reporte de grupo especifico\n"
-		<< "[5]Reporte deportistas matriculados en grupo\n"
-		<< "[6]Cancelacion de  matricula en grupo\n"
+	  s << "	   <Menu Grupos>		  " << endl
+	    << "[1]Ingreso nuevo grupo-----------------------" << endl
+		<< "[2]Modificacion de  grupo especifico---------" << endl
+		<< "[3]Matricula en grupo especifico-------------" << endl
+		<< "[4]Reporte de grupo especifico---------------" << endl
+		<< "[5]Reporte deportistas matriculados en grupo-" << endl
+		<< "[6]Cancelacion de  matricula en grupo--------" << endl
 		<< "[7]Atras\n\n"
 		<< "Digite una opcion: "
 		<< endl;
@@ -390,25 +389,25 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 2: //Modificacion de  grupo especifico
-		imprimirString("Opcion en desarrollo");
+		imprimirString("< 4.Control Grupos>  <2. Modificación  de  grupo especifico>");
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 3: //matricula de grupo especifico
-		imprimirString("Opcion en desarrollo");
+		imprimirString("< 4.Control Grupos>  <3.Matricula en grupo especifico>");
 		imprimirString("Opcion en desarrollo");
 
 		break;
 	case 4: //Reporte de grupo especifico 
-		imprimirString("Opcion en desarrollo");
+		imprimirString("< 5.Control Grupos> < 4.Reporte de grupo especifico >");
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 5: //Reporte deportistas matriculados en grupo
-		imprimirString("Opcion en desarrollo");
+		imprimirString("< 5.Control Grupos> < 5. Reporte deportistas matriculados por grupo>");
 		imprimirString("Opcion en desarrollo");
 
 		break;
 	case 6://Cancelacion de  matricula en grupo
-		imprimirString("Opcion en desarrollo");
+		imprimirString("< 5.Control Grupos>  <6. Cancelación de  matricula en grupo>");
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 7:
@@ -425,10 +424,10 @@ bool Menu::opMenuGrupos(int op)
 string Menu::menuPagos()
 {
 	stringstream s;
-	s << "\t<3.Control de deportistas>\n";
-	s << "[1]Registro nuevo de pago\n"
-		<< "[2]Reporte de pagos por deportista\n"
-		<< "[3]Atras"
+	  s << "	   <Menu Pagos>		  " << endl
+	    << "[1]Registro nuevo de pago-------------" << endl
+		<< "[2]Reporte de pagos por deportista----" << endl
+		<< "[3]Atras------------------------------\n\n"
 		<< "Digite una opcion: "
 		<< endl;
 	return s.str();
