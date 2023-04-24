@@ -15,10 +15,13 @@ public:
 	virtual bool eliminarUltimo();
 	virtual bool listaVacia();
 	virtual int contador();
+
 	template <class T> // NOta: jamas hacer esto dentro de la clase, solo serviria para un tipo de dato 
 	friend ostream& operator << (ostream& out, ListaT<T>& l);//friend le da acceso a todos los miembros de la clase por esto no serviria sin friend
 	string toString();
+
 };
+//Modificación de curso específico 
 template <class T>
 ostream& operator << (ostream& out, ListaT<T>& l) { 
 	Nodo<T>* _actual = l._primero;

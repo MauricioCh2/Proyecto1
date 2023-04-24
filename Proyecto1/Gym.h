@@ -6,6 +6,8 @@
 
 #include "Deportista.h"
 #include "Lista_Template.h"
+//#include "Grupo.h"
+#include "Curso.h"
 
 
 class Gym {
@@ -15,6 +17,9 @@ private:
 	string _nombre;
 	int _mensualidad;
 	ListaT<Deportista>* _lisCliente = NULL;
+	//ListaT<Grupo>* _lisGrupo = NULL;
+	ListaT<Curso>* _lisCurso = NULL;
+
 public: 
 	Gym();
 	string getNombreDgym();

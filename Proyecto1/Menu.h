@@ -48,6 +48,7 @@ public:
 	bool opMenuAdministracion(int);
 	//Control de deportistas--------------------------------------------
 	string menuDeportista();
+	string subMenuListas();
 	bool opMenuDeportista(int);
 	//Control de Cursos-------------------------------------------------
 	string menuCursos();
