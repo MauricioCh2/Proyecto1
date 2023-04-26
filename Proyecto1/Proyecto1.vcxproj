@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Archivos.h" />
     <ClInclude Include="Ciclista.h" />
     <ClInclude Include="Corredor.h" />
     <ClInclude Include="Curso.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Archivo.cpp" />
     <ClCompile Include="Ciclista.cpp" />
     <ClCompile Include="Corredor.cpp" />
     <ClCompile Include="Curso.cpp" />

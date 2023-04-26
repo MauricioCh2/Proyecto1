@@ -17,6 +17,7 @@ public:
 	virtual int contador();
 	template <class T> // NOta: jamas hacer esto dentro de la clase, solo serviria para un tipo de dato 
 	friend ostream& operator << (ostream& out, ListaT<T>& l);//friend le da acceso a todos los miembros de la clase por esto no serviria sin friend
+	void guardar(ofstream&);
 	string toString();
 };
 template <class T>
@@ -97,6 +98,16 @@ int ListaT<T>::contador() {
 	}
 	return cont;
 }
+template <class T>
+void ListaT<T>::guardar(ofstream& of) {
+	_actual = _primero;
+	while (_actual != NULL) {
+		if ( T* dep = dynamic_cast<Deportista*>(_actual->getInfo())) {
+		
+		}
+	}
+}
+
 template <class T>
 string ListaT<T>::toString() {
 	stringstream s;
