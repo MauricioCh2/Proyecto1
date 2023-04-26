@@ -2,6 +2,7 @@
 #include <iostream>
 #include<sstream>
 #include "Fecha.h"
+#include "Execpciones.h"
 using namespace std;
 
 //RECIVIR----------------------

@@ -1,5 +1,5 @@
 #include "Corredor.h"
-Corredor::Corredor(string ced, string nombre, string tel, Fecha* fech, char sex, double estatura) :Deportista(ced, nombre, tel, fech) {
+Corredor::Corredor(int ced, string nombre, string tel, Fecha* fech, char sex, double estatura) :Deportista(ced, nombre, tel, fech) {
 	this->_sexo = sex;
 	this->_estatura = estatura;
 }

@@ -2,13 +2,15 @@
 //RECIVIR----------------------
 int recivirInt() {
 	int i;
-	while (true) {
+	bool fin = false;
+	while (fin == false) {
 
-		if (cin >> i) {
+		if (cin >> i){
+			fin = true;
 			return i;
 		}
 		else {
-			throw new string("ERROR: Digite un valor entero valido");
+			throw (new ErrorV('i'));
 			cin.clear();
 			cin.ignore(1024, '\n');
 		}
@@ -18,25 +20,41 @@ int recivirInt() {
 }
 string recivirString() {
 	string s;
-	cin >> s;
-	return s;
+	bool fin = false;
+	while (fin == false) {
+		if (cin >> s) {
+			fin = true;
+			return s;
+		}
+		throw new ErrorV('s');
+	}
+	return "";
 }
 char recivirChar() {
 	char c;
-	cin >> c;
-	return c;
+	bool fin = false;
+	while (fin==false) {
+		if (cin >> c) {
+			fin = true;
+			return c;
+		}
+		throw new ErrorV('c');
+	}
+	return 'c';
 }
 
 //puede que lo cambiemos a char*
 double recivirDouble() {
 	double d;
-	while (true) {
+	bool fin = false;
+	while (fin == false) {
 
 		if (cin >> d) {
+			fin = true;
 			return d;
 		}
 		else {
-			throw new string("ERROR: Digite un valor entero valido");
+			throw (new ErrorV('d'));
 			cin.clear();
 			cin.ignore(1024, '\n');
 		}
@@ -58,7 +76,6 @@ void imprimirDouble(double d) {
 }
 //VALIDACIONES-----------------
 Fecha* validarFecha() {
-
 	string leer = recivirString();//1/11/11
 	stringstream input_stringstream(leer);
 	string dia = "";
@@ -81,13 +98,15 @@ Fecha* validarFecha() {
 
 int validarDia(string s) {
 	int d;
-	while (true) {
+	bool fin = false;
+	while (fin == false) {
 		d = stoi(s);
 		if (d >= 1 && d <= 31) {
+			fin = true;
 			return d;
 		}
 		else {
-			throw new string("ERROR: Digite un fecha valido\n");
+			throw (new ErrorV('f'));
 		}
 	}
 	return 0;
@@ -95,26 +114,30 @@ int validarDia(string s) {
 }
 int validarMes(string s) {
 	int m;
-	while (true) {
+	bool fin = false;
+	while (fin == false) {
 		m = stoi(s);
 		if (m >= 1 && m <= 12) {
+			fin = true;
 			return m;
 		}
 		else {
-			throw new string("ERROR: Digite un fecha valido\n");
+			throw (new ErrorV('f'));
 		}
 	}
 	return 0;
 }
 int validarAnnio(string s) {
 	int a;
-	while (true) {
+	bool fin = false;
+	while (fin == false) {
 		a = stoi(s);
 		if (a >= 1 && a <= 31) {
+			fin = true;
 			return a;
 		}
 		else {
-			throw new string("ERROR: Digite un fecha valido\n");
+			throw (new ErrorV('f'));
 		}
 	}
 	return 0;

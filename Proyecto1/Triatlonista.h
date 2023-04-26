@@ -11,7 +11,7 @@ protected:
 	//Corredor* _ptrCorredor;
 	Nadador* _ptrNad;
 public:
-	Triatlonista(string, string, string, Fecha*, int, double, char, double, double, double, double, int, int);
+	Triatlonista(int, string, string, Fecha*, int, double, char, double, double, double, double, int, int);
 
 	int getCanPartIronMan();
 	int getCanTriatGanador();

@@ -12,7 +12,8 @@ void Menu::inicio() {
 			ex = true;
 		}
 		catch (...) {
-			imprimirString("ERROR: Digite un fecha valido");
+			cout << "Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+			limpiar();
 		}
 	} while (ex == false);
 	//cout<<fecha->toString()<< "prueba ";
@@ -101,7 +102,7 @@ bool Menu::opMenuDeportista(int op)
 {
 	int opSub=0;
 	//Deportista
-	string cedula = "";
+	int cedula = 0;
 	string nombre = "";
 	string telefono = "";
 	Fecha* fechaNa = NULL;
@@ -128,153 +129,170 @@ bool Menu::opMenuDeportista(int op)
 
 		//deportista
 		imprimirString("Cedula: ");
-		while (ex == false) {
+		do {
 			try {
-				cedula = recivirString();
+				cedula = recivirInt();
 				ex = true;
 			}
-			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
 			}
-		}
+		}while (ex == false);
 		ex = false;
-
 		imprimirString("Nombre: ");
-		while (ex == false) {
+		do {
 			try {
 				nombre = recivirString();
 				ex = true;
 			}
-			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
 			}
-		}
+		} while (ex == false);
 		ex = false;
 		imprimirString("Telefono: ");
-		while (ex == false) {
+		do {
 			try {
 				telefono = recivirString();
 				ex = true;
 			}
-			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+
+				limpiar();
 			}
-		}
-			ex = false;
+		}while (ex == false);
+		ex = false;
 		imprimirString("Fecha nacimiento: ");
-		while (ex == false) {
+		do {
 			try {
 				fechaNa = validarFecha();
 				ex = true;
 			}
 			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+				cout << "Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+				limpiar();
 			}
-		}
+		}while (ex == false);
 		ex = false;
 		//Ciclista
 		imprimirString("Horas de entrenamiento: ");
-		while (ex == false) {
+		do {
 			try {
 				horasEntrenem = recivirDouble();
 				ex = true;
 			}
-			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
 			}
-		} 
+		} while (ex == false);
 		ex = false;
-		imprimirString("Temperatura promedio al entrenar: ");
-		while (ex == false) {
+		imprimirString("Temperatura promedio al entrenar en Grados Celcius: ");
+		do {
 			try {
 					temProm = recivirDouble();
 					ex = true;
 			}
-			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
 			}
-		} 
+		} while (ex == false);
 		ex = false;
 		//Corredor
-		imprimirString("Sexo: ");
-		while (ex == false) {
+		imprimirString("Sexo(H=hombre,M=mujer): ");
+		do {
 			try {
 				sexo = recivirChar();
-				ex = true;
+				if (sexo == 'M' || sexo == 'H' || sexo == 'm' || sexo == 'h') {
+					ex = true; 
+				}
+				else {
+					throw new ErrorV('c');
+				}
 			}
-			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
 			}
-		} 
+		} while (ex == false);
 		ex = false;
-		imprimirString("Estatura: ");
-		while (ex == false) {
+		imprimirString("Estatura en metros (ejemplo: 1.50cm): ");
+		do {
 			try {
 					estatura = recivirDouble();
 					ex = true;
 			}
-			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
 			}
-		} 
+		} while (ex == false);
 		ex = false;
 		//Nadador
 		imprimirString("Porcentaje masa corporal: ");
-		while (ex == false) {
+		do {
 			try {
 				masaMuscular = recivirDouble();
 				ex = true;
 			}
-			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
 			}
-		}
+		}while (ex == false);
 		ex = false;
-		imprimirString("Peso: ");
-		while (ex == false) {
+		imprimirString("Peso en kg: ");
+		do {
 			try {
 				peso = recivirDouble();
 				ex = true;
 			}
-			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
 			}
-		} 
+		} while (ex == false);
 		ex = false;
 		imprimirString("Porcentaje de grasa corporal: ");
-		while (ex == false) {
+		do {
 			try {
 				PgrasaCorporalMC = recivirDouble();
 				ex = true;
 			}
-			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
 			}
-		} 
+		} while (ex == false);
 		ex = false;
 		//triatlonista
 		imprimirString("Cantidad de participaciones en Iron Man");
-		while (ex == false) {
+		do {
 			try {
 				cantPartiEnIronMan = recivirDouble();
 				ex = true;
 			}
-			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
 			}
-		} 
+		} while (ex == false);
 		ex = false;
 		imprimirString("Cantidad de triatlones ganados:");
-		while (ex == false) {
+		do {
 			try {
 				canTriaGanados = recivirDouble();
 				ex = true;
 			}
-			catch (...) {
-				imprimirString("ERROR DE RECOLECCION DE INFORMACION: ");
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
 			}
-		}
-		ex = false;
+		}while (ex == false);
 
 		system("pause");
 
