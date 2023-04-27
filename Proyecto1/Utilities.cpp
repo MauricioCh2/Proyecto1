@@ -119,20 +119,27 @@ int validarAnnio(string s) {
 	}
 	return 0;
 }
-char validarDia(char d)
+char validarDia()
 {
+	char d;
+	cin >> d;
 	if (d == 'l' || d == 'm' || d == 'k' || d == 'j' || d == 'v' || d == 's' || d == 'd') {
 		return d;
 	}
 	else {
-
+		//throw (Excepcion 'C');
 	}
 
 }
-int validarHora(string) {
 
+int validarHora(string h) {
+	string inputstringstream(h);
+	getline(inputstringstream, );
+	if () {
+
+	}
 }
-int validarMinuto(string) {
+int validarMinuto(string m ) {
 
 }
 //Otros-------------------------------
