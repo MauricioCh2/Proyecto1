@@ -22,6 +22,11 @@ Fecha* validarFecha();
 int validarDia(string);
 int validarMes(string);
 int validarAnnio(string);
+
+
+char validarDia(char);
+int validarHora(string);
+int validarMinuto(string);
 //podriamos hacer uno para guardar e imprimir vectores pero no se si sera util asi qu de momnto no
 //Otros
 void enter();

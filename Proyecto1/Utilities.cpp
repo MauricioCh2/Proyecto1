@@ -119,6 +119,22 @@ int validarAnnio(string s) {
 	}
 	return 0;
 }
+char validarDia(char d)
+{
+	if (d == 'l' || d == 'm' || d == 'k' || d == 'j' || d == 'v' || d == 's' || d == 'd') {
+		return d;
+	}
+	else {
+
+	}
+
+}
+int validarHora(string) {
+
+}
+int validarMinuto(string) {
+
+}
 //Otros-------------------------------
 void enter() {
 	system("pause");

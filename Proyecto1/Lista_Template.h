@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <sstream>
+#include "Triatlonista.h"
 #include "Nodo_Template.h"
 using namespace std;
 template <class T>
@@ -17,7 +18,7 @@ public:
 	virtual int contador();
 	template <class T> // NOta: jamas hacer esto dentro de la clase, solo serviria para un tipo de dato 
 	friend ostream& operator << (ostream& out, ListaT<T>& l);//friend le da acceso a todos los miembros de la clase por esto no serviria sin friend
-	void guardar(ofstream&);
+	void guardarDeportistas(ofstream&);
 	string toString();
 };
 template <class T>
@@ -99,12 +100,31 @@ int ListaT<T>::contador() {
 	return cont;
 }
 template <class T>
-void ListaT<T>::guardar(ofstream& of) {
+void ListaT<T>::guardarDeportistas(ofstream& depo) {
 	_actual = _primero;
 	while (_actual != NULL) {
-		if ( T* dep = dynamic_cast<Deportista*>(_actual->getInfo())) {
-		
+		if ( Triatlonista* dep = dynamic_cast<Triatlonista*>(_actual->getInfo())) {
+			
+		//deportista-------------------------------------
+		   depo << dep->getNombre() << "\t"
+				<< dep->getCedula() << "\t"
+				<< dep->getTelefono() << "\t"
+				<< dep->getFecha() << "\t"
+				//ciclista----------------------------------------
+				<< dep->getHorasDeEntrenamiento() << "\t"
+				<< dep->getTempPromedio() << "\t"
+				//corredor----------------------------------------
+				<< dep->getSexo() << "\t"
+				<< dep->getEstatura() << "\t"
+				//nadado------------------------------------------
+				<< dep->getMasaMuscular() << "\t"
+				<< dep->getPeso() << "\t"
+				<< dep->getPorcGrasaCorporal() << "\t"
+				//triatlonista------------------------------------
+			    << dep->getCanPartIronMan() << "\t"
+				<< dep->getCanTriatGanador() << endl;
 		}
+		_actual = _actual->getSig();
 	}
 }
 

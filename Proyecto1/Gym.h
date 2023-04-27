@@ -21,9 +21,10 @@ private:
 	ListaT<Curso>* _lisCurso = NULL;
 public: 
 	Gym();
+	ListaT<Deportista>* getListaDep();
 	string getNombreDgym();
-	void setNombreDgym(string);
 	int getMensualidadDgym();
+	void setNombreDgym(string);
 	void setMensualidadDgym(int);
 	//Clientes------------------------------------------------------
 	void ingresarListaClientes(Deportista*);

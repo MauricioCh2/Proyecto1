@@ -53,13 +53,13 @@ bool Menu::opMenuAdministracion(int op) {
 
 	switch (op) {
 	case 1://Nombre del Gimnasio
-		imprimirString("<1. Administración General > <1. Nombre del Gimnasio>  ");
+		imprimirString("<1. Administración General > <1. Nombre del Gimnasio>  \n");
 		imprimirString("Ingrese el nombre del Gimnasio : _ FitnessUNA");
 		_gym->setNombreDgym(" _ FitnessUNA");
 		imprimirString("<Digite Enter >");
 		break;
 	case 2://Monto de mensualidad
-		imprimirString("<1. Administración General>  <2. Monto de mensualidad >  ");
+		imprimirString("<1. Administración General>  <2. Monto de mensualidad >   \n");
 		imprimirString("Ingrese el Monto de mensualidad: 25000 ");
 		_gym->setMensualidadDgym(25000);
 		imprimirString("<Digite Enter >");
@@ -124,7 +124,7 @@ bool Menu::opMenuDeportista(int op)
 	Deportista* cliente = NULL;
 	switch (op) {
 	case 1: // Ingreso nuevo deportista 
-		imprimirString("<2.Control Deportistas>  <1.Ingreso nuevo deportista>");
+		imprimirString("<2.Control Deportistas>  <1.Ingreso nuevo deportista>  \n");
 
 		//deportista
 		imprimirString("Cedula: ");

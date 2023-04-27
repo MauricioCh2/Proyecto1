@@ -30,11 +30,26 @@ string Triatlonista::toString() {
 	s << "Cantidad de Triatones ganadas" << _cantTriatGanador << endl;
 	return s.str();
 }
-
+//Deportista--------------------------------------
+string Triatlonista::getNombre() { return _nombre; }
+string Triatlonista::getCedula() { return _cedula; }
+string Triatlonista::getTelefono() { return _telefono; }
+Fecha* Triatlonista::fechaNacimiento() { return _ptrFecha; }
+//Ciclista----------------------------------------
+int Triatlonista::getHorasDeEntrenamiento() { return _ptrCiclista->getHorasEntrenamiento(); }
+int Triatlonista::getTempPromedio() { return _ptrCiclista->getTempProm(); }
+//Corredor----------------------------------------
+char Triatlonista::getSexo() { return _sexo; }
+double Triatlonista::getEstatura() { return _estatura; }
+//Nadado------------------------------------------
+double Triatlonista::getMasaMuscular() { return _ptrNad->getMasaMuscular(); }
+double Triatlonista::getPeso() { return _ptrNad->getPeso(); }
+double Triatlonista::getPorcGrasaCorporal() { return _ptrNad->getIMC(); }
+//Triatlonista------------------------------------
 int Triatlonista::getCanPartIronMan() { return _cantPartIronMan; }
 int Triatlonista::getCanTriatGanador() { return _cantTriatGanador; }
 void Triatlonista::setCanPartIronMan(int canIron) { _cantPartIronMan = canIron; }
-void Triatlonista::getCanTriatGanador(int canGanadas) { _cantTriatGanador = canGanadas; }
+void Triatlonista::setCanTriatGanador(int canGanadas) { _cantTriatGanador = canGanadas; }
 
 //Fecha* Triatlonista::getFecha()
 //{
