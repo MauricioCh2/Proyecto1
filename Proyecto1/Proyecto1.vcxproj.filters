@@ -60,6 +60,9 @@
     <ClInclude Include="Execpciones.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Iterador.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ciclista.cpp">

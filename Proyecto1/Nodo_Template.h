@@ -12,7 +12,7 @@ public:
 	Nodo();
 	Nodo(T*, Nodo<T>*);
 	~Nodo();
-	void setInfo(const T*);
+	void setInfo(T*);
 	T* getInfo();
 	void setSiguiente(Nodo<T>*);
 	Nodo<T>* getSig();
@@ -35,7 +35,7 @@ Nodo<T>::~Nodo() {
 
 }
 template <class T>
-void Nodo<T>::setInfo(const T* p) {
+void Nodo<T>::setInfo(T* p) {
 	_info = p;
 }
 template <class T>

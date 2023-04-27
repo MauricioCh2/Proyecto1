@@ -21,10 +21,15 @@ void Gym::setMensualidadDgym(int m)
 	_mensualidad = m;
 }
 void Gym::ingresarListaClientes(Deportista* d) {
-	_lisCliente->insertarElem(*d);
+	_lisCliente->insertarElem(d);
 }
 
 string Gym::imprimirListaClientes()
 {
 	return _lisCliente->toString();
+}
+
+ListaT<Deportista>* Gym::getListaDepor()
+{
+	return _lisCliente;
 }

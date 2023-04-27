@@ -7,6 +7,7 @@ Triatlonista::Triatlonista(int ced, string nombre, string tel, Fecha* fech, int 
 	_ptrNad = new Nadador(masaMuscu, peso, IMC);
 	this->_cantPartIronMan = partIronMan;
 	this->_cantTriatGanador = triaGan;
+	this->fech = NULL;
 }
 Triatlonista:: ~Triatlonista() {
 	delete _ptrNad;
@@ -26,8 +27,11 @@ string Triatlonista::toString() {
 	s << _ptrNad->toString();
 	s << "\t" << "Cantidad de participaciones\n\t en el iron man" << "................." << _cantPartIronMan << endl;
 	s << "\t" << "Cantidad de Triatones ganadas" << "..." << _cantTriatGanador << endl;
+	s << "Cantidad de Triatones ganadas " << _cantTriatGanador << endl;
 	s << "----------------------------------------------------------------" << endl;
-	s << "Cantidad de Triatones ganadas" << _cantTriatGanador << endl;
+	if (fech != NULL) {
+		s << "La ultima fecha de un pago registardo es:" << this->fech->toString()<<endl;
+	}
 	return s.str();
 }
 
@@ -36,12 +40,14 @@ int Triatlonista::getCanTriatGanador() { return _cantTriatGanador; }
 void Triatlonista::setCanPartIronMan(int canIron) { _cantPartIronMan = canIron; }
 void Triatlonista::getCanTriatGanador(int canGanadas) { _cantTriatGanador = canGanadas; }
 
-//Fecha* Triatlonista::getFecha()
-//{
-//	return fech;
-//}
-//
-//void Triatlonista::setFecha(Fecha* f)
-//{
-//	fech = f;
-//}
+Fecha* Triatlonista::getFecha()
+{
+	return fech;
+}
+
+void Triatlonista::setFecha(Fecha* f)
+{
+	fech = f;
+}
+
+

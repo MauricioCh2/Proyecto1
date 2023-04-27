@@ -28,4 +28,6 @@ public:
 	//Clientes------------------------------------------------------
 	void ingresarListaClientes(Deportista*);
 	string imprimirListaClientes();
+
+	ListaT<Deportista>* getListaDepor();
 };

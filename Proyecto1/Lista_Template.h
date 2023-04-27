@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include "Nodo_Template.h"
+#include "Iterador.h"
 using namespace std;
 template <class T>
 class ListaT {
@@ -11,44 +12,24 @@ private:
 public:
 	ListaT();
 	virtual ~ListaT();
-	void insertarElem(T&);// nota aqui no se puede poner con const
+	void insertarElem(T*);// nota aqui no se puede poner con const
 	virtual bool eliminarUltimo();
 	virtual bool listaVacia();
 	virtual int contador();
-	template <class T> // NOta: jamas hacer esto dentro de la clase, solo serviria para un tipo de dato 
-	friend ostream& operator << (ostream& out, ListaT<T>& l);//friend le da acceso a todos los miembros de la clase por esto no serviria sin friend
-	void guardar(ofstream&);
 	string toString();
+	Nodo<T>* getPriemero();
+	Iterador<T>* begin();     // Colocar un iterador al inicio
+	Iterador<T>* end();
 };
-template <class T>
-ostream& operator << (ostream& out, ListaT<T>& l) { 
-	Nodo<T>* _actual = l._primero;
-	while (_actual != NULL) {
-		out << *_actual->getInfo();
-		_actual = _actual->getSig();
-	}
-	return out;
-}
 template <class T>
 ListaT<T>::ListaT() {
 	_primero = NULL;
 	_actual = NULL;
 }
 template <class T>
-void ListaT<T>::insertarElem(T& p) {
+void ListaT<T>::insertarElem(T* p) {
 	_actual = _primero;
-	if (listaVacia())
-	{
-		_primero = new Nodo<T>(&p, NULL);
-	}
-	else
-	{
-		while (_actual->getSig() != NULL)
-		{
-			_actual = _actual->getSig();
-		}
-		_actual->setSiguiente(new Nodo<T>(&p, NULL));
-	}
+	_primero = new Nodo<T>(p, _primero);
 }
 template <class T>
 ListaT<T>::~ListaT() {
@@ -85,7 +66,9 @@ bool ListaT<T>::eliminarUltimo() {
 }
 template <class T>
 bool ListaT<T>::listaVacia() {
-	if (_primero == NULL) return true;
+	if (_primero == NULL) {
+		return true;
+	}
 	return false;
 }
 template <class T>
@@ -98,15 +81,6 @@ int ListaT<T>::contador() {
 	}
 	return cont;
 }
-template <class T>
-void ListaT<T>::guardar(ofstream& of) {
-	_actual = _primero;
-	while (_actual != NULL) {
-		if ( T* dep = dynamic_cast<Deportista*>(_actual->getInfo())) {
-		
-		}
-	}
-}
 
 template <class T>
 string ListaT<T>::toString() {
@@ -117,4 +91,20 @@ string ListaT<T>::toString() {
 		_actual = _actual->getSig();
 	}
 	return s.str();
+}
+
+template<class T>
+inline Nodo<T>* ListaT<T>::getPriemero()
+{
+	return _primero;
+}
+
+template<class T>
+Iterador<T>* ListaT<T>::begin() {
+	return new Iterador<T>(_primero);
+}
+
+template<class T>
+Iterador<T>* ListaT<T>::end() {
+	return new Iterador<T>();
 }

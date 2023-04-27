@@ -28,6 +28,7 @@
     <ClInclude Include="Fecha.h" />
     <ClInclude Include="Grupo.h" />
     <ClInclude Include="Gym.h" />
+    <ClInclude Include="Iterador.h" />
     <ClInclude Include="Lista_Template.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Nadador.h" />

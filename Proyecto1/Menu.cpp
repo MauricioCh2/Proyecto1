@@ -17,6 +17,54 @@ void Menu::inicio() {
 		}
 	} while (ex == false);
 	//cout<<fecha->toString()<< "prueba ";
+	Fecha* f1 = new Fecha(1, 4, 23);
+	Deportista* c1 = new Triatlonista(111, "a", "1", f1, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	Fecha* f2 = new Fecha(1, 4, 23);
+	Deportista* c2 = new Triatlonista(222, "a", "1", f2, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	Fecha* f3 = new Fecha(1, 4, 23);
+	Deportista* c3 = new Triatlonista(333, "a", "1", f3, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	Fecha* f4 = new Fecha(30, 3, 23);
+	Deportista* c4 = new Triatlonista(444, "a", "1", f4, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	Fecha* f5 = new Fecha(30, 3, 23);
+	Deportista* c5 = new Triatlonista(555, "a", "1", f5, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	Fecha* f6 = new Fecha(1, 1, 23);
+	Deportista* c6 = new Triatlonista(666, "a", "1", f6, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	Fecha* f7 = new Fecha(1, 1, 23);
+	Deportista* c7 = new Triatlonista(777, "a", "1", f7, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	Fecha* f8 = new Fecha(1, 1, 23);
+	Deportista* c8 = new Triatlonista(888, "a", "1", f8, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	Fecha* f9 = new Fecha(1, 1, 23);
+	Deportista* c9 = new Triatlonista(999, "a", "1", f9, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	Fecha* f10 = new Fecha(1, 1, 23);
+	Deportista* c10 = new Triatlonista(100, "a", "1", f10, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	Fecha* f11 = new Fecha(1, 1, 23);
+	Deportista* c11 = new Triatlonista(000, "a", "1", f11, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	c1->setFecha(f1);
+	c2->setFecha(f2);
+	c3->setFecha(f3);
+	c4->setFecha(f4);
+	c5->setFecha(f5);
+
+	c6->setFecha(f6);
+	c7->setFecha(f7);
+	c8->setFecha(f8);
+	c9->setFecha(f9);
+	//c10 Inactivo
+	//c11 Inactivo
+
+
+	_gym->ingresarListaClientes(c1);
+	_gym->ingresarListaClientes(c2);
+	_gym->ingresarListaClientes(c3);
+	_gym->ingresarListaClientes(c4);
+	_gym->ingresarListaClientes(c5);
+	_gym->ingresarListaClientes(c6);
+	_gym->ingresarListaClientes(c7);
+	_gym->ingresarListaClientes(c8);
+	_gym->ingresarListaClientes(c9);
+	_gym->ingresarListaClientes(c10);
+	_gym->ingresarListaClientes(c11);
+
 	while (!fin) {
 		llamarMenus();
 	}
@@ -119,6 +167,14 @@ bool Menu::opMenuDeportista(int op)
 	//triatlonista
 	int cantPartiEnIronMan = 0;
 	int canTriaGanados = 0;
+
+	int cedulaAbuscar = 0;
+	Iterador<Deportista>* iter;
+	Iterador<Deportista>* iter2;
+
+
+	iter = _gym->getListaDepor()->begin();
+	iter2 = _gym->getListaDepor()->end();
 
 	bool ex = false;
 	//clientes (esto puede variar)
@@ -302,10 +358,36 @@ bool Menu::opMenuDeportista(int op)
 		limpiarPantalla();
 		break;
 	case 2: //Modificacion de deportista
+
+		Deportista* aux;
+		Deportista* auxAborrar;
 		imprimirString("<2.Control Deportistas>  <2.Modificacion de deportista>");
-		imprimirString("en dersarrollo");
+		imprimirString("Cual seria la cedula del Deportista?\n");
+		do {
+			try {
+				cedulaAbuscar = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+
+		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
+			if (iter->operator*()->getCedula() == cedulaAbuscar) {
+				aux = atualizarINFO();
+				auxAborrar= iter->getPNodo()->getInfo();
+				iter->getPNodo()->setInfo(aux);
+				delete auxAborrar;
+			}
+		}
+		
+
 		break;
 	case 3: //Listado de deportistas
+		iter = _gym->getListaDepor()->begin();
+		iter2 = _gym->getListaDepor()->end();
 		imprimirString("<2.Control Deportistas>  <3.Listado de deportistas>");
 		imprimirString(subMenuListas());
 		opSub = recivirInt();
@@ -314,15 +396,47 @@ bool Menu::opMenuDeportista(int op)
 				imprimirString(_gym->imprimirListaClientes());
 				break;
 			case 2://deportistas activos
-				imprimirString("en dersarrollo");
-				
+				imprimirString("-------------------------------------------");
+				imprimirString("Deportistas Activos");
+				imprimirString("-------------------------------------------");
+
+				for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
+					if (EstadoDcliente(iter->getPNodo()->getInfo()) == 1)
+					{
+						imprimirString(iter->operator*()->toString());
+					}
+				}
+				imprimirString("---------------------Fin--------------------");
+				imprimirString("-------------------------------------------");
 				break;
 			case 3://deportistas inactivos
-				imprimirString("en dersarrollo");
+				imprimirString("-------------------------------------------");
+				imprimirString("Deportistas Inactivos");
+				imprimirString("-------------------------------------------");
+
+				for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
+					if (EstadoDcliente(iter->getPNodo()->getInfo()) == 3)
+					{
+						imprimirString(iter->operator*()->toString());
+					}
+				}
+				imprimirString("---------------------Fin--------------------");
+				imprimirString("-------------------------------------------");
 				
 				break;
 			case 4:// deportistas con morosidad
-				imprimirString("en dersarrollo");
+				imprimirString("-------------------------------------------");
+				imprimirString("Deportistas con morosidad seguna la fecha de hoy");
+				imprimirString("-------------------------------------------");
+
+				for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
+					if (EstadoDcliente(iter->getPNodo()->getInfo()) == 2)
+					{
+						imprimirString(iter->operator*()->toString());
+					}
+				}
+				imprimirString("---------------------Fin--------------------");
+				imprimirString("-------------------------------------------");
 				
 				break;
 			case 5://atras
@@ -337,7 +451,25 @@ bool Menu::opMenuDeportista(int op)
 		break;
 	case 4: //Detalle de deportista especificp
 		imprimirString("<2.Control Deportistas>  <4.Detalle deportista especifico>");
-		imprimirString("en dersarrollo");
+		imprimirString("Cual seria la cedula del Deportista?\n");
+		do {
+			try {
+				cedulaAbuscar = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+
+		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
+			if (iter->operator*()->getCedula() == cedulaAbuscar) {
+				imprimirString("La infomacion de ese deportista es espesifico es: ");
+				imprimirString(iter->operator*()->toString());
+			}
+		}
+		
 		break;
 	case 5: //Atras
 		limpiarPantalla();
@@ -348,6 +480,9 @@ bool Menu::opMenuDeportista(int op)
 		break;
 	};
 	return false;
+	delete iter;
+	delete iter2;
+	delete fechaNa;
 }
 //Control Cursos--------------------------------------------------------------
 string Menu::menuCursos()
@@ -455,19 +590,59 @@ string Menu::menuPagos()
 bool Menu::opMenuPagos(int op)
 {
 	Fecha* fechAux = NULL;
-	int deportista = 0;
+	int cedulaAbuscar = 0;
+	bool ex=false;
+	Iterador<Deportista>* iter;
+	Iterador<Deportista>* iter2;
+
+	iter = _gym->getListaDepor()->begin();
+	iter2 = _gym->getListaDepor()->end();
 
 	switch (op) {
 	case 1: // Registro nuevo de pago\n"
 		imprimirString("<5.Control  Pagos> <1.Registro de nuevo  pago>");
+		imprimirString("Cedula del Cliente: ");
+		do {
+			try {
 
+				cedulaAbuscar = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+
+		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
+			if (iter->operator*()->getCedula() == cedulaAbuscar) {
+				imprimirString("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO MENSUAL");
+				iter->operator*()->setFecha(fecha);
+			}
+		}
 		//listar los cursos con su codigo 
-		imprimirString("Opcion en desarrollo");
 		break;
-	case 2: //Modificacion de  grupo especifico
+	case 2: 
 		imprimirString("<5.Control  Pagos> <1.Registro de nuevo  pago>");
+		imprimirString("Cedula del Cliente: ");
+		do {
+			try {
 
-		imprimirString("Opcion en desarrollo");
+				cedulaAbuscar = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+
+		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
+			if (iter->operator*()->getCedula() == cedulaAbuscar) {
+				imprimirString("El ultimo pago de este Cliente esta regitrado en la fecha: ");
+				imprimirString(iter->operator*()->getFecha()->toString());
+			}
+		}
 		break;
 	case 3: //Cancelar
 		limpiarPantalla();
@@ -479,6 +654,217 @@ bool Menu::opMenuPagos(int op)
 		break;
 	}
 	return false;
+}
+
+Triatlonista* Menu::atualizarINFO()
+{
+	int opSub = 0;
+	//Deportista
+	int cedula = 0;
+	string nombre = "";
+	string telefono = "";
+	Fecha* fechaNa = NULL;
+	//Ciclista
+	int horasEntrenem = 0;
+	double temProm = 0;
+	//Corredor
+	char sexo;
+	double estatura = 0.0;
+	//Nadador
+	double masaMuscular = 0.0;
+	double peso = 0.0;
+	double PgrasaCorporalMC = 0.0;
+	//triatlonista
+	int cantPartiEnIronMan = 0;
+	int canTriaGanados = 0;
+	bool ex = false;
+
+		imprimirString("Actualisando informacion de Deportista");
+
+		//deportista
+		imprimirString("Cedula: ");
+		do {
+			try {
+				cedula = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Nombre: ");
+		do {
+			try {
+				nombre = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Telefono: ");
+		do {
+			try {
+				telefono = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Fecha nacimiento: ");
+		do {
+			try {
+				fechaNa = validarFecha();
+				ex = true;
+			}
+			catch (...) {
+				cout << "Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		//Ciclista
+		imprimirString("Horas de entrenamiento: ");
+		do {
+			try {
+				horasEntrenem = recivirDouble();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Temperatura promedio al entrenar en Grados Celcius: ");
+		do {
+			try {
+				temProm = recivirDouble();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		//Corredor
+		imprimirString("Sexo(H=hombre,M=mujer): ");
+		do {
+			try {
+				sexo = recivirChar();
+				if (sexo == 'M' || sexo == 'H' || sexo == 'm' || sexo == 'h') {
+					ex = true;
+				}
+				else {
+					throw new ErrorV('c');
+				}
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Estatura en metros (ejemplo: 1.50cm): ");
+		do {
+			try {
+				estatura = recivirDouble();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		//Nadador
+		imprimirString("Porcentaje masa corporal: ");
+		do {
+			try {
+				masaMuscular = recivirDouble();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Peso en kg: ");
+		do {
+			try {
+				peso = recivirDouble();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Porcentaje de grasa corporal: ");
+		do {
+			try {
+				PgrasaCorporalMC = recivirDouble();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		//triatlonista
+		imprimirString("Cantidad de participaciones en Iron Man");
+		do {
+			try {
+				cantPartiEnIronMan = recivirDouble();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Cantidad de triatlones ganados:");
+		do {
+			try {
+				canTriaGanados = recivirDouble();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+
+		system("pause");
+
+		return  new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
+}
+
+int Menu::EstadoDcliente(Deportista* tri)
+{
+	if (tri->getFecha() == NULL) {
+		return 3;//Inactivo
+	}
+	else if ( tri->getFecha()->getAno()==this->fecha->getAno() && tri->getFecha()->getMes() == this->fecha->getMes() ){
+		return 1;//Activo
+	}
+	else if (tri->getFecha()->getAno() == this->fecha->getAno() && tri->getFecha()->getMes() == (this->fecha->getMes()-1) && tri->getFecha()->getDia() >= this->fecha->getDia()) {
+		return 1;//Activo
+	}
+		return 2;//deportistas con morosidad
 }
 
 bool Menu::llamarMenus() {

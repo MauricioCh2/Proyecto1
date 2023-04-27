@@ -7,9 +7,9 @@ class Triatlonista : public Corredor {
 protected:
 	int _cantPartIronMan;
 	int _cantTriatGanador;
-	Ciclista* _ptrCiclista;
-	//Corredor* _ptrCorredor;
+	Ciclista* _ptrCiclista;;
 	Nadador* _ptrNad;
+	Fecha* fech;
 public:
 	Triatlonista(int, string, string, Fecha*, int, double, char, double, double, double, double, int, int);
 
@@ -19,7 +19,7 @@ public:
 	void getCanTriatGanador(int);
 	virtual ~Triatlonista();
 	virtual string toString();
-	/*Fecha* getFecha();
-	void setFecha(Fecha*);*/
+	Fecha* getFecha();
+	void setFecha(Fecha*);
 
 };
