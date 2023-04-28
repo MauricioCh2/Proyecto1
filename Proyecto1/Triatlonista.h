@@ -17,25 +17,39 @@ public:
 	string getNombre();
 	int getCedula();
 	string getTelefono();
-	Fecha* fechaNacimiento();
 	//Ciclista----------------------------------------
 	int getHorasDeEntrenamiento();
 	int getTempPromedio();
+	void setHorasDeEntrenamiento(int);
+	void setTempPromedio(int);
 	//Corredor----------------------------------------
 	char getSexo();
 	double getEstatura();
+	void setSexo(char);
+	void setEstatura(double);
 	//Nadado------------------------------------------
 	double getMasaMuscular();
 	double getPeso();
 	double getPorcGrasaCorporal();
+	void setMasaMuscular(double);
+	void setPeso(double);
+	void setPorcGrasaCorporal(double);
 	//Triatlonista------------------------------------
 	int getCanPartIronMan();
 	int getCanTriatGanador();
 	void setCanPartIronMan(int);
 	void setCanTriatGanador(int);
-	virtual ~Triatlonista();
-	virtual string toString();
 	Fecha* getFechaDeultimoPago();
 	void setFechaDeultimoPago(Fecha*);
 
+	virtual ~Triatlonista();
+	string toString();
+
+
+	//MVP para clonar
+	//Ciclista----------------------------------------
+	//Corredor----------------------------------------
+	// 
+	//Nadado------------------------------------------
+	//Triatlonista------------------------------------
 };

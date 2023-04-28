@@ -45,7 +45,7 @@ bool Archivos::cargarDeportistas()
 	ifstream f_Deportistas("../ListaDeportista.txt");
 	string  nombre, telefono;
 	string Scedula,Ssex, ShorasEn, ScanPartIron, ScanTriGana, StemP, Sestatura, SmasaMuscu, Speso, SporGrasaC;
-	Fecha* fechN;
+	Fecha* fechN = NULL;
 	const char* sex;
 	int cedula, horasEn, canPartIron, canTriGana;
 	double temP, estatura, masaMuscu, peso, porGrasaC;

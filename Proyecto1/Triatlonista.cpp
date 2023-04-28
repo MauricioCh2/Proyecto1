@@ -7,7 +7,8 @@ Triatlonista::Triatlonista(int ced, string nombre, string tel, Fecha* fech, int 
 	_ptrNad = new Nadador(masaMuscu, peso, IMC);
 	this->_cantPartIronMan = partIronMan;
 	this->_cantTriatGanador = triaGan;
-	this->fech = NULL;
+	this->_ptrFecha = fech;
+	this->fechDeuñtimoPago = NULL;
 }
 Triatlonista:: ~Triatlonista() {
 	delete _ptrNad;
@@ -29,8 +30,8 @@ string Triatlonista::toString() {
 	s << "\t" << "Cantidad de Triatones ganadas" << "..." << _cantTriatGanador << endl;
 	s << "Cantidad de Triatones ganadas " << _cantTriatGanador << endl;
 	s << "----------------------------------------------------------------" << endl;
-	if (fech != NULL) {
-		s << "La ultima fecha de un pago registardo es:" << this->fech->toString()<<endl;
+	if (fechDeuñtimoPago != NULL) {
+		s << "La ultima fecha de un pago registardo es:" << this->fechDeuñtimoPago->toString()<<endl;
 	}
 	return s.str();
 }
@@ -39,17 +40,44 @@ string Triatlonista::toString() {
 string Triatlonista::getNombre() { return _nombre; }
 int Triatlonista::getCedula() { return _cedula; }
 string Triatlonista::getTelefono() { return _telefono; }
-Fecha* Triatlonista::fechaNacimiento() { return _ptrFecha; }
 //Ciclista----------------------------------------
 int Triatlonista::getHorasDeEntrenamiento() { return _ptrCiclista->getHorasEntrenamiento(); }
 int Triatlonista::getTempPromedio() { return _ptrCiclista->getTempProm(); }
+void Triatlonista::setHorasDeEntrenamiento(int i)
+{
+	_ptrCiclista->setHorasEntre(i);
+}
+void Triatlonista::setTempPromedio(int t)
+{
+	_ptrCiclista->setTempPro(t);
+}
 //Corredor----------------------------------------
 char Triatlonista::getSexo() { return _sexo; }
 double Triatlonista::getEstatura() { return _estatura; }
+void Triatlonista::setSexo(char c)
+{
+	Corredor::setSexo(c);
+}
+void Triatlonista::setEstatura(double d)
+{
+	Corredor::setEstatura(d);
+}
 //Nadado------------------------------------------
 double Triatlonista::getMasaMuscular() { return _ptrNad->getMasaMuscular(); }
 double Triatlonista::getPeso() { return _ptrNad->getPeso(); }
-double Triatlonista::getPorcGrasaCorporal() { return _ptrNad->getIMC(); }
+double Triatlonista::getPorcGrasaCorporal() {return _ptrNad->getIMC();}
+void Triatlonista::setMasaMuscular(double d)
+{
+	_ptrNad->setMasaMuscular(d);
+}
+void Triatlonista::setPeso(double d)
+{
+	_ptrNad->setPeso(d);
+}
+void Triatlonista::setPorcGrasaCorporal(double d)
+{
+	_ptrNad->setIMC(d);
+}
 //Triatlonista------------------------------------
 int Triatlonista::getCanPartIronMan() { return _cantPartIronMan; }
 int Triatlonista::getCanTriatGanador() { return _cantTriatGanador; }

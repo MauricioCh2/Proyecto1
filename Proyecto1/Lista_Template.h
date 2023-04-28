@@ -123,7 +123,7 @@ void ListaT<T>::guardarDeportistas(ofstream& depo) {
 			depo << dep->getNombre() << "\t"
 				<< dep->getCedula() << "\t"
 				<< dep->getTelefono() << "\t"
-				<< dep->getFecha() << "\t"
+				<< dep->getFechaNacimiento() << "\t"
 				//ciclista----------------------------------------
 				<< dep->getHorasDeEntrenamiento() << "\t"
 				<< dep->getTempPromedio() << "\t"

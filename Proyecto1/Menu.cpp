@@ -39,16 +39,16 @@ void Menu::inicio() {
 	Deportista* c10 = new Triatlonista(100, "a", "1", f10, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
 	Fecha* f11 = new Fecha(1, 1, 23);
 	Deportista* c11 = new Triatlonista(000, "a", "1", f11, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	c1->setFecha(f1);
-	c2->setFecha(f2);
-	c3->setFecha(f3);
-	c4->setFecha(f4);
-	c5->setFecha(f5);
+	c1->setFechaDeultimoPago(f1);
+	c2->setFechaDeultimoPago(f2);
+	c3->setFechaDeultimoPago(f3);
+	c4->setFechaDeultimoPago(f4);
+	c5->setFechaDeultimoPago(f5);
 
-	c6->setFecha(f6);
-	c7->setFecha(f7);
-	c8->setFecha(f8);
-	c9->setFecha(f9);
+	c6->setFechaDeultimoPago(f6);
+	c7->setFechaDeultimoPago(f7);
+	c8->setFechaDeultimoPago(f8);
+	c9->setFechaDeultimoPago(f9);
 	//c10 Inactivo
 	//c11 Inactivo
 
@@ -360,6 +360,7 @@ bool Menu::opMenuDeportista(int op)
 	case 2: //Modificacion de deportista
 
 		Deportista* aux;
+		Deportista* auxAborrar;
 		imprimirString("<2.Control Deportistas>  <2.Modificacion de deportista>");
 		imprimirString("Cual seria la cedula del Deportista?\n");
 		do {
@@ -375,10 +376,11 @@ bool Menu::opMenuDeportista(int op)
 
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulaAbuscar) {
-				aux = iter->operator*();
-				aux = atualizarINFO(aux);
+				aux = atualizarINFO(iter->operator*());
+				auxAborrar = iter->operator*();
 				iter->getPNodo()->setInfo(aux);
-				
+				delete auxAborrar;
+				//Clona el deportista y despues los substitulle con el original para asi poder cambira la infoamcion y no violar ninun principio
 			}
 		}
 		
@@ -616,13 +618,13 @@ bool Menu::opMenuPagos(int op)
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulaAbuscar) {
 				imprimirString("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO MENSUAL");
-				iter->operator*()->setFecha(fecha);
+				iter->operator*()->setFechaDeultimoPago(fecha);
 			}
 		}
 		//listar los cursos con su codigo 
 		break;
 	case 2: 
-		imprimirString("<5.Control  Pagos> <1.Registro de nuevo  pago>");
+		imprimirString("<5.Control  Pagos> <2.Reporte de pagos por deportista>");
 		imprimirString("Cedula del Cliente: ");
 		do {
 			try {
@@ -639,7 +641,7 @@ bool Menu::opMenuPagos(int op)
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulaAbuscar) {
 				imprimirString("El ultimo pago de este Cliente esta regitrado en la fecha: ");
-				imprimirString(iter->operator*()->getFecha()->toString());
+				imprimirString(iter->operator*()->getFechaDeultimoPago()->toString());
 			}
 		}
 		break;
@@ -657,6 +659,9 @@ bool Menu::opMenuPagos(int op)
 
 Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 {
+	Deportista* DepOriginal = depAactaulizar;
+	Deportista* Clon =  new Triatlonista(depAactaulizar->getCedula(), depAactaulizar->getNombre(), depAactaulizar->getTelefono(), depAactaulizar->getFechaNacimiento() , depAactaulizar->getHorasDeEntrenamiento(), depAactaulizar->getTempPromedio(), depAactaulizar->getSexo(), depAactaulizar->getEstatura(), depAactaulizar->getMasaMuscular(), depAactaulizar->getPeso(), depAactaulizar->getPorcGrasaCorporal() , depAactaulizar->getCanTriatGanador(), depAactaulizar->getCanPartIronMan() );
+
 	int opSub = 0;
 	//Deportista
 	int cedula = 0;
@@ -677,7 +682,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 	int cantPartiEnIronMan = 0;
 	int canTriaGanados = 0;
 	bool ex = false;
-	int op=0;
+	int op = 0;
 
 		imprimirString("Actualisando informacion de Deportista");
 		imprimirString(QueQuiereEditarTri());
@@ -707,6 +712,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		ex = false;
+		Clon->setCedula(cedula);
 		break;
 		case 2:
 		imprimirString("Nombre: ");
@@ -721,6 +727,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		ex = false;
+		Clon->setNombre(nombre);
 		break;
 		case 3:
 		imprimirString("Telefono: ");
@@ -736,6 +743,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		ex = false;
+		Clon->setTelefono(telefono);
 		break;
 		case 4:
 		imprimirString("Fecha nacimiento: ");
@@ -750,6 +758,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		ex = false;
+		Clon->setFechaNacimiento(fechaNa);
 		break;
 		case 5:
 		//Ciclista
@@ -765,6 +774,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		ex = false;
+		Clon->setHorasDeEntrenamiento(horasEntrenem);
 		break;
 		case 6:
 		imprimirString("Temperatura promedio al entrenar en Grados Celcius: ");
@@ -779,6 +789,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		ex = false;
+		Clon->setTempPromedio(temProm);
 		break;
 		case 7:
 		//Corredor
@@ -799,6 +810,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		ex = false;
+		Clon->setSexo(sexo);
 		break;
 		case 8:
 		imprimirString("Estatura en metros (ejemplo: 1.50cm): ");
@@ -813,6 +825,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		ex = false;
+		Clon->setEstatura(estatura);
 		break;
 		case 9:
 		//Nadador
@@ -828,6 +841,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		ex = false;
+		Clon->setMasaMuscular(masaMuscular);
 		break;
 		case 10:
 		imprimirString("Peso en kg: ");
@@ -842,6 +856,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		ex = false;
+		Clon->setPeso(peso);
 		break;
 		case 11:
 		imprimirString("Porcentaje de grasa corporal: ");
@@ -856,6 +871,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		ex = false;
+		Clon->setPorcGrasaCorporal(PgrasaCorporalMC);
 		break;
 		case 12:
 		//triatlonista
@@ -871,6 +887,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		ex = false;
+		Clon->setCanPartIronMan(cantPartiEnIronMan);
 		break;
 		case 13:
 		imprimirString("Cantidad de triatlones ganados:");
@@ -884,6 +901,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 				limpiar();
 			}
 		} while (ex == false);
+		Clon->setCanTriatGanador(canTriaGanados);
 		break;
 
 
@@ -891,19 +909,19 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 		}
 
 		system("pause");
-		depAactaulizar =   new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
-		return depAactaulizar;
+		
+		return Clon;
 }
 
 int Menu::EstadoDcliente(Deportista* tri)
 {
-	if (tri->getFecha() == NULL) {
+	if (tri->getFechaDeultimoPago() == NULL) {
 		return 3;//Inactivo
 	}
-	else if ( tri->getFecha()->getAno()==this->fecha->getAno() && tri->getFecha()->getMes() == this->fecha->getMes() ){
+	else if (tri->getFechaDeultimoPago()->getAno()==this->fecha->getAno() && tri->getFechaDeultimoPago()->getMes() == this->fecha->getMes() ){
 		return 1;//Activo
 	}
-	else if (tri->getFecha()->getAno() == this->fecha->getAno() && tri->getFecha()->getMes() == (this->fecha->getMes()-1) && tri->getFecha()->getDia() >= this->fecha->getDia()) {
+	else if (tri->getFechaDeultimoPago()->getAno() == this->fecha->getAno() && tri->getFechaDeultimoPago()->getMes() == (this->fecha->getMes()-1) && tri->getFechaDeultimoPago()->getDia() >= this->fecha->getDia()) {
 		return 1;//Activo
 	}
 		return 2;//deportistas con morosidad
