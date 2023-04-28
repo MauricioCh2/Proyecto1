@@ -40,14 +40,14 @@ int Triatlonista::getCanTriatGanador() { return _cantTriatGanador; }
 void Triatlonista::setCanPartIronMan(int canIron) { _cantPartIronMan = canIron; }
 void Triatlonista::getCanTriatGanador(int canGanadas) { _cantTriatGanador = canGanadas; }
 
-Fecha* Triatlonista::getFecha()
+Fecha* Triatlonista::getFechaDeultimoPago()
 {
-	return fech;
+	return fechDeuñtimoPago;
 }
 
-void Triatlonista::setFecha(Fecha* f)
+void Triatlonista::setFechaDeultimoPago(Fecha* f)
 {
-	fech = f;
+	fechDeuñtimoPago = f;
 }
 
 

@@ -9,7 +9,7 @@ protected:
 	int _cantTriatGanador;
 	Ciclista* _ptrCiclista;;
 	Nadador* _ptrNad;
-	Fecha* fech;
+	Fecha* fechDeuñtimoPago;
 public:
 	Triatlonista(int, string, string, Fecha*, int, double, char, double, double, double, double, int, int);
 
@@ -19,7 +19,7 @@ public:
 	void getCanTriatGanador(int);
 	virtual ~Triatlonista();
 	virtual string toString();
-	Fecha* getFecha();
-	void setFecha(Fecha*);
+	Fecha* getFechaDeultimoPago();
+	void setFechaDeultimoPago(Fecha*);
 
 };
