@@ -2,7 +2,7 @@
 #include "Curso.h"
 #include "Fecha.h"
 class Grupo {
-public:
+private:
 	//hay que ver como listar los cursos 
 	string _cedInstructor;
 	string _nomInstructor;
@@ -19,7 +19,9 @@ public:
 
 	string _nombreCurso;
 	int _connumGrupo;
-private:
+
+
+public:
 	Grupo(string, string, int, Fecha*, int, char, int, int, int, int);
 	~Grupo();
 	//friend ostream& operator<<(ostream& ou, Grupo& g);

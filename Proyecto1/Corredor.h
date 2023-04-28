@@ -5,7 +5,7 @@ protected:
 	char _sexo;
 	double _estatura;
 public:
-	Corredor(int, string, string, Fecha*, char, double);
+	Corredor(char, double);
 	virtual ~Corredor();
 	void setSexo(char);
 	void setEstatura(double);

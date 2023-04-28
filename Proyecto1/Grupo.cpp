@@ -27,7 +27,7 @@ string Grupo::toString() {
 	s << "Numero del grupo:......." << _connumGrupo << endl;
 	s << "Cedula del instructor:.." << _cedInstructor << endl;
 	s << "Instructor asignado:...." << _nomInstructor << endl;
-	s << "Cupo maximo: " << _cupMax << endl;
+	s << "Cupo maximo:............" << _cupMax << endl;
 	//s << ": " << _fechaInicio << endl; cantidad de matriculados 
 	s << "Semanas de duracion...: " << _semDuracion << endl;
 	s << "Dia:................... ";

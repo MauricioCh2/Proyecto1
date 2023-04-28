@@ -1,6 +1,11 @@
 #include "Triatlonista.h"
 Triatlonista::Triatlonista(int ced, string nombre, string tel, Fecha* fech, int horasEntre, double temProm, char sexo, double est, double masaMuscu, double peso, double IMC, int triaGan, int partIronMan) :
-	Corredor(ced, nombre, tel, fech, sexo, est) {
+	Corredor(sexo, est)  {
+	//Deportista
+	_cedula = ced;
+	_nombre = nombre;
+	_telefono = tel;
+	_ptrFecha = fech,
 	//Ciclista
 	_ptrCiclista = new Ciclista(horasEntre, temProm);
 	//Nadador
