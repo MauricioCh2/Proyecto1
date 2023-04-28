@@ -13,11 +13,11 @@ Curso::Curso(string nomC, string niv, int canGrupos , string desc )
     for (int i = 0; i < _canGrupos; i++) {
         _VGrupos[i] = NULL;
     }
-
-    _numCurso = contCurso;
     contCurso++;
+    _numCurso = contCurso;
+    
 }
-
+//probablemente eliminemos este 
 Curso::Curso(string d, string n, int c, Fecha* f, int h,int canGrupo) {
     _descripcion = d;
     _nivel = n;
@@ -73,6 +73,11 @@ string Curso::toString() {
     stringstream s;
     s << _numCurso<< "\t" <<_nombreCurso << "\t" << _nivel << endl;
     return s.str();
+}
+
+Grupo* Curso::getVectorGrupos()
+{
+    return nullptr;
 }
 
 //Vector------------------------------------------

@@ -596,18 +596,30 @@ string Menu::menuGrupos()
 }
 bool Menu::opMenuGrupos(int op)
 {
-	string cedInstr;
-	string nomInstructor;
-	int cupMax;
-	Fecha* fechaInicio;
-	int semDuracion;
+	int numCurso;
+	string cedInstr = "";
+	string nomInstructor = "";
+	int cupMax = 0;
+	Fecha* fechaInicio = NULL;
+	int semDuracion = 0;
+	Grupo* grupo = NULL;
+	char dia;
+	string horInicio = "";
+	string horaFinal = "";
+	int horIn = 0;
+	int minIn = 0;
+	int horFin = 0;
+	int minFin = 0;
 	switch (op) {
 	case 1: // Ingreso nuevo grupo;
-		//listar los cursos con su codigo 
 		imprimirString("< 4.Control Grupos> < 1.Ingreso nuevo grupo>");
+		imprimirString("Lista de cursos");
+		imprimirString(_gym->imprimirListaCursos());
+		imprimirString("Digite el curso a elegir: ");
 		//Listar cursos para elegir en cual se va aingresar el grupo
 		//recorrer la lista e ingresar
-		imprimirString("Nombre del Curso");
+		//If() {} tenemos que validar si caben mas grupos en ese curso 
+		imprimirString("Cedula del instructor");
 		do {
 			try {
 				cedInstr = recivirString();
@@ -619,7 +631,100 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-		imprimirString("Opcion en desarrollo");
+		imprimirString("Nombre del instructor");
+		do {
+			try {
+				nomInstructor = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Cupo maximo del grupo: ");
+		do {
+			try {
+				cupMax = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Fecha de inicio: ");
+		do {
+			try {
+				fechaInicio = validarFecha();
+				ex = true;
+			}
+			catch (...) {
+				cout << "Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Semanas de duracion: ");
+		do {
+			try {
+				dia = validarDia();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		//Horario----------------------------------------------------------------------------------
+		imprimirString("Digite el día de la semana (l-k-m-j-v-s-d) ):");
+		do {
+			try {
+				semDuracion = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Digite la hora de inicio en hora militar (hora:minuto):");
+		do {
+			try {
+				horInicio = recivirString();
+				horIn = validarHora(horInicio);
+				minIn = validarMinuto(horInicio);
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Digite la hora de finalizacion en hora militar (hora:minuto):");
+		do {
+			try {
+				horaFinal = recivirString();
+				horFin = validarHora(horaFinal);
+				minFin = validarMinuto(horaFinal);
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		
+		grupo = new Grupo(cedInstr, nomInstructor, cupMax, fechaInicio,  semDuracion,  dia,  horIn,  minIn,  horFin,  minFin);
+		enter();
+		limpiarPantalla();
+		
 		break;
 	case 2: //Modificacion de  grupo especifico
 		imprimirString("< 4.Control Grupos>  <2. Modificación  de  grupo especifico>");

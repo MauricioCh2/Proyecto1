@@ -12,7 +12,7 @@ private:
     //string codCurso;
     string _nombreCurso;
     string _nivel;
-    int _canGrupos;//tamannio
+    int _canGrupos;//tamaño
     Fecha* _fecha; // Esto seria mas bien grupos
     int _cupMax;//Hace falta? 
     string _descripcion;
@@ -39,6 +39,7 @@ public:
     Fecha* getFecha();
     int getHora();
     string toString();
+    Grupo* getVectorGrupos();
     //Vector-------------------------------
     void ingresarElemento(Grupo&);
     Grupo* operator[](int);
