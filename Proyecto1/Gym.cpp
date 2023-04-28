@@ -2,8 +2,9 @@
 Gym::Gym() {
 	_nombre = " ";
 	_lisCliente = new ListaT<Deportista>;
+	_lisCurso = new ListaT<Curso>;
 }
-
+//Administracion---------------------------------------------------------
 string Gym::getNombreDgym()
 {
 	return _nombre;
@@ -20,6 +21,18 @@ void Gym::setMensualidadDgym(int m)
 {
 	_mensualidad = m;
 }
+//Cursos------------------------------------------------------------------
+void Gym::ingresarCursos(Curso* c) {
+	_lisCurso->insertarElem(c);
+}
+string Gym::imprimirListaCursos() {
+	return _lisCurso->toString();
+}
+
+ListaT<Curso>* Gym::getListaCurso() {
+	return _lisCurso;
+}
+//Clientes----------------------------------------------------------------
 void Gym::ingresarListaClientes(Deportista* d) {
 	_lisCliente->insertarElem(d);
 }

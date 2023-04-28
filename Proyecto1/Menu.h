@@ -31,6 +31,7 @@ Nada de esto es necesario pero para llevar un orden y que se vea coquete no esta
 #include "Gym.h"
 #include "Fecha.h"
 #include "Triatlonista.h"
+#include "Curso.h"
 //#include "Archivos.h"
 using namespace std;
 
@@ -38,6 +39,7 @@ class Menu {
 private:
 	Fecha* fecha;
 	Gym* _gym;
+	bool ex;
 public:
 	//Inicio------------------------------------------------------------
 	void inicio();

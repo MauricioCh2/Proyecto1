@@ -1,9 +1,7 @@
 #pragma once
-#include "Curso.h"
 #include "Fecha.h"
 class Grupo {
 private:
-	//hay que ver como listar los cursos 
 	string _cedInstructor;
 	string _nomInstructor;
 	int _cupMax;
