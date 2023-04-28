@@ -14,7 +14,7 @@ private:
     int _cupMax;
     Fecha* _fecha;
     int _hora;
-    ListaT<Grupo>* _lisCurso = NULL;
+    //ListaT<Grupo>* _lisCurso = NULL;//Junan Pablo Cartin 
 public:
     Curso(string, string, int, Fecha*, int);
     ~Curso();
