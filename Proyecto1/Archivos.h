@@ -1,6 +1,7 @@
 #pragma once
 #include <fstream>
 #include "Gym.h"
+#include "Triatlonista.h"
 #include "Utilities.h"
 class Archivos {
 private: 

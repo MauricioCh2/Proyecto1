@@ -2,6 +2,8 @@
 #include <iostream>
 #include <sstream>
 #include "Fecha.h"
+#include "Lista_Template.h"
+#include "Grupo.h"
 //#include "Lista_Template.h"
 using namespace std;
 
@@ -12,7 +14,7 @@ private:
     int _cupMax;
     Fecha* _fecha;
     int _hora;
-    //ListaT* _lista;
+    //ListaT<Grupo>* _lisCurso = NULL;//Junan Pablo Cartin 
 public:
     Curso(string, string, int, Fecha*, int);
     ~Curso();
