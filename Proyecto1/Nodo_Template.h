@@ -12,7 +12,7 @@ public:
 	Nodo();
 	Nodo(T*, Nodo<T>*);
 	~Nodo();
-	void setInfo(T*);
+	void setInfo( T*);
 	T* getInfo();
 	void setSiguiente(Nodo<T>*);
 	Nodo<T>* getSig();

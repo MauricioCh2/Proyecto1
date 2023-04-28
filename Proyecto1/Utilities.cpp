@@ -142,6 +142,49 @@ int validarAnnio(string s) {
 	}
 	return 0;
 }
+char validarDia()
+{
+	char d;
+	cin >> d;
+	if (d == 'l' || d == 'm' || d == 'k' || d == 'j' || d == 'v' || d == 's' || d == 'd') {
+		return d;
+	}
+	else {
+		//throw (Excepcion 'C');
+	}
+
+}
+
+int validarHora(string h) {
+	string Shora = "";
+	string Smin = "";
+	int hora;
+	stringstream input_stringstream(h);
+	getline(input_stringstream, Shora, ':');
+	getline(input_stringstream, Smin, ':');
+	hora = stoi("hora");
+	if (hora < 24) {
+		return hora;
+	}
+	else {
+		throw new string("ERROR: Digite una hora valida\n");
+	}
+}
+int validarMinuto(string m) {
+	string Shora = "";
+	string Smin = "";
+	int min;
+	stringstream input_stringstream(m);
+	getline(input_stringstream, Shora, ':');
+	getline(input_stringstream, Smin, ':');
+	min = stoi("hora");
+	if (min < 60) {
+		return min;
+	}
+	else {
+		throw new string("ERROR: Digite un minuto valido\n");
+	}
+}
 //Otros-------------------------------
 void enter() {
 	system("pause");
