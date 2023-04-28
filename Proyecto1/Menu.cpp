@@ -867,6 +867,22 @@ int Menu::EstadoDcliente(Deportista* tri)
 		return 2;//deportistas con morosidad
 }
 
+string Menu::QueQuiereEditarTri()
+{
+	stringstream s;
+	s << "	   <Que quiere editar>		  " << endl
+		<< "[1]Editar -----------------------" << endl
+		<< "[2]Editar---------" << endl
+		<< "[3]Editar-------------" << endl
+		<< "[4]Editar---------------" << endl
+		<< "[5]Editar-" << endl
+		<< "[6]Editar--------" << endl
+		<< "[7]Atras\n\n"
+		<< "Digite una opcion: "
+		<< endl;
+	return s.str();
+}
+
 bool Menu::llamarMenus() {
 	int op = 0;
 	int opE = 0;

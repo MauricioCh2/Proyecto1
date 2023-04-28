@@ -64,5 +64,7 @@ public:
 	Triatlonista* atualizarINFO();
 	int EstadoDcliente(Deportista* );
 
+	string QueQuiereEditarTri();
+
 
 };
