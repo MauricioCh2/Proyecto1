@@ -61,7 +61,7 @@ public:
 	bool opMenuPagos(int);
 	//Guardar en Archivos y salir 
 	//realmente esto no requiere metodo 
-	Triatlonista* atualizarINFO();
+	Deportista* atualizarINFO(Deportista*);
 	int EstadoDcliente(Deportista* );
 
 	string QueQuiereEditarTri();

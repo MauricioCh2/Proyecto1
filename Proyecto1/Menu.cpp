@@ -360,7 +360,6 @@ bool Menu::opMenuDeportista(int op)
 	case 2: //Modificacion de deportista
 
 		Deportista* aux;
-		Deportista* auxAborrar;
 		imprimirString("<2.Control Deportistas>  <2.Modificacion de deportista>");
 		imprimirString("Cual seria la cedula del Deportista?\n");
 		do {
@@ -376,10 +375,10 @@ bool Menu::opMenuDeportista(int op)
 
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulaAbuscar) {
-				aux = atualizarINFO();
-				auxAborrar= iter->getPNodo()->getInfo();
+				aux = iter->operator*();
+				aux = atualizarINFO(aux);
 				iter->getPNodo()->setInfo(aux);
-				delete auxAborrar;
+				
 			}
 		}
 		
@@ -656,7 +655,7 @@ bool Menu::opMenuPagos(int op)
 	return false;
 }
 
-Triatlonista* Menu::atualizarINFO()
+Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 {
 	int opSub = 0;
 	//Deportista
@@ -678,10 +677,24 @@ Triatlonista* Menu::atualizarINFO()
 	int cantPartiEnIronMan = 0;
 	int canTriaGanados = 0;
 	bool ex = false;
+	int op=0;
 
 		imprimirString("Actualisando informacion de Deportista");
-
-		//deportista
+		imprimirString(QueQuiereEditarTri());
+		do {
+			try {
+				op = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		switch (op)
+		{
+		case 1:		
 		imprimirString("Cedula: ");
 		do {
 			try {
@@ -694,6 +707,8 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 		ex = false;
+		break;
+		case 2:
 		imprimirString("Nombre: ");
 		do {
 			try {
@@ -706,6 +721,8 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 		ex = false;
+		break;
+		case 3:
 		imprimirString("Telefono: ");
 		do {
 			try {
@@ -719,6 +736,8 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 		ex = false;
+		break;
+		case 4:
 		imprimirString("Fecha nacimiento: ");
 		do {
 			try {
@@ -731,6 +750,8 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 		ex = false;
+		break;
+		case 5:
 		//Ciclista
 		imprimirString("Horas de entrenamiento: ");
 		do {
@@ -744,6 +765,8 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 		ex = false;
+		break;
+		case 6:
 		imprimirString("Temperatura promedio al entrenar en Grados Celcius: ");
 		do {
 			try {
@@ -756,6 +779,8 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 		ex = false;
+		break;
+		case 7:
 		//Corredor
 		imprimirString("Sexo(H=hombre,M=mujer): ");
 		do {
@@ -774,6 +799,8 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 		ex = false;
+		break;
+		case 8:
 		imprimirString("Estatura en metros (ejemplo: 1.50cm): ");
 		do {
 			try {
@@ -786,6 +813,8 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 		ex = false;
+		break;
+		case 9:
 		//Nadador
 		imprimirString("Porcentaje masa corporal: ");
 		do {
@@ -799,6 +828,8 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 		ex = false;
+		break;
+		case 10:
 		imprimirString("Peso en kg: ");
 		do {
 			try {
@@ -811,6 +842,8 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 		ex = false;
+		break;
+		case 11:
 		imprimirString("Porcentaje de grasa corporal: ");
 		do {
 			try {
@@ -823,6 +856,8 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 		ex = false;
+		break;
+		case 12:
 		//triatlonista
 		imprimirString("Cantidad de participaciones en Iron Man");
 		do {
@@ -836,6 +871,8 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 		ex = false;
+		break;
+		case 13:
 		imprimirString("Cantidad de triatlones ganados:");
 		do {
 			try {
@@ -847,10 +884,15 @@ Triatlonista* Menu::atualizarINFO()
 				limpiar();
 			}
 		} while (ex == false);
+		break;
+
+
+		default:break;
+		}
 
 		system("pause");
-
-		return  new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
+		depAactaulizar =   new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
+		return depAactaulizar;
 }
 
 int Menu::EstadoDcliente(Deportista* tri)
@@ -871,13 +913,20 @@ string Menu::QueQuiereEditarTri()
 {
 	stringstream s;
 	s << "	   <Que quiere editar>		  " << endl
-		<< "[1]Editar -----------------------" << endl
-		<< "[2]Editar---------" << endl
-		<< "[3]Editar-------------" << endl
-		<< "[4]Editar---------------" << endl
-		<< "[5]Editar-" << endl
-		<< "[6]Editar--------" << endl
-		<< "[7]Atras\n\n"
+		<< "[1]Editar Cedula-----------------------" << endl
+		<< "[2]Editar Nombre---------" << endl
+		<< "[3]Editar telefono-------------" << endl
+		<< "[4]Editar Fecha de Nacimento---------------" << endl
+		<< "[5]Editar Horas de Entrenamiento" << endl
+		<< "[6]Editar Temperatura Promedio--------" << endl
+		<< "[7]Editar Sexo--------" << endl
+		<< "[8]Editar Estatura--------" << endl
+		<< "[9]Editar Masa Muscular--------" << endl
+		<< "[10]Editar peso --------" << endl
+		<< "[11]Editar Porecentaje de grasa Corporal --------" << endl
+		<< "[12]Editar Cantidad de Triatlones Ganados--------" << endl
+		<< "[13]Editar Cantidad participaciones en IronMan--------" << endl
+		<< "[14]Atras\n\n"
 		<< "Digite una opcion: "
 		<< endl;
 	return s.str();
