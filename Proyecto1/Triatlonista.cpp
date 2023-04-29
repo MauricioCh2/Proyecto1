@@ -30,7 +30,7 @@ string Triatlonista::toString() {
 	s << "\t" << "Cantidad de Triatones ganadas" << "..." << _cantTriatGanador << endl;
 	s << "Cantidad de Triatones ganadas " << _cantTriatGanador << endl;
 	s << "----------------------------------------------------------------" << endl;
-	if (fechDeultimoPago != NULL) {
+	if (fechDeultimoPago != NULL) {//lifi is good
 		s << "La ultima fecha de un pago registardo es:" << this->fechDeultimoPago->toString()<<endl;
 	}
 	return s.str();
