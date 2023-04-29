@@ -25,6 +25,9 @@ public:
 	void setNombreDgym(string);
 	int getMensualidadDgym();
 	void setMensualidadDgym(int);
+	//Cursos------------------------------------------------------
+	void ingresarCursos(Curso*);
+	string imprimirListaCursos();
 	//Clientes------------------------------------------------------
 	void ingresarListaClientes(Deportista*);
 	string imprimirListaClientes();
