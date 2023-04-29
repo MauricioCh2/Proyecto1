@@ -1,12 +1,12 @@
 #pragma once
-#include "Curso.h"
 #include "Fecha.h"
+#include "Deportista.h"
+#include "Triatlonista.h"
 class Grupo {
-public:
-	//hay que ver como listar los cursos 
+private:
 	string _cedInstructor;
 	string _nomInstructor;
-	int _cupMax;
+	int _cupMax;//tamaño
 	Fecha* _fechaInicio;
 	int _semDuracion;
 	//Horarios
@@ -19,12 +19,30 @@ public:
 
 	string _nombreCurso;
 	int _connumGrupo;
-private:
+
+	//ector triatlonista
+	int _can;
+	Deportista** _VClientes;
+
+public:
 	Grupo(string, string, int, Fecha*, int, char, int, int, int, int);
 	~Grupo();
 	//friend ostream& operator<<(ostream& ou, Grupo& g);
 	string toString();
-
+	//vector deportista
+	void ingresarElemento(Deportista&);
+	Deportista* operator[](int);
+	// gets--------------------------------------
+	string getCedInstructor();
+	string getNomInstructor();
+	int getCupMax();
+	Fecha* getFechaInicio();
+	int getSemDuracion();
+	char getDiaSemana();
+	int getHoraInicio();
+	int getMinInicio();
+	int getHoraFinaliza();
+	int getMinFinaliza();
 
 	string getNombreCurso();
 	int getConnumGrupo();
@@ -33,7 +51,7 @@ private:
 	void setCedInstructor(string);
 	void setNomInstructo(string);
 	void setcupMax(int);
-	void setFechaInicio(Fecha* );
+	void setFechaInicio(Fecha*);
 	void setSemDuracion(int);
 	void setDiaSem(char);
 	void setHoraInicio(int);
