@@ -11,7 +11,7 @@ int Cobro::EstadoDcliente(Deportista* tri, Fecha* f)
 	else if (tri->getFechaDeultimoPago()->getAno() == f->getAno() && tri->getFechaDeultimoPago()->getMes() == f->getMes()) {
 		return 1;//Activo
 	}
-	else if (tri->getFechaDeultimoPago()->getAno() == f->getAno() && tri->getFechaDeultimoPago()->getMes() == (f->getMes() - 1) && tri->getFechaDeultimoPago()->getDia() >= this->fecha->getDia()) {
+	else if (tri->getFechaDeultimoPago()->getAno() == f->getAno() && tri->getFechaDeultimoPago()->getMes() == (f->getMes() - 1) && tri->getFechaDeultimoPago()->getDia() >=f->getDia()) {
 		return 1;//Activo
 	}
 	return 2;//deportistas con morosidad
