@@ -60,6 +60,4 @@ public:
 	void setMinutoFinal(int);
 	void setNombreCurso();
 	//Vector triatlonista
-	int _can;
-	Deportista** _VClientes;
 };
