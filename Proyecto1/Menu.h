@@ -26,7 +26,7 @@ Nada de esto es necesario pero para llevar un orden y que se vea coquete no esta
 #pragma once
 #include <iostream>
 #include <sstream>
-
+#include "Cobro.h"
 #include "Utilities.h"
 #include "Gym.h"
 #include "Fecha.h"
@@ -39,6 +39,7 @@ private:
 	Fecha* fecha;
 	Gym* _gym;
 public:
+	Fecha* getFechaActual();
 	//Inicio------------------------------------------------------------
 	void inicio();
 	bool llamarMenus();
@@ -62,8 +63,6 @@ public:
 	//Guardar en Archivos y salir 
 	//realmente esto no requiere metodo 
 	Deportista* atualizarINFO(Deportista*);
-	int EstadoDcliente(Deportista* );
-
 	string QueQuiereEditarTri();
 
 

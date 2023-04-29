@@ -21,6 +21,7 @@
   <ItemGroup>
     <ClInclude Include="Archivos.h" />
     <ClInclude Include="Ciclista.h" />
+    <ClInclude Include="Cobro.h" />
     <ClInclude Include="Corredor.h" />
     <ClInclude Include="Curso.h" />
     <ClInclude Include="Deportista.h" />
@@ -39,6 +40,7 @@
   <ItemGroup>
     <ClCompile Include="Archivo.cpp" />
     <ClCompile Include="Ciclista.cpp" />
+    <ClCompile Include="Cobro.cpp" />
     <ClCompile Include="Corredor.cpp" />
     <ClCompile Include="Curso.cpp" />
     <ClCompile Include="Deportista.cpp" />

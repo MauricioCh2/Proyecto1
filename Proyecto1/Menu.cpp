@@ -1,4 +1,8 @@
 #include "Menu.h"
+Fecha* Menu::getFechaActual()
+{
+	return this->fecha;
+}
 void Menu::inicio() {
 	_gym = new Gym();
 	bool fin = false;
@@ -402,7 +406,7 @@ bool Menu::opMenuDeportista(int op)
 				imprimirString("-------------------------------------------");
 
 				for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
-					if (EstadoDcliente(iter->getPNodo()->getInfo()) == 1)
+					if ( Cobro::EstadoDcliente(iter->getPNodo()->getInfo(), this->fecha ) == 1)
 					{
 						imprimirString(iter->operator*()->toString());
 					}
@@ -416,7 +420,7 @@ bool Menu::opMenuDeportista(int op)
 				imprimirString("-------------------------------------------");
 
 				for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
-					if (EstadoDcliente(iter->getPNodo()->getInfo()) == 3)
+					if (Cobro::EstadoDcliente(iter->getPNodo()->getInfo(), this->fecha) == 3)
 					{
 						imprimirString(iter->operator*()->toString());
 					}
@@ -431,7 +435,7 @@ bool Menu::opMenuDeportista(int op)
 				imprimirString("-------------------------------------------");
 
 				for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
-					if (EstadoDcliente(iter->getPNodo()->getInfo()) == 2)
+					if (Cobro::EstadoDcliente(iter->getPNodo()->getInfo(), this->fecha) == 2)
 					{
 						imprimirString(iter->operator*()->toString());
 					}
@@ -617,14 +621,14 @@ bool Menu::opMenuPagos(int op)
 
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulaAbuscar) {
+				iter->operator*()->setFechaDeultimoPago(Cobro::getFechaDeultimoPago(iter->operator*(),this->fecha));
 				imprimirString("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO MENSUAL");
-				iter->operator*()->setFechaDeultimoPago(fecha);
 			}
 		}
 		//listar los cursos con su codigo 
 		break;
 	case 2: 
-		imprimirString("<5.Control  Pagos> <2.Reporte de pagos por deportista>");
+		imprimirString("<5.Control  Pagos> <2.Reporte de pagos por deportista>");////////////////
 		imprimirString("Cedula del Cliente: ");
 		do {
 			try {
@@ -641,7 +645,10 @@ bool Menu::opMenuPagos(int op)
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulaAbuscar) {
 				imprimirString("El ultimo pago de este Cliente esta regitrado en la fecha: ");
-				imprimirString(iter->operator*()->getFechaDeultimoPago()->toString());
+				if (iter->operator*()->getFechaDeultimoPago() != NULL) {
+					imprimirString(iter->operator*()->getFechaDeultimoPago()->toString());
+				}
+				imprimirString("{Este cliente esta [inactivo], por lo que no se tiene regitrado un pago reciente}");
 			}
 		}
 		break;
@@ -913,19 +920,6 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 		return Clon;
 }
 
-int Menu::EstadoDcliente(Deportista* tri)
-{
-	if (tri->getFechaDeultimoPago() == NULL) {
-		return 3;//Inactivo
-	}
-	else if (tri->getFechaDeultimoPago()->getAno()==this->fecha->getAno() && tri->getFechaDeultimoPago()->getMes() == this->fecha->getMes() ){
-		return 1;//Activo
-	}
-	else if (tri->getFechaDeultimoPago()->getAno() == this->fecha->getAno() && tri->getFechaDeultimoPago()->getMes() == (this->fecha->getMes()-1) && tri->getFechaDeultimoPago()->getDia() >= this->fecha->getDia()) {
-		return 1;//Activo
-	}
-		return 2;//deportistas con morosidad
-}
 
 string Menu::QueQuiereEditarTri()
 {

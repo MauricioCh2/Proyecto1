@@ -9,7 +9,7 @@ protected:
 	int _cantTriatGanador;
 	Ciclista* _ptrCiclista;;
 	Nadador* _ptrNad;
-	Fecha* fechDeuñtimoPago;
+	Fecha* fechDeultimoPago;
 public:
 	Triatlonista(int, string, string, Fecha*, int, double, char, double, double, double, double, int, int);
 
