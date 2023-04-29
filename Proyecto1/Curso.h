@@ -15,6 +15,7 @@ private:
     Fecha* _fecha;
     int _hora;
     //ListaT<Grupo>* _lisCurso = NULL;//Junan Pablo Cartin 
+    //ListaT<Grupo>* _lisGrupo = NULL;
 public:
     Curso(string, string, int, Fecha*, int);
     ~Curso();
