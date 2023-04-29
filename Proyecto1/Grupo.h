@@ -26,4 +26,20 @@ private:
 	string toString();
 
 
+	string getNombreCurso();
+	int getConnumGrupo();
+	Deportista* getVectorClientes();
+	// sets--------------------------------------
+	void setCedInstructor(string);
+	void setNomInstructo(string);
+	void setcupMax(int);
+	void setFechaInicio(Fecha* );
+	void setSemDuracion(int);
+	void setDiaSem(char);
+	void setHoraInicio(int);
+	void setMinutoInicio(int);
+	void setHoraFinal(int);
+	void setMinutoFinal(int);
+	void setNombreCurso();
+	//Vector triatlonista
 };
