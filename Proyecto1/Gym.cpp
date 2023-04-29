@@ -2,8 +2,9 @@
 Gym::Gym() {
 	_nombre = " ";
 	_lisCliente = new ListaT<Deportista>;
+	_lisCurso = new ListaT<Curso>;
 }
-
+//Administracion---------------------------------------------------------
 string Gym::getNombreDgym()
 {
 	return _nombre;

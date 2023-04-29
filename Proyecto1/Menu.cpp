@@ -556,6 +556,7 @@ bool Menu::opMenuGrupos(int op)
 	int minIn = 0;
 	int horFin = 0;
 	int minFin = 0;
+	bool ex = false;
 	switch (op) {
 	case 1: // Ingreso nuevo grupo;
 		imprimirString("< 4.Control Grupos> < 1.Ingreso nuevo grupo>");
