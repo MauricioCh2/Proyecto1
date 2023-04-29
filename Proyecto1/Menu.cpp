@@ -493,10 +493,10 @@ bool Menu::opMenuDeportista(int op)
 string Menu::menuCursos()
 {
 	stringstream s;
-		s << "	   <Menu Cursos>		  " << endl
-		<< "[1].Ingreso nuevo curso---------------" << endl
-		<< "[2]. Reporte de curso específico------" << endl
-		<< "[3]. Modificación de curso específico-" << endl
+	s << "	   <Menu Cursos>		  " << endl
+		<< "[1]Ingreso nuevo curso----------------" << endl
+		<< "[2]Reporte de curso específico--------" << endl
+		<< "[3]Modificación de curso específico---" << endl
 		<< "[5]Atras------------------------------\n\n"
 		<< "Digite una opcion: ";
 
@@ -504,13 +504,72 @@ string Menu::menuCursos()
 }
 bool Menu::opMenuCursos(int op)
 {
+	bool ex=false;
+	string nombreCurso = "";
+	string nivel = "";
+	int canG = 0;
+	string descripcion = "";
+	Curso* curso = NULL;
 	switch (op) {
 	case 1: // Ingreso nuevo curso;
 		imprimirString("< 3.Control Cursos> < 1.Ingreso nuevo curso >");
-		imprimirString("Opcion en desarrollo");
+		imprimirString("Nombre del Curso");
+		do {
+			try {
+				nombreCurso = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Nivel del curso: ");
+		do {
+			try {
+				nivel = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Cantidad de grupos: ");
+		do {
+			try {
+				canG = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Descripcion del curso: ");
+		do {
+			try {
+				descripcion = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		curso = new Curso(nombreCurso, nivel, canG, descripcion);
+		_gym->ingresarCursos(curso);
+		enter();
+		limpiarPantalla();
 		break;
 	case 2: //Reporte de curso específico 
 		imprimirString("< 3.Control Cursos> < 2.Reporte de curso especifico>");
+		cout << "<Numero de curso> \t" << "<Nombre del curso>\t" << "<Nivel>\t" << endl;
+		imprimirString(_gym->imprimirListaCursos());
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 3://Modificación de curso específico 
@@ -523,7 +582,6 @@ bool Menu::opMenuCursos(int op)
 	return false;
 }
 
-//Control de grupos-------------------------------------------------------
 //Control de grupos-------------------------------------------------------
 string Menu::menuGrupos()
 {
