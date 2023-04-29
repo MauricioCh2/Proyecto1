@@ -2,7 +2,7 @@
 void Menu::inicio() {
 	_gym = new Gym();
 	bool fin = false;
-	bool ex = false;
+	ex = false;
 	imprimirString("Bienvenido al GYM de triatlon");
 
 	imprimirString("Digite la Fecha en formato dia/mes/annio");
@@ -76,10 +76,10 @@ string Menu::menuPrincipal() {
 	  s << "	   <Menu Principal>		  " << endl
 		<< "[1]Administracion General-------------" << endl
 		<< "[2]Control de Deportista--------------" << endl
-		<< "[3]Reportes generales-----------------" << endl
-		<< "[4]Control de Grupo-------------------" << endl
+		<< "[3]Control de Cursos------------------" << endl
+		<< "[4]Control de Grupos------------------" << endl
 		<< "[5]Control de Pagos-------------------" << endl
-		<< "[5]Guardar Archivos y salir-----------" << endl
+		<< "[6]Guardar Archivos y salir-----------" << endl
 		<< "Digite una opcion: ";
 
 	return s.str();
@@ -349,8 +349,9 @@ bool Menu::opMenuDeportista(int op)
 				limpiar();
 			}
 		}while (ex == false);
+		ex = false;
 
-		system("pause");
+		enter();
 
 		cliente = new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
 		_gym->ingresarListaClientes(cliente);
@@ -489,9 +490,9 @@ string Menu::menuCursos()
 {
 	stringstream s;
 		s << "	   <Menu Cursos>		  " << endl
-		<< "[1].Ingreso nuevo curso---------------" << endl
-		<< "[2]. Reporte de curso específico------" << endl
-		<< "[3]. Modificación de curso específico-" << endl
+		<< "[1]Ingreso nuevo curso----------------" << endl
+		<< "[2]Reporte de curso específico--------" << endl
+		<< "[3]Modificación de curso específico---" << endl
 		<< "[5]Atras------------------------------\n\n"
 		<< "Digite una opcion: ";
 
@@ -499,13 +500,72 @@ string Menu::menuCursos()
 }
 bool Menu::opMenuCursos(int op)
 {
+
+	string nombreCurso = "";
+	string nivel = "";
+	int canG = 0;
+	string descripcion = "";
+	Curso* curso = NULL;
 	switch (op) {
 	case 1: // Ingreso nuevo curso;
 		imprimirString("< 3.Control Cursos> < 1.Ingreso nuevo curso >");
-		imprimirString("Opcion en desarrollo");
+		imprimirString("Nombre del Curso");
+		do {
+			try {
+				nombreCurso = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Nivel del curso: ");
+		do {
+			try {
+				nivel = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Cantidad de grupos: ");
+		do {
+			try {
+				canG = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Descripcion del curso: ");
+		do {
+			try {
+				descripcion = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		curso = new Curso(nombreCurso, nivel, canG, descripcion);
+		_gym->ingresarCursos(curso);
+		enter();
+		limpiarPantalla();
 		break;
 	case 2: //Reporte de curso específico 
 		imprimirString("< 3.Control Cursos> < 2.Reporte de curso especifico>");
+		cout << "<Numero de curso> \t" << "<Nombre del curso>\t" << "<Nivel>\t" << endl;
+		imprimirString(_gym->imprimirListaCursos()) ;
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 3://Modificación de curso específico 
@@ -536,11 +596,135 @@ string Menu::menuGrupos()
 }
 bool Menu::opMenuGrupos(int op)
 {
+	int numCurso;
+	string cedInstr = "";
+	string nomInstructor = "";
+	int cupMax = 0;
+	Fecha* fechaInicio = NULL;
+	int semDuracion = 0;
+	Grupo* grupo = NULL;
+	char dia;
+	string horInicio = "";
+	string horaFinal = "";
+	int horIn = 0;
+	int minIn = 0;
+	int horFin = 0;
+	int minFin = 0;
 	switch (op) {
 	case 1: // Ingreso nuevo grupo;
-		//listar los cursos con su codigo 
 		imprimirString("< 4.Control Grupos> < 1.Ingreso nuevo grupo>");
-		imprimirString("Opcion en desarrollo");
+		imprimirString("Lista de cursos");
+		imprimirString(_gym->imprimirListaCursos());
+		imprimirString("Digite el curso a elegir: ");
+		//Listar cursos para elegir en cual se va aingresar el grupo
+		//recorrer la lista e ingresar
+		//If() {} tenemos que validar si caben mas grupos en ese curso 
+		imprimirString("Cedula del instructor");
+		do {
+			try {
+				cedInstr = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Nombre del instructor");
+		do {
+			try {
+				nomInstructor = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Cupo maximo del grupo: ");
+		do {
+			try {
+				cupMax = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Fecha de inicio: ");
+		do {
+			try {
+				fechaInicio = validarFecha();
+				ex = true;
+			}
+			catch (...) {
+				cout << "Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Semanas de duracion: ");
+		do {
+			try {
+				dia = validarDia();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		//Horario----------------------------------------------------------------------------------
+		imprimirString("Digite el día de la semana (l-k-m-j-v-s-d) ):");
+		do {
+			try {
+				semDuracion = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Digite la hora de inicio en hora militar (hora:minuto):");
+		do {
+			try {
+				horInicio = recivirString();
+				horIn = validarHora(horInicio);
+				minIn = validarMinuto(horInicio);
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Digite la hora de finalizacion en hora militar (hora:minuto):");
+		do {
+			try {
+				horaFinal = recivirString();
+				horFin = validarHora(horaFinal);
+				minFin = validarMinuto(horaFinal);
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		
+		grupo = new Grupo(cedInstr, nomInstructor, cupMax, fechaInicio,  semDuracion,  dia,  horIn,  minIn,  horFin,  minFin);
+		enter();
+		limpiarPantalla();
+		
 		break;
 	case 2: //Modificacion de  grupo especifico
 		imprimirString("< 4.Control Grupos>  <2. Modificación  de  grupo especifico>");
@@ -848,7 +1032,7 @@ Triatlonista* Menu::atualizarINFO()
 			}
 		} while (ex == false);
 
-		system("pause");
+		enter();
 
 		return  new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
 }
@@ -878,7 +1062,7 @@ bool Menu::llamarMenus() {
 		limpiarPantalla();
 		imprimirString(menuAdministracion());
 		op = recivirInt();
-		opMenuCursos(op);
+		opMenuAdministracion(op);
 		break;
 	case 2://Control de Deportistas
 		limpiarPantalla();

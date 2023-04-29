@@ -9,16 +9,25 @@ using namespace std;
 
 class Curso {
 private:
-    string _descripcion;
+    //string codCurso;
+    string _nombreCurso;
     string _nivel;
-    int _cupMax;
-    Fecha* _fecha;
-    int _hora;
-    //ListaT<Grupo>* _lisCurso = NULL;//Junan Pablo Cartin 
-    //ListaT<Grupo>* _lisGrupo = NULL;
+    int _canGrupos;//tamaño
+    Fecha* _fecha; // Esto seria mas bien grupos
+    int _cupMax;//Hace falta? 
+    string _descripcion;
+
+    int _numCurso;
+    static int contCurso;
+    int _hora;// creo que seria mejor gets y sets de grupo 
+    int _can;
+    Grupo** _VGrupos;
+
 public:
-    Curso(string, string, int, Fecha*, int);
+    Curso(string, string, int, string); 
+    Curso(string, string, int, Fecha*, int, int);
     ~Curso();
+
     void setDescripcion(string);
     void setNivel(string);
     void setCup(int);
@@ -29,4 +38,10 @@ public:
     int getCup();
     Fecha* getFecha();
     int getHora();
+    string toString();
+    Grupo* getVectorGrupos();
+    //Vector-------------------------------
+    void ingresarElemento(Grupo&);
+    Grupo* operator[](int);
+
 };
