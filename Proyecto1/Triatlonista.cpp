@@ -8,7 +8,7 @@ Triatlonista::Triatlonista(int ced, string nombre, string tel, Fecha* fech, int 
 	this->_cantPartIronMan = partIronMan;
 	this->_cantTriatGanador = triaGan;
 	this->_ptrFecha = fech;
-	this->fechDeuñtimoPago = NULL;
+	this->fechDeultimoPago = NULL;
 }
 Triatlonista:: ~Triatlonista() {
 	delete _ptrNad;
@@ -86,12 +86,12 @@ void Triatlonista::setCanTriatGanador(int canGanadas) { _cantTriatGanador = canG
 
 Fecha* Triatlonista::getFechaDeultimoPago()
 {
-	return fechDeuñtimoPago;
+	return fechDeultimoPago;
 }
 
 void Triatlonista::setFechaDeultimoPago(Fecha* f)
 {
-	fechDeuñtimoPago = f;
+	fechDeultimoPago = f;
 }
 
 
