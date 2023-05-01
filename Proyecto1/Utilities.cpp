@@ -162,7 +162,7 @@ int validarHora(string h) {
 	stringstream input_stringstream(h);
 	getline(input_stringstream, Shora, ':');
 	getline(input_stringstream, Smin, ':');
-	hora = stoi("hora");
+	hora = stoi(Shora);
 	if (hora < 24) {
 		return hora;
 	}
@@ -177,7 +177,7 @@ int validarMinuto(string m) {
 	stringstream input_stringstream(m);
 	getline(input_stringstream, Shora, ':');
 	getline(input_stringstream, Smin, ':');
-	min = stoi("hora");
+	min = stoi(Smin);
 	if (min < 60) {
 		return min;
 	}

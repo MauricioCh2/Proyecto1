@@ -29,8 +29,24 @@ string Gym::imprimirListaCursos() {
 	return _lisCurso->toString();
 }
 
+string Gym::imprimirListaEspe(string s)
+{
+	return _lisCurso->encontrarEsp(s)->toString();
+}
+
+string Gym::imprimirListadoCursos()
+{
+	return _lisCurso->Listar();
+
+}
+
 ListaT<Curso>* Gym::getListaCurso() {
 	return _lisCurso;
+}
+//Grupos--------------------------------------------------------
+
+void Gym::ingresarGrupo(Grupo*)
+{
 }
 //Clientes----------------------------------------------------------------
 void Gym::ingresarListaClientes(Deportista* d) {

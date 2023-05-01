@@ -29,10 +29,12 @@ public:
 	~Grupo();
 	//friend ostream& operator<<(ostream& ou, Grupo& g);
 	string toString();
+	string Listar();
 	//vector deportista
 	void ingresarElemento(Deportista&);
 	Deportista* operator[](int);
 	// gets--------------------------------------
+	string getIdent();
 	string getCedInstructor();
 	string getNomInstructor();
 	int getCupMax();

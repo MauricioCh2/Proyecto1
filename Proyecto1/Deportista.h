@@ -20,6 +20,7 @@ public:
 	virtual void setFechaNacimiento(Fecha*);
 	virtual string getNombre();
 	virtual int getCedula();
+	virtual string getIdent();
 	virtual string getTelefono();
 	virtual Fecha* getFechaNacimiento();
 	virtual string toString() = 0;

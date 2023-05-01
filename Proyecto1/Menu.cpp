@@ -80,7 +80,7 @@ string Menu::menuPrincipal() {
 	  s << "	   <Menu Principal>		  " << endl
 		<< "[1]Administracion General-------------" << endl
 		<< "[2]Control de Deportista--------------" << endl
-		<< "[3]Reportes generales-----------------" << endl
+		<< "[3]Control de Cursos------------------" << endl
 		<< "[4]Control de Grupo-------------------" << endl
 		<< "[5]Control de Pagos-------------------" << endl
 		<< "[5]Guardar Archivos y salir-----------" << endl
@@ -505,6 +505,8 @@ string Menu::menuCursos()
 bool Menu::opMenuCursos(int op)
 {
 	bool ex=false;
+	string ident = "";
+	string codCurso = "";
 	string nombreCurso = "";
 	string nivel = "";
 	int canG = 0;
@@ -513,6 +515,18 @@ bool Menu::opMenuCursos(int op)
 	switch (op) {
 	case 1: // Ingreso nuevo curso;
 		imprimirString("< 3.Control Cursos> < 1.Ingreso nuevo curso >");
+		imprimirString("Codigo del Curso");
+		do {
+			try {
+				codCurso = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
 		imprimirString("Nombre del Curso");
 		do {
 			try {
@@ -561,15 +575,30 @@ bool Menu::opMenuCursos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-		curso = new Curso(nombreCurso, nivel, canG, descripcion);
+		curso = new Curso(codCurso, nombreCurso, nivel, canG, descripcion);
 		_gym->ingresarCursos(curso);
 		enter();
 		limpiarPantalla();
 		break;
 	case 2: //Reporte de curso específico 
 		imprimirString("< 3.Control Cursos> < 2.Reporte de curso especifico>");
-		cout << "<Numero de curso> \t" << "<Nombre del curso>\t" << "<Nivel>\t" << endl;
-		imprimirString(_gym->imprimirListaCursos());
+		imprimirString("Listado de cursos");
+		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
+		imprimirString(_gym->imprimirListadoCursos());
+
+		imprimirString("Cual curso desea ver en especifico");
+		do {
+			try {
+				 ident = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString(_gym->imprimirListaEspe(ident));
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 3://Modificación de curso específico 
@@ -600,6 +629,7 @@ string Menu::menuGrupos()
 }
 bool Menu::opMenuGrupos(int op)
 {
+	string ident;
 	int numCurso;
 	string cedInstr = "";
 	string nomInstructor = "";
@@ -619,8 +649,22 @@ bool Menu::opMenuGrupos(int op)
 	case 1: // Ingreso nuevo grupo;
 		imprimirString("< 4.Control Grupos> < 1.Ingreso nuevo grupo>");
 		imprimirString("Lista de cursos");
-		imprimirString(_gym->imprimirListaCursos());
+		imprimirString("<Numero de curso> \t <Nombre del curso>\t  <Nivel>\t");
+		imprimirString(_gym->imprimirListadoCursos());
 		imprimirString("Digite el curso a elegir: ");
+		do {
+			try {
+				ident = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		//Verificar spacio
+		
 		//Listar cursos para elegir en cual se va aingresar el grupo
 		//recorrer la lista e ingresar
 		//If() {} tenemos que validar si caben mas grupos en ese curso 
@@ -675,7 +719,7 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString("Semanas de duracion: ");
 		do {
 			try {
-				dia = validarDia();
+				semDuracion = recivirInt();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -688,7 +732,8 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString("Digite el día de la semana (l-k-m-j-v-s-d) ):");
 		do {
 			try {
-				semDuracion = recivirInt();
+				dia = validarDia();
+
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -701,8 +746,6 @@ bool Menu::opMenuGrupos(int op)
 		do {
 			try {
 				horInicio = recivirString();
-				horIn = validarHora(horInicio);
-				minIn = validarMinuto(horInicio);
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -711,6 +754,8 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		horIn = validarHora(horInicio);
+		minIn = validarMinuto(horInicio);
 		imprimirString("Digite la hora de finalizacion en hora militar (hora:minuto):");
 		do {
 			try {
@@ -727,6 +772,7 @@ bool Menu::opMenuGrupos(int op)
 		ex = false;
 
 		grupo = new Grupo(cedInstr, nomInstructor, cupMax, fechaInicio, semDuracion, dia, horIn, minIn, horFin, minFin);
+
 		enter();
 		limpiarPantalla();
 
@@ -1139,7 +1185,7 @@ bool Menu::llamarMenus() {
 		limpiarPantalla();
 		imprimirString(menuAdministracion());
 		op = recivirInt();
-		opMenuCursos(op);
+		opMenuAdministracion(op);
 		break;
 	case 2://Control de Deportistas
 		limpiarPantalla();

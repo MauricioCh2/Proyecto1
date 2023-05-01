@@ -29,8 +29,12 @@ public:
 	//Cursos--------------------------------------------------------
 	void ingresarCursos(Curso*);
 	string imprimirListaCursos();
-
+	string imprimirListaEspe(string);
+	string imprimirListadoCursos();
+	
 	ListaT<Curso>* getListaCurso();
+	//Grupos--------------------------------------------------------
+	void ingresarGrupo(Grupo*);
 	//Clientes------------------------------------------------------
 	void ingresarListaClientes(Deportista*);
 	string imprimirListaClientes();

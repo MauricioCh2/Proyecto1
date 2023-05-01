@@ -69,6 +69,12 @@ string Grupo::toString() {
 
 	return s.str();
 }
+string Grupo::Listar()
+{
+	stringstream s;
+	s << _connumGrupo<< "\t" << _diaSemana << "\t" << _horaInicio << ":" << _minInicio << "-" << _horaFinaliza <<":" << _minFinaliza << "\t" << _cupMax << endl;
+	return s.str();
+}
 //Vector------------------------------------------
 void Grupo::ingresarElemento(Deportista& grupo) {
 	if (_can < _cupMax) {
@@ -79,9 +85,14 @@ void Grupo::ingresarElemento(Deportista& grupo) {
 Deportista* Grupo::operator[](int k) {
 	return _VClientes[k];
 }
+string Grupo::getIdent()
+{
+	return _cedInstructor;
+}
 //Gets------------------------------------------
 string Grupo::getCedInstructor()
 {
+
 	return _cedInstructor;
 }
 

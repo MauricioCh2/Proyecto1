@@ -19,7 +19,11 @@ public:
 	virtual bool eliminarUltimo();
 	virtual bool listaVacia();
 	virtual int contador();
+	virtual T* contadorEspecifico(int);//retorna el valor que se encuentre en x posicion
+	virtual T* encontrarEsp(string);
+	
 	string toString();
+	string Listar();
 	Nodo<T>* getPriemero();
 	Iterador<T>* begin();     // Colocar un iterador al inicio
 	Iterador<T>* end();
@@ -85,14 +89,51 @@ int ListaT<T>::contador() {
 		_actual = _actual->getSig();
 	}
 	return cont;
+	
 }
+template <class T>
+T* ListaT<T>::contadorEspecifico(int n) {
+	int cont = 0;
+	_actual = _primero;
+	while (_actual != NULL) {
+		cont++; // creo que esto es menos meos
+		if (cont == n) {
+			break;
+		}
+		_actual = _actual->getSig();
+	}
+	return _actual->getInfo();
+}
+template <class T>
+T* ListaT<T>::encontrarEsp(string s) {
+	_actual = _primero;
+	T* t;
+	while (_actual != NULL) {
+		t = dynamic_cast<T*>(_actual->getInfo());
+		if (t->getIdent() == s) {
+			return t;
+		}
+		_actual = _actual->getSig();
 
+	}
+	return NULL;
+}
 template <class T>
 string ListaT<T>::toString() {
 	stringstream s;
 	_actual = _primero;
 	while (_actual != NULL) {
 		s << _actual->toStringNodo();
+		_actual = _actual->getSig();
+	}
+	return s.str();
+}
+template <class T>
+string ListaT<T>::Listar() {
+	stringstream s;
+	_actual = _primero;
+	while (_actual != NULL) {
+		s << _actual->ListarN();
 		_actual = _actual->getSig();
 	}
 	return s.str();
