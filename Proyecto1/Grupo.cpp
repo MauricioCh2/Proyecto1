@@ -202,5 +202,7 @@ Deportista* Grupo::operator[](int k) {
 }
 string Grupo::getIdent()
 {
-	return _cedInstructor;
+	string numGrup = to_string(_connumGrupo);
+
+	return numGrup;
 }

@@ -867,9 +867,20 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
-
-		_gym->reporteGrupoEspe(codCurso, numGrup);
-		imprimirString("Opcion en desarrollo");
+		imprimirString("Cual grupo desea ver? ");
+		do {
+			try {
+				numGrup = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString(_gym->reporteGrupoEspe(codCurso, numGrup));
+		
 		break;
 	case 5: //Reporte deportistas matriculados en grupo
 		imprimirString("< 5.Control Grupos> < 5. Reporte deportistas matriculados por grupo>");
