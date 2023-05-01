@@ -8,6 +8,7 @@ Curso::Curso(string cod, string nomC, string niv, int canGrupos, string desc)
     _canGrupos = canGrupos;
     _descripcion = desc;
     _can = 0;
+    _numGrupo = 0;
 
     _lisGrupos = new ListaT<Grupo>;
 
@@ -109,13 +110,12 @@ bool Curso::verficiarEspacio()
     return false;
 }
 void Curso::ingresarGrupo(Grupo* grupo) {
-    if (_cupMax < _lisGrupos->contador()) {
+        _numGrupo = _numGrupo++;
         _lisGrupos->insertarElem(grupo);
-    }
-    else {
-        cout << "si, aqui definitivamente deberia haber una excepcion" << endl;
-    }
-    
+        _lisGrupos->contador();
+        grupo->setnumGrupo(_numGrupo);
+        grupo->setNombreCurso(_nombreCurso);
+
 }
 Grupo* Curso::operator[](int k) { // la idea es que retorne el grupo que se encuentre en la posicion dentro de los[]
     return _lisGrupos->contadorEspecifico(k);

@@ -1,7 +1,8 @@
 #include "Grupo.h"
+
 Grupo::Grupo(string ced, string nom, int cupM, Fecha* fech, int dur, char diaSem, int horaIn, int minIn, int horFin, int minFin) {
 	_cedInstructor = ced;
-	_nomInstructor;
+	_nomInstructor = nom;
 	_cupMax = cupM;
 	_fechaInicio = fech;
 	_semDuracion = dur;
@@ -14,7 +15,7 @@ Grupo::Grupo(string ced, string nom, int cupM, Fecha* fech, int dur, char diaSem
 	_minFinaliza = minFin;
 
 	_nombreCurso = "Sin Definir";
-	_connumGrupo++;
+	_numGrupo=0;
 
 	//Lista triatlonistas
 	_lisDepor = new ListaT<Deportista>;
@@ -32,7 +33,7 @@ string Grupo::toString() {
 	stringstream s;
 	s << "----------------------------------------" << endl;
 	s << "Nombre del curso:......." << _nombreCurso << endl;
-	s << "Numero del grupo:......." << _connumGrupo << endl;
+	s << "Numero del grupo:......." << _numGrupo << endl;
 	s << "Cedula del instructor:.." << _cedInstructor << endl;
 	s << "Instructor asignado:...." << _nomInstructor << endl;
 	s << "Cupo maximo:............" << _cupMax << endl;
@@ -69,7 +70,7 @@ string Grupo::toString() {
 string Grupo::Listar()
 {
 	stringstream s;
-	s << _connumGrupo<< "\t" << _diaSemana << "\t" << _horaInicio << ":" << _minInicio << "-" << _horaFinaliza <<":" << _minFinaliza << "\t" << _cupMax << endl;
+	s << _numGrupo<< "\t" << _diaSemana << "\t" << _horaInicio << ":" << _minInicio << "-" << _horaFinaliza <<":" << _minFinaliza << "\t" << _cupMax << endl;
 	return s.str();
 }
 
@@ -130,9 +131,9 @@ string Grupo::getNombreCurso()
 	return _nombreCurso;
 }
 
-int Grupo::getConnumGrupo()
+int Grupo::getNumGrupo()
 {
-	return _connumGrupo;
+	return _numGrupo;
 }
 
 ListaT<Deportista>* Grupo::getListaDepor()
@@ -188,10 +189,12 @@ void Grupo::setMinutoFinal(int a)
 {
 	_minFinaliza = a;
 }
-
-void Grupo::setNombreCurso()
+void Grupo::setnumGrupo(int n) {
+	_numGrupo = n;
+}
+void Grupo::setNombreCurso(string n)
 {
-	//_nombreCurso 
+	_nombreCurso = n;
 }
 //Lista------------------------------------------
 void Grupo::ingresarDeportista(Deportista* de) {
@@ -202,7 +205,7 @@ Deportista* Grupo::operator[](int k) {
 }
 string Grupo::getIdent()
 {
-	string numGrup = to_string(_connumGrupo);
+	string numGrup = to_string(_numGrupo);
 
 	return numGrup;
 }

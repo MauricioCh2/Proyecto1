@@ -18,7 +18,7 @@ private:
     int _cupMax;//Hace falta? 
     string _descripcion;
 
-    //int _numCurso;
+    int _numGrupo;
     static int contCurso;
     int _hora;// creo que seria mejor gets y sets de grupo 
     int _can;

@@ -19,7 +19,7 @@ private:
 	int _minFinaliza;
 
 	string _nombreCurso;
-	int _connumGrupo;
+	int _numGrupo;
 
 	//ector triatlonista
 	ListaT<Deportista>* _lisDepor;
@@ -43,9 +43,8 @@ public:
 	int getMinInicio();
 	int getHoraFinaliza();
 	int getMinFinaliza();
-
 	string getNombreCurso();
-	int getConnumGrupo();
+	int getNumGrupo();
 	ListaT<Deportista>* getListaDepor();
 	// sets--------------------------------------
 	void setCedInstructor(string);
@@ -58,7 +57,9 @@ public:
 	void setMinutoInicio(int);
 	void setHoraFinal(int);
 	void setMinutoFinal(int);
-	void setNombreCurso();
+	void setnumGrupo(int n);
+	void setNombreCurso(string);
+
 	//Lista deportista
 	void ingresarDeportista(Deportista*);
 	Deportista* operator[](int);

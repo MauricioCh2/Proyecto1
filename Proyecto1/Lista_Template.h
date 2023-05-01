@@ -21,10 +21,11 @@ public:
 	virtual int contador();
 	virtual T* contadorEspecifico(int);//retorna el valor que se encuentre en x posicion
 	virtual T* encontrarEsp(string);
-	
+	virtual T* getUltimo();
 	string toString();
 	string Listar();
 	Nodo<T>* getPriemero();
+
 	Iterador<T>* begin();     // Colocar un iterador al inicio
 	Iterador<T>* end();
 	//Archivos
@@ -117,6 +118,14 @@ T* ListaT<T>::encontrarEsp(string s) {
 
 	}
 	return NULL;
+}
+template <class T>
+T* ListaT<T>::getUltimo() {
+	_actual = _primero;
+	while (_actual != NULL) {
+		_actual = _actual->getSig();
+	}
+	return _actual->getInfo();
 }
 template <class T>
 string ListaT<T>::toString() {

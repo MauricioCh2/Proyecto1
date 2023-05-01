@@ -581,7 +581,7 @@ bool Menu::opMenuCursos(int op)
 		limpiarPantalla();
 		break;
 	case 2: //Reporte de curso específico 
-		imprimirString("< 3.Control Cursos> < 2.Reporte de curso especifico>");
+		imprimirString("< 3.Control Cursos> < 2.Reporte de curso especifico>\n");
 		imprimirString("Listado de cursos");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
@@ -599,7 +599,8 @@ bool Menu::opMenuCursos(int op)
 		} while (ex == false);
 		ex = false;
 		imprimirString(_gym->imprimirListaEspe(ident));
-		imprimirString("Opcion en desarrollo");
+		enter();
+		limpiarPantalla();
 		break;
 	case 3://Modificación de curso específico 
 		imprimirString("< 3.Control Cursos> < 3. Modificación de  curso especifico >");
@@ -655,7 +656,7 @@ bool Menu::opMenuGrupos(int op)
 	case 1: // Ingreso nuevo grupo;
 		imprimirString("< 4.Control Grupos> < 1.Ingreso nuevo grupo>");
 		imprimirString("Lista de cursos");
-		imprimirString("<Numero de curso> \t <Nombre del curso>\t  <Nivel>\t");
+		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
 		imprimirString("Digite el curso a elegir: ");
 		do {
@@ -766,8 +767,7 @@ bool Menu::opMenuGrupos(int op)
 		do {
 			try {
 				horaFinal = recivirString();
-				horFin = validarHora(horaFinal);
-				minFin = validarMinuto(horaFinal);
+				
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -776,6 +776,8 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		horFin = validarHora(horaFinal);
+		minFin = validarMinuto(horaFinal);
 		
 		grupo = new Grupo(cedInstr, nomInstructor, cupMax, fechaInicio, semDuracion, dia, horIn, minIn, horFin, minFin);
 		_gym->ingresarGrupo(curso, grupo);
@@ -803,6 +805,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		imprimirString("En que curso desea matricular?");
+		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		_gym->imprimirListadoCursos();
 
 		do {
@@ -817,6 +820,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		imprimirString("Para dicho curso quedan los siguientes grupos disponibles: ");
+		imprimirString("<Num>\t\t<Dia>\t\t<Horario>\t\t\t<CupMax>\t\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(curso));
 		imprimirString("Digite el grupo en el que desea ser ingresado: ");
 		do {
@@ -853,6 +857,7 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString("< 5.Control Grupos> < 4.Reporte de grupo especifico >");
 		codCurso = "";
 		numGrup = "";
+		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
 		imprimirString("En cual curso se encuentra el grupo?");
 		do {
@@ -866,6 +871,7 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		imprimirString("<Num>\t\t<Dia>\t\t<Horario>\t\t\t<CupMax>\t\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
 		imprimirString("Cual grupo desea ver? ");
 		do {
@@ -880,7 +886,9 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		imprimirString(_gym->reporteGrupoEspe(codCurso, numGrup));
-		
+		enter();
+		limpiar();
+		limpiarPantalla();
 		break;
 	case 5: //Reporte deportistas matriculados en grupo
 		imprimirString("< 5.Control Grupos> < 5. Reporte deportistas matriculados por grupo>");
