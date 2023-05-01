@@ -3,6 +3,7 @@ Gym::Gym() {
 	_nombre = " ";
 	_lisCliente = new ListaT<Deportista>;
 	_lisCurso = new ListaT<Curso>;
+	
 }
 //Administracion---------------------------------------------------------
 string Gym::getNombreDgym()
@@ -45,8 +46,33 @@ ListaT<Curso>* Gym::getListaCurso() {
 }
 //Grupos--------------------------------------------------------
 
-void Gym::ingresarGrupo(Grupo*)
+void Gym::ingresarGrupo(string c,Grupo* g)
 {
+	_lisCurso->encontrarEsp(c)->ingresarGrupo(g);
+}
+string Gym::imprimirListadoGrupo(string c)
+{
+	return _lisCurso->encontrarEsp(c)->getListaGrupos()->Listar();
+}
+int Gym::PruebaCantGrupos(string c)
+{
+	return _lisCurso->encontrarEsp(c)->getListaGrupos()->contador();
+}
+string Gym::reporteGrupoEspe(string cur, string grup)
+{
+	ListaT<Grupo>* lisG = new ListaT<Grupo>;
+	//podria terminar el metodo de verifiar espacio
+	lisG=_lisCurso->encontrarEsp(cur)->getListaGrupos();
+	
+	return lisG->encontrarEsp(grup)->toString();
+}
+void Gym::ingresarClienteAGrupos(string n, string cod, string ced )
+{
+	
+	Deportista* dep = _lisCliente->encontrarEsp(ced);
+	Curso* cur = _lisCurso->encontrarEsp(cod);
+	cur->getListaGrupos()->encontrarEsp(n)->ingresarDeportista(dep);
+	
 }
 //Clientes----------------------------------------------------------------
 void Gym::ingresarListaClientes(Deportista* d) {

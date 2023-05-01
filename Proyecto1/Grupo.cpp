@@ -16,20 +16,17 @@ Grupo::Grupo(string ced, string nom, int cupM, Fecha* fech, int dur, char diaSem
 	_nombreCurso = "Sin Definir";
 	_connumGrupo++;
 
-	//Vector triatlonistas
-	_can = 0;
-	_VClientes = new Deportista * [cupM];
-	for (int i = 0; i < _cupMax; i++) {
-		_VClientes[i] = NULL;
-	}
+	//Lista triatlonistas
+	_lisDepor = new ListaT<Deportista>;
 
 }
 Grupo:: ~Grupo() {
-	for (int i = 0; i < _can; i++) {
+	
+	/*for (int i = 0; i < _can; i++) {
 		if (_VClientes[i] != NULL)
 			delete _VClientes[i];
 	}
-	delete[] _VClientes;
+	delete[] _VClientes;*/
 }
 string Grupo::toString() {
 	stringstream s;
@@ -75,20 +72,7 @@ string Grupo::Listar()
 	s << _connumGrupo<< "\t" << _diaSemana << "\t" << _horaInicio << ":" << _minInicio << "-" << _horaFinaliza <<":" << _minFinaliza << "\t" << _cupMax << endl;
 	return s.str();
 }
-//Vector------------------------------------------
-void Grupo::ingresarElemento(Deportista& grupo) {
-	if (_can < _cupMax) {
-		_VClientes[_can++] = &grupo;
-		_can++;
-	}
-}
-Deportista* Grupo::operator[](int k) {
-	return _VClientes[k];
-}
-string Grupo::getIdent()
-{
-	return _cedInstructor;
-}
+
 //Gets------------------------------------------
 string Grupo::getCedInstructor()
 {
@@ -151,9 +135,9 @@ int Grupo::getConnumGrupo()
 	return _connumGrupo;
 }
 
-Deportista* Grupo::getVectorClientes()
+ListaT<Deportista>* Grupo::getListaDepor()
 {
-	return *_VClientes;
+	return _lisDepor;
 }
 
 void Grupo::setCedInstructor(string a)
@@ -208,4 +192,15 @@ void Grupo::setMinutoFinal(int a)
 void Grupo::setNombreCurso()
 {
 	//_nombreCurso 
+}
+//Lista------------------------------------------
+void Grupo::ingresarDeportista(Deportista* de) {
+	_lisDepor->insertarElem(de);
+}
+Deportista* Grupo::operator[](int k) {
+	return _lisDepor->contadorEspecifico(k);
+}
+string Grupo::getIdent()
+{
+	return _cedInstructor;
 }

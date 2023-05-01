@@ -2,6 +2,7 @@
 #include "Fecha.h"
 #include "Deportista.h"
 #include "Triatlonista.h"
+#include "Lista_Template.h"
 class Grupo {
 private:
 	string _cedInstructor;
@@ -21,8 +22,7 @@ private:
 	int _connumGrupo;
 
 	//ector triatlonista
-	int _can;
-	Deportista** _VClientes;
+	ListaT<Deportista>* _lisDepor;
 
 public:
 	Grupo(string, string, int, Fecha*, int, char, int, int, int, int);
@@ -30,9 +30,7 @@ public:
 	//friend ostream& operator<<(ostream& ou, Grupo& g);
 	string toString();
 	string Listar();
-	//vector deportista
-	void ingresarElemento(Deportista&);
-	Deportista* operator[](int);
+	
 	// gets--------------------------------------
 	string getIdent();
 	string getCedInstructor();
@@ -48,7 +46,7 @@ public:
 
 	string getNombreCurso();
 	int getConnumGrupo();
-	Deportista* getVectorClientes();
+	ListaT<Deportista>* getListaDepor();
 	// sets--------------------------------------
 	void setCedInstructor(string);
 	void setNomInstructo(string);
@@ -61,5 +59,7 @@ public:
 	void setHoraFinal(int);
 	void setMinutoFinal(int);
 	void setNombreCurso();
-	//Vector triatlonista
+	//Lista deportista
+	void ingresarDeportista(Deportista*);
+	Deportista* operator[](int);
 };

@@ -46,8 +46,9 @@ public:
     int getHora();
     string Listar();
     string toString();
-    Grupo* getVectorGrupos();
-    //Vector-------------------------------
+   
+    //Lista-------------------------------
+    ListaT<Grupo>* getListaGrupos();
     bool verficiarEspacio();
     void ingresarGrupo(Grupo*);
     Grupo* operator[](int);

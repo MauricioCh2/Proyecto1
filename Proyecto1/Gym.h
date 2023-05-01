@@ -34,10 +34,15 @@ public:
 	
 	ListaT<Curso>* getListaCurso();
 	//Grupos--------------------------------------------------------
-	void ingresarGrupo(Grupo*);
+	void ingresarGrupo(string,Grupo*);
+	string imprimirListadoGrupo(string);
+	int PruebaCantGrupos(string c);
+	string reporteGrupoEspe(string,string);
+	void ingresarClienteAGrupos(string,string, string);
 	//Clientes------------------------------------------------------
 	void ingresarListaClientes(Deportista*);
 	string imprimirListaClientes();
+
 
 	ListaT<Deportista>* getListaDepor();
 

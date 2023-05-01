@@ -28,6 +28,7 @@ Curso::Curso(string d, string n, int c, Fecha* f, int h, int canGrupo) {
 
 }
 Curso::~Curso() {
+    _lisGrupos->eliminarUltimo();
     delete _lisGrupos;
     /*for (int i = 0; i < _can; i++) {
         if (_VGrupos[i] != NULL)
@@ -91,9 +92,15 @@ string Curso::toString() {
     return s.str();
 }
 
-Grupo* Curso::getVectorGrupos()
+
+
+
+
+//LIsta------------------------------------------
+
+ListaT<Grupo>* Curso::getListaGrupos()
 {
-    return nullptr;
+    return _lisGrupos;
 }
 
 bool Curso::verficiarEspacio()
@@ -101,12 +108,10 @@ bool Curso::verficiarEspacio()
 
     return false;
 }
-
-//LIsta------------------------------------------
 void Curso::ingresarGrupo(Grupo* grupo) {
     if (_cupMax < _lisGrupos->contador()) {
         _lisGrupos->insertarElem(grupo);
-   }
+    }
     else {
         cout << "si, aqui definitivamente deberia haber una excepcion" << endl;
     }

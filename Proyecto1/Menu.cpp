@@ -629,8 +629,9 @@ string Menu::menuGrupos()
 }
 bool Menu::opMenuGrupos(int op)
 {
-	string ident;
-	int numCurso;
+	
+	string curso;
+	string numCurso;
 	string cedInstr = "";
 	string nomInstructor = "";
 	int cupMax = 0;
@@ -645,6 +646,11 @@ bool Menu::opMenuGrupos(int op)
 	int horFin = 0;
 	int minFin = 0;
 	bool ex = false;
+	//op 3
+	string cedCliente = "";
+	string codCurso = "";
+	string numGrup = "";
+	Fecha* fechaMa = NULL;
 	switch (op) {
 	case 1: // Ingreso nuevo grupo;
 		imprimirString("< 4.Control Grupos> < 1.Ingreso nuevo grupo>");
@@ -654,7 +660,7 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString("Digite el curso a elegir: ");
 		do {
 			try {
-				ident = recivirString();
+				curso = recivirString();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -770,9 +776,10 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-
+		
 		grupo = new Grupo(cedInstr, nomInstructor, cupMax, fechaInicio, semDuracion, dia, horIn, minIn, horFin, minFin);
-
+		_gym->ingresarGrupo(curso, grupo);
+		
 		enter();
 		limpiarPantalla();
 
@@ -783,11 +790,85 @@ bool Menu::opMenuGrupos(int op)
 		break;
 	case 3: //matricula de grupo especifico
 		imprimirString("< 4.Control Grupos>  <3.Matricula en grupo especifico>");
-		imprimirString("Opcion en desarrollo");
+		imprimirString("Digite el ID del usuario que desea matricular:");
+		do {
+			try {
+				cedCliente = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("En que curso desea matricular?");
+		_gym->imprimirListadoCursos();
 
+		do {
+			try {
+				codCurso = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Para dicho curso quedan los siguientes grupos disponibles: ");
+		imprimirString(_gym->imprimirListadoGrupo(curso));
+		imprimirString("Digite el grupo en el que desea ser ingresado: ");
+		do {
+			try {
+				numGrup = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		
+		imprimirString("Digite la fecha de matricula: ");
+		do {
+			try {
+				fechaMa = validarFecha();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+
+		_gym->ingresarClienteAGrupos(numGrup, codCurso, cedCliente);
+
+		
+		imprimirString("Opcion en desarrollo");
 		break;
 	case 4: //Reporte de grupo especifico 
 		imprimirString("< 5.Control Grupos> < 4.Reporte de grupo especifico >");
+		codCurso = "";
+		numGrup = "";
+		imprimirString(_gym->imprimirListadoCursos());
+		imprimirString("En cual curso se encuentra el grupo?");
+		do {
+			try {
+				codCurso = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString(_gym->imprimirListadoGrupo(codCurso));
+
+		_gym->reporteGrupoEspe(codCurso, numGrup);
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 5: //Reporte deportistas matriculados en grupo
