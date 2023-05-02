@@ -1070,8 +1070,39 @@ bool Menu::opMenuGrupos(int op)
 		break;
 	case 5: //Reporte deportistas matriculados en grupo
 		imprimirString("< 5.Control Grupos> < 5. Reporte deportistas matriculados por grupo>");
-		imprimirString("Opcion en desarrollo");
+		imprimirString("Seleccione un curso");
+		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
+		_gym->imprimirListadoCursos();
 
+		do {
+			try {
+				codCurso = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Seleccione un grupo: ");
+		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
+		imprimirString(_gym->imprimirListadoGrupo(curso));
+		imprimirString("Digite el grupo en el que desea ser ingresado: ");
+		do {
+			try {
+				numGrup = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString(_gym->imprimirClientesDeUnGrupo(codCurso,numGrup));
+		enter();
+		limpiarPantalla();
 		break;
 	case 6://Cancelacion de  matricula en grupo
 		imprimirString("< 5.Control Grupos>  <6. Cancelación de  matricula en grupo>");

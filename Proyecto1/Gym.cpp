@@ -74,6 +74,10 @@ void Gym::ingresarClienteAGrupos(string n, string cod, string ced )
 	cur->getListaGrupos()->encontrarEsp(n)->ingresarDeportista(dep);
 	
 }
+string Gym::imprimirClientesDeUnGrupo(string cod, string n)
+{
+	return _lisCurso->encontrarEsp(cod)->getListaGrupos()->encontrarEsp(n)->imprimirDeportistas();
+}
 //Clientes----------------------------------------------------------------
 void Gym::ingresarListaClientes(Deportista* d) {
 	_lisCliente->insertarElem(d);

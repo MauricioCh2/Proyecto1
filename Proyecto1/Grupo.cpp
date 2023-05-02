@@ -214,3 +214,6 @@ string Grupo::getIdent()
 
 	return numGrup;
 }
+string Grupo::imprimirDeportistas() {
+	return _lisDepor->toString();
+}

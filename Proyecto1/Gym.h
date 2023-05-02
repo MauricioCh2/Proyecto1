@@ -34,6 +34,7 @@ public:
 	int PruebaCantGrupos(string c);
 	string reporteGrupoEspe(string,string);
 	void ingresarClienteAGrupos(string,string, string);
+	string imprimirClientesDeUnGrupo(string, string);
 	//Clientes------------------------------------------------------
 	void ingresarListaClientes(Deportista*);
 	string imprimirListaClientes();

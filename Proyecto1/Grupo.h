@@ -64,4 +64,5 @@ public:
 	//Lista deportista
 	void ingresarDeportista(Deportista*);
 	Deportista* operator[](int);
+	string imprimirDeportistas();
 };
