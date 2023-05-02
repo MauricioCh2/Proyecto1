@@ -83,7 +83,7 @@ string Menu::menuPrincipal() {
 		<< "[3]Control de Cursos------------------" << endl
 		<< "[4]Control de Grupo-------------------" << endl
 		<< "[5]Control de Pagos-------------------" << endl
-		<< "[5]Guardar Archivos y salir-----------" << endl
+		<< "[6]Guardar Archivos y salir-----------" << endl
 		<< "Digite una opcion: ";
 
 	return s.str();
@@ -103,19 +103,37 @@ string Menu::menuAdministracion() {
 
 }
 bool Menu::opMenuAdministracion(int op) {
-
+	string nombre;
+	int mensualidad;
+	bool ex = false;
 	switch (op) {
 	case 1://Nombre del Gimnasio
 		imprimirString("<1. Administración General > <1. Nombre del Gimnasio>  ");
-		imprimirString("Ingrese el nombre del Gimnasio : _ FitnessUNA");
-		_gym->setNombreDgym(" _ FitnessUNA");
-		imprimirString("<Digite Enter >");
+		imprimirString("Ingrese el nombre del Gimnasio :");
+		ignorarCin();
+		nombre = recivirGetLine();
+		_gym->setNombreDgym(nombre);
+		enter();
+		limpiarPantalla();
+
 		break;
 	case 2://Monto de mensualidad
 		imprimirString("<1. Administración General>  <2. Monto de mensualidad >  ");
-		imprimirString("Ingrese el Monto de mensualidad: 25000 ");
-		_gym->setMensualidadDgym(25000);
-		imprimirString("<Digite Enter >");
+		imprimirString("Ingrese el Monto de mensualidad:");
+		do {
+			try {
+				mensualidad = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		_gym->setMensualidadDgym(mensualidad);
+		enter();
+		limpiarPantalla();
 		break;
 	case 3: 
 		limpiarPantalla();
@@ -203,7 +221,8 @@ bool Menu::opMenuDeportista(int op)
 		imprimirString("Nombre: ");
 		do {
 			try {
-				nombre = recivirString();
+				ignorarCin();
+				nombre = recivirGetLine();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -354,7 +373,7 @@ bool Menu::opMenuDeportista(int op)
 			}
 		}while (ex == false);
 
-		system("pause");
+		
 
 		cliente = new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
 		_gym->ingresarListaClientes(cliente);
@@ -530,7 +549,8 @@ bool Menu::opMenuCursos(int op)
 		imprimirString("Nombre del Curso");
 		do {
 			try {
-				nombreCurso = recivirString();
+				ignorarCin();
+				nombreCurso = recivirGetLine();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -564,17 +584,9 @@ bool Menu::opMenuCursos(int op)
 		} while (ex == false);
 		ex = false;
 		imprimirString("Descripcion del curso: ");
-		do {
-			try {
-				descripcion = recivirString();
-				ex = true;
-			}
-			catch (ErrorV* e) {
-				cout << e->what() << endl;
-				limpiar();
-			}
-		} while (ex == false);
-		ex = false;
+		ignorarCin();
+		descripcion = recivirGetLine();
+	
 		curso = new Curso(codCurso, nombreCurso, nivel, canG, descripcion);
 		_gym->ingresarCursos(curso);
 		enter();
@@ -690,7 +702,8 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString("Nombre del instructor");
 		do {
 			try {
-				nomInstructor = recivirString();
+				ignorarCin();
+				nomInstructor = recivirGetLine();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -820,7 +833,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		imprimirString("Para dicho curso quedan los siguientes grupos disponibles: ");
-		imprimirString("<Num>\t\t<Dia>\t\t<Horario>\t\t\t<CupMax>\t\t<Disp>");
+		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(curso));
 		imprimirString("Digite el grupo en el que desea ser ingresado: ");
 		do {
@@ -871,7 +884,7 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-		imprimirString("<Num>\t\t<Dia>\t\t<Horario>\t\t\t<CupMax>\t\t<Disp>");
+		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
 		imprimirString("Cual grupo desea ver? ");
 		do {
@@ -1055,7 +1068,8 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 		imprimirString("Nombre: ");
 		do {
 			try {
-				nombre = recivirString();
+				ignorarCin();
+				nombre = recivirGetLine();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1245,7 +1259,7 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 		default:break;
 		}
 
-		system("pause");
+		enter();
 		
 		return Clon;
 }

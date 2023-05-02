@@ -21,9 +21,10 @@ public:
 	virtual int contador();
 	virtual T* contadorEspecifico(int);//retorna el valor que se encuentre en x posicion
 	virtual T* encontrarEsp(string);
-	virtual T* getUltimo();
+	virtual bool eliminarEspe(string);
 	string toString();
 	string Listar();
+	void setSig();
 	Nodo<T>* getPriemero();
 
 	Iterador<T>* begin();     // Colocar un iterador al inicio
@@ -120,12 +121,38 @@ T* ListaT<T>::encontrarEsp(string s) {
 	return NULL;
 }
 template <class T>
-T* ListaT<T>::getUltimo() {
+bool ListaT<T>::eliminarEspe(string i) {
+	Nodo<T>* pAnterior = NULL;
+	T* t;
 	_actual = _primero;
-	while (_actual != NULL) {
-		_actual = _actual->getSig();
+	//si la lista esta vacia
+	if (_primero == NULL) {
+		return false;
 	}
-	return _actual->getInfo();
+	// si el elemento esta de primero
+	t = dynamic_cast<T*>(_primero->getInfo());
+	if (t->getIdent() == i) {
+		_actual = _actual->getSig();
+		delete (_primero);
+		_primero = _actual;
+		return true;
+	}
+	// en caso de no ser el primero recorrera la lista
+	while (_actual != NULL && t->getIdent() != i) {
+		pAnterior = _actual;
+		_actual = _actual->getSig();
+		t = dynamic_cast <T*>(_actual->getInfo());
+	}
+
+	if (_actual == NULL) { return false; }//Si no lo encontro	
+	else {// el nodo fue encontrado
+		pAnterior->setSiguiente(_actual->getSig());
+		delete _actual;
+		return true;
+	}
+	return false;
+
+
 }
 template <class T>
 string ListaT<T>::toString() {

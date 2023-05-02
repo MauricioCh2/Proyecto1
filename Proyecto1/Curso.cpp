@@ -88,7 +88,8 @@ string Curso::toString() {
     s << "Cantidad de grupos: " << _canGrupos << endl;
     s << "Descripcion : "<<_descripcion << endl;
     s << "Detalles de grupos abiertos" << endl;
-    s << "#Grupo\t Dia\t\t Horario\t Grupo \t Cantidad" << endl;
+    s << "<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>"<< endl;
+
     s << _lisGrupos->Listar();
     return s.str();
 }

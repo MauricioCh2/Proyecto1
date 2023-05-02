@@ -63,14 +63,14 @@ string Grupo::toString() {
 		s << "Domingo" << endl;
 		break;
 	}
-	s << "Horario: " << _horaInicio << ":" << _minInicio << "-" << _horaFinaliza << ":" << _minFinaliza << endl;
+	s << "Horario: " << _horaInicio << ":" << _minInicio << " - " << _horaFinaliza << ":" << _minFinaliza << endl;
 
 	return s.str();
 }
 string Grupo::Listar()
 {
 	stringstream s;
-	s << _numGrupo<< "\t" << _diaSemana << "\t" << _horaInicio << ":" << _minInicio << "-" << _horaFinaliza <<":" << _minFinaliza << "\t" << _cupMax << endl;
+	s << "  " << _numGrupo << "\t" << _diaSemana << "\t" << _horaInicio << ":" << _minInicio << "-" << _horaFinaliza << ":" << _minFinaliza << "\t\t" << _cupMax << "\t" << _lisDepor->contador() - _cupMax << endl;
 	return s.str();
 }
 
@@ -139,6 +139,11 @@ int Grupo::getNumGrupo()
 ListaT<Deportista>* Grupo::getListaDepor()
 {
 	return _lisDepor;
+}
+int Grupo :: getDispo() {
+	int disp = 0;
+	disp =_lisDepor->contador() - _cupMax;
+	return disp;
 }
 
 void Grupo::setCedInstructor(string a)

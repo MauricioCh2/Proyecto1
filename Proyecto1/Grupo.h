@@ -46,6 +46,7 @@ public:
 	string getNombreCurso();
 	int getNumGrupo();
 	ListaT<Deportista>* getListaDepor();
+	int getDispo();
 	// sets--------------------------------------
 	void setCedInstructor(string);
 	void setNomInstructo(string);

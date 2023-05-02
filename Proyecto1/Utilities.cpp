@@ -30,6 +30,12 @@ string recivirString() {
 	}
 	return "";
 }
+string recivirGetLine() {
+	string s;
+	getline(cin, s);
+	return s;
+}
+
 char recivirChar() {
 	char c;
 	bool fin = false;
@@ -195,4 +201,7 @@ void limpiarPantalla() {
 void limpiar() {
 	cin.clear();
 	cin.ignore(1024, '\n');
+}
+void ignorarCin() {
+	cin.ignore();
 }
