@@ -3,8 +3,7 @@
 #include <sstream>
 #include "Nodo_Template.h"
 #include "Iterador.h"
-#include "Triatlonista.h"
-#include "Triatlonista.h"
+
 
 using namespace std;
 template <class T>
@@ -30,7 +29,7 @@ public:
 	Iterador<T>* begin();     // Colocar un iterador al inicio
 	Iterador<T>* end();
 	//Archivos
-	void guardarDeportistas(ofstream&);
+	//void guardarDeportistas(ofstream&);
 };
 template <class T>
 ListaT<T>::ListaT() {
@@ -190,31 +189,31 @@ template<class T>
 Iterador<T>* ListaT<T>::end() {
 	return new Iterador<T>();
 }
-template <class T>
-void ListaT<T>::guardarDeportistas(ofstream& depo) {
-	_actual = _primero;
-	while (_actual != NULL) {
-		if (Triatlonista* dep = dynamic_cast<Triatlonista*>(_actual->getInfo())) {
-
-			//deportista-------------------------------------
-			depo << dep->getNombre() << "\t"
-				<< dep->getCedula() << "\t"
-				<< dep->getTelefono() << "\t"
-				<< dep->getFechaNacimiento() << "\t"
-				//ciclista----------------------------------------
-				<< dep->getHorasDeEntrenamiento() << "\t"
-				<< dep->getTempPromedio() << "\t"
-				//corredor----------------------------------------
-				<< dep->getSexo() << "\t"
-				<< dep->getEstatura() << "\t"
-				//nadado------------------------------------------
-				<< dep->getMasaMuscular() << "\t"
-				<< dep->getPeso() << "\t"
-				<< dep->getPorcGrasaCorporal() << "\t"
-				//triatlonista------------------------------------
-				<< dep->getCanPartIronMan() << "\t"
-				<< dep->getCanTriatGanador() << endl;
-		}
-		_actual = _actual->getSig();
-	}
-}
+//template <class T>
+//void ListaT<T>::guardarDeportistas(ofstream& depo) {
+//	_actual = _primero;
+//	while (_actual != NULL) {
+//		if (Triatlonista* dep = dynamic_cast<Triatlonista*>(_actual->getInfo())) {
+//
+//			//deportista-------------------------------------
+//			depo << dep->getNombre() << "\t"
+//				<< dep->getCedula() << "\t"
+//				<< dep->getTelefono() << "\t"
+//				<< dep->getFechaNacimiento() << "\t"
+//				//ciclista----------------------------------------
+//				<< dep->getHorasDeEntrenamiento() << "\t"
+//				<< dep->getTempPromedio() << "\t"
+//				//corredor----------------------------------------
+//				<< dep->getSexo() << "\t"
+//				<< dep->getEstatura() << "\t"
+//				//nadado------------------------------------------
+//				<< dep->getMasaMuscular() << "\t"
+//				<< dep->getPeso() << "\t"
+//				<< dep->getPorcGrasaCorporal() << "\t"
+//				//triatlonista------------------------------------
+//				<< dep->getCanPartIronMan() << "\t"
+//				<< dep->getCanTriatGanador() << endl;
+//		}
+//		_actual = _actual->getSig();
+//	}
+//}

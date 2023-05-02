@@ -71,6 +71,9 @@ double recivirDouble() {
 void imprimirString(string s) {
 	cout << s << endl;
 }
+void imprimirString2(string S) {
+	cout << S;
+}
 void imprimirInt(int i) {
 	cout << i << endl;
 }
@@ -173,7 +176,7 @@ int validarHora(string h) {
 		return hora;
 	}
 	else {
-		throw new string("ERROR: Digite una hora valida\n");
+		throw new ErrorV('h');
 	}
 }
 int validarMinuto(string m) {
@@ -188,7 +191,7 @@ int validarMinuto(string m) {
 		return min;
 	}
 	else {
-		throw new string("ERROR: Digite un minuto valido\n");
+		throw new ErrorV('m');
 	}
 }
 //Otros-------------------------------

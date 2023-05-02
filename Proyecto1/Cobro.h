@@ -5,8 +5,8 @@
 #include "Menu.h"
 
 using namespace std;
-class Cobro { 
+class Cobro {
 public:
-    static int EstadoDcliente(Deportista* tri, Fecha* f);
-    static Fecha* getFechaDeultimoPago(Deportista* tri, Fecha* f);
+    static int EstadoDcliente(Deportista*, Fecha*);
+    static Fecha* getFechaDeultimoPago(Deportista*, Fecha*, int);
 };

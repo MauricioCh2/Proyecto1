@@ -18,4 +18,5 @@ public:
 	int getAno();
 	void setAno(int);
 	string toString();
+	string getIdent();
 };

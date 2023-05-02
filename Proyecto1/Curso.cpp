@@ -41,6 +41,10 @@ void Curso::setIdent(string i)
 {
     _codCurso = i;
 }
+void Curso::setNombreDcurso(string s)
+{
+    _nombreCurso = s;
+}
 void Curso::setDescripcion(string d) {
     _descripcion = d;
 }
@@ -59,6 +63,10 @@ void Curso::setHora(int h) {
 string Curso::getIdent()
 {
     return _codCurso;
+}
+string Curso::getNombreDcurso()
+{
+    return _nombreCurso;
 }
 string Curso::getDescripcion() {
     return _descripcion;

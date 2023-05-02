@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <sstream>
-
+#include "Lista_Template.h"
 #include "Fecha.h"
 using namespace std;
 
@@ -52,4 +52,5 @@ public:
 	virtual void setCanTriatGanador(int) = 0;
 	virtual Fecha* getFechaDeultimoPago() = 0;
 	virtual void setFechaDeultimoPago(Fecha*) = 0;
+	virtual string imprimirPAGOS() = 0;
 };

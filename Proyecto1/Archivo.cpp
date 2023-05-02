@@ -26,7 +26,7 @@ bool Archivos::guardarDeportistas()
 		imprimirString("Error al guardar :(");
 	}
 	if (dep.good()) {
-		_gym->getListaDepor()->guardarDeportistas(dep);
+		//_gym->getListaDepor()->guardarDeportistas(dep);
 	}
 	dep.close();
 	return ver;

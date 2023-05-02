@@ -31,7 +31,6 @@ Nada de esto es necesario pero para llevar un orden y que se vea coquete no esta
 #include "Gym.h"
 #include "Fecha.h"
 #include "Triatlonista.h"
-//#include "Archivos.h"
 using namespace std;
 
 class Menu {
@@ -64,6 +63,10 @@ public:
 	//realmente esto no requiere metodo 
 	Deportista* atualizarINFO(Deportista*);
 	string QueQuiereEditarTri();
+	Curso* atualizarINFOcurso(Curso*);
+	Grupo* atualizarINFOgrupo(Grupo*);
+	string QueQuiereEditarCurso();
+	string QueQuiereEditarGrupo();
 
 
 };

@@ -10,7 +10,7 @@ protected:
 	int _cantTriatGanador;
 	Ciclista* _ptrCiclista;;
 	Nadador* _ptrNad;
-	Fecha* fechDeultimoPago;
+	ListaT<Fecha>* ListaDpagos = NULL;
 public:
 	Triatlonista(int, string, string, Fecha*, int, double, char, double, double, double, double, int, int);
 
@@ -42,7 +42,7 @@ public:
 	void setCanTriatGanador(int);
 	Fecha* getFechaDeultimoPago();
 	void setFechaDeultimoPago(Fecha*);
-
+	string imprimirPAGOS();
 	virtual ~Triatlonista();
 	string toString();
 

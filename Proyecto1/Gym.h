@@ -1,13 +1,8 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include <sstream>
-//esta va a ser la que tenga las listas de todo 
-
 #include "Deportista.h"
-#include "Lista_Template.h"
 //#include "Grupo.h"
 #include "Curso.h"
+
 
 
 class Gym {
@@ -42,6 +37,7 @@ public:
 	//Clientes------------------------------------------------------
 	void ingresarListaClientes(Deportista*);
 	string imprimirListaClientes();
+	ListaT<Grupo>* getListaDgruposDcurso(string);
 
 
 	ListaT<Deportista>* getListaDepor();

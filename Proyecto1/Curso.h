@@ -3,9 +3,10 @@
 #include <sstream>
 #include "Fecha.h"
 //#include "Iterador.h"
-#include "Lista_Template.h"
 #include "Grupo.h"
 //#include "Lista_Template.h"
+
+
 using namespace std;
 
 class Curso {
@@ -33,12 +34,14 @@ public:
     Curso(string, string, int, Fecha*, int, int);
     ~Curso();
     void setIdent(string);
+    void setNombreDcurso(string);
     void setDescripcion(string);
     void setNivel(string);
     void setCup(int);
     void setFecha(Fecha*);
     void setHora(int);
     string getIdent();
+    string getNombreDcurso();
     string getDescripcion();
     string getNivel();
     int getCup();

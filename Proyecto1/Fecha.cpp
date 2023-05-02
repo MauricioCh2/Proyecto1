@@ -47,3 +47,9 @@ string Fecha::toString()
 	s << dia << "/" << mes << "/" << ano << endl;
 	return s.str();
 }
+
+string Fecha::getIdent()
+{
+	throw new string("buenas tardes");
+	return "";
+}

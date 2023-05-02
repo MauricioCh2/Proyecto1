@@ -84,6 +84,11 @@ string Gym::imprimirListaClientes()
 	return _lisCliente->toString();
 }
 
+ListaT<Grupo>* Gym::getListaDgruposDcurso(string c)
+{
+	return _lisCurso->encontrarEsp(c)->getListaGrupos();
+}
+
 ListaT<Deportista>* Gym::getListaDepor()
 {
 	return _lisCliente;

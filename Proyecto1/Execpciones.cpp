@@ -18,6 +18,8 @@ const char* ErrorV::what() const throw()
 		case 'D': return "ERROR DE double";
 		case 'S': return "ERROR DE string";
 		case 'F': return "ERROR DE Fecha";
+		case 'h': return "ERROR DE hora";
+		case 'm': return "ERROR DE minuto";
 		default: return "ERROR DESCONOSIDO";
 	}
 }

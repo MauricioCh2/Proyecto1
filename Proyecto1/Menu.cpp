@@ -170,6 +170,22 @@ string Menu::subMenuListas(){
 
 bool Menu::opMenuDeportista(int op)
 {
+	if (_gym->getListaCurso()->listaVacia() == true) {
+		limpiar();
+		imprimirString("-------------------------------------------------------------");
+		imprimirString("ERROR: No es posible trabajar con Deportistas sin primero ingresar algun Cursos");
+		imprimirString("-------------------------------------------------------------");
+		enter();
+		op = 5;
+	}
+	else if (_gym->getListaCurso()->getPriemero()->getInfo()->getListaGrupos()==NULL){
+		imprimirString("-------------------------------------------------------------");
+		imprimirString("ERROR: No es posible trabajar con Deportistas sin primero ingresar algun Grupo");
+		imprimirString("(Nota: Para crear un grupo es necesario tener al menus un Curso)");
+		imprimirString("-------------------------------------------------------------");
+		enter();
+		op = 5;
+	}
 	int opSub=0;
 	//Deportista
 	int cedula = 0;
@@ -506,7 +522,6 @@ bool Menu::opMenuDeportista(int op)
 	return false;
 	delete iter;
 	delete iter2;
-	delete fechaNa;
 }
 //Control Cursos--------------------------------------------------------------
 string Menu::menuCursos()
@@ -531,6 +546,12 @@ bool Menu::opMenuCursos(int op)
 	int canG = 0;
 	string descripcion = "";
 	Curso* curso = NULL;
+
+	Iterador<Curso>* iter;
+	Iterador<Curso>* iter2;
+	Curso* aux = NULL;
+	Curso* auxAborrar = NULL;
+
 	switch (op) {
 	case 1: // Ingreso nuevo curso;
 		imprimirString("< 3.Control Cursos> < 1.Ingreso nuevo curso >");
@@ -615,13 +636,48 @@ bool Menu::opMenuCursos(int op)
 		limpiarPantalla();
 		break;
 	case 3://Modificación de curso específico 
+		
+
+		iter = _gym->getListaCurso()->begin();
+		iter2 = _gym->getListaCurso()->end();
 		imprimirString("< 3.Control Cursos> < 3. Modificación de  curso especifico >");
-		imprimirString("Opcion en desarrollo");
+		imprimirString("Listado de cursos");
+		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
+		imprimirString(_gym->imprimirListadoCursos());
+
+		imprimirString("Cual curso desea modificación en especifico: ");
+		imprimirString("Ingrese el codigo del Curso: ");
+		do {
+			try {
+				ident = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+
+		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
+			if (iter->operator*()->getIdent() == ident) {
+				aux = atualizarINFOcurso(iter->operator*());
+				auxAborrar = iter->operator*();
+				iter->getPNodo()->setInfo(aux);
+				delete auxAborrar;
+				//Clona el deportista y despues los substitulle con el original para asi poder cambira la infoamcion y no violar ninun principio
+			}
+		}
+		delete iter;
+		delete iter2;
+		
 		break;
 	default:
 		break;
 	};
 	return false;
+	delete iter;
+	delete iter2;
 }
 
 //Control de grupos-------------------------------------------------------
@@ -642,7 +698,14 @@ string Menu::menuGrupos()
 }
 bool Menu::opMenuGrupos(int op)
 {
-	
+	if (_gym->getListaCurso()->listaVacia() == true) {
+		limpiar();
+		imprimirString("-------------------------------------------------------------");
+		imprimirString("ERROR: No es posible trbajar con grupos sin primero ingresar algun Cursos");
+		imprimirString("-------------------------------------------------------------");
+		enter();
+		op = 7;
+	}
 	string curso;
 	string numCurso;
 	string cedInstr = "";
@@ -664,6 +727,16 @@ bool Menu::opMenuGrupos(int op)
 	string codCurso = "";
 	string numGrup = "";
 	Fecha* fechaMa = NULL;
+
+	Iterador<Curso>* iterCurso;
+	Iterador<Curso>* iter2Curso;
+	Iterador<Grupo>* iterGrupo;
+	Iterador<Grupo>* iter2Grupo;
+	Grupo* aux = NULL;
+	Grupo* auxAborrar = NULL;
+	string identDcurso = "";
+	string identDgrupo = "";
+
 	switch (op) {
 	case 1: // Ingreso nuevo grupo;
 		imprimirString("< 4.Control Grupos> < 1.Ingreso nuevo grupo>");
@@ -774,8 +847,30 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-		horIn = validarHora(horInicio);
-		minIn = validarMinuto(horInicio);
+
+		do {
+			try {
+				horIn = validarHora(horInicio);
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		do {
+			try {
+				minIn = validarMinuto(horInicio);
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+
 		imprimirString("Digite la hora de finalizacion en hora militar (hora:minuto):");
 		do {
 			try {
@@ -789,8 +884,29 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-		horFin = validarHora(horaFinal);
-		minFin = validarMinuto(horaFinal);
+
+		do {
+			try {
+				horFin = validarHora(horaFinal);
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		do {
+			try {
+				minFin = validarMinuto(horaFinal);
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
 		
 		grupo = new Grupo(cedInstr, nomInstructor, cupMax, fechaInicio, semDuracion, dia, horIn, minIn, horFin, minFin);
 		_gym->ingresarGrupo(curso, grupo);
@@ -800,8 +916,57 @@ bool Menu::opMenuGrupos(int op)
 
 		break;
 	case 2: //Modificacion de  grupo especifico
+		iterCurso = _gym->getListaCurso()->begin();
+		iter2Curso = _gym->getListaCurso()->end();
 		imprimirString("< 4.Control Grupos>  <2. Modificación  de  grupo especifico>");
-		imprimirString("Opcion en desarrollo");
+		imprimirString("De cual Curso proviene el Grupo que desea modificación : ");
+		imprimirString("Ingrese el codigo del Curso: ");
+		do {
+			try {
+				identDcurso = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+
+		if (_gym->getListaDgruposDcurso(identDcurso) == NULL) {
+			imprimirString("El curso que escogio no tiene Grupos, por lo tanto no es posible editar un Grupo");
+		}
+		else
+		{
+			imprimirString("Para dicho curso quedan los siguientes grupos disponibles: ");
+			imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
+			imprimirString(_gym->imprimirListadoGrupo(identDcurso));
+			imprimirString("Digite el grupo en el que desea ser ingresado: ");
+			do {
+				try {
+					numGrup = recivirString();
+					ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+
+			iterGrupo = _gym->getListaDgruposDcurso(identDcurso)->begin();
+			iter2Grupo = _gym->getListaDgruposDcurso(identDcurso)->end();
+			for (; iterGrupo->getPNodo() != iter2Grupo->getPNodo(); iterGrupo->operator++()) {
+				if (iterGrupo->operator*()->getIdent() == numGrup) {
+					aux = atualizarINFOgrupo(iterGrupo->operator*());
+					auxAborrar = iterGrupo->operator*();
+					_gym->ingresarGrupo(identDcurso, aux);
+					delete auxAborrar;
+					//Clona el deportista y despues los substitulle con el original para asi poder cambira la infoamcion y no violar ninun principio
+				}
+			}
+		}
+		
 		break;
 	case 3: //matricula de grupo especifico
 		imprimirString("< 4.Control Grupos>  <3.Matricula en grupo especifico>");
@@ -926,8 +1091,8 @@ bool Menu::opMenuGrupos(int op)
 string Menu::menuPagos()
 {
 	stringstream s;
-	  s << "	   <Menu Pagos>		  " << endl
-	    << "[1]Registro nuevo de pago-------------" << endl
+	s << "	   <Menu Pagos>		  " << endl
+		<< "[1]Registro nuevo de pago-------------" << endl
 		<< "[2]Reporte de pagos por deportista----" << endl
 		<< "[3]Atras------------------------------\n\n"
 		<< "Digite una opcion: "
@@ -939,7 +1104,7 @@ bool Menu::opMenuPagos(int op)
 {
 	Fecha* fechAux = NULL;
 	int cedulaAbuscar = 0;
-	bool ex=false;
+	bool ex = false;
 	Iterador<Deportista>* iter;
 	Iterador<Deportista>* iter2;
 
@@ -964,14 +1129,14 @@ bool Menu::opMenuPagos(int op)
 
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulaAbuscar) {
-				iter->operator*()->setFechaDeultimoPago(Cobro::getFechaDeultimoPago(iter->operator*(),this->fecha));
+				iter->operator*()->setFechaDeultimoPago(Cobro::getFechaDeultimoPago(iter->operator*(), this->fecha, _gym->getMensualidadDgym()));
 				imprimirString("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO MENSUAL");
 			}
 		}
 		//listar los cursos con su codigo 
 		break;
-	case 2: 
-		imprimirString("<5.Control  Pagos> <2.Reporte de pagos por deportista>");////////////////
+	case 2:
+		imprimirString("<5.Control  Pagos> <2.Reporte de pagos por deportista>");
 		imprimirString("Cedula del Cliente: ");
 		do {
 			try {
@@ -989,7 +1154,7 @@ bool Menu::opMenuPagos(int op)
 			if (iter->operator*()->getCedula() == cedulaAbuscar) {
 				imprimirString("El ultimo pago de este Cliente esta regitrado en la fecha: ");
 				if (iter->operator*()->getFechaDeultimoPago() != NULL) {
-					imprimirString(iter->operator*()->getFechaDeultimoPago()->toString());
+					imprimirString(iter->operator*()->imprimirPAGOS());
 				}
 				imprimirString("{Este cliente esta [inactivo], por lo que no se tiene regitrado un pago reciente}");
 			}
@@ -1009,7 +1174,6 @@ bool Menu::opMenuPagos(int op)
 
 Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 {
-	Deportista* DepOriginal = depAactaulizar;
 	Deportista* Clon =  new Triatlonista(depAactaulizar->getCedula(), depAactaulizar->getNombre(), depAactaulizar->getTelefono(), depAactaulizar->getFechaNacimiento() , depAactaulizar->getHorasDeEntrenamiento(), depAactaulizar->getTempPromedio(), depAactaulizar->getSexo(), depAactaulizar->getEstatura(), depAactaulizar->getMasaMuscular(), depAactaulizar->getPeso(), depAactaulizar->getPorcGrasaCorporal() , depAactaulizar->getCanTriatGanador(), depAactaulizar->getCanPartIronMan() );
 
 	int opSub = 0;
@@ -1288,42 +1452,459 @@ string Menu::QueQuiereEditarTri()
 	return s.str();
 }
 
+Curso* Menu::atualizarINFOcurso(Curso* original)
+{
+	string ident = "";
+	string codCurso = "";
+	string nombreCurso = "";
+	string nivel = "";
+	int canG = 0;
+	string descripcion = "";
+	bool ex = false;
+	int op = 0;
+	Curso* Clon = new Curso(original->getIdent(), original->getNombreDcurso(), original->getNivel(), original->getCup(), original->getDescripcion());
+	imprimirString("Actualisando informacion de Curso");
+	imprimirString(QueQuiereEditarCurso());
+	do {
+		try {
+			op = recivirInt();
+			ex = true;
+		}
+		catch (ErrorV* e) {
+			cout << e->what() << endl;
+			limpiar();
+		}
+	} while (ex == false);
+	ex = false;
+	switch (op)
+	{
+	case 1:
+
+		imprimirString("Codigo del Curso");
+		do {
+			try {
+				codCurso = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+
+		Clon->setIdent(codCurso);
+		break;
+	case 2:
+		imprimirString("Nombre del Curso");
+		do {
+			try {
+				ignorarCin();
+				nombreCurso = recivirGetLine();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+
+		Clon->setNombreDcurso(nombreCurso);
+		break;
+	case 3:
+		imprimirString("Nivel del curso: ");
+		do {
+			try {
+				nivel = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+
+		Clon->setNivel(nivel);
+		break;
+	case 4:
+		imprimirString("Cantidad de grupos: ");
+		do {
+			try {
+				canG = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		Clon->setCup(canG);
+		break;
+	case 5:
+		imprimirString("Descripcion del curso: ");
+		ignorarCin();
+		descripcion = recivirGetLine();
+
+		ex = false;
+		Clon->setDescripcion(descripcion);
+		break;
+
+	default:
+		break;
+	}
+
+	return Clon;
+}
+
+Grupo* Menu::atualizarINFOgrupo(Grupo* original)
+{
+	string cedInstr = "";
+	string nomInstructor = "";
+	int cupMax = 0;
+	Fecha* fechaInicio = NULL;
+	int semDuracion = 0;
+	Grupo* grupo = NULL;
+	char dia;
+	string horInicio = "";
+	string horaFinal = "";
+	int horIn = 0;
+	int minIn = 0;
+	int horFin = 0;
+	int minFin = 0;
+	bool ex = false;
+	int op = 0;
+	
+	Grupo* Clon = new Grupo(original->getCedInstructor(), original->getNomInstructor(), original->getCupMax(), original->getFechaInicio(), original->getSemDuracion(), original->getDiaSemana(), original->getHoraInicio(), original->getMinInicio(), original->getHoraFinaliza(), original->getMinFinaliza() );
+	imprimirString("Actualisando informacion de Grupo");
+	imprimirString(QueQuiereEditarGrupo());
+	do {
+		try {
+			op = recivirInt();
+			ex = true;
+		}
+		catch (ErrorV* e) {
+			cout << e->what() << endl;
+			limpiar();
+		}
+	} while (ex == false);
+	ex = false;
+	switch (op)
+	{
+		case 1:
+
+			imprimirString("Cedula del instructor");
+			do {
+				try {
+					cedInstr = recivirString();
+					ex = true;
+				}
+				catch (ErrorV* e) {
+				cout << e->what() << endl;
+					limpiar();
+				}	
+			} while (ex == false);
+			ex = false;
+			Clon->setCedInstructor(cedInstr);
+		break;
+		case 2:
+			imprimirString("Nombre del instructor");
+			do {
+				try {
+					ignorarCin();
+					nomInstructor = recivirGetLine();
+				ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+			Clon->setNomInstructo(nomInstructor);
+		break;
+		case 3:
+			imprimirString("Cupo maximo del grupo: ");
+			do {
+				try {
+					cupMax = recivirInt();
+					ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+			Clon->setcupMax(cupMax);
+		break;
+		case 4:
+			imprimirString("Fecha de inicio: ");
+			do {
+				try {
+					fechaInicio = validarFecha();
+					ex = true;
+				}
+				catch (...) {
+					cout << "Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+			Clon->setFechaInicio(fechaInicio);
+		break;
+		case 5:
+			imprimirString("Semanas de duracion: ");
+			do {
+				try {
+					semDuracion = recivirInt();
+					ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+						limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+			Clon->setSemDuracion(semDuracion);
+		break;
+		case 6:
+		//Horario----------------------------------------------------------------------------------
+			imprimirString("Digite el día de la semana (l-k-m-j-v-s-d) ):");
+			do {
+				try {
+					dia = validarDia();
+	
+					ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+			Clon->setDiaSem(dia);
+		break;
+		case 7:
+			imprimirString("Digite la hora de inicio en hora militar (hora:minuto):");
+			do {
+				try {
+					horInicio = recivirString();
+					ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+			do {
+				try {
+					horIn = validarHora(horInicio);
+					ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+			Clon->setHoraInicio(horIn);
+			do {
+				try {
+					minIn = validarMinuto(horInicio);
+					ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+			Clon->setMinutoInicio(minIn);
+		break;
+
+
+		case 8:
+			imprimirString("Digite la hora de finalizacion en hora militar (hora:minuto):");
+			do {
+				try {
+					horaFinal = recivirString();
+						
+					ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+
+			do {
+				try {
+					horFin = validarHora(horaFinal);
+					ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+			Clon->setHoraFinal(horFin);
+			do {
+				try {
+					minFin = validarMinuto(horaFinal);
+					ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+			Clon->setMinutoFinal(minFin);
+		break;
+		default:
+		break;
+	}
+	
+	return Clon;
+}
+
+string Menu::QueQuiereEditarCurso()
+{
+	stringstream s;
+	s << "	   <Que quiere editar>		  " << endl
+		<< "[1]Editar Codigo de Curso-----------------------" << endl
+		<< "[2]Editar Nombre de Curso---------" << endl
+		<< "[3]Editar Nivel de Curso-------------" << endl
+		<< "[4]Editar CupoMaximo de Curso---------------" << endl
+		<< "[5]Editar Decripcion de Curso" << endl
+		<< "[14]Atras\n\n"
+		<< "Digite una opcion: "
+		<< endl;
+	return s.str();
+}
+
+string Menu::QueQuiereEditarGrupo()
+{
+	stringstream s;
+	s << "	   <Que quiere editar>		  " << endl
+		<< "[1]Editar Cedula de Instructor-----------------------" << endl
+		<< "[2]Editar Nombre de Instructor---------" << endl
+		<< "[3]Editar CupoMaximo-------------" << endl
+		<< "[4]Editar Fecha de Inicio---------------" << endl
+		<< "[5]Editar Duracion" << endl
+		<< "[6]Editar Dia de la Semana en la que se lleva a cabo--------" << endl
+		<< "[7]Editar Hora de Inicio--------" << endl
+		<< "[8]Editar Hora de Finalizacion--------" << endl
+		<< "[14]Atras\n\n"
+		<< "Digite una opcion: "
+		<< endl;
+	return s.str();
+}
+
 bool Menu::llamarMenus() {
 	int op = 0;
 	int opE = 0;
+	bool ex = false;
 
 	imprimirString(menuPrincipal());
-	op = recivirInt();
+	do {
+		try {
+			op = recivirInt();
+			ex = true;
+		}
+		catch (ErrorV* e) {
+			cout << e->what() << endl;
+			limpiar();
+		}
+	} while (ex == false);
+	ex = false;
+
 	switch (op) {
 	case 1://Administracion General 
 		limpiarPantalla();
 		imprimirString(menuAdministracion());
-		op = recivirInt();
+		do {
+			try {
+				op = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
 		opMenuAdministracion(op);
 		break;
 	case 2://Control de Deportistas
 		limpiarPantalla();
 		imprimirString(menuDeportista());
-		op = recivirInt();
+		do {
+			try {
+				op = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
 		opMenuDeportista(op);
 		break;
 	case 3://Control de Cursos
 		limpiarPantalla();
 		imprimirString(menuCursos());
-		op = recivirInt();
+		do {
+			try {
+				op = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
 		opMenuCursos(op);
 		break;
 	case 4://Control de Grupos
 		limpiarPantalla();
 		imprimirString(menuGrupos());
-		op = recivirInt();
+		do {
+			try {
+				op = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
 		opMenuGrupos(op);
 
 		break;
 	case 5://Control Pagos
 		limpiarPantalla();
 		imprimirString(menuPagos());
-		op = recivirInt();
+		do {
+			try {
+				op = recivirInt();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
 		opMenuPagos(op);
 
 		break;

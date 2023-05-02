@@ -8,7 +8,7 @@ Triatlonista::Triatlonista(int ced, string nombre, string tel, Fecha* fech, int 
 	this->_cantPartIronMan = partIronMan;
 	this->_cantTriatGanador = triaGan;
 	this->_ptrFecha = fech;
-	this->fechDeultimoPago = NULL;
+	this->ListaDpagos = new ListaT<Fecha>;
 }
 Triatlonista:: ~Triatlonista() {
 	delete _ptrNad;
@@ -30,8 +30,8 @@ string Triatlonista::toString() {
 	s << "\t" << "Cantidad de Triatones ganadas" << "..." << _cantTriatGanador << endl;
 	s << "Cantidad de Triatones ganadas " << _cantTriatGanador << endl;
 	s << "----------------------------------------------------------------" << endl;
-	if (fechDeultimoPago != NULL) {
-		s << "La ultima fecha de un pago registardo es:" << this->fechDeultimoPago->toString()<<endl;
+	if (ListaDpagos->listaVacia() == true) {
+		s << "La ultima fecha de un pago registardo es:" << ListaDpagos->toString() << endl;
 	}
 	return s.str();
 }
@@ -86,12 +86,16 @@ void Triatlonista::setCanTriatGanador(int canGanadas) { _cantTriatGanador = canG
 
 Fecha* Triatlonista::getFechaDeultimoPago()
 {
-	return fechDeultimoPago;
+	return ListaDpagos->getPriemero()->getInfo();
 }
-
 void Triatlonista::setFechaDeultimoPago(Fecha* f)
 {
-	fechDeultimoPago = f;
+	this->ListaDpagos->insertarElem(f);
 }
+string Triatlonista::imprimirPAGOS()
+{
+	return this->ListaDpagos->toString();
+}
+
 
 
