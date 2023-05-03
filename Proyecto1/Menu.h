@@ -61,7 +61,7 @@ public:
 	bool opMenuPagos(int);
 	//Guardar en Archivos y salir 
 	//realmente esto no requiere metodo 
-	void atualizarINFO(Deportista*);
+	void atualizarINFO(Deportista*,Expediente*);
 	string QueQuiereEditarTri();
 	void atualizarINFOcurso(Curso*);
 	void atualizarINFOgrupo(Grupo*);

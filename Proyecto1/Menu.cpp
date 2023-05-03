@@ -209,9 +209,9 @@ bool Menu::opMenuDeportista(int op)
 	int cedulaAbuscar = 0;
 	Iterador<Deportista>* iter;
 	Iterador<Deportista>* iter2;
-
-
-	
+	Iterador<Expediente>* iterexp;
+	Iterador<Expediente>* iter2exp;
+	Expediente* ExpeAeditar = NULL;
 
 	bool ex = false;
 	//clientes (esto puede variar)
@@ -521,11 +521,23 @@ bool Menu::opMenuDeportista(int op)
 			}
 		} while (ex == false);
 
-		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
-			if (iter->operator*()->getCedula() == cedulaAbuscar) {
-				atualizarINFO(iter->operator*());
+		iterexp = _gym->getListaExpediente()->begin();
+		iter2exp = _gym->getListaExpediente()->end();
+
+		for (; iterexp->getPNodo() != iter2exp->getPNodo(); iterexp->operator++()) {
+			if (iterexp->operator*()->getCedula() == cedulaAbuscar) {
+				ExpeAeditar = iterexp->operator*();
+
 			}
 		}
+
+		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
+			if (iter->operator*()->getCedula() == cedulaAbuscar) {
+				atualizarINFO(iter->operator*(), ExpeAeditar);
+
+			}
+		}
+
 		
 
 		break;
@@ -1437,10 +1449,9 @@ bool Menu::opMenuPagos(int op)
 	return false;
 }
 
-void Menu::atualizarINFO(Deportista* depAactaulizar)
+void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 {
 	Deportista* Clon = depAactaulizar;
-		//new Triatlonista(depAactaulizar->getCedula(), depAactaulizar->getNombre(), depAactaulizar->getTelefono(), depAactaulizar->getFechaNacimiento() , depAactaulizar->getHorasDeEntrenamiento(), depAactaulizar->getTempPromedio(), depAactaulizar->getSexo(), depAactaulizar->getEstatura(), depAactaulizar->getMasaMuscular(), depAactaulizar->getPeso(), depAactaulizar->getPorcGrasaCorporal() , depAactaulizar->getCanTriatGanador(), depAactaulizar->getCanPartIronMan() );
 
 	int opSub = 0;
 	//Deportista
@@ -1493,6 +1504,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 		} while (ex == false);
 		ex = false;
 		Clon->setCedula(cedula);
+		expeCon->setCedula(cedula);
 		break;
 		case 2:
 		imprimirString("Nombre: ");
@@ -1509,6 +1521,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 		} while (ex == false);
 		ex = false;
 		Clon->setNombre(nombre);
+		expeCon->setNombre(nombre);
 		break;
 		case 3:
 		imprimirString("Telefono: ");
@@ -1525,6 +1538,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 		} while (ex == false);
 		ex = false;
 		Clon->setTelefono(telefono);
+		expeCon->setTelefono(telefono);
 		break;
 		case 4:
 		imprimirString("Fecha nacimiento: ");
@@ -1540,6 +1554,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 		} while (ex == false);
 		ex = false;
 		Clon->setFechaNacimiento(fechaNa);
+		expeCon->setFechaNacimiento(fechaNa);
 		break;
 		case 5:
 		//Ciclista
@@ -1556,6 +1571,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 		} while (ex == false);
 		ex = false;
 		Clon->setHorasDeEntrenamiento(horasEntrenem);
+		expeCon->setHorasDeEntrenamiento(horasEntrenem);
 		break;
 		case 6:
 		imprimirString("Temperatura promedio al entrenar en Grados Celcius: ");
@@ -1571,6 +1587,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 		} while (ex == false);
 		ex = false;
 		Clon->setTempPromedio(temProm);
+		expeCon->setTempPromedio(temProm);
 		break;
 		case 7:
 		//Corredor
@@ -1592,6 +1609,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 		} while (ex == false);
 		ex = false;
 		Clon->setSexo(sexo);
+		expeCon->setSexo(sexo);
 		break;
 		case 8:
 		imprimirString("Estatura en metros (ejemplo: 1.50cm): ");
@@ -1607,6 +1625,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 		} while (ex == false);
 		ex = false;
 		Clon->setEstatura(estatura);
+		expeCon->setEstatura(estatura);
 		break;
 		case 9:
 		//Nadador
@@ -1623,6 +1642,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 		} while (ex == false);
 		ex = false;
 		Clon->setMasaMuscular(masaMuscular);
+		expeCon->setMasaMuscular(masaMuscular);
 		break;
 		case 10:
 		imprimirString("Peso en kg: ");
@@ -1638,6 +1658,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 		} while (ex == false);
 		ex = false;
 		Clon->setPeso(peso);
+		expeCon->setPeso(peso);
 		break;
 		case 11:
 		imprimirString("Porcentaje de grasa corporal: ");
@@ -1653,6 +1674,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 		} while (ex == false);
 		ex = false;
 		Clon->setPorcGrasaCorporal(PgrasaCorporalMC);
+		expeCon->setPorcGrasaCorporal(PgrasaCorporalMC);
 		break;
 		case 12:
 		//triatlonista
@@ -1669,6 +1691,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 		} while (ex == false);
 		ex = false;
 		Clon->setCanPartIronMan(cantPartiEnIronMan);
+		expeCon->setCanPartIronMan(cantPartiEnIronMan);
 		break;
 		case 13:
 		imprimirString("Cantidad de triatlones ganados:");
@@ -1683,12 +1706,14 @@ void Menu::atualizarINFO(Deportista* depAactaulizar)
 			}
 		} while (ex == false);
 		Clon->setCanTriatGanador(canTriaGanados);
+		expeCon->setCanTriatGanador(canTriaGanados);
 		break;
 
 
 		default:break;
 		}
 
+		
 		enter();
 		
 }
