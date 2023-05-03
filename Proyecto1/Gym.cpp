@@ -3,6 +3,7 @@ Gym::Gym() {
 	_nombre = " ";
 	_lisCliente = new ListaT<Deportista>;
 	_lisCurso = new ListaT<Curso>;
+	_lisExpediente = new ListaT<Expediente>;
 	
 }
 //Administracion---------------------------------------------------------
@@ -114,5 +115,10 @@ ListaT<Deportista>* Gym::getListaDepor()
 {
 
 	return _lisCliente;
+}
+
+ListaT<Expediente>* Gym::getListaExpediente()
+{
+	return _lisExpediente;
 }
 

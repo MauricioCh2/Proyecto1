@@ -36,7 +36,7 @@ string Triatlonista::toString() {
 	s << "\t" << "Cantidad de Triatones ganadas" << "..." << _cantTriatGanador << endl;
 	s << "Cantidad de Triatones ganadas " << _cantTriatGanador << endl;
 	s << "----------------------------------------------------------------" << endl;
-	if (ListaDpagos->listaVacia() == true) {
+	if (ListaDpagos->listaVacia() != true) {
 		s << "La ultima fecha de un pago registardo es:" << ListaDpagos->toString() << endl;
 	}
 	return s.str();

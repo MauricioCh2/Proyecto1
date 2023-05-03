@@ -2,6 +2,7 @@
 #include "Deportista.h"
 //#include "Grupo.h"
 #include "Curso.h"
+#include "Expediente.h"
 
 
 
@@ -14,6 +15,7 @@ private:
 	ListaT<Deportista>* _lisCliente = NULL;
 	//ListaT<Grupo>* _lisGrupo = NULL;
 	ListaT<Curso>* _lisCurso = NULL;
+	ListaT<Expediente>* _lisExpediente = NULL;
 public:
 	Gym();
 	//Administracion------------------------------------------------
@@ -47,5 +49,5 @@ public:
 	void cancelarMatricula(string,string,string);
 
 	ListaT<Deportista>* getListaDepor();
-
+	ListaT<Expediente>* getListaExpediente();
 };

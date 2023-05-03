@@ -221,6 +221,10 @@ bool Menu::opMenuDeportista(int op)
 	string codCurso = "";
 	string numGrup = "";
 	Fecha* fechaMa = NULL; // no se si es neceario 
+
+	stringMOD* IDcurso = NULL;
+	stringMOD* IDgrupo = NULL;
+	Expediente* exaux = NULL;
 	switch (op) {
 	case 1: // Ingreso nuevo deportista 
 		imprimirString("<2.Control Deportistas>  <1.Ingreso nuevo deportista>");
@@ -455,10 +459,17 @@ bool Menu::opMenuDeportista(int op)
 		}while (ex == false);
 
 		
-
+	
 		cliente = new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
 		_gym->ingresarClienteAGrupos(numGrup, codCurso, cliente);
 
+		exaux = new Expediente(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan, NULL);
+		IDcurso= new stringMOD(codCurso);
+		IDgrupo= new stringMOD(numGrup);
+		exaux->getlisCursosIdent()->insertarElem(IDcurso);
+		exaux->getlisGruposIdent()->insertarElem(IDgrupo);
+
+		_gym->getListaExpediente()->insertarElem(exaux);
 		enter();
 		limpiarPantalla();
 		break;
@@ -943,7 +954,6 @@ bool Menu::opMenuGrupos(int op)
 		do {
 			try {
 				dia = validarDia();
-
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -974,9 +984,7 @@ bool Menu::opMenuGrupos(int op)
 				cout << e->what() << endl;
 				limpiar();
 			}
-		} while (ex == false);
-		ex = false;
-		do {
+			ignorarCin();
 			try {
 				minIn = validarMinuto(horInicio);
 				ex = true;

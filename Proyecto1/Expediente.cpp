@@ -1,9 +1,6 @@
 #include "Expediente.h"
 
-Expediente::Expediente()
-{
-}
-Expediente::Expediente(int ced, string nombre, string tel, Fecha* fech, int horasEntre, double temProm, char sexo, double est, double masaMuscu, double peso, double IMC, int triaGan, int partIronMan,Fecha* ultimoPago)
+Expediente::Expediente(int ced, string nombre, string tel, Fecha* fech, int horasEntre, double temProm, char sexo, double est, double masaMuscu, double peso, double IMC, int triaGan, int partIronMan, Fecha* ultimopago)
 {
 	_cedula=ced;//Cuite los ptr,s porque no son punteros lo que van a almacenar
 	_nombre= nombre;
@@ -16,11 +13,12 @@ Expediente::Expediente(int ced, string nombre, string tel, Fecha* fech, int hora
 	_IMC= IMC;
 	_horasEntrenam= horasEntre;
 	_temPromedio= temProm;
+	_cantPartIronMan= partIronMan;
+	_cantTriatGanador= triaGan;
+	_lisCursosIdent = new ListaT<stringMOD>;
+	_lisGruposIdent = new ListaT<stringMOD>;
 
-	//_lisCursosIdent = new ListaT<string>;
-	//_lisGruposIdent = new ListaT<string>;
-
-	Fecha* _fechaDultimopago;
+	_fechaDultimopago= ultimopago;
 }
 Expediente:: ~Expediente() {
 
@@ -43,25 +41,30 @@ Fecha* Expediente::getFechaNacimiento()
 	return _ptrFechadeNaci;
 }
 string Expediente::toString() {
-	/*stringstream s;
+	stringstream s;
 	s << "------------------------------CLIENTE---------------------------" << endl;
-	s << "\t" << "Cedula" << ".........................." << _cedula << endl;
-	s << "\t" << "Nombre" << ".........................." << _nombre << endl;
-	s << "\t" << "Telefono" << "........................" << _telefono << endl;
-	s << "\t" << "Fecha Nacimiento" << "................" << _ptrFecha->toString();
-	s << _ptrCiclista->toString();
-	s << "\t" << "Sexo" << "............................" << _sexo << endl;
-	s << "\t" << "Estatura" << "........................" << _estatura << endl;
-	s << _ptrNad->toString();
-	s << "\t" << "Cantidad de participaciones\n\t en el iron man" << "................." << _cantPartIronMan << endl;
-	s << "\t" << "Cantidad de Triatones ganadas" << "..." << _cantTriatGanador << endl;
-	s << "Cantidad de Triatones ganadas " << _cantTriatGanador << endl;
+	s << "\t" << "Cedula" << ".........................." << this->_cedula << endl;
+	s << "\t" << "Nombre" << ".........................." << this->_nombre << endl;
+	s << "\t" << "Telefono" << "........................" << this->_telefono << endl;
+	s << "\t" << "Fecha Nacimiento" << "................" << this->_ptrFechadeNaci << endl;;
+	s << "\t" << "Horas entrnadas" << "................." << this->_horasEntrenam << endl;
+	s << "\t" << "Temperatura promedio" << "............" << this->_temPromedio << endl;
+	s << "\t" << "Sexo" << "............................" << this->_sexo << endl;
+	s << "\t" << "Estatura" << "........................" << this->_estatura << endl;
+	s << "\t" << "Indice masa muscular" << "............" << this->_masaMuscular << endl;
+	s << "\t" << "Peso" << "............................" << this->_peso << endl;
+	s << "\t" << "Porcentaje grasa corporal" << "......." << this->_IMC << endl;
+	s << "\t" << "Cantidad de participaciones\n\t en el iron man" << "................." << this->_cantPartIronMan << endl;
+	s << "\t" << "Cantidad de Triatones ganadas" << "..." << this->_cantTriatGanador << endl;
+	s << "Cantidad de Triatones ganadas " << this->_cantTriatGanador << endl;
 	s << "----------------------------------------------------------------" << endl;
-	if (ListaDpagos->listaVacia() == true) {
-		s << "La ultima fecha de un pago registardo es:" << ListaDpagos->toString() << endl;
+	if (_lisCursosIdent->listaVacia() != true) {
+		s << "Los codigos de los cursos que a matriculado:" << _lisCursosIdent->toString() << endl;
 	}
-	return s.str();*/
-	return "";
+	if (_lisGruposIdent->listaVacia() != true) {
+		s << "Los codigos de los cursos de los grupos en los que se encuentar: " << _lisGruposIdent->toString() << endl;
+	}
+	return s.str();
 }
 //Ciclista----------------------------------------
 int Expediente::getHorasDeEntrenamiento() { return _horasEntrenam; }
@@ -106,3 +109,13 @@ int Expediente::getCanPartIronMan() { return _cantPartIronMan; }
 int Expediente::getCanTriatGanador() { return _cantTriatGanador; }
 void Expediente::setCanPartIronMan(int canIron) { _cantPartIronMan = canIron; }
 void Expediente::setCanTriatGanador(int canGanadas) { _cantTriatGanador = canGanadas; }
+
+ListaT<stringMOD>* Expediente::getlisCursosIdent()
+{
+	return _lisCursosIdent;
+}
+
+ListaT<stringMOD>* Expediente::getlisGruposIdent()
+{
+	return _lisGruposIdent;
+}

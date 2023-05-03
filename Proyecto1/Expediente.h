@@ -6,6 +6,7 @@
 #include <string>
 #include "Lista_Template.h"
 #include "Fecha.h"
+#include "stringMOD.h"
 using namespace std;
 
 class Expediente {
@@ -23,12 +24,11 @@ protected:
 	double _temPromedio;
 	int _cantPartIronMan;
 	int _cantTriatGanador;
-	//ListaT<string>* _lisCursosIdent = NULL;
-	//ListaT<string>* _lisGruposIdent = NULL;
+	ListaT<stringMOD>* _lisCursosIdent = NULL;
+	ListaT<stringMOD>* _lisGruposIdent = NULL;
 
 	Fecha* _fechaDultimopago;
 public:
-	Expediente();
 	Expediente(int, string, string, Fecha*, int, double, char, double, double, double, double, int, int, Fecha*);
 	virtual ~Expediente();
 	void setNombre(string);
@@ -66,7 +66,7 @@ public:
 
 
 	//Cursos----------------------------------------------
-	//ListaT<string>* getlisCursosIdent();
+	ListaT<stringMOD>* getlisCursosIdent();
 	//Grupos----------------------------------------------
-	//<string>* getlisGruposIdent();
+	ListaT <stringMOD>* getlisGruposIdent();
 };

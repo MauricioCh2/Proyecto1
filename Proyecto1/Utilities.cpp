@@ -93,7 +93,7 @@ Fecha* validarFecha() {
 	int d, m, a;
 	getline(input_stringstream, dia, '/');
 	getline(input_stringstream, mes, '/');
-	getline(input_stringstream, annio, '/');
+	getline(input_stringstream, annio, '\n');
 	d = validarDia(dia);
 	m = validarMes(mes);
 	a = validarAnnio(annio);
@@ -154,12 +154,18 @@ int validarAnnio(string s) {
 char validarDia()
 {
 	char d;
-	cin >> d;
-	if (d == 'l' || d == 'm' || d == 'k' || d == 'j' || d == 'v' || d == 's' || d == 'd') {
-		return d;
+	if (cin >> d) {
+
+		if (d == 'l' || d == 'm' || d == 'k' || d == 'j' || d == 'v' || d == 's' || d == 'd') {
+			return d;
+		}
+		else
+		{
+			throw (new ErrorV('y'));
+		}
 	}
 	else {
-		//throw (Excepcion 'C');
+		throw (new ErrorV ('y'));
 	}
 
 }
@@ -170,29 +176,71 @@ int validarHora(string h) {
 	int hora;
 	stringstream input_stringstream(h);
 	getline(input_stringstream, Shora, ':');
-	getline(input_stringstream, Smin, ':');
-	hora = stoi(Shora);
-	if (hora < 24) {
-		return hora;
+	getline(input_stringstream, Smin, ' ');
+
+	for (char c : Shora) {
+		if (!isdigit(c)) {
+			throw new ErrorV('h');
+		}
 	}
-	else {
+
+	for (char c : Smin) {
+		if (!isdigit(c)) {
+			throw new ErrorV('h');
+		}
+	}
+
+	try {
+		hora = stoi(Shora);
+	}
+	catch (const invalid_argument& e) {
 		throw new ErrorV('h');
 	}
+	catch (const out_of_range& e) {
+		throw new ErrorV('h');
+	}
+
+	if (hora < 0 || hora >= 24) {
+		throw new ErrorV('h');
+	}
+
+	return hora;
 }
+
 int validarMinuto(string m) {
 	string Shora = "";
 	string Smin = "";
-	int min;
+	int min = 0;
 	stringstream input_stringstream(m);
 	getline(input_stringstream, Shora, ':');
-	getline(input_stringstream, Smin, ':');
-	min = stoi(Smin);
-	if (min < 60) {
-		return min;
+	getline(input_stringstream, Smin, ' ');
+
+	for (char c : Shora) {
+		if (!isdigit(c)) {
+			throw new ErrorV('m');
+		}
 	}
-	else {
+
+	for (char c : Smin) {
+		if (!isdigit(c)) {
+			throw new ErrorV('m');
+		}
+	}
+
+	try {
+		min = stoi(Smin);
+	}
+	catch (const invalid_argument& e) {
 		throw new ErrorV('m');
 	}
+	catch (const out_of_range& e) {
+		throw new ErrorV('m');
+	}
+
+	if (min < 0 || min >= 60) {
+		throw new ErrorV('m');
+	}
+	return min;
 }
 //Otros-------------------------------
 void enter() {
