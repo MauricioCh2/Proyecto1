@@ -16,7 +16,7 @@ void Menu::inicio() {
 			ex = true;
 		}
 		catch (...) {
-			cout << "Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+			imprimirString("Error con el formato de fecha (ejemplo: 15/4/23 )  << endl");
 			limpiar();
 		}
 	} while (ex == false);
@@ -211,8 +211,7 @@ bool Menu::opMenuDeportista(int op)
 	Iterador<Deportista>* iter2;
 
 
-	iter = _gym->getListaDepor()->begin();
-	iter2 = _gym->getListaDepor()->end();
+	
 
 	bool ex = false;
 	//clientes (esto puede variar)
@@ -221,7 +220,8 @@ bool Menu::opMenuDeportista(int op)
 	string codCurso = "";
 	string numGrup = "";
 	Fecha* fechaMa = NULL; // no se si es neceario 
-
+	Deportista* aux;
+	Deportista* auxAborrar;
 	stringMOD* IDcurso = NULL;
 	stringMOD* IDgrupo = NULL;
 	Expediente* exaux = NULL;
@@ -283,8 +283,8 @@ bool Menu::opMenuDeportista(int op)
 				fechaMa = validarFecha();
 				ex = true;
 			}
-			catch (ErrorV* e) {
-				cout << e->what() << endl;
+			catch (...) {
+				imprimirString("Error con el formato de fecha (ejemplo: 15/4/23 )  << endl");
 				limpiar();
 			}
 		} while (ex == false);
@@ -474,9 +474,9 @@ bool Menu::opMenuDeportista(int op)
 		limpiarPantalla();
 		break;
 	case 2: //Modificacion de deportista
-
-		Deportista* aux;
-		Deportista* auxAborrar;
+		iter = _gym->getListaDepor()->begin();
+		iter2 = _gym->getListaDepor()->end();
+		
 		imprimirString("<2.Control Deportistas>  <2.Modificacion de deportista>");
 		imprimirString("Seleccione el curso");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
@@ -508,8 +508,8 @@ bool Menu::opMenuDeportista(int op)
 			}
 		} while (ex == false);
 		ex = false;
-
-		
+		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
+		imprimirString(_gym->imprimirListadoDeClientesDUnGrupo(codCurso, numGrup));
 
 		imprimirString("Cual seria la cedula del Deportista?\n");
 		do {
@@ -526,9 +526,11 @@ bool Menu::opMenuDeportista(int op)
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulaAbuscar) {
 				aux = atualizarINFO(iter->operator*());
-				auxAborrar = iter->operator*();
+				//auxAborrar = iter->operator*();
 				iter->getPNodo()->setInfo(aux);
-				delete auxAborrar;
+				
+				
+
 				//Clona el deportista y despues los substitulle con el original para asi poder cambira la infoamcion y no violar ninun principio
 			}
 		}
@@ -536,6 +538,7 @@ bool Menu::opMenuDeportista(int op)
 
 		break;
 	case 3: //Listado de deportistas
+
 		iter = _gym->getListaDepor()->begin();
 		iter2 = _gym->getListaDepor()->end();
 		imprimirString("<2.Control Deportistas>  <3.Listado de deportistas>");
@@ -600,6 +603,8 @@ bool Menu::opMenuDeportista(int op)
 		
 		break;
 	case 4: //Detalle de deportista especificp
+		iter = _gym->getListaDepor()->begin();
+		iter2 = _gym->getListaDepor()->end();
 		imprimirString("<2.Control Deportistas>  <4.Detalle deportista especifico>");
 		imprimirString("Cual seria la cedula del Deportista?\n");
 		do {
@@ -1387,7 +1392,8 @@ bool Menu::opMenuPagos(int op)
 
 Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 {
-	Deportista* Clon =  new Triatlonista(depAactaulizar->getCedula(), depAactaulizar->getNombre(), depAactaulizar->getTelefono(), depAactaulizar->getFechaNacimiento() , depAactaulizar->getHorasDeEntrenamiento(), depAactaulizar->getTempPromedio(), depAactaulizar->getSexo(), depAactaulizar->getEstatura(), depAactaulizar->getMasaMuscular(), depAactaulizar->getPeso(), depAactaulizar->getPorcGrasaCorporal() , depAactaulizar->getCanTriatGanador(), depAactaulizar->getCanPartIronMan() );
+	Deportista* Clon = depAactaulizar;
+		//new Triatlonista(depAactaulizar->getCedula(), depAactaulizar->getNombre(), depAactaulizar->getTelefono(), depAactaulizar->getFechaNacimiento() , depAactaulizar->getHorasDeEntrenamiento(), depAactaulizar->getTempPromedio(), depAactaulizar->getSexo(), depAactaulizar->getEstatura(), depAactaulizar->getMasaMuscular(), depAactaulizar->getPeso(), depAactaulizar->getPorcGrasaCorporal() , depAactaulizar->getCanTriatGanador(), depAactaulizar->getCanPartIronMan() );
 
 	int opSub = 0;
 	//Deportista

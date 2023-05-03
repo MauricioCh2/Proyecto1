@@ -48,6 +48,7 @@ public:
 	string imprimirListadoDeClientesDUnGrupo(string,string);
 	void cancelarMatricula(string,string,string);
 
+
 	ListaT<Deportista>* getListaDepor();
 	ListaT<Expediente>* getListaExpediente();
 };

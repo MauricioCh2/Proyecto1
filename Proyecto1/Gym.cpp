@@ -91,12 +91,12 @@ string Gym::imprimirListadoDeClientesDUnGrupo(string cur, string grup)
 	//podria terminar el metodo de verifiar espacio
 	lisG = _lisCurso->encontrarEsp(cur)->getListaGrupos();
 
-	return lisG->encontrarEsp(grup)->Listar();
+	return lisG->encontrarEsp(grup)->getListaDepor()->Listar();
 }
 
 string Gym::imprimirListaClientes()
 {
-	return _lisCliente->toString();
+	return getListaDepor()->toString();
 }
 
 //string Gym::imprimirListadoDeportistas()
@@ -113,10 +113,29 @@ void Gym::cancelarMatricula(string cur, string grup, string ced) {
 }
 ListaT<Deportista>* Gym::getListaDepor()
 {
+	int canC = 0;
+	int canG = 0;
+	int canD = 0;
+	ListaT<Grupo>* AuxGrup = new ListaT<Grupo>;
+	ListaT<Deportista>* AuxDep = new ListaT <Deportista>;
+	canC = _lisCurso->contador();
+	while (canC != 0) {
 
+		canG = _lisCurso->contadorEspecifico(canC)->getListaGrupos()->contador();
+		while (canG!=0) {
+			canD = _lisCurso->contadorEspecifico(canC)->getListaGrupos()->contadorEspecifico(canG)->getListaDepor()->contador();
+			while (canD != 0) {
+				AuxDep->insertarElem(_lisCurso->contadorEspecifico(canC)->getListaGrupos()->contadorEspecifico(canG)->getListaDepor()->contadorEspecifico(canD));
+				canD--;
+			}
+			canG--;
+		}
+		
+		canC--;
+	}
+	_lisCliente = AuxDep;
 	return _lisCliente;
 }
-
 ListaT<Expediente>* Gym::getListaExpediente()
 {
 	return _lisExpediente;
