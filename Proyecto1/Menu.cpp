@@ -1359,7 +1359,9 @@ bool Menu::opMenuPagos(int op)
 				if (iter->operator*()->getFechaDeultimoPago() != NULL) {
 					imprimirString(iter->operator*()->imprimirPAGOS());
 				}
-				imprimirString("{Este cliente esta [inactivo], por lo que no se tiene regitrado un pago reciente}");
+				else {
+					imprimirString("{Este cliente esta [inactivo], por lo que no se tiene regitrado un pago reciente}");
+				}
 			}
 		}
 		break;

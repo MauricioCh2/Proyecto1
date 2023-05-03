@@ -66,6 +66,9 @@
     <ClInclude Include="Cobro.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Expediente.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Ciclista.cpp">
@@ -111,6 +114,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Cobro.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Expediente.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
