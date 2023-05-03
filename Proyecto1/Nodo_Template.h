@@ -53,6 +53,7 @@ Nodo<T>* Nodo<T>::getSig() {
 }
 template <class T>
 string Nodo<T>::toStringNodo()const {
+	
 	return _info->toString();
 }
 template <class T>

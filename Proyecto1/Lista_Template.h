@@ -21,9 +21,10 @@ public:
 	virtual T* contadorEspecifico(int);//retorna el valor que se encuentre en x posicion
 	virtual T* encontrarEsp(string);
 	virtual bool eliminarEspe(string);
+	//virtual bool cambiaNodos(string, string);
 	string toString();
 	string Listar();
-	void setSig();
+
 	Nodo<T>* getPriemero();
 
 	Iterador<T>* begin();     // Colocar un iterador al inicio
