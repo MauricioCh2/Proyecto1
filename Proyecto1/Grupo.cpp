@@ -70,7 +70,13 @@ string Grupo::toString() {
 string Grupo::Listar()
 {
 	stringstream s;
-	s << "  " << _numGrupo << "\t" << _diaSemana << "\t" << _horaInicio << ":" << _minInicio << "-" << _horaFinaliza << ":" << _minFinaliza << "\t\t" << _cupMax << "\t\t" << _cupMax  - _lisDepor->contador() << endl;
+	s << "  " << _numGrupo << "\t" << _diaSemana << "\t" << _horaInicio << ":" << _minInicio << "-" << _horaFinaliza << ":" << _minFinaliza << "\t\t" << _cupMax << "\t\t";
+		if (_lisDepor!=NULL) { 
+			s<< _cupMax - _lisDepor->contador() << endl;
+		}
+		else {
+			s << "no hay " << endl;
+		}
 	return s.str();
 }
 

@@ -606,6 +606,8 @@ bool Menu::opMenuDeportista(int op)
 		iter = _gym->getListaDepor()->begin();
 		iter2 = _gym->getListaDepor()->end();
 		imprimirString("<2.Control Deportistas>  <4.Detalle deportista especifico>");
+		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
+		imprimirString(_gym->getListaDepor()->Listar());
 		imprimirString("Cual seria la cedula del Deportista?\n");
 		do {
 			try {
@@ -1052,7 +1054,11 @@ bool Menu::opMenuGrupos(int op)
 		iter2Curso = _gym->getListaCurso()->end();
 		imprimirString("< 4.Control Grupos>  <2. Modificación  de  grupo especifico>");
 		imprimirString("De cual Curso proviene el Grupo que desea modificación : ");
+		
+		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
+		imprimirString(_gym->imprimirListadoCursos());
 		imprimirString("Ingrese el codigo del Curso: ");
+
 		do {
 			try {
 				identDcurso = recivirString();
@@ -1064,6 +1070,9 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		
+	
+
 
 		if (_gym->getListaDgruposDcurso(identDcurso) == NULL) {
 			imprimirString("El curso que escogio no tiene Grupos, por lo tanto no es posible editar un Grupo");
