@@ -19,4 +19,5 @@ public:
 	void setAno(int);
 	string toString();
 	string getIdent();
+	bool operator > (const Fecha&)const;
 };

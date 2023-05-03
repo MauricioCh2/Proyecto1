@@ -16,8 +16,12 @@ private:
 	//ListaT<Grupo>* _lisGrupo = NULL;
 	ListaT<Curso>* _lisCurso = NULL;
 	ListaT<Expediente>* _lisExpediente = NULL;
+	Fecha* _fechaHoy = NULL;
 public:
+	//GYM-----------------------------------------------------------
 	Gym();
+	Gym(Fecha*);
+	Fecha* getFecha();
 	//Administracion------------------------------------------------
 	string getNombreDgym();
 	void setNombreDgym(string);

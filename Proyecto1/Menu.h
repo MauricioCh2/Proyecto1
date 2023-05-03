@@ -39,7 +39,7 @@ private:
 	Fecha* fecha;
 	Gym* _gym;
 public:
-	Fecha* getFechaActual();
+	//Fecha* getFechaActual();
 	//Inicio------------------------------------------------------------
 	void inicio();
 	bool llamarMenus();

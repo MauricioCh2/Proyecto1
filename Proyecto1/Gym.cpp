@@ -1,10 +1,24 @@
 #include "Gym.h"
 Gym::Gym() {
 	_nombre = " ";
+	_fechaHoy = new Fecha(0,0,0);
 	_lisCliente = new ListaT<Deportista>;
 	_lisCurso = new ListaT<Curso>;
 	_lisExpediente = new ListaT<Expediente>;
 	
+}
+Gym::Gym(Fecha* f) {
+	_nombre = " ";
+	_fechaHoy = f;
+	_lisCliente = new ListaT<Deportista>;
+	_lisCurso = new ListaT<Curso>;
+	_lisExpediente = new ListaT<Expediente>;
+
+
+}
+Fecha* Gym::getFecha()
+{
+	return _fechaHoy;
 }
 //Administracion---------------------------------------------------------
 string Gym::getNombreDgym()
