@@ -1,7 +1,5 @@
 #pragma once
-#pragma once
 #include <iostream>
-#include <sstream>
 #include <sstream>
 #include <string>
 #include "Lista_Template.h"
@@ -27,9 +25,9 @@ protected:
 	ListaT<stringMOD>* _lisCursosIdent = NULL;
 	ListaT<stringMOD>* _lisGruposIdent = NULL;
 
-	Fecha* _fechaDultimopago;
+	ListaT<Fecha>* ListaDpagos = NULL;
 public:
-	Expediente(int, string, string, Fecha*, int, double, char, double, double, double, double, int, int, Fecha*);
+	Expediente(int, string, string, Fecha*, int, double, char, double, double, double, double, int, int);
 	virtual ~Expediente();
 	void setNombre(string);
 	void setCedula(int);
@@ -69,4 +67,6 @@ public:
 	ListaT<stringMOD>* getlisCursosIdent();
 	//Grupos----------------------------------------------
 	ListaT <stringMOD>* getlisGruposIdent();
+
+	ListaT <Fecha>* getlisFecha();
 };
