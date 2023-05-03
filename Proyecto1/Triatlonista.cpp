@@ -92,6 +92,9 @@ void Triatlonista::setCanTriatGanador(int canGanadas) { _cantTriatGanador = canG
 
 Fecha* Triatlonista::getFechaDeultimoPago()
 {
+	if (ListaDpagos->listaVacia() == true) {
+		return NULL;
+	}
 	return ListaDpagos->getPriemero()->getInfo();
 }
 void Triatlonista::setFechaDeultimoPago(Fecha* f)

@@ -220,8 +220,6 @@ bool Menu::opMenuDeportista(int op)
 	string codCurso = "";
 	string numGrup = "";
 	Fecha* fechaMa = NULL; // no se si es neceario 
-	Deportista* aux;
-	Deportista* auxAborrar;
 	stringMOD* IDcurso = NULL;
 	stringMOD* IDgrupo = NULL;
 	Expediente* exaux = NULL;
@@ -525,13 +523,7 @@ bool Menu::opMenuDeportista(int op)
 
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulaAbuscar) {
-				aux = atualizarINFO(iter->operator*());
-				//auxAborrar = iter->operator*();
-				iter->getPNodo()->setInfo(aux);
-				
-				
-
-				//Clona el deportista y despues los substitulle con el original para asi poder cambira la infoamcion y no violar ninun principio
+				atualizarINFO(iter->operator*());
 			}
 		}
 		
@@ -600,7 +592,8 @@ bool Menu::opMenuDeportista(int op)
 				
 				break;
 		}
-		
+		delete iter;
+		delete iter2;
 		break;
 	case 4: //Detalle de deportista especificp
 		iter = _gym->getListaDepor()->begin();
@@ -666,8 +659,7 @@ bool Menu::opMenuCursos(int op)
 
 	Iterador<Curso>* iter;
 	Iterador<Curso>* iter2;
-	Curso* aux = NULL;
-	Curso* auxAborrar = NULL;
+
 
 	switch (op) {
 	case 1: // Ingreso nuevo curso;
@@ -778,10 +770,7 @@ bool Menu::opMenuCursos(int op)
 
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getIdent() == ident) {
-				aux = atualizarINFOcurso(iter->operator*());
-				auxAborrar = iter->operator*();
-				iter->getPNodo()->setInfo(aux);
-				delete auxAborrar;
+				atualizarINFOcurso(iter->operator*());
 				//Clona el deportista y despues los substitulle con el original para asi poder cambira la infoamcion y no violar ninun principio
 			}
 		}
@@ -849,8 +838,6 @@ bool Menu::opMenuGrupos(int op)
 	Iterador<Curso>* iter2Curso;
 	Iterador<Grupo>* iterGrupo;
 	Iterador<Grupo>* iter2Grupo;
-	Grupo* aux = NULL;
-	Grupo* auxAborrar = NULL;
 	string identDcurso = "";
 	string identDgrupo = "";
 
@@ -1099,11 +1086,7 @@ bool Menu::opMenuGrupos(int op)
 			iter2Grupo = _gym->getListaDgruposDcurso(identDcurso)->end();
 			for (; iterGrupo->getPNodo() != iter2Grupo->getPNodo(); iterGrupo->operator++()) {
 				if (iterGrupo->operator*()->getIdent() == numGrup) {
-					aux = atualizarINFOgrupo(iterGrupo->operator*());
-					auxAborrar = iterGrupo->operator*();
-					_gym->ingresarGrupo(identDcurso, aux);
-					delete auxAborrar;
-					//Clona el deportista y despues los substitulle con el original para asi poder cambira la infoamcion y no violar ninun principio
+					atualizarINFOgrupo(iterGrupo->operator*());
 				}
 			}
 		}
@@ -1324,26 +1307,76 @@ string Menu::menuPagos()
 
 bool Menu::opMenuPagos(int op)
 {
+	if (_gym->getListaCurso()->listaVacia() == true) {
+		limpiar();
+		imprimirString("-------------------------------------------------------------");
+		imprimirString("ERROR: No es posible trabajar con Deportistas sin primero ingresar algun Cursos");
+		imprimirString("-------------------------------------------------------------");
+		enter();
+		op = 3;
+	}
+	else if (_gym->getListaCurso()->getPriemero()->getInfo()->getListaGrupos() == NULL) {
+		imprimirString("-------------------------------------------------------------");
+		imprimirString("ERROR: No es posible trabajar con Deportistas sin primero ingresar algun Grupo");
+		imprimirString("(Nota: Para crear un grupo es necesario tener al menus un Curso)");
+		imprimirString("-------------------------------------------------------------");
+		enter();
+		op = 3;
+	}
+
 	Fecha* fechAux = NULL;
-	int cedulaAbuscar = 0;
+	int cedulAbuscar = 0;
+	string codCurso="";
+	string numGrup = "";
 	bool ex = false;
 	Iterador<Deportista>* iter;
 	Iterador<Deportista>* iter2;
 
-	iter = _gym->getListaDepor()->begin();
-	iter2 = _gym->getListaDepor()->end();
 
 	switch (op) {
 	case 1: // Registro nuevo de pago\n"
+		iter = _gym->getListaDepor()->begin();
+		iter2 = _gym->getListaDepor()->end();
 		imprimirString("<5.Control  Pagos> <1.Registro de nuevo  pago>");
-		imprimirString("Deportistas disponibles: ");
+		imprimirString("Seleccione el curso");
+		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
+		imprimirString(_gym->imprimirListadoCursos());
+
+		do {
+			try {
+				codCurso = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Seleccione el grupo: ");
+		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
+		imprimirString(_gym->imprimirListadoGrupo(codCurso));
+		imprimirString("Digite el grupo en el que desea ser ingresado: ");
+		do {
+			try {
+				numGrup = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
 		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
-		//imprimirString(_gym->imprimirListadoDeportistas());
+		imprimirString("Deportistas disponibles en este grupo para realisar el pago: ");
+		imprimirString(_gym->imprimirListadoDeClientesDUnGrupo(codCurso, numGrup));
+		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
 		imprimirString("Cedula del Cliente: ");
 		do {
 			try {
 
-				cedulaAbuscar = recivirInt();
+				cedulAbuscar = recivirInt();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1352,21 +1385,26 @@ bool Menu::opMenuPagos(int op)
 			}
 		} while (ex == false);
 
+
+
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
-			if (iter->operator*()->getCedula() == cedulaAbuscar) {
-				iter->operator*()->setFechaDeultimoPago(Cobro::getFechaDeultimoPago(iter->operator*(), this->fecha, _gym->getMensualidadDgym()));
+			if (iter->operator*()->getCedula() == cedulAbuscar) {
+				fechAux = Cobro::getFechaDeultimoPago(iter->operator*(), this->fecha, _gym->getMensualidadDgym());
+				iter->operator*()->setFechaDeultimoPago(fechAux);
 				imprimirString("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO MENSUAL");
 			}
 		}
 		//listar los cursos con su codigo 
 		break;
 	case 2:
+		iter = _gym->getListaDepor()->begin();
+		iter2 = _gym->getListaDepor()->end();
 		imprimirString("<5.Control  Pagos> <2.Reporte de pagos por deportista>");
 		imprimirString("Cedula del Cliente: ");
 		do {
 			try {
 
-				cedulaAbuscar = recivirInt();
+				cedulAbuscar = recivirInt();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1376,7 +1414,7 @@ bool Menu::opMenuPagos(int op)
 		} while (ex == false);
 
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
-			if (iter->operator*()->getCedula() == cedulaAbuscar) {
+			if (iter->operator*()->getCedula() == cedulAbuscar) {
 				imprimirString("El ultimo pago de este Cliente esta regitrado en la fecha: ");
 				if (iter->operator*()->getFechaDeultimoPago() != NULL) {
 					imprimirString(iter->operator*()->imprimirPAGOS());
@@ -1399,7 +1437,7 @@ bool Menu::opMenuPagos(int op)
 	return false;
 }
 
-Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
+void Menu::atualizarINFO(Deportista* depAactaulizar)
 {
 	Deportista* Clon = depAactaulizar;
 		//new Triatlonista(depAactaulizar->getCedula(), depAactaulizar->getNombre(), depAactaulizar->getTelefono(), depAactaulizar->getFechaNacimiento() , depAactaulizar->getHorasDeEntrenamiento(), depAactaulizar->getTempPromedio(), depAactaulizar->getSexo(), depAactaulizar->getEstatura(), depAactaulizar->getMasaMuscular(), depAactaulizar->getPeso(), depAactaulizar->getPorcGrasaCorporal() , depAactaulizar->getCanTriatGanador(), depAactaulizar->getCanPartIronMan() );
@@ -1653,7 +1691,6 @@ Deportista* Menu::atualizarINFO(Deportista* depAactaulizar)
 
 		enter();
 		
-		return Clon;
 }
 
 
@@ -1680,7 +1717,7 @@ string Menu::QueQuiereEditarTri()
 	return s.str();
 }
 
-Curso* Menu::atualizarINFOcurso(Curso* original)
+void Menu::atualizarINFOcurso(Curso* original)
 {
 	string ident = "";
 	string codCurso = "";
@@ -1690,7 +1727,7 @@ Curso* Menu::atualizarINFOcurso(Curso* original)
 	string descripcion = "";
 	bool ex = false;
 	int op = 0;
-	Curso* Clon = new Curso(original->getIdent(), original->getNombreDcurso(), original->getNivel(), original->getCanGrup(), original->getDescripcion());
+	Curso* Clon = original;
 	imprimirString("Actualisando informacion de Curso");
 	imprimirString(QueQuiereEditarCurso());
 	do {
@@ -1784,10 +1821,9 @@ Curso* Menu::atualizarINFOcurso(Curso* original)
 		break;
 	}
 
-	return Clon;
 }
 
-Grupo* Menu::atualizarINFOgrupo(Grupo* original)
+void Menu::atualizarINFOgrupo(Grupo* original)
 {
 	string cedInstr = "";
 	string nomInstructor = "";
@@ -1805,7 +1841,7 @@ Grupo* Menu::atualizarINFOgrupo(Grupo* original)
 	bool ex = false;
 	int op = 0;
 	
-	Grupo* Clon = new Grupo(original->getCedInstructor(), original->getNomInstructor(), original->getCupMax(), original->getFechaInicio(), original->getSemDuracion(), original->getDiaSemana(), original->getHoraInicio(), original->getMinInicio(), original->getHoraFinaliza(), original->getMinFinaliza() );
+	Grupo* Clon = original;
 	imprimirString("Actualisando informacion de Grupo");
 	imprimirString(QueQuiereEditarGrupo());
 	do {
@@ -1999,7 +2035,6 @@ Grupo* Menu::atualizarINFOgrupo(Grupo* original)
 		break;
 	}
 	
-	return Clon;
 }
 
 string Menu::QueQuiereEditarCurso()

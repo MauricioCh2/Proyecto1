@@ -61,10 +61,10 @@ public:
 	bool opMenuPagos(int);
 	//Guardar en Archivos y salir 
 	//realmente esto no requiere metodo 
-	Deportista* atualizarINFO(Deportista*);
+	void atualizarINFO(Deportista*);
 	string QueQuiereEditarTri();
-	Curso* atualizarINFOcurso(Curso*);
-	Grupo* atualizarINFOgrupo(Grupo*);
+	void atualizarINFOcurso(Curso*);
+	void atualizarINFOgrupo(Grupo*);
 	string QueQuiereEditarCurso();
 	string QueQuiereEditarGrupo();
 

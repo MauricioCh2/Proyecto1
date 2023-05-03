@@ -24,8 +24,13 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 	int mesesApagar = 0;
 	string respuesta;
 	int respuestai = 0;
+	int op = 0;
 	Fecha* aux = new Fecha(0, 0, 0);
-	switch (EstadoDcliente(tri, tri->getFechaDeultimoPago()))
+	if (tri->getFechaDeultimoPago() == NULL) {
+		op = 3;
+	}
+	op = EstadoDcliente(tri, tri->getFechaDeultimoPago());
+	switch (op)
 	{
 	case 1:
 		imprimirString("Cuantos meses le gustaria pagar por adelantado {ya que su estado actual en el gimanccio es de [Activo]} ");
@@ -46,7 +51,7 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 			aux->setMes(aux->getMes() - 12);
 			aux->setAno(aux->getAno() + 1);
 		}
-		break;
+	break;
 	case 2:
 		imprimirString("Usted esta Moroso por un total de meses de : ");
 		mesesDmorosidad = (f->getMes() - tri->getFechaDeultimoPago()->getMes());
@@ -110,7 +115,7 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 			} while (ex == false);
 			ex = false;
 			aux = f;
-			aux->setMes(f->getMes() + mesesApagar);
+			aux->setMes(f->getMes()+mesesApagar);
 		}
 		if (aux->getMes() > 12) {
 			aux->setMes(aux->getMes() - 12);
