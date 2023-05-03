@@ -12,8 +12,13 @@ public:
 	//Guardar datos-----------------------------------
 	bool guardarDatos();
 	bool guardarDeportistas();
+	bool guardarCursos();
+	bool guardarGrupos();
 	//lee datos---------------------------------------
 	bool cargarDatos();
 	bool cargarDeportistas();
+	bool cargarCursos();
+	bool cargarGrupos();
+
 
 };

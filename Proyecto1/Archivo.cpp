@@ -31,6 +31,10 @@ bool Archivos::guardarDeportistas()
 	dep.close();
 	return ver;
 }
+bool Archivos::guardarCursos()
+{
+	return false;
+}
 //Cargar datos------------------------------------------------------
 bool Archivos::cargarDatos()
 {
@@ -88,4 +92,9 @@ bool Archivos::cargarDeportistas()
 	}
 	f_Deportistas.close();
 	return true;
+}
+
+bool Archivos::cargarCursos()
+{
+	return false;
 }
