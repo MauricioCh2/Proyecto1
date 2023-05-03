@@ -17,7 +17,7 @@ Curso::Curso(string cod, string nomC, string niv, int canGrupos, string desc)
 Curso::Curso(string d, string n, int c, Fecha* f, int h, int canGrupo) {
     _descripcion = d;
     _nivel = n;
-    _cupMax = c;
+   // _cupMax = c;
     _fecha = f;
     _hora = h;
     _can = 0;
@@ -51,8 +51,8 @@ void Curso::setDescripcion(string d) {
 void Curso::setNivel(string n) {
     _nivel = n;
 }
-void Curso::setCup(int c) {
-    _cupMax = c;
+void Curso::setCanGrup(int c) {
+    _canGrupos = c;
 }
 void Curso::setFecha(Fecha* f) {
     _fecha = f;
@@ -74,8 +74,8 @@ string Curso::getDescripcion() {
 string Curso::getNivel() {
     return _nivel;
 }
-int Curso::getCup() {
-    return _cupMax;
+int Curso::getCanGrup() {
+    return _canGrupos;
 }
 Fecha* Curso::getFecha() {
     return _fecha;
@@ -113,18 +113,30 @@ ListaT<Grupo>* Curso::getListaGrupos()
     return _lisGrupos;
 }
 
-bool Curso::verficiarEspacio()
+bool Curso::verficarEspacio()
 {
-
+   
+    if (_lisGrupos!=NULL) {
+        if (_lisGrupos->contador() == _canGrupos) {
+          
+            return false;
+        }
+        if (_lisGrupos->contador() < _canGrupos) {
+            return true;
+        }
+    }
+   
     return false;
 }
-void Curso::ingresarGrupo(Grupo* grupo) {
+bool Curso::ingresarGrupo(Grupo* grupo) {
+   
         _numGrupo = _numGrupo++;
         _lisGrupos->insertarElem(grupo);
         _lisGrupos->contador();
         grupo->setnumGrupo(_numGrupo);
         grupo->setNombreCurso(_nombreCurso);
-
+    
+        return true;
 }
 Grupo* Curso::operator[](int k) { // la idea es que retorne el grupo que se encuentre en la posicion dentro de los[]
     return _lisGrupos->contadorEspecifico(k);

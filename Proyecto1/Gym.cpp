@@ -23,6 +23,10 @@ void Gym::setMensualidadDgym(int m)
 	_mensualidad = m;
 }
 //Cursos------------------------------------------------------------------
+bool Gym::verDisponivilidadCursos(string c) {
+	return _lisCurso->encontrarEsp(c)->verficarEspacio();
+}
+
 void Gym::ingresarCursos(Curso* c) {
 	_lisCurso->insertarElem(c);
 }
@@ -45,7 +49,9 @@ ListaT<Curso>* Gym::getListaCurso() {
 	return _lisCurso;
 }
 //Grupos--------------------------------------------------------
-
+bool Gym::verDisponivilidadGrupos(string c, string g) {
+	return _lisCurso->encontrarEsp(c)->getListaGrupos()->encontrarEsp(g)->verficarEspacio();
+}
 void Gym::ingresarGrupo(string c,Grupo* g)
 {
 	_lisCurso->encontrarEsp(c)->ingresarGrupo(g);
@@ -66,10 +72,9 @@ string Gym::reporteGrupoEspe(string cur, string grup)
 	
 	return lisG->encontrarEsp(grup)->toString();
 }
-void Gym::ingresarClienteAGrupos(string n, string cod, string ced )
+void Gym::ingresarClienteAGrupos(string n, string cod, Deportista* dep )
 {
 	
-	Deportista* dep = _lisCliente->encontrarEsp(ced);
 	Curso* cur = _lisCurso->encontrarEsp(cod);
 	cur->getListaGrupos()->encontrarEsp(n)->ingresarDeportista(dep);
 	
@@ -79,8 +84,13 @@ string Gym::imprimirClientesDeUnGrupo(string cod, string n)
 	return _lisCurso->encontrarEsp(cod)->getListaGrupos()->encontrarEsp(n)->imprimirDeportistas();
 }
 //Clientes----------------------------------------------------------------
-void Gym::ingresarListaClientes(Deportista* d) {
-	_lisCliente->insertarElem(d);
+string Gym::imprimirListadoDeClientesDUnGrupo(string cur, string grup)
+{
+	ListaT<Grupo>* lisG = new ListaT<Grupo>;
+	//podria terminar el metodo de verifiar espacio
+	lisG = _lisCurso->encontrarEsp(cur)->getListaGrupos();
+
+	return lisG->encontrarEsp(grup)->Listar();
 }
 
 string Gym::imprimirListaClientes()
@@ -88,13 +98,21 @@ string Gym::imprimirListaClientes()
 	return _lisCliente->toString();
 }
 
+//string Gym::imprimirListadoDeportistas()
+//{
+//	return _lisCliente->Listar();
+//}
+
 ListaT<Grupo>* Gym::getListaDgruposDcurso(string c)
 {
 	return _lisCurso->encontrarEsp(c)->getListaGrupos();
 }
-
+void Gym::cancelarMatricula(string cur, string grup, string ced) {
+	_lisCurso->encontrarEsp(cur)->getListaGrupos()->encontrarEsp(grup)->getListaDepor()->eliminarEspe(ced);
+}
 ListaT<Deportista>* Gym::getListaDepor()
 {
+
 	return _lisCliente;
 }
 

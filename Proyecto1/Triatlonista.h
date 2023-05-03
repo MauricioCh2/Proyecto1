@@ -44,6 +44,7 @@ public:
 	void setFechaDeultimoPago(Fecha*);
 	string imprimirPAGOS();
 	virtual ~Triatlonista();
+	string Listar();
 	string toString();
 
 

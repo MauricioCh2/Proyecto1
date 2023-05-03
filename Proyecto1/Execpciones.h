@@ -8,7 +8,7 @@ class ErrorV  {
 private:
 	char motivo;
 public:
-	ErrorV(int m);
+	ErrorV(char m);
 	const char* what()const throw();
 
 };

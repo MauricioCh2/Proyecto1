@@ -1,6 +1,6 @@
 #include "Execpciones.h"
 
-ErrorV::ErrorV(int m)
+ErrorV::ErrorV(char m)
 {
 	motivo = m;
 }
@@ -13,7 +13,7 @@ const char* ErrorV::what() const throw()
 		case 'd': return "ERROR DE double";
 		case 's': return "ERROR DE string";
 		case 'f': return "ERROR DE Fecha";
-		case 'C': return "ERROR DE char";
+		case 'G': return "ERROR DE CUPO";
 		case 'I': return "ERROR DE int";
 		case 'D': return "ERROR DE double";
 		case 'S': return "ERROR DE string";

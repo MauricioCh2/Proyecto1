@@ -70,7 +70,7 @@ string Grupo::toString() {
 string Grupo::Listar()
 {
 	stringstream s;
-	s << "  " << _numGrupo << "\t" << _diaSemana << "\t" << _horaInicio << ":" << _minInicio << "-" << _horaFinaliza << ":" << _minFinaliza << "\t\t" << _cupMax << "\t" << _lisDepor->contador() - _cupMax << endl;
+	s << "  " << _numGrupo << "\t" << _diaSemana << "\t" << _horaInicio << ":" << _minInicio << "-" << _horaFinaliza << ":" << _minFinaliza << "\t\t" << _cupMax << "\t\t" << _cupMax  - _lisDepor->contador() << endl;
 	return s.str();
 }
 
@@ -202,6 +202,21 @@ void Grupo::setNombreCurso(string n)
 	_nombreCurso = n;
 }
 //Lista------------------------------------------
+bool Grupo::verficarEspacio()
+{
+
+	if (_lisDepor != NULL) {
+		if (_lisDepor->contador() == _cupMax) {
+
+			return false;
+		}
+		if (_lisDepor->contador() < _cupMax) {
+			return true;
+		}
+	}
+
+	return false;
+}
 void Grupo::ingresarDeportista(Deportista* de) {
 	_lisDepor->insertarElem(de);
 }

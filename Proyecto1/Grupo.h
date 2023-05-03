@@ -62,6 +62,7 @@ public:
 	void setNombreCurso(string);
 
 	//Lista deportista
+	bool verficarEspacio();
 	void ingresarDeportista(Deportista*);
 	Deportista* operator[](int);
 	string imprimirDeportistas();

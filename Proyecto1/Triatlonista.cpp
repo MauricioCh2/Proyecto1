@@ -15,6 +15,12 @@ Triatlonista:: ~Triatlonista() {
 	delete _ptrCiclista;
 
 }
+string Triatlonista::Listar()
+{
+	stringstream s;
+	s << _cedula << "\t" << _nombre << "\t" << _telefono << "\t" << "canGrupos" << endl;
+	return s.str();
+}
 string Triatlonista::toString() {
 	stringstream s;
 	s << "------------------------------CLIENTE---------------------------" << endl;

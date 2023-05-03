@@ -21,53 +21,53 @@ void Menu::inicio() {
 		}
 	} while (ex == false);
 	//cout<<fecha->toString()<< "prueba ";
-	Fecha* f1 = new Fecha(1, 4, 23);
-	Deportista* c1 = new Triatlonista(111, "a", "1", f1, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	Fecha* f2 = new Fecha(1, 4, 23);
-	Deportista* c2 = new Triatlonista(222, "a", "1", f2, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	Fecha* f3 = new Fecha(1, 4, 23);
-	Deportista* c3 = new Triatlonista(333, "a", "1", f3, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	Fecha* f4 = new Fecha(30, 3, 23);
-	Deportista* c4 = new Triatlonista(444, "a", "1", f4, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	Fecha* f5 = new Fecha(30, 3, 23);
-	Deportista* c5 = new Triatlonista(555, "a", "1", f5, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	Fecha* f6 = new Fecha(1, 1, 23);
-	Deportista* c6 = new Triatlonista(666, "a", "1", f6, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	Fecha* f7 = new Fecha(1, 1, 23);
-	Deportista* c7 = new Triatlonista(777, "a", "1", f7, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	Fecha* f8 = new Fecha(1, 1, 23);
-	Deportista* c8 = new Triatlonista(888, "a", "1", f8, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	Fecha* f9 = new Fecha(1, 1, 23);
-	Deportista* c9 = new Triatlonista(999, "a", "1", f9, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	Fecha* f10 = new Fecha(1, 1, 23);
-	Deportista* c10 = new Triatlonista(100, "a", "1", f10, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	Fecha* f11 = new Fecha(1, 1, 23);
-	Deportista* c11 = new Triatlonista(000, "a", "1", f11, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	c1->setFechaDeultimoPago(f1);
-	c2->setFechaDeultimoPago(f2);
-	c3->setFechaDeultimoPago(f3);
-	c4->setFechaDeultimoPago(f4);
-	c5->setFechaDeultimoPago(f5);
+	//Fecha* f1 = new Fecha(1, 4, 23);
+	//Deportista* c1 = new Triatlonista(111, "a", "1", f1, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	//Fecha* f2 = new Fecha(1, 4, 23);
+	//Deportista* c2 = new Triatlonista(222, "a", "1", f2, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	//Fecha* f3 = new Fecha(1, 4, 23);
+	//Deportista* c3 = new Triatlonista(333, "a", "1", f3, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	//Fecha* f4 = new Fecha(30, 3, 23);
+	//Deportista* c4 = new Triatlonista(444, "a", "1", f4, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	//Fecha* f5 = new Fecha(30, 3, 23);
+	//Deportista* c5 = new Triatlonista(555, "a", "1", f5, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	//Fecha* f6 = new Fecha(1, 1, 23);
+	//Deportista* c6 = new Triatlonista(666, "a", "1", f6, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	//Fecha* f7 = new Fecha(1, 1, 23);
+	//Deportista* c7 = new Triatlonista(777, "a", "1", f7, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	//Fecha* f8 = new Fecha(1, 1, 23);
+	//Deportista* c8 = new Triatlonista(888, "a", "1", f8, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	//Fecha* f9 = new Fecha(1, 1, 23);
+	//Deportista* c9 = new Triatlonista(999, "a", "1", f9, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	//Fecha* f10 = new Fecha(1, 1, 23);
+	//Deportista* c10 = new Triatlonista(100, "a", "1", f10, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	//Fecha* f11 = new Fecha(1, 1, 23);
+	//Deportista* c11 = new Triatlonista(000, "a", "1", f11, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
+	//c1->setFechaDeultimoPago(f1);
+	//c2->setFechaDeultimoPago(f2);
+	//c3->setFechaDeultimoPago(f3);
+	//c4->setFechaDeultimoPago(f4);
+	//c5->setFechaDeultimoPago(f5);
 
-	c6->setFechaDeultimoPago(f6);
-	c7->setFechaDeultimoPago(f7);
-	c8->setFechaDeultimoPago(f8);
-	c9->setFechaDeultimoPago(f9);
-	//c10 Inactivo
-	//c11 Inactivo
+	//c6->setFechaDeultimoPago(f6);
+	//c7->setFechaDeultimoPago(f7);
+	//c8->setFechaDeultimoPago(f8);
+	//c9->setFechaDeultimoPago(f9);
+	////c10 Inactivo
+	////c11 Inactivo
 
 
-	_gym->ingresarListaClientes(c1);
-	_gym->ingresarListaClientes(c2);
-	_gym->ingresarListaClientes(c3);
-	_gym->ingresarListaClientes(c4);
-	_gym->ingresarListaClientes(c5);
-	_gym->ingresarListaClientes(c6);
-	_gym->ingresarListaClientes(c7);
-	_gym->ingresarListaClientes(c8);
-	_gym->ingresarListaClientes(c9);
-	_gym->ingresarListaClientes(c10);
-	_gym->ingresarListaClientes(c11);
+	//_gym->ingresarListaClientes(c1);
+	//_gym->ingresarListaClientes(c2);
+	//_gym->ingresarListaClientes(c3);
+	//_gym->ingresarListaClientes(c4);
+	//_gym->ingresarListaClientes(c5);
+	//_gym->ingresarListaClientes(c6);
+	//_gym->ingresarListaClientes(c7);
+	//_gym->ingresarListaClientes(c8);
+	//_gym->ingresarListaClientes(c9);
+	//_gym->ingresarListaClientes(c10);
+	//_gym->ingresarListaClientes(c11);
 
 	while (!fin) {
 		llamarMenus();
@@ -178,7 +178,7 @@ bool Menu::opMenuDeportista(int op)
 		enter();
 		op = 5;
 	}
-	else if (_gym->getListaCurso()->getPriemero()->getInfo()->getListaGrupos()==NULL){
+	else if (_gym->getListaCurso()->getPriemero()->getInfo()->getListaGrupos() == NULL) {
 		imprimirString("-------------------------------------------------------------");
 		imprimirString("ERROR: No es posible trabajar con Deportistas sin primero ingresar algun Grupo");
 		imprimirString("(Nota: Para crear un grupo es necesario tener al menus un Curso)");
@@ -186,7 +186,7 @@ bool Menu::opMenuDeportista(int op)
 		enter();
 		op = 5;
 	}
-	int opSub=0;
+	int opSub = 0;
 	//Deportista
 	int cedula = 0;
 	string nombre = "";
@@ -217,9 +217,74 @@ bool Menu::opMenuDeportista(int op)
 	bool ex = false;
 	//clientes (esto puede variar)
 	Deportista* cliente = NULL;
+	//Cursos y grupos
+	string codCurso = "";
+	string numGrup = "";
+	Fecha* fechaMa = NULL; // no se si es neceario 
 	switch (op) {
 	case 1: // Ingreso nuevo deportista 
 		imprimirString("<2.Control Deportistas>  <1.Ingreso nuevo deportista>");
+		do {
+
+			imprimirString("Lista de cursos");
+			imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
+			imprimirString(_gym->imprimirListadoCursos());
+			imprimirString("Seleccione un curso:  ");
+			
+				try {
+					codCurso = recivirString();
+					ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+			
+		
+		imprimirString("Para dicho curso quedan los siguientes grupos disponibles: ");
+		do {
+			imprimirString("Seleccione un grupo:  ");
+			imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
+			imprimirString(_gym->imprimirListadoGrupo(codCurso));
+			imprimirString("Digite el grupo en el que desea ser ingresado: ");
+			imprimirString("O digite 'salir;' para ir atras ");
+
+			do {
+				try {
+					numGrup = recivirString();
+					ex = true;
+				}
+				catch (ErrorV* e) {
+					cout << e->what() << endl;
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+			if (numGrup == "salir") {
+				break;
+			}
+			if (_gym->verDisponivilidadGrupos(codCurso, numGrup) != true) {
+				imprimirString("Ese grupo no esta disponible digite otro ");
+			}
+		} while (_gym->verDisponivilidadGrupos(codCurso, numGrup) != true );
+		if (numGrup == "salir") {
+			limpiarPantalla();
+			return true;
+		}
+		imprimirString("Digite la fecha de matricula: ");
+		do {
+			try {
+				fechaMa = validarFecha();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
 
 		//deportista
 		imprimirString("Cedula: ");
@@ -392,7 +457,8 @@ bool Menu::opMenuDeportista(int op)
 		
 
 		cliente = new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
-		_gym->ingresarListaClientes(cliente);
+		_gym->ingresarClienteAGrupos(numGrup, codCurso, cliente);
+
 		enter();
 		limpiarPantalla();
 		break;
@@ -401,6 +467,39 @@ bool Menu::opMenuDeportista(int op)
 		Deportista* aux;
 		Deportista* auxAborrar;
 		imprimirString("<2.Control Deportistas>  <2.Modificacion de deportista>");
+		imprimirString("Seleccione el curso");
+		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
+		imprimirString(_gym->imprimirListadoCursos());
+
+		do {
+			try {
+				codCurso = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("Seleccione el grupo: ");
+		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
+		imprimirString(_gym->imprimirListadoGrupo(codCurso));
+		imprimirString("Digite el grupo en el que desea ser ingresado: ");
+		do {
+			try {
+				numGrup = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+
+		
+
 		imprimirString("Cual seria la cedula del Deportista?\n");
 		do {
 			try {
@@ -740,21 +839,39 @@ bool Menu::opMenuGrupos(int op)
 	switch (op) {
 	case 1: // Ingreso nuevo grupo;
 		imprimirString("< 4.Control Grupos> < 1.Ingreso nuevo grupo>");
-		imprimirString("Lista de cursos");
-		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
-		imprimirString(_gym->imprimirListadoCursos());
-		imprimirString("Digite el curso a elegir: ");
+			
 		do {
-			try {
-				curso = recivirString();
-				ex = true;
-			}
-			catch (ErrorV* e) {
-				cout << e->what() << endl;
-				limpiar();
-			}
-		} while (ex == false);
-		ex = false;
+			
+				imprimirString("Lista de cursos");
+				imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
+				imprimirString(_gym->imprimirListadoCursos());
+				imprimirString("Digite el curso a elegir: ");
+				imprimirString("O digite 'salir' para ir de vuelta al menu: ");
+
+				do {
+					try {
+						curso = recivirString();
+						ex = true;
+					}
+					catch (ErrorV* e) {
+						cout << e->what() << endl;
+						limpiar();
+					}
+				} while (ex == false);
+				ex = false;
+				if (curso == "salir") {
+					break;
+				}
+				if (_gym->verDisponivilidadCursos(curso) != true) {
+					imprimirString("Ese curso no esta disponible digite otro ");
+
+				}
+
+		} while (_gym->verDisponivilidadCursos(curso)!=true);
+		if (curso == "salir") {
+			limpiarPantalla();
+			return true;
+		}
 		//Verificar spacio
 		
 		//Listar cursos para elegir en cual se va aingresar el grupo
@@ -910,6 +1027,8 @@ bool Menu::opMenuGrupos(int op)
 		
 		grupo = new Grupo(cedInstr, nomInstructor, cupMax, fechaInicio, semDuracion, dia, horIn, minIn, horFin, minFin);
 		_gym->ingresarGrupo(curso, grupo);
+		numGrup = to_string(grupo->getNumGrupo());
+		_gym->reporteGrupoEspe(curso, numGrup );
 		
 		enter();
 		limpiarPantalla();
@@ -969,7 +1088,11 @@ bool Menu::opMenuGrupos(int op)
 		
 		break;
 	case 3: //matricula de grupo especifico
+		cout << "Creo que ha que eliminar esto";
 		imprimirString("< 4.Control Grupos>  <3.Matricula en grupo especifico>");
+		imprimirString("Deportistas disponibles: ");
+		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
+		//imprimirString(_gym->imprimirListadoDeportistas());
 		imprimirString("Digite el ID del usuario que desea matricular:");
 		do {
 			try {
@@ -984,7 +1107,7 @@ bool Menu::opMenuGrupos(int op)
 		ex = false;
 		imprimirString("En que curso desea matricular?");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
-		_gym->imprimirListadoCursos();
+		imprimirString(_gym->imprimirListadoCursos());
 
 		do {
 			try {
@@ -999,7 +1122,7 @@ bool Menu::opMenuGrupos(int op)
 		ex = false;
 		imprimirString("Para dicho curso quedan los siguientes grupos disponibles: ");
 		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
-		imprimirString(_gym->imprimirListadoGrupo(curso));
+		imprimirString(_gym->imprimirListadoGrupo(codCurso));
 		imprimirString("Digite el grupo en el que desea ser ingresado: ");
 		do {
 			try {
@@ -1026,7 +1149,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 
-		_gym->ingresarClienteAGrupos(numGrup, codCurso, cedCliente);
+		//_gym->ingresarClienteAGrupos(numGrup, codCurso, cedCliente);
 
 		
 		imprimirString("Opcion en desarrollo");
@@ -1072,7 +1195,7 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString("< 5.Control Grupos> < 5. Reporte deportistas matriculados por grupo>");
 		imprimirString("Seleccione un curso");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
-		_gym->imprimirListadoCursos();
+		imprimirString(_gym->imprimirListadoCursos());
 
 		do {
 			try {
@@ -1085,10 +1208,10 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-		imprimirString("Seleccione un grupo: ");
+		
 		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
-		imprimirString(_gym->imprimirListadoGrupo(curso));
-		imprimirString("Digite el grupo en el que desea ser ingresado: ");
+		imprimirString(_gym->imprimirListadoGrupo(codCurso));
+		imprimirString("Seleccione un grupo: ");
 		do {
 			try {
 				numGrup = recivirString();
@@ -1106,6 +1229,52 @@ bool Menu::opMenuGrupos(int op)
 		break;
 	case 6://Cancelacion de  matricula en grupo
 		imprimirString("< 5.Control Grupos>  <6. Cancelación de  matricula en grupo>");
+		imprimirString("Seleccione un curso");
+		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
+		imprimirString(_gym->imprimirListadoCursos());
+
+		do {
+			try {
+				codCurso = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+
+		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
+		imprimirString(_gym->imprimirListadoGrupo(codCurso));
+		imprimirString("Seleccione un grupo: ");
+		do {
+			try {
+				numGrup = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		imprimirString("<Listado de clientes dentro del grupo> ");
+		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
+		imprimirString(_gym->imprimirListadoDeClientesDUnGrupo(codCurso, numGrup));
+		imprimirString("Digite la cedula del cliente que desea eliminar?");
+		do {
+			try {
+				cedCliente = recivirString();
+				ex = true;
+			}
+			catch (ErrorV* e) {
+				cout << e->what() << endl;
+				limpiar();
+			}
+		} while (ex == false);
+		ex = false;
+		_gym->cancelarMatricula(codCurso, numGrup, cedCliente);
 		imprimirString("Opcion en desarrollo");
 		break;
 	case 7:
@@ -1145,6 +1314,9 @@ bool Menu::opMenuPagos(int op)
 	switch (op) {
 	case 1: // Registro nuevo de pago\n"
 		imprimirString("<5.Control  Pagos> <1.Registro de nuevo  pago>");
+		imprimirString("Deportistas disponibles: ");
+		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
+		//imprimirString(_gym->imprimirListadoDeportistas());
 		imprimirString("Cedula del Cliente: ");
 		do {
 			try {
@@ -1493,7 +1665,7 @@ Curso* Menu::atualizarINFOcurso(Curso* original)
 	string descripcion = "";
 	bool ex = false;
 	int op = 0;
-	Curso* Clon = new Curso(original->getIdent(), original->getNombreDcurso(), original->getNivel(), original->getCup(), original->getDescripcion());
+	Curso* Clon = new Curso(original->getIdent(), original->getNombreDcurso(), original->getNivel(), original->getCanGrup(), original->getDescripcion());
 	imprimirString("Actualisando informacion de Curso");
 	imprimirString(QueQuiereEditarCurso());
 	do {
@@ -1572,7 +1744,7 @@ Curso* Menu::atualizarINFOcurso(Curso* original)
 			}
 		} while (ex == false);
 		ex = false;
-		Clon->setCup(canG);
+		Clon->setCanGrup(canG);
 		break;
 	case 5:
 		imprimirString("Descripcion del curso: ");

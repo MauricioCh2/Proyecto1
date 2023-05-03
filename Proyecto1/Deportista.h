@@ -25,7 +25,7 @@ public:
 	virtual string getTelefono();
 	virtual Fecha* getFechaNacimiento();
 	virtual string toString() = 0;
-
+	virtual string Listar() = 0;
 	
 	//MVP para clonar
 	//Ciclista----------------------------------------

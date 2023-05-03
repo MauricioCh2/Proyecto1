@@ -68,5 +68,5 @@ public:
 	string QueQuiereEditarCurso();
 	string QueQuiereEditarGrupo();
 
-
+	
 };

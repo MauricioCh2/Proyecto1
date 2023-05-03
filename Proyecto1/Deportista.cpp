@@ -23,3 +23,4 @@ string Deportista::getIdent() {
 
 string Deportista::getTelefono() { return _telefono; }
 Fecha* Deportista::getFechaNacimiento() { return _ptrFecha; }
+

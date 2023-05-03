@@ -29,17 +29,22 @@ public:
 	
 	ListaT<Curso>* getListaCurso();
 	//Grupos--------------------------------------------------------
+	bool verDisponivilidadCursos(string);
 	void ingresarGrupo(string,Grupo*);
 	string imprimirListadoGrupo(string);
 	int PruebaCantGrupos(string c);
 	string reporteGrupoEspe(string,string);
-	void ingresarClienteAGrupos(string,string, string);
+	void ingresarClienteAGrupos(string,string, Deportista*);
 	string imprimirClientesDeUnGrupo(string, string);
 	//Clientes------------------------------------------------------
-	void ingresarListaClientes(Deportista*);
+	bool verDisponivilidadGrupos(string, string);
 	string imprimirListaClientes();
-	ListaT<Grupo>* getListaDgruposDcurso(string);
 
+	//string imprimirListadoDeportistas();
+	//listo  
+	ListaT<Grupo>* getListaDgruposDcurso(string);
+	string imprimirListadoDeClientesDUnGrupo(string,string);
+	void cancelarMatricula(string,string,string);
 
 	ListaT<Deportista>* getListaDepor();
 

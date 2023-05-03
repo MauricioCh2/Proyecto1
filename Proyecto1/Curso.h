@@ -4,6 +4,7 @@
 #include "Fecha.h"
 //#include "Iterador.h"
 #include "Grupo.h"
+#include "Execpciones.h"
 //#include "Lista_Template.h"
 
 
@@ -16,7 +17,7 @@ private:
     string _nivel;
     int _canGrupos;//tamaño
     Fecha* _fecha; // Esto seria mas bien grupos
-    int _cupMax;//Hace falta? 
+    //int _cupMax;//Hace falta? 
     string _descripcion;
 
     int _numGrupo;
@@ -37,14 +38,14 @@ public:
     void setNombreDcurso(string);
     void setDescripcion(string);
     void setNivel(string);
-    void setCup(int);
+    void setCanGrup(int);
     void setFecha(Fecha*);
     void setHora(int);
     string getIdent();
     string getNombreDcurso();
     string getDescripcion();
     string getNivel();
-    int getCup();
+    int getCanGrup();
     Fecha* getFecha();
     int getHora();
     string Listar();
@@ -52,8 +53,8 @@ public:
    
     //Lista-------------------------------
     ListaT<Grupo>* getListaGrupos();
-    bool verficiarEspacio();
-    void ingresarGrupo(Grupo*);
+    bool verficarEspacio();
+    bool ingresarGrupo(Grupo*);
     Grupo* operator[](int);
 
 };
