@@ -91,14 +91,29 @@ string Curso::Listar()
 }
 string Curso::toString() {
     stringstream s;
-    s << "Nombre del curso: " << _nombreCurso << endl;
-    s << "Nivel del curso: " << _nivel << endl;
-    s << "Cantidad de grupos: " << _canGrupos << endl;
-    s << "Descripcion : "<<_descripcion << endl;
-    s << "Detalles de grupos abiertos" << endl;
-    s << "<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>"<< endl;
+    s << "-------------------------------CURSO----------------------------" << endl;
+    s << "\tNombre del curso:................" << _nombreCurso << endl;
+    s << "\tNivel del curso:................." << _nivel << endl;
+    s << "\tCantidad  maxima de grupos:......" << _canGrupos << endl;
+    s << "\tCantidad  de grupos disponibles:.";
+    if (_lisGrupos != NULL) {
+        s << _canGrupos - _lisGrupos->contador() << endl;
+    }
+    else {
+        s << _canGrupos << endl;
+    } 
+    s << "\tDescripcion:....................." << _descripcion << endl;
+    s << "\tDetalles de grupos abiertos:" << endl;
+    if (_lisGrupos->contador()!=0) {
+        s << "<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>" << endl;
+        s << _lisGrupos->Listar();
+    }
+    else {
+        s << "\tNo hay grupos " << endl;
+    }
+   
+    s << "----------------------------------------------------------------" << endl;
 
-    s << _lisGrupos->Listar();
     return s.str();
 }
 
@@ -107,6 +122,11 @@ string Curso::toString() {
 
 
 //LIsta------------------------------------------
+
+void Curso::setListaGrupos(ListaT<Grupo>* l)
+{
+    _lisGrupos = l;
+}
 
 ListaT<Grupo>* Curso::getListaGrupos()
 {

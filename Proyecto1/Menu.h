@@ -31,6 +31,7 @@ Nada de esto es necesario pero para llevar un orden y que se vea coquete no esta
 #include "Gym.h"
 #include "Fecha.h"
 #include "Triatlonista.h"
+#include "Lista_Template.h"
 using namespace std;
 
 class Menu {

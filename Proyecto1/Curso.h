@@ -34,6 +34,7 @@ public:
     Curso(string, string, string, int, string);
     Curso(string, string, int, Fecha*, int, int);
     ~Curso();
+    //Sets-----------------
     void setIdent(string);
     void setNombreDcurso(string);
     void setDescripcion(string);
@@ -41,6 +42,7 @@ public:
     void setCanGrup(int);
     void setFecha(Fecha*);
     void setHora(int);
+    //gets
     string getIdent();
     string getNombreDcurso();
     string getDescripcion();
@@ -52,6 +54,7 @@ public:
     string toString();
    
     //Lista-------------------------------
+    void setListaGrupos(ListaT<Grupo>*);
     ListaT<Grupo>* getListaGrupos();
     bool verficarEspacio();
     bool ingresarGrupo(Grupo*);

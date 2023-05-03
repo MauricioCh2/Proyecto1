@@ -24,20 +24,19 @@ string Triatlonista::Listar()
 string Triatlonista::toString() {
 	stringstream s;
 	s << "------------------------------CLIENTE---------------------------" << endl;
-	s << "\t" << "Cedula" << ".........................." << _cedula << endl;
-	s << "\t" << "Nombre" << ".........................." << _nombre << endl;
-	s << "\t" << "Telefono" << "........................" << _telefono << endl;
-	s << "\t" << "Fecha Nacimiento" << "................" << _ptrFecha->toString();
+	s << "\t" << "Cedula:" << ".........................." << _cedula << endl;
+	s << "\t" << "Nombre:" << ".........................." << _nombre << endl;
+	s << "\t" << "Telefono:" << "........................" << _telefono << endl;
+	s << "\t" << "Fecha Nacimiento:" << "................" << _ptrFecha->toString();
 	s << _ptrCiclista->toString();
-	s << "\t" << "Sexo" << "............................" << _sexo << endl;
-	s << "\t" << "Estatura" << "........................" << _estatura << endl;
+	s << "\t" << "Sexo:" << "............................" << _sexo << endl;
+	s << "\t" << "Estatura:" << "........................" << _estatura << endl;
 	s << _ptrNad->toString();
-	s << "\t" << "Cantidad de participaciones\n\t en el iron man" << "................." << _cantPartIronMan << endl;
-	s << "\t" << "Cantidad de Triatones ganadas" << "..." << _cantTriatGanador << endl;
-	s << "Cantidad de Triatones ganadas " << _cantTriatGanador << endl;
+	s << "\t" << "Cantidad de participaciones\n\t en el iron man:" << "................." << _cantPartIronMan << endl;
+	s << "\t" << "Cantidad de Triatones ganadas:........." << _cantTriatGanador << endl;
 	s << "----------------------------------------------------------------" << endl;
 	if (ListaDpagos->listaVacia() != true) {
-		s << "La ultima fecha de un pago registardo es:" << ListaDpagos->toString() << endl;
+		s << "La ultima fecha de un pago registardo es:\n " << ListaDpagos->toString() << endl;
 	}
 	return s.str();
 }

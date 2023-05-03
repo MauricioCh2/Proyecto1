@@ -84,12 +84,13 @@ string Menu::menuPrincipal() {
 		<< "[4]Control de Grupo-------------------" << endl
 		<< "[5]Control de Pagos-------------------" << endl
 		<< "[6]Guardar Archivos y salir-----------" << endl
-		<< "Digite una opcion: ";
+		<< "Digite una opcion:";
 
 	return s.str();
 }
 
 //------------------------------------------------------------------------
+
 //Administracion General--------------------------------------------------
 string Menu::menuAdministracion() {
 	stringstream s;
@@ -108,7 +109,7 @@ bool Menu::opMenuAdministracion(int op) {
 	bool ex = false;
 	switch (op) {
 	case 1://Nombre del Gimnasio
-		imprimirString("<1. Administración General > <1. Nombre del Gimnasio>  ");
+		imprimirString("<1. Administracion General > <1. Nombre del Gimnasio>  ");
 		imprimirString("Ingrese el nombre del Gimnasio :");
 		ignorarCin();
 		nombre = recivirGetLine();
@@ -118,7 +119,7 @@ bool Menu::opMenuAdministracion(int op) {
 
 		break;
 	case 2://Monto de mensualidad
-		imprimirString("<1. Administración General>  <2. Monto de mensualidad >  ");
+		imprimirString("<1. Administracion General>  <2. Monto de mensualidad >  ");
 		imprimirString("Ingrese el Monto de mensualidad:");
 		do {
 			try {
@@ -159,7 +160,7 @@ string Menu::menuDeportista() {
 }
 string Menu::subMenuListas(){
 	stringstream s;
-	  s << "[1]Listado general--------" << endl
+	  s << "[1]Listado general--------------------" << endl
 		<< "[2]Listado de deportistas activos ----" << endl
 		<< "[3]Listado de deportistas inactivos---" << endl
 		<< "[4]Listado de deportistas en morosidad" << endl
@@ -250,7 +251,7 @@ bool Menu::opMenuDeportista(int op)
 		imprimirString("Para dicho curso quedan los siguientes grupos disponibles: ");
 		do {
 			imprimirString("Seleccione un grupo:  ");
-			imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
+			imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
 			imprimirString(_gym->imprimirListadoGrupo(codCurso));
 			imprimirString("Digite el grupo en el que desea ser ingresado: ");
 			imprimirString("O digite 'salir;' para ir atras ");
@@ -494,7 +495,7 @@ bool Menu::opMenuDeportista(int op)
 		} while (ex == false);
 		ex = false;
 		imprimirString("Seleccione el grupo: ");
-		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
+		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
 		imprimirString("Digite el grupo en el que desea ser ingresado: ");
 		do {
@@ -646,8 +647,8 @@ string Menu::menuCursos()
 	stringstream s;
 	s << "	   <Menu Cursos>		  " << endl
 		<< "[1]Ingreso nuevo curso----------------" << endl
-		<< "[2]Reporte de curso específico--------" << endl
-		<< "[3]Modificación de curso específico---" << endl
+		<< "[2]Reporte de curso especifico--------" << endl
+		<< "[3]Modificacion de curso especifico---" << endl
 		<< "[5]Atras------------------------------\n\n"
 		<< "Digite una opcion: ";
 
@@ -663,7 +664,7 @@ bool Menu::opMenuCursos(int op)
 	int canG = 0;
 	string descripcion = "";
 	Curso* curso = NULL;
-
+	ListaT<Grupo>* lisAuxG = new ListaT<Grupo>; 
 	Iterador<Curso>* iter;
 	Iterador<Curso>* iter2;
 	Curso* aux = NULL;
@@ -752,17 +753,17 @@ bool Menu::opMenuCursos(int op)
 		enter();
 		limpiarPantalla();
 		break;
-	case 3://Modificación de curso específico 
+	case 3://Modificaci/n de curso específico 
 		
 
 		iter = _gym->getListaCurso()->begin();
 		iter2 = _gym->getListaCurso()->end();
-		imprimirString("< 3.Control Cursos> < 3. Modificación de  curso especifico >");
+		imprimirString("< 3.Control Cursos> < 3. Modificacion de  curso especifico >");
 		imprimirString("Listado de cursos");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
 
-		imprimirString("Cual curso desea modificación en especifico: ");
+		imprimirString("Cual curso desea modificacion en especifico: ");
 		imprimirString("Ingrese el codigo del Curso: ");
 		do {
 			try {
@@ -780,6 +781,8 @@ bool Menu::opMenuCursos(int op)
 			if (iter->operator*()->getIdent() == ident) {
 				aux = atualizarINFOcurso(iter->operator*());
 				auxAborrar = iter->operator*();
+				limpiar();
+				aux->setListaGrupos(auxAborrar->getListaGrupos());
 				iter->getPNodo()->setInfo(aux);
 				delete auxAborrar;
 				//Clona el deportista y despues los substitulle con el original para asi poder cambira la infoamcion y no violar ninun principio
@@ -804,11 +807,11 @@ string Menu::menuGrupos()
 	s << "	   <Menu Grupos>		  " << endl
 		<< "[1]Ingreso nuevo grupo-----------------------" << endl
 		<< "[2]Modificacion de  grupo especifico---------" << endl
-		<< "[3]Matricula en grupo especifico-------------" << endl
-		<< "[4]Reporte de grupo especifico---------------" << endl
-		<< "[5]Reporte deportistas matriculados en grupo-" << endl
-		<< "[6]Cancelacion de  matricula en grupo--------" << endl
-		<< "[7]Atras\n\n"
+		//<< "[3]Matricula en grupo especifico-------------" << endl
+		<< "[3]Reporte de grupo especifico---------------" << endl
+		<< "[4]Reporte deportistas matriculados en grupo-" << endl
+		<< "[5]Cancelacion de  matricula en grupo--------" << endl
+		<< "[6]Atras\n\n"
 		<< "Digite una opcion: "
 		<< endl;
 	return s.str();
@@ -957,7 +960,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		//Horario----------------------------------------------------------------------------------
-		imprimirString("Digite el día de la semana (l-k-m-j-v-s-d) ):");
+		imprimirString("Digite el dia de la semana (l-k-m-j-v-s-d) ):");
 		do {
 			try {
 				dia = validarDia();
@@ -1052,8 +1055,8 @@ bool Menu::opMenuGrupos(int op)
 	case 2: //Modificacion de  grupo especifico
 		iterCurso = _gym->getListaCurso()->begin();
 		iter2Curso = _gym->getListaCurso()->end();
-		imprimirString("< 4.Control Grupos>  <2. Modificación  de  grupo especifico>");
-		imprimirString("De cual Curso proviene el Grupo que desea modificación : ");
+		imprimirString("< 4.Control Grupos>  <2. Modificacion  de  grupo especifico>");
+		imprimirString("De cual Curso proviene el Grupo que desea modificacion : ");
 		
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
@@ -1080,7 +1083,7 @@ bool Menu::opMenuGrupos(int op)
 		else
 		{
 			imprimirString("Para dicho curso quedan los siguientes grupos disponibles: ");
-			imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
+			imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
 			imprimirString(_gym->imprimirListadoGrupo(identDcurso));
 			imprimirString("Digite el grupo en el que desea ser ingresado: ");
 			do {
@@ -1109,75 +1112,9 @@ bool Menu::opMenuGrupos(int op)
 		}
 		
 		break;
-	case 3: //matricula de grupo especifico
-		cout << "Creo que ha que eliminar esto";
-		imprimirString("< 4.Control Grupos>  <3.Matricula en grupo especifico>");
-		imprimirString("Deportistas disponibles: ");
-		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
-		//imprimirString(_gym->imprimirListadoDeportistas());
-		imprimirString("Digite el ID del usuario que desea matricular:");
-		do {
-			try {
-				cedCliente = recivirString();
-				ex = true;
-			}
-			catch (ErrorV* e) {
-				cout << e->what() << endl;
-				limpiar();
-			}
-		} while (ex == false);
-		ex = false;
-		imprimirString("En que curso desea matricular?");
-		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
-		imprimirString(_gym->imprimirListadoCursos());
-
-		do {
-			try {
-				codCurso = recivirString();
-				ex = true;
-			}
-			catch (ErrorV* e) {
-				cout << e->what() << endl;
-				limpiar();
-			}
-		} while (ex == false);
-		ex = false;
-		imprimirString("Para dicho curso quedan los siguientes grupos disponibles: ");
-		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
-		imprimirString(_gym->imprimirListadoGrupo(codCurso));
-		imprimirString("Digite el grupo en el que desea ser ingresado: ");
-		do {
-			try {
-				numGrup = recivirString();
-				ex = true;
-			}
-			catch (ErrorV* e) {
-				cout << e->what() << endl;
-				limpiar();
-			}
-		} while (ex == false);
-		ex = false;
-		
-		imprimirString("Digite la fecha de matricula: ");
-		do {
-			try {
-				fechaMa = validarFecha();
-				ex = true;
-			}
-			catch (ErrorV* e) {
-				cout << e->what() << endl;
-				limpiar();
-			}
-		} while (ex == false);
-		ex = false;
-
-		//_gym->ingresarClienteAGrupos(numGrup, codCurso, cedCliente);
-
-		
-		imprimirString("Opcion en desarrollo");
-		break;
-	case 4: //Reporte de grupo especifico 
-		imprimirString("< 5.Control Grupos> < 4.Reporte de grupo especifico >");
+	
+	case 3: //Reporte de grupo especifico 
+		imprimirString("< 5.Control Grupos> < 3.Reporte de grupo especifico >");
 		codCurso = "";
 		numGrup = "";
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
@@ -1194,7 +1131,7 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
+		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
 		imprimirString("Cual grupo desea ver? ");
 		do {
@@ -1213,8 +1150,8 @@ bool Menu::opMenuGrupos(int op)
 		limpiar();
 		limpiarPantalla();
 		break;
-	case 5: //Reporte deportistas matriculados en grupo
-		imprimirString("< 5.Control Grupos> < 5. Reporte deportistas matriculados por grupo>");
+	case 4: //Reporte deportistas matriculados en grupo
+		imprimirString("< 5.Control Grupos> < 4. Reporte deportistas matriculados por grupo>");
 		imprimirString("Seleccione un curso");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
@@ -1231,7 +1168,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		
-		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
+		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
 		imprimirString("Seleccione un grupo: ");
 		do {
@@ -1249,8 +1186,8 @@ bool Menu::opMenuGrupos(int op)
 		enter();
 		limpiarPantalla();
 		break;
-	case 6://Cancelacion de  matricula en grupo
-		imprimirString("< 5.Control Grupos>  <6. Cancelación de  matricula en grupo>");
+	case 5://Cancelacion de  matricula en grupo
+		imprimirString("< 5.Control Grupos>  <5. Cancelacion de  matricula en grupo>");
 		imprimirString("Seleccione un curso");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
@@ -1267,7 +1204,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 
-		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
+		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
 		imprimirString("Seleccione un grupo: ");
 		do {
@@ -1299,7 +1236,7 @@ bool Menu::opMenuGrupos(int op)
 		_gym->cancelarMatricula(codCurso, numGrup, cedCliente);
 		imprimirString("Opcion en desarrollo");
 		break;
-	case 7:
+	case 6:
 		limpiarPantalla();
 		return true;
 		break;
@@ -1900,7 +1837,7 @@ Grupo* Menu::atualizarINFOgrupo(Grupo* original)
 		break;
 		case 6:
 		//Horario----------------------------------------------------------------------------------
-			imprimirString("Digite el día de la semana (l-k-m-j-v-s-d) ):");
+			imprimirString("Digite el dia de la semana (l-k-m-j-v-s-d) ):");
 			do {
 				try {
 					dia = validarDia();
@@ -2029,7 +1966,7 @@ string Menu::QueQuiereEditarGrupo()
 		<< "[6]Editar Dia de la Semana en la que se lleva a cabo--------" << endl
 		<< "[7]Editar Hora de Inicio--------" << endl
 		<< "[8]Editar Hora de Finalizacion--------" << endl
-		<< "[14]Atras\n\n"
+		<< "[9]Atras\n\n"
 		<< "Digite una opcion: "
 		<< endl;
 	return s.str();
@@ -2139,6 +2076,9 @@ bool Menu::llamarMenus() {
 	case 6: //Guardar en Archivos y salir
 		limpiarPantalla();
 		imprimirString("Buen dia...");
+		enter();
+		limpiar();
+		exit(0);
 		return true;
 		//Completar Archivos al 100%
 		//Y despues "delete()" cuando ya leyo y gurado TODO
