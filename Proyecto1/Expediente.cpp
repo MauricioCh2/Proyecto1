@@ -1,24 +1,24 @@
 #include "Expediente.h"
 
-Expediente::Expediente(int ced, string nombre, string tel, Fecha* fech, int horasEntre, double temProm, char sexo, double est, double masaMuscu, double peso, double IMC, int triaGan, int partIronMan, Fecha* ultimopago)
+Expediente::Expediente(int ced, string nombre, string tel, Fecha* fech, int horasEntre, double temProm, char sexo, double est, double masaMuscu, double peso, double IMC, int triaGan, int partIronMan)
 {
-	_cedula=ced;//Cuite los ptr,s porque no son punteros lo que van a almacenar
-	_nombre= nombre;
-	_telefono= tel;
-	_ptrFechadeNaci= fech;
-	_sexo= sexo;
-	_estatura= est;
-	_masaMuscular= masaMuscu;
-	_peso= peso;
-	_IMC= IMC;
-	_horasEntrenam= horasEntre;
-	_temPromedio= temProm;
-	_cantPartIronMan= partIronMan;
-	_cantTriatGanador= triaGan;
+	_cedula = ced;//Cuite los ptr,s porque no son punteros lo que van a almacenar
+	_nombre = nombre;
+	_telefono = tel;
+	_ptrFechadeNaci = fech;
+	_sexo = sexo;
+	_estatura = est;
+	_masaMuscular = masaMuscu;
+	_peso = peso;
+	_IMC = IMC;
+	_horasEntrenam = horasEntre;
+	_temPromedio = temProm;
+	_cantPartIronMan = partIronMan;
+	_cantTriatGanador = triaGan;
 	_lisCursosIdent = new ListaT<stringMOD>;
 	_lisGruposIdent = new ListaT<stringMOD>;
 
-	_fechaDultimopago= ultimopago;
+	ListaDpagos = new ListaT<Fecha>;
 }
 Expediente:: ~Expediente() {
 
@@ -71,22 +71,22 @@ int Expediente::getHorasDeEntrenamiento() { return _horasEntrenam; }
 int Expediente::getTempPromedio() { return _temPromedio; }
 void Expediente::setHorasDeEntrenamiento(int i)
 {
-	_horasEntrenam=i;
+	_horasEntrenam = i;
 }
 void Expediente::setTempPromedio(int t)
 {
-	_temPromedio=t;
+	_temPromedio = t;
 }
 //Corredor----------------------------------------
 char Expediente::getSexo() { return _sexo; }
 double Expediente::getEstatura() { return _estatura; }
 void Expediente::setSexo(char c)
 {
-	_sexo=c;
+	_sexo = c;
 }
 void Expediente::setEstatura(double d)
 {
-	_estatura=d;
+	_estatura = d;
 }
 //Nadado------------------------------------------
 double Expediente::getMasaMuscular() { return _masaMuscular; }
@@ -94,7 +94,7 @@ double Expediente::getPeso() { return _peso; }
 double Expediente::getPorcGrasaCorporal() { return _IMC; }
 void Expediente::setMasaMuscular(double d)
 {
-	_masaMuscular=d;
+	_masaMuscular = d;
 }
 void Expediente::setPeso(double d)
 {
@@ -118,4 +118,9 @@ ListaT<stringMOD>* Expediente::getlisCursosIdent()
 ListaT<stringMOD>* Expediente::getlisGruposIdent()
 {
 	return _lisGruposIdent;
+}
+
+ListaT<Fecha>* Expediente::getlisFecha()
+{
+	return ListaDpagos;
 }

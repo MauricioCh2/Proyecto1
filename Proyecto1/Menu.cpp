@@ -210,7 +210,7 @@ bool Menu::opMenuDeportista(int op)
 	Iterador<Expediente>* iterexp;
 	Iterador<Expediente>* iter2exp;
 	Expediente* ExpeAeditar = NULL;
-
+	
 	bool ex = false;
 	//clientes (esto puede variar)
 	Deportista* cliente = NULL;
@@ -468,7 +468,7 @@ bool Menu::opMenuDeportista(int op)
 		cliente = new Triatlonista(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
 		_gym->ingresarClienteAGrupos(numGrup, codCurso, cliente);
 
-		exaux = new Expediente(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan, NULL);
+		exaux = new Expediente(cedula, nombre, telefono, fechaNa, horasEntrenem, temProm, sexo, estatura, masaMuscular, peso, PgrasaCorporalMC, canTriaGanados, cantPartiEnIronMan);
 		IDcurso= new stringMOD(codCurso);
 		IDgrupo= new stringMOD(numGrup);
 		exaux->getlisCursosIdent()->insertarElem(IDcurso);
@@ -1348,6 +1348,9 @@ bool Menu::opMenuPagos(int op)
 	bool ex = false;
 	Iterador<Deportista>* iter;
 	Iterador<Deportista>* iter2;
+	Iterador<Expediente>* iterexp;
+	Iterador<Expediente>* iter2exp;
+	Expediente* ExpeAeditar = NULL;
 
 
 	switch (op) {
@@ -1402,13 +1405,31 @@ bool Menu::opMenuPagos(int op)
 			}
 		} while (ex == false);
 
+		iterexp = _gym->getListaExpediente()->begin();
+		iter2exp = _gym->getListaExpediente()->end();
+
+		for (; iterexp->getPNodo() != iter2exp->getPNodo(); iterexp->operator++()) {
+			if (iterexp->operator*()->getCedula() == cedulAbuscar) {
+				ExpeAeditar = iterexp->operator*();
+
+			}
+		}
 
 
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulAbuscar) {
 				fechAux = Cobro::getFechaDeultimoPago(iter->operator*(), this->fecha, _gym->getMensualidadDgym());
-				iter->operator*()->setFechaDeultimoPago(fechAux);
-				imprimirString("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO MENSUAL");
+
+				if (fechAux->getDia() != 0 && fechAux->getMes() != 0 && fechAux->getAno() != 0) {
+					iter->operator*()->setFechaDeultimoPago(fechAux);
+					ExpeAeditar->getlisFecha()->insertarElem(fechAux);
+					imprimirString("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO MENSUAL");
+				}
+				else
+				{
+					imprimirString("Nota de Confirmaccion: NO SE REALIZO NINGUN PAGO ");
+				}
+				
 			}
 		}
 		//listar los cursos con su codigo 
