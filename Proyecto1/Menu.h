@@ -32,10 +32,12 @@ Nada de esto es necesario pero para llevar un orden y que se vea coquete no esta
 #include "Fecha.h"
 #include "Triatlonista.h"
 #include "Lista_Template.h"
+#include "Archivos.h"
 using namespace std;
 
 class Menu {
 private:
+	Archivos* arch;
 	Fecha* fecha;
 	Gym* _gym;
 public:

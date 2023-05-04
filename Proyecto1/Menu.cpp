@@ -274,6 +274,7 @@ bool Menu::opMenuDeportista(int op)
 			limpiarPantalla();
 			return true;
 		}
+
 		do {
 			imprimirString("Digite la fecha de matricula: ");
 			do {
@@ -291,7 +292,7 @@ bool Menu::opMenuDeportista(int op)
 			if (fechaMa < _gym->getFecha()) {
 				imprimirString("Digite una fecha mayor a la actual ");
 			}
-		} while (fechaMa < _gym->getFecha());
+		} while (fechaMa < fecha); //fecha ma tiene que ser mayor para poder salir
 
 		
 
@@ -2149,7 +2150,7 @@ bool Menu::llamarMenus() {
 	int op = 0;
 	int opE = 0;
 	bool ex = false;
-
+	
 	imprimirString(menuPrincipal());
 	do {
 		try {
@@ -2249,7 +2250,8 @@ bool Menu::llamarMenus() {
 	case 6: //Guardar en Archivos y salir
 		limpiarPantalla();
 		imprimirString("Buen dia...");
-		enter();
+		arch = new Archivos(_gym);
+		arch->guardarDatos();
 		limpiar();
 		exit(0);
 		return true;

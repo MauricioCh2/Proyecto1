@@ -16,12 +16,14 @@ private:
 	int _minInicio;
 
 	int _horaFinaliza;
-	int _minFinaliza;
+	 int _minFinaliza;
 
+	//Internos----------------------------
 	string _nombreCurso;
 	int _numGrupo;
-
-	//ector triatlonista
+	//para archivos
+	string _codCursoPert; //es ele codigo del curso al que pertenece 
+	//eLista triatlonista
 	ListaT<Deportista>* _lisDepor;
 
 public:
@@ -43,10 +45,13 @@ public:
 	int getMinInicio();
 	int getHoraFinaliza();
 	int getMinFinaliza();
+	//Interno----------------
 	string getNombreCurso();
 	int getNumGrupo();
 	ListaT<Deportista>* getListaDepor();
 	int getDispo();
+	//Archivos---------------
+	string getCodCursoPertenece();
 	// sets--------------------------------------
 	void setCedInstructor(string);
 	void setNomInstructo(string);
@@ -60,7 +65,7 @@ public:
 	void setMinutoFinal(int);
 	void setnumGrupo(int n);
 	void setNombreCurso(string);
-
+	void setCodCursoPertenece(string);
 	//Lista deportista
 	bool verficarEspacio();
 	void ingresarDeportista(Deportista*);

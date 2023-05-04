@@ -155,3 +155,64 @@ ListaT<Expediente>* Gym::getListaExpediente()
 	return _lisExpediente;
 }
 
+void Gym::guardarCursos(ofstream& c)
+{
+	Curso* curso = NULL;
+	Iterador<Curso>* it;
+	Iterador<Curso>* it2;
+	it = _lisCurso->begin();
+	it2 = _lisCurso->end();
+	for (; it != it2; it->operator++() ) {
+		 curso = it-> operator*();
+		c << curso->getIdent() << "\t"
+			<< curso->getNombreDcurso() << "\t"
+			<< curso->getNivel() << "\t"
+			<< to_string(curso->getCanGrup()) << "\t"
+			<< curso->getDescripcion() << "\n";
+	}
+	
+}
+
+void Gym::guardarGrupos(ofstream& g)
+{
+	Grupo* grup;
+	Iterador<Grupo>* it;
+	ListaT<Grupo>* lisG = new ListaT<Grupo>;
+	int canC = 0;
+	int canG = 0;
+	canC = _lisCurso->contador();
+	while (canC != 0) {
+
+		canG = _lisCurso->contadorEspecifico(canC)->getListaGrupos()->contador();
+		while (canG != 0) {
+				lisG->insertarElem(_lisCurso->contadorEspecifico(canC)->getListaGrupos()->contadorEspecifico(canG));
+			canG--;
+		}
+
+		canC--;
+	}
+	
+
+	for (it = lisG->begin(); it != lisG->end(); ++it) {
+		grup = it-> operator*();
+		g << grup->getCedInstructor() << "\t"
+			<< grup->getNomInstructor() << "\t"
+			<< to_string(grup->getCupMax()) << "\t"
+			<< grup->getFechaInicio()->toString() << "\t"
+			<< grup->getSemDuracion() << "\t"
+			<< string(1,grup->getDiaSemana()) << "\t" // convierte char a strings
+
+			<< to_string(grup->getHoraInicio()) << "\t"
+			<< to_string(grup->getMinInicio()) << "\t"
+			<< to_string(grup->getHoraFinaliza()) << "\t"
+			<< to_string(grup->getMinFinaliza()) << "\t"
+
+			<< grup->getCodCursoPertenece() << endl;
+	}
+}
+
+void Gym::guardarExpedientes(ofstream&)
+{
+
+}
+

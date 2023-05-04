@@ -13,7 +13,9 @@ Archivos::~Archivos()
 bool Archivos::guardarDatos()
 {
 	bool ver = true;
-	guardarDeportistas();
+	guardarCursos();
+	guardarGrupos();
+	//guardarDeportistas/expedientes();
 	return ver;
 }
 
@@ -33,7 +35,31 @@ bool Archivos::guardarDeportistas()
 }
 bool Archivos::guardarCursos()
 {
-	return false;
+	bool ver = false;
+	ofstream cursos;
+	cursos.open("../ListaCursos.txt", ios::out | ios::trunc);
+	if (cursos.fail()) {
+		cout<<"Error al abrir :(";
+		cout << " pasar a throw"; 
+		return ver;
+	}
+	_gym->guardarCursos(cursos);
+	cursos.close();
+	return ver;
+}
+bool Archivos::guardarGrupos()
+{
+	bool ver = false;
+	ofstream grupos;
+	grupos.open("../ListaGrupos.txt", ios::out | ios::trunc);
+	if (grupos.fail()) {
+		cout << "Error al abrir :(";
+		cout << " pasar a throw";
+		return ver;
+	}
+	_gym->guardarGrupos(grupos);
+	grupos.close();
+	return ver;
 }
 //Cargar datos------------------------------------------------------
 bool Archivos::cargarDatos()
@@ -95,6 +121,11 @@ bool Archivos::cargarDeportistas()
 }
 
 bool Archivos::cargarCursos()
+{
+	return false;
+}
+
+bool Archivos::cargarGrupos()
 {
 	return false;
 }

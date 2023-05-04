@@ -35,16 +35,22 @@ string recivirStringN() {
 	bool fin = false;
 	while (fin == false) {
 		if (cin >> s) {
-			for (char c: s) {
-				if (!isdigit(c)) {
-					throw new ErrorV('s');
+			if (s == "salir") {
+				return s;
+			}
+			else {
+				for (char c : s) {
+					if (!isdigit(c)) {
+						throw new ErrorV('s');
 
-					return "";
+						return "";
+					}
 				}
+
+				fin = true;
+				return s;
 			}
 			
-			fin = true;
-			return s;
 		}
 		throw new ErrorV('z');
 	}

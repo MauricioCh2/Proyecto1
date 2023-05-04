@@ -22,7 +22,7 @@ Grupo::Grupo(string ced, string nom, int cupM, Fecha* fech, int dur, char diaSem
 
 }
 Grupo:: ~Grupo() {
-	
+	delete _lisDepor;
 	/*for (int i = 0; i < _can; i++) {
 		if (_VClientes[i] != NULL)
 			delete _VClientes[i];
@@ -152,6 +152,11 @@ int Grupo :: getDispo() {
 	return disp;
 }
 
+string Grupo::getCodCursoPertenece()
+{
+	return _codCursoPert;
+}
+
 void Grupo::setCedInstructor(string a)
 {
 	_cedInstructor = a;
@@ -206,6 +211,10 @@ void Grupo::setnumGrupo(int n) {
 void Grupo::setNombreCurso(string n)
 {
 	_nombreCurso = n;
+}
+void Grupo::setCodCursoPertenece(string cod)
+{
+	_codCursoPert = cod;
 }
 //Lista------------------------------------------
 bool Grupo::verficarEspacio()

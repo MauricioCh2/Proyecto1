@@ -1,5 +1,4 @@
 #include"Curso.h"
-int Curso::contCurso = 0;
 Curso::Curso(string cod, string nomC, string niv, int canGrupos, string desc)
 {
     _codCurso = cod;
@@ -7,35 +6,15 @@ Curso::Curso(string cod, string nomC, string niv, int canGrupos, string desc)
     _nivel = niv;
     _canGrupos = canGrupos;
     _descripcion = desc;
-    _can = 0;
     _numGrupo = 0;
 
     _lisGrupos = new ListaT<Grupo>;
 
 }
 //probablemente eliminemos este 
-Curso::Curso(string d, string n, int c, Fecha* f, int h, int canGrupo) {
-    _descripcion = d;
-    _nivel = n;
-   // _cupMax = c;
-    _fecha = f;
-    _hora = h;
-    _can = 0;
-   /* _VGrupos = new Grupo * [canGrupo];
-    _canGrupos = canGrupo;
-    for (int i = 0; i < _canGrupos; i++) {
-        _VGrupos[i] = NULL;
-    }*/
 
-}
 Curso::~Curso() {
-    _lisGrupos->eliminarUltimo();
     delete _lisGrupos;
-    /*for (int i = 0; i < _can; i++) {
-        if (_VGrupos[i] != NULL)
-            delete _VGrupos[i];
-    }
-    delete[] _VGrupos;*/
 }
 void Curso::setIdent(string i)
 {
@@ -54,12 +33,8 @@ void Curso::setNivel(string n) {
 void Curso::setCanGrup(int c) {
     _canGrupos = c;
 }
-void Curso::setFecha(Fecha* f) {
-    _fecha = f;
-}
-void Curso::setHora(int h) {
-    _hora = h;
-}
+
+
 string Curso::getIdent()
 {
     return _codCurso;
@@ -77,12 +52,8 @@ string Curso::getNivel() {
 int Curso::getCanGrup() {
     return _canGrupos;
 }
-Fecha* Curso::getFecha() {
-    return _fecha;
-}
-int Curso::getHora() {
-    return _hora;
-}
+
+
 string Curso::Listar()
 {
     stringstream s;
@@ -155,7 +126,7 @@ bool Curso::ingresarGrupo(Grupo* grupo) {
         _lisGrupos->contador();
         grupo->setnumGrupo(_numGrupo);
         grupo->setNombreCurso(_nombreCurso);
-    
+        grupo->setCodCursoPertenece(_codCurso);
         return true;
 }
 Grupo* Curso::operator[](int k) { // la idea es que retorne el grupo que se encuentre en la posicion dentro de los[]

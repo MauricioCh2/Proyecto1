@@ -1,9 +1,10 @@
 #pragma once
+#include <fstream>
 #include "Deportista.h"
 //#include "Grupo.h"
 #include "Curso.h"
 #include "Expediente.h"
-
+#include "Iterador.h"
 
 
 class Gym {
@@ -53,4 +54,10 @@ public:
 
 	ListaT<Deportista>* getListaDepor();
 	ListaT<Expediente>* getListaExpediente();
+
+	//ARCHIVOS-------------------------
+	void guardarCursos(ofstream&);
+	void guardarGrupos(ofstream&);
+	void guardarExpedientes(ofstream&);
+
 };

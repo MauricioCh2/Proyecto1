@@ -12,18 +12,14 @@ using namespace std;
 
 class Curso {
 private:
+    //Constructor
     string _codCurso;
     string _nombreCurso;
     string _nivel;
     int _canGrupos;//tamaño
-    Fecha* _fecha; // Esto seria mas bien grupos
-    //int _cupMax;//Hace falta? 
     string _descripcion;
-
+    // otros
     int _numGrupo;
-    static int contCurso;
-    int _hora;// creo que seria mejor gets y sets de grupo 
-    int _can;
     ListaT<Grupo>* _lisGrupos = NULL;
     Iterador<Grupo>* it1;
     Iterador<Grupo>* it2;
@@ -32,7 +28,6 @@ private:
 
 public:
     Curso(string, string, string, int, string);
-    Curso(string, string, int, Fecha*, int, int);
     ~Curso();
     //Sets-----------------
     void setIdent(string);
@@ -40,16 +35,16 @@ public:
     void setDescripcion(string);
     void setNivel(string);
     void setCanGrup(int);
-    void setFecha(Fecha*);
-    void setHora(int);
+    
+   
     //gets
     string getIdent();
     string getNombreDcurso();
     string getDescripcion();
     string getNivel();
     int getCanGrup();
-    Fecha* getFecha();
-    int getHora();
+   
+    //curso
     string Listar();
     string toString();
    
