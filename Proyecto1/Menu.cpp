@@ -850,6 +850,7 @@ bool Menu::opMenuGrupos(int op)
 	bool ex = false;
 	//op 3
 	string cedCliente = "";
+	int cedint = 0;
 	string codCurso = "";
 	string numGrup = "";
 	Fecha* fechaMa = NULL;
@@ -1187,13 +1188,14 @@ bool Menu::opMenuGrupos(int op)
 		iterexp = _gym->getListaExpediente()->begin();
 		iter2exp = _gym->getListaExpediente()->end();
 
-		//for (; iterexp->getPNodo() != iter2exp->getPNodo(); iterexp->operator++()) {
-		//	if (iterexp->operator*()->getCedula() == cedCliente) {
-		//		ExpeAeditar = iterexp->operator*();
-		//		ExpeAeditar->getlisCursosIdent()->insertarElem(IDcurso);
-		//		ExpeAeditar->getlisGruposIdent()->insertarElem(IDgrupo);
-		//	}
-		//}
+		cedint = stoi(cedCliente);
+		for (; iterexp->getPNodo() != iter2exp->getPNodo(); iterexp->operator++()) {
+			if (iterexp->operator*()->getCedula() == cedint) {
+				ExpeAeditar = iterexp->operator*();
+				ExpeAeditar->getlisCursosIdent()->insertarElem(IDcurso);
+				ExpeAeditar->getlisGruposIdent()->insertarElem(IDgrupo);
+			}
+		}
 
 		_gym->ingresarClienteAGrupos(numGrup, codCurso, depAux);
 		break;
