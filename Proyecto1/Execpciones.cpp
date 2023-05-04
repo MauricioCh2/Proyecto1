@@ -12,6 +12,7 @@ const char* ErrorV::what() const throw()
 		case 'i': return "ERROR DE int";
 		case 'd': return "ERROR DE double";
 		case 's': return "ERROR DE string";
+		case 'z': return "ERROR digite unicamente valores numericos";
 		case 'f': return "ERROR DE Fecha";
 		case 'G': return "ERROR DE CUPO";
 		case 'I': return "ERROR DE int";

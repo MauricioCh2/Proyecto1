@@ -30,6 +30,26 @@ string recivirString() {
 	}
 	return "";
 }
+string recivirStringN() {
+	string s;
+	bool fin = false;
+	while (fin == false) {
+		if (cin >> s) {
+			for (char c: s) {
+				if (!isdigit(c)) {
+					throw new ErrorV('s');
+
+					return "";
+				}
+			}
+			
+			fin = true;
+			return s;
+		}
+		throw new ErrorV('z');
+	}
+	return "";
+}
 string recivirGetLine() {
 	string s;
 	getline(cin, s);

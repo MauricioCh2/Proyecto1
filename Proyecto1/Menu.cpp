@@ -232,7 +232,7 @@ bool Menu::opMenuDeportista(int op)
 			imprimirString("Seleccione un curso:  ");
 			
 				try {
-					codCurso = recivirString();
+					codCurso = recivirStringN();
 					
 					ex = true;
 				}
@@ -254,7 +254,7 @@ bool Menu::opMenuDeportista(int op)
 
 			do {
 				try {
-					numGrup = recivirString();
+					numGrup = recivirStringN();
 					ex = true;
 				}
 				catch (ErrorV* e) {
@@ -274,8 +274,8 @@ bool Menu::opMenuDeportista(int op)
 			limpiarPantalla();
 			return true;
 		}
-		imprimirString("Digite la fecha de matricula: ");
 		do {
+			imprimirString("Digite la fecha de matricula: ");
 			do {
 				try {
 					fechaMa = validarFecha();
@@ -287,9 +287,9 @@ bool Menu::opMenuDeportista(int op)
 				}
 			} while (ex == false);
 			ex = false;
+
 			if (fechaMa < _gym->getFecha()) {
 				imprimirString("Digite una fecha mayor a la actual ");
-
 			}
 		} while (fechaMa < _gym->getFecha());
 
@@ -489,7 +489,7 @@ bool Menu::opMenuDeportista(int op)
 
 		do {
 			try {
-				codCurso = recivirString();
+				codCurso = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -504,7 +504,7 @@ bool Menu::opMenuDeportista(int op)
 		imprimirString("Digite el grupo en el que desea ser ingresado: ");
 		do {
 			try {
-				numGrup = recivirString();
+				numGrup = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -686,7 +686,7 @@ bool Menu::opMenuCursos(int op)
 		imprimirString("Codigo del Curso");
 		do {
 			try {
-				codCurso = recivirString();
+				codCurso = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -875,7 +875,7 @@ bool Menu::opMenuGrupos(int op)
 
 				do {
 					try {
-						curso = recivirString();
+						curso = recivirStringN();
 						ex = true;
 					}
 					catch (ErrorV* e) {
@@ -1068,7 +1068,7 @@ bool Menu::opMenuGrupos(int op)
 
 		do {
 			try {
-				identDcurso = recivirString();
+				identDcurso = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1092,7 +1092,7 @@ bool Menu::opMenuGrupos(int op)
 			imprimirString("Digite el grupo en el que desea ser ingresado: ");
 			do {
 				try {
-					numGrup = recivirString();
+					numGrup = recivirStringN();
 					ex = true;
 				}
 				catch (ErrorV* e) {
@@ -1122,7 +1122,7 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString(_gym->getListaDepor()->Listar());
 		do {
 			try {
-				cedCliente = recivirString();
+				cedCliente = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1136,7 +1136,7 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString(_gym->imprimirListadoCursos());
 		do {
 			try {
-				codCurso = recivirString();
+				codCurso = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1152,7 +1152,7 @@ bool Menu::opMenuGrupos(int op)
 		do{
 			do {
 				try {
-					numGrup = recivirString();
+					numGrup = recivirStringN();
 					ex = true;
 				}
 				catch (ErrorV* e) {
@@ -1184,7 +1184,7 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString("En cual curso se encuentra el grupo?");
 		do {
 			try {
-				codCurso = recivirString();
+				codCurso = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1198,7 +1198,7 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString("Cual grupo desea ver? ");
 		do {
 			try {
-				numGrup = recivirString();
+				numGrup = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1221,7 +1221,7 @@ bool Menu::opMenuGrupos(int op)
 
 		do {
 			try {
-				codCurso = recivirString();
+				codCurso = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1236,7 +1236,7 @@ bool Menu::opMenuGrupos(int op)
 		imprimirString("Seleccione un grupo: ");
 		do {
 			try {
-				numGrup = recivirString();
+				numGrup = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1257,7 +1257,7 @@ bool Menu::opMenuGrupos(int op)
 
 		do {
 			try {
-				codCurso = recivirString();
+				codCurso = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1364,7 +1364,7 @@ bool Menu::opMenuPagos(int op)
 
 		do {
 			try {
-				codCurso = recivirString();
+				codCurso = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1379,7 +1379,7 @@ bool Menu::opMenuPagos(int op)
 		imprimirString("Digite el grupo en el que desea ser ingresado: ");
 		do {
 			try {
-				numGrup = recivirString();
+				numGrup = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {
@@ -1799,7 +1799,7 @@ void Menu::atualizarINFOcurso(Curso* original)
 		imprimirString("Codigo del Curso");
 		do {
 			try {
-				codCurso = recivirString();
+				codCurso = recivirStringN();
 				ex = true;
 			}
 			catch (ErrorV* e) {

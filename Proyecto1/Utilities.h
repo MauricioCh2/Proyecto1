@@ -8,6 +8,7 @@ using namespace std;
 //RECIVIR----------------------
 int recivirInt();
 string recivirString();
+string recivirStringN();
 string recivirGetLine();
 char recivirChar();
 //puede que lo cambiemos a char*

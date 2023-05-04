@@ -54,15 +54,15 @@ string Fecha::getIdent()
 	return "";
 }
 
-bool Fecha::operator>(const Fecha& f)const 
+bool Fecha::operator<(const Fecha& f)const 
 {
-	if (ano > f.ano) {
+	if (ano < f.ano) {
 		return true;
 	}
-	else if (ano == f.ano and mes > f.mes ) {
+	else if (ano == f.ano and mes < f.mes ) {
 		return true;
 	}
-	else if (ano == f.ano and mes == f.mes and dia >= f.dia) {
+	else if (ano == f.ano and mes == f.mes and dia < f.dia) {
 		return true;
 	}else {
 	
