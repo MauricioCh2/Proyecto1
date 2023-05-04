@@ -850,6 +850,7 @@ bool Menu::opMenuGrupos(int op)
 	bool ex = false;
 	//op 3
 	string cedCliente = "";
+	int cedint = 0;
 	string codCurso = "";
 	string numGrup = "";
 	Fecha* fechaMa = NULL;
@@ -858,6 +859,14 @@ bool Menu::opMenuGrupos(int op)
 	Iterador<Curso>* iter2Curso;
 	Iterador<Grupo>* iterGrupo;
 	Iterador<Grupo>* iter2Grupo;
+
+	Iterador<Expediente>* iterexp;
+	Iterador<Expediente>* iter2exp;
+	Expediente* ExpeAeditar = NULL;
+	stringMOD* IDcurso = NULL;
+	stringMOD* IDgrupo = NULL ;
+
+
 	string identDcurso = "";
 	string identDgrupo = "";
 	Deportista* depAux = NULL;
@@ -1173,6 +1182,21 @@ bool Menu::opMenuGrupos(int op)
 			return true;
 		}
 		depAux = _gym->getListaDepor()->encontrarEsp(cedCliente);
+
+		IDcurso = new stringMOD(codCurso);
+		IDgrupo = new stringMOD(numGrup);
+		iterexp = _gym->getListaExpediente()->begin();
+		iter2exp = _gym->getListaExpediente()->end();
+
+		cedint = stoi(cedCliente);
+		for (; iterexp->getPNodo() != iter2exp->getPNodo(); iterexp->operator++()) {
+			if (iterexp->operator*()->getCedula() == cedint) {
+				ExpeAeditar = iterexp->operator*();
+				ExpeAeditar->getlisCursosIdent()->insertarElem(IDcurso);
+				ExpeAeditar->getlisGruposIdent()->insertarElem(IDgrupo);
+			}
+		}
+
 		_gym->ingresarClienteAGrupos(numGrup, codCurso, depAux);
 		break;
 	case 4: //Reporte de grupo especifico 
