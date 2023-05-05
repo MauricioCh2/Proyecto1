@@ -23,6 +23,7 @@ void imprimirDouble(double);
 //VALIDACIONES-----------------
 	//preguuntar si cada uno de estos tiene que ir en una clase / .h y cpp separados
 Fecha* validarFecha();
+Fecha* validarFechaA(string); //validacion exclusiva para archivos
 int validarDia(string);
 int validarMes(string);
 int validarAnnio(string);

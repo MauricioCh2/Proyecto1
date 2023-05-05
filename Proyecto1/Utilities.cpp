@@ -127,8 +127,24 @@ Fecha* validarFecha() {
 
 
 	return fech;
+}
+Fecha* validarFechaA(string f) {
+	
+	stringstream input_stringstream(f);
+	string dia = "";
+	string mes = "";
+	string annio = "";
+	int d, m, a;
+	getline(input_stringstream, dia, '/');
+	getline(input_stringstream, mes, '/');
+	getline(input_stringstream, annio, '\n');
+	d = validarDia(dia);
+	m = validarMes(mes);
+	a = validarAnnio(annio);
+	Fecha* fech = new Fecha(d, m, a);
 
 
+	return fech;
 }
 
 int validarDia(string s) {

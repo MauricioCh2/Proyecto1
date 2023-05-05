@@ -17,6 +17,8 @@ void Menu::inicio() {
 		}
 	} while (ex == false);
 	_gym = new Gym(fecha);
+	arch = new Archivos(_gym);
+	arch->cargarDatos();
 	//cout<<fecha->toString()<< "prueba ";
 	//Fecha* f1 = new Fecha(1, 4, 23);
 	//Deportista* c1 = new Triatlonista(111, "a", "1", f1, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
@@ -289,10 +291,10 @@ bool Menu::opMenuDeportista(int op)
 			} while (ex == false);
 			ex = false;
 
-			if (fechaMa < _gym->getFecha()) {
+			if (fechaMa->operator<(*fecha)) {
 				imprimirString("Digite una fecha mayor a la actual ");
 			}
-		} while (fechaMa < fecha); //fecha ma tiene que ser mayor para poder salir
+		} while (fechaMa->operator<(*fecha)); //fecha ma tiene que ser mayor para poder salir
 
 		
 
@@ -1183,6 +1185,24 @@ bool Menu::opMenuGrupos(int op)
 			return true;
 		}
 		depAux = _gym->getListaDepor()->encontrarEsp(cedCliente);
+		do {
+			imprimirString("Digite la fecha de matricula: ");
+			do {
+				try {
+					fechaMa = validarFecha();
+					ex = true;
+				}
+				catch (...) {
+					imprimirString("Error con el formato de fecha (ejemplo: 15/4/23 )");
+					limpiar();
+				}
+			} while (ex == false);
+			ex = false;
+
+			if (fechaMa->operator<(*fecha)) {
+				imprimirString("Digite una fecha mayor a la actual ");
+			}
+		} while (fechaMa->operator<(*fecha)); //fecha ma tiene que ser mayor para poder salir
 
 		IDcurso = new stringMOD(codCurso);
 		IDgrupo = new stringMOD(numGrup);
@@ -1193,8 +1213,14 @@ bool Menu::opMenuGrupos(int op)
 		for (; iterexp->getPNodo() != iter2exp->getPNodo(); iterexp->operator++()) {
 			if (iterexp->operator*()->getCedula() == cedint) {
 				ExpeAeditar = iterexp->operator*();
-				ExpeAeditar->getlisCursosIdent()->insertarElem(IDcurso);
-				ExpeAeditar->getlisGruposIdent()->insertarElem(IDgrupo);
+				if (ExpeAeditar->getlisCursosIdent()->contador() < 4) {
+					ExpeAeditar->getlisCursosIdent()->insertarElem(IDcurso);
+					ExpeAeditar->getlisGruposIdent()->insertarElem(IDgrupo);
+				}
+				else {
+					imprimirString("No es posible matricular mas  de 4 cursos ");
+					break;
+				}
 			}
 		}
 
@@ -2252,7 +2278,7 @@ bool Menu::llamarMenus() {
 		imprimirString("Buen dia...");
 		arch = new Archivos(_gym);
 		arch->guardarDatos();
-		limpiar();
+		//limpiar();
 		exit(0);
 		return true;
 		//Completar Archivos al 100%

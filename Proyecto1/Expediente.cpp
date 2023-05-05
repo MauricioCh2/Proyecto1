@@ -2,7 +2,7 @@
 
 Expediente::Expediente(int ced, string nombre, string tel, Fecha* fech, int horasEntre, double temProm, char sexo, double est, double masaMuscu, double peso, double IMC, int triaGan, int partIronMan)
 {
-	_cedula = ced;//Cuite los ptr,s porque no son punteros lo que van a almacenar
+	_cedula = ced;
 	_nombre = nombre;
 	_telefono = tel;
 	_ptrFechadeNaci = fech;

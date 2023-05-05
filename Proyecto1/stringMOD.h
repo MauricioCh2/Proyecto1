@@ -15,5 +15,5 @@ public:
     string getstringMOD();
     string getIdent();
     string toString();
-
+    
 };

@@ -158,17 +158,21 @@ ListaT<Expediente>* Gym::getListaExpediente()
 void Gym::guardarCursos(ofstream& c)
 {
 	Curso* curso = NULL;
-	Iterador<Curso>* it;
-	Iterador<Curso>* it2;
-	it = _lisCurso->begin();
-	it2 = _lisCurso->end();
-	for (; it != it2; it->operator++() ) {
-		 curso = it-> operator*();
-		c << curso->getIdent() << "\t"
-			<< curso->getNombreDcurso() << "\t"
-			<< curso->getNivel() << "\t"
-			<< to_string(curso->getCanGrup()) << "\t"
-			<< curso->getDescripcion() << "\n";
+	Iterador<Curso>* iter;
+	Iterador<Curso>* iter2;
+
+	iter = _lisCurso->begin();
+	iter2 = _lisCurso->end();
+
+	for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
+		if (iter != NULL) {
+			curso = iter-> operator*();
+			c << curso->getIdent() << "\t"
+				<< curso->getNombreDcurso() << "\t"
+				<< curso->getNivel() << "\t"
+				<< to_string(curso->getCanGrup()) << "\t"
+				<< curso->getDescripcion() << endl;
+		}
 	}
 	
 }
@@ -177,23 +181,30 @@ void Gym::guardarGrupos(ofstream& g)
 {
 	Grupo* grup;
 	Iterador<Grupo>* it;
+	Iterador<Grupo>* it2;
+
 	ListaT<Grupo>* lisG = new ListaT<Grupo>;
 	int canC = 0;
 	int canG = 0;
-	canC = _lisCurso->contador();
-	while (canC != 0) {
+	if (_lisCurso!= NULL) {
+		canC = _lisCurso->contador();
+		while (canC != 0) {
 
-		canG = _lisCurso->contadorEspecifico(canC)->getListaGrupos()->contador();
-		while (canG != 0) {
+			canG = _lisCurso->contadorEspecifico(canC)->getListaGrupos()->contador();
+			while (canG != 0) {
 				lisG->insertarElem(_lisCurso->contadorEspecifico(canC)->getListaGrupos()->contadorEspecifico(canG));
-			canG--;
+				canG--;
+			}
+
+			canC--;
 		}
-
-		canC--;
 	}
-	
+	it = lisG->begin();
+	it2 = lisG->end();
 
-	for (it = lisG->begin(); it != lisG->end(); ++it) {
+	for (; it->getPNodo() != it2->getPNodo(); it->operator++()) {
+
+	//for (it = lisG->begin(); it != lisG->end(); it->operator++()) {
 		grup = it-> operator*();
 		g << grup->getCedInstructor() << "\t"
 			<< grup->getNomInstructor() << "\t"
@@ -211,8 +222,46 @@ void Gym::guardarGrupos(ofstream& g)
 	}
 }
 
-void Gym::guardarExpedientes(ofstream&)
+void Gym::guardarExpedientes(ofstream& e )
 {
-
+	int contC = 0;
+	int contG = 0;
+	Expediente* exp;
+	Iterador<Expediente>* it;
+	Iterador<Expediente>* it2;
+	string id = "";
+	it = _lisExpediente->begin();
+	it2 = _lisExpediente->end();
+	for (; it->getPNodo() != it2->getPNodo(); it->operator++()) {
+		exp = it->operator*();
+		//Deportista//Cliente
+		e << exp->getIdent() << "\t"
+			<< exp->getNombre() << "\t"
+			<< exp->getTelefono() << "\t"
+			<< exp->getFechaNacimiento()->toString() << "\t"
+			<< exp->getHorasDeEntrenamiento() << "\t"
+			<< to_string(exp->getTempPromedio()) << "\t"
+			<< string(1, exp->getSexo()) << "\t"
+			<< to_string(exp->getEstatura()) << "\t"
+			<< to_string(exp->getMasaMuscular()) << "\t"
+			<< to_string(exp->getPeso()) << "\t"
+			<< to_string(exp->getPorcGrasaCorporal()) << "\t"
+			<< to_string(exp->getCanTriatGanador()) << "\t"
+			<< to_string(exp->getCanPartIronMan()) << "/";
+		//Expediente
+		contC = exp->getlisCursosIdent()->contador();
+		while (contC!=0) {
+			e<<exp->getlisCursosIdent()->contadorEspecifico(contC)->getIdent()<< "\t";
+			contC--;
+		}
+		e << "/";
+		contG = exp->getlisGruposIdent()->contador();
+		while (contG!=0) {
+			e << exp->getlisGruposIdent()->contadorEspecifico(contG)->getIdent() << "\t";
+			contG--;
+		}
+		e << endl; 
+		//es probable que falten mas cosas como una posible lista de fechas
+	}
 }
 
