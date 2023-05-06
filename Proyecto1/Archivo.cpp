@@ -169,8 +169,7 @@ bool Archivos::cargarGrupos()
 	Fecha* fecha = NULL;
 	Grupo* grupAux = NULL;
 	string id;
-	int conD = 0;
-	int conID = 0;
+	
 	while (f_Grupo.good()) {
 		getline(f_Grupo, cedInstruc, '\t');
 		getline(f_Grupo, nomInstruc, '\t');
@@ -196,30 +195,37 @@ bool Archivos::cargarGrupos()
 			_gym->ingresarGrupo(codigoCur, grupAux);
 
 			getline(f_Grupo, id, '\n');
-			ListaT<stringMOD>* lisIdCli = new ListaT<stringMOD>;
-			stringMOD* IDcurso = NULL;
-			if (!id.empty()) {
-				stringstream cursIDs(id);
-				while (getline(cursIDs, id, '\t')) {
-					IDcurso = new stringMOD(id);
-					lisIdCli->insertarElem(IDcurso);
-				}
-			}
-			if (lisAux != NULL) {
-				conD = lisAux->contador();
-			}
-			conID = lisIdCli->contador();
-			while (conD != 0) {
-				while (conID != 0) {
-					if (lisAux->contadorEspecifico(conD)->getIdent() == lisIdCli->contadorEspecifico(conID)->getIdent()) {
-						grupAux->ingresarDeportista(lisAux->contadorEspecifico(conD));
+			if(!id.empty()) {
+				ListaT<stringMOD>* lisIdCli = new ListaT<stringMOD>;
+				stringMOD* IDcurso = NULL;
+				
+					stringstream cursIDs(id);
+					while (getline(cursIDs, id, '\t')) {
+						IDcurso = new stringMOD(id);
+						lisIdCli->insertarElem(IDcurso);
 					}
-					conID--;
-				}
+					int conD = 0;
+					int conID = 0;
+					int con = 1;
+					int con2 = 1;
+					if (lisAux != NULL) {
+						conD = lisAux->contador();
+					}
+					conID = lisIdCli->contador();
+					while (conD != con) {
+						while (conID != con2) {
+							if (lisAux->contadorEspecifico(con2)->getIdent() == lisIdCli->contadorEspecifico(conID)->getIdent()) {
+								grupAux->ingresarDeportista(lisAux->contadorEspecifico(con2));
+							}
+							con2++;
+						}
 
-				conD--;
+						con++;
+					}
 			}
+
 		}
+			
 
 	}
 	f_Grupo.close();

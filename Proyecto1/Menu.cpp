@@ -1347,6 +1347,23 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+
+		IDcurso = new stringMOD(codCurso);
+		IDgrupo = new stringMOD(numGrup);
+		cedint = stoi(cedCliente);
+		iterexp = _gym->getListaExpediente()->begin();
+		iter2exp = _gym->getListaExpediente()->end();
+
+		for (; iterexp->getPNodo() != iter2exp->getPNodo(); iterexp->operator++()) {
+			if (iterexp->operator*()->getCedula() == cedint) {
+				ExpeAeditar = iterexp->operator*();
+				ExpeAeditar->getlisCursosIdent()->eliminarEspe(codCurso);
+				ExpeAeditar->getlisGruposIdent()->eliminarEspe(numGrup);
+				if (ExpeAeditar->getlisCursosIdent()->contador() == 0) {
+					_gym->getListaExpediente()->eliminarEspe(cedCliente);
+				}
+			}
+		}
 		_gym->cancelarMatricula(codCurso, numGrup, cedCliente);
 		imprimirString("Opcion en desarrollo");
 		break;

@@ -187,6 +187,7 @@ void Gym::guardarGrupos(ofstream& g)
 	int canC = 0;
 	int canG = 0;
 	int canD = 0;
+	int con = 0;
 	if (_lisCurso!= NULL) {
 		canC = _lisCurso->contador();
 		while (canC != 0) {
@@ -202,7 +203,7 @@ void Gym::guardarGrupos(ofstream& g)
 	}
 	it = lisG->begin();
 	it2 = lisG->end();
-
+	
 	for (; it->getPNodo() != it2->getPNodo(); it->operator++()) {
 
 	//for (it = lisG->begin(); it != lisG->end(); it->operator++()) {
@@ -219,15 +220,18 @@ void Gym::guardarGrupos(ofstream& g)
 			<< to_string(grup->getHoraFinaliza()) << "\t"
 			<< to_string(grup->getMinFinaliza()) << "\t"
 			<< grup->getCodCursoPertenece() << "/";
-		if (grup->getListaDepor()->listaVacia()) {
+		if (grup->getListaDepor()==NULL) {
 			g << endl;
-			break;
 		}
 		else {
+			 canC = 0;
+			 canG = 0;
+			 canD = 0;
+			 con = 1;
 			canD = grup->getListaDepor()->contador();
-			while (canD != 0) {
-				g << grup->getListaDepor()->contadorEspecifico(canD)->getIdent() << "\t";
-				canD--;
+			while (con != canD) {
+				g << grup->getListaDepor()->contadorEspecifico(con)->getIdent() << "\t";
+				con++;
 			}
 			g << endl;
 		}
@@ -237,6 +241,7 @@ void Gym::guardarGrupos(ofstream& g)
 
 void Gym::guardarExpedientes(ofstream& e )
 {
+	cout<<_lisExpediente->toString();
 	int contC = 0;
 	int contG = 0;
 	Expediente* exp;
@@ -245,6 +250,7 @@ void Gym::guardarExpedientes(ofstream& e )
 	string id = "";
 	it = _lisExpediente->begin();
 	it2 = _lisExpediente->end();
+	
 	for (; it->getPNodo() != it2->getPNodo(); it->operator++()) {
 		exp = it->operator*();
 		//Deportista//Cliente
