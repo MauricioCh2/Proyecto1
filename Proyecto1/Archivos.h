@@ -8,6 +8,7 @@
 class Archivos {
 private: 
 	Gym* _gym;
+	ListaT<Deportista>* lisAux;
 public: 
 	Archivos(Gym*);
 	~Archivos();

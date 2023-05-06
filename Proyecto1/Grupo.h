@@ -3,6 +3,7 @@
 #include "Deportista.h"
 #include "Triatlonista.h"
 #include "Lista_Template.h"
+//#include "stringMOD.h"
 class Grupo {
 private:
 	string _cedInstructor;
@@ -25,6 +26,9 @@ private:
 	string _codCursoPert; //es ele codigo del curso al que pertenece 
 	//eLista triatlonista
 	ListaT<Deportista>* _lisDepor;
+	
+
+	
 
 public:
 	Grupo(string, string, int, Fecha*, int, char, int, int, int, int);

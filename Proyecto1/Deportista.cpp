@@ -1,5 +1,5 @@
 #include "Deportista.h"
-Deportista::Deportista() {}
+//Deportista::Deportista() {}
 Deportista::Deportista(int ced, string nom, string tel, Fecha* f) {
 	_cedula = ced;
 	_nombre = nom;

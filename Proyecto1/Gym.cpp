@@ -186,6 +186,7 @@ void Gym::guardarGrupos(ofstream& g)
 	ListaT<Grupo>* lisG = new ListaT<Grupo>;
 	int canC = 0;
 	int canG = 0;
+	int canD = 0;
 	if (_lisCurso!= NULL) {
 		canC = _lisCurso->contador();
 		while (canC != 0) {
@@ -217,8 +218,20 @@ void Gym::guardarGrupos(ofstream& g)
 			<< to_string(grup->getMinInicio()) << "\t"
 			<< to_string(grup->getHoraFinaliza()) << "\t"
 			<< to_string(grup->getMinFinaliza()) << "\t"
-
-			<< grup->getCodCursoPertenece() << endl;
+			<< grup->getCodCursoPertenece() << "/";
+		if (grup->getListaDepor()->listaVacia()) {
+			g << endl;
+			break;
+		}
+		else {
+			canD = grup->getListaDepor()->contador();
+			while (canD != 0) {
+				g << grup->getListaDepor()->contadorEspecifico(canD)->getIdent() << "\t";
+				canD--;
+			}
+			g << endl;
+		}
+		
 	}
 }
 
@@ -247,9 +260,9 @@ void Gym::guardarExpedientes(ofstream& e )
 			<< to_string(exp->getPeso()) << "\t"
 			<< to_string(exp->getPorcGrasaCorporal()) << "\t"
 			<< to_string(exp->getCanTriatGanador()) << "\t"
-			<< to_string(exp->getCanPartIronMan()) << "/";
+			<< to_string(exp->getCanPartIronMan()) << "\n";
 		//Expediente
-		contC = exp->getlisCursosIdent()->contador();
+		/*contC = exp->getlisCursosIdent()->contador();
 		while (contC!=0) {
 			e<<exp->getlisCursosIdent()->contadorEspecifico(contC)->getIdent()<< "\t";
 			contC--;
@@ -260,7 +273,7 @@ void Gym::guardarExpedientes(ofstream& e )
 			e << exp->getlisGruposIdent()->contadorEspecifico(contG)->getIdent() << "\t";
 			contG--;
 		}
-		e << endl; 
+		e << endl; */
 		//es probable que falten mas cosas como una posible lista de fechas
 	}
 }

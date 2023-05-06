@@ -3,6 +3,7 @@
 Archivos::Archivos(Gym* g)
 {
 	this->_gym = g;
+	lisAux = new ListaT<Deportista>;
 }
 
 Archivos::~Archivos()
@@ -76,10 +77,10 @@ bool Archivos::guadarExpediente()
 bool Archivos::cargarDatos()
 {
 	bool ver = true;
-	cargarCursos();
-	cargarGrupos();
-	cargarExpediente();
-	//if (not cargarDeportistas()) { ver = false; }
+	if (not cargarExpediente()) { ver = false; }
+	if (not cargarCursos()) { ver = false; }
+	if (not cargarGrupos()) { ver = false; }
+	
 
 	return ver;
 }
@@ -167,6 +168,9 @@ bool Archivos::cargarGrupos()
 	int horaIn = 0, minIn = 0, horaFin = 0, minFin = 0;
 	Fecha* fecha = NULL;
 	Grupo* grupAux = NULL;
+	string id;
+	int conD = 0;
+	int conID = 0;
 	while (f_Grupo.good()) {
 		getline(f_Grupo, cedInstruc, '\t');
 		getline(f_Grupo, nomInstruc, '\t');
@@ -178,8 +182,8 @@ bool Archivos::cargarGrupos()
 		getline(f_Grupo, SminIn, '\t');
 		getline(f_Grupo, ShoraFin, '\t');
 		getline(f_Grupo, SminFin, '\t');
-		getline(f_Grupo, codigoCur, '\n');
-		if (!cedInstruc.empty()&& !nomInstruc.empty()&& !ScupMax.empty()&& !sFechaIn.empty()&& !SsemDur.empty()&& !SdiaSem.empty()&& !ShoraIn.empty()&& !SminIn.empty()&& !ShoraFin.empty() && !SminFin.empty()) {
+		getline(f_Grupo, codigoCur, '/');
+		if (!cedInstruc.empty() && !nomInstruc.empty() && !ScupMax.empty() && !sFechaIn.empty() && !SsemDur.empty() && !SdiaSem.empty() && !ShoraIn.empty() && !SminIn.empty() && !ShoraFin.empty() && !SminFin.empty()) {
 			cupMax = stoi(ScupMax);
 			semDur = stoi(SsemDur);
 			horaIn = stoi(ShoraIn);
@@ -188,8 +192,33 @@ bool Archivos::cargarGrupos()
 			minIn = stoi(SminFin);
 			diaSem = SdiaSem.at(0);//busca el caracter numero 0 del string el cual es el char que se necesia
 			fecha = validarFechaA(sFechaIn);
-			grupAux = new Grupo(cedInstruc, nomInstruc, cupMax, fecha,semDur, diaSem,horaIn, minIn, horaFin, minFin);
-			_gym->ingresarGrupo(codigoCur,grupAux);
+			grupAux = new Grupo(cedInstruc, nomInstruc, cupMax, fecha, semDur, diaSem, horaIn, minIn, horaFin, minFin);
+			_gym->ingresarGrupo(codigoCur, grupAux);
+
+			getline(f_Grupo, id, '\n');
+			ListaT<stringMOD>* lisIdCli = new ListaT<stringMOD>;
+			stringMOD* IDcurso = NULL;
+			if (!id.empty()) {
+				stringstream cursIDs(id);
+				while (getline(cursIDs, id, '\t')) {
+					IDcurso = new stringMOD(id);
+					lisIdCli->insertarElem(IDcurso);
+				}
+			}
+			if (lisAux != NULL) {
+				conD = lisAux->contador();
+			}
+			conID = lisIdCli->contador();
+			while (conD != 0) {
+				while (conID != 0) {
+					if (lisAux->contadorEspecifico(conD)->getIdent() == lisIdCli->contadorEspecifico(conID)->getIdent()) {
+						grupAux->ingresarDeportista(lisAux->contadorEspecifico(conD));
+					}
+					conID--;
+				}
+
+				conD--;
+			}
 		}
 
 	}
@@ -229,8 +258,8 @@ bool Archivos::cargarExpediente()
 		getline(f_Expediente, Speso, '\t');
 		getline(f_Expediente, SporGrasaC, '\t');
 		getline(f_Expediente, ScanTriGana, '\t');
-		getline(f_Expediente, ScanPartIron, '\t');
-		if (!Scedula.empty() && !nombre.empty() && !SfechaN.empty() && !ShorasEn.empty() && !StemP.empty() && !Ssex.empty() && !Sestatura.empty() && !SmasaMuscu.empty() && !Speso.empty() && !SporGrasaC.empty())
+		getline(f_Expediente, ScanPartIron, '\n');
+		if (!Scedula.empty() && !nombre.empty() && !SfechaN.empty() && !ShorasEn.empty() && !StemP.empty() && !Ssex.empty() && !Sestatura.empty() && !SmasaMuscu.empty() && !Speso.empty() && !SporGrasaC.empty() && !ScanTriGana.empty() && !ScanPartIron.empty())
 		{
 			cedula = stoi(Scedula);
 			horasEn = stoi(ShorasEn);
@@ -245,74 +274,78 @@ bool Archivos::cargarExpediente()
 			fechN = validarFechaA(SfechaN);
 
 			deportista = new Triatlonista(cedula, nombre, telefono, fechN, horasEn, temP, *sex, estatura, masaMuscu, peso, porGrasaC, canTriGana, canPartIron);
-
+			lisAux->insertarElem(deportista);
 		}
 		else { return false; }
 
-		getline(f_Expediente, cursos, '/');
+		/*getline(f_Expediente, cursos, '/');
 		stringstream cursosS(cursos);
 		ListaT<stringMOD>* lisCursos = new ListaT<stringMOD>;
 		while (getline(cursosS, IdeCursos, '\t')) {
 			IDcurso = new stringMOD(IdeCursos);
 			lisCursos->insertarElem(IDcurso);
 		}
-		getline(f_Expediente, grupos, '/');
+		getline(f_Expediente, grupos, '\n');
 		stringstream gruposS(grupos);
 		ListaT<stringMOD>* lisGrupos = new ListaT<stringMOD>;
 		while (getline(gruposS, IdeGrupos, '\t')) {
 			IDgrupo = new stringMOD(IdeGrupos);
 			lisGrupos->insertarElem(IDgrupo);
 		}
-		stringMOD* c1 = NULL;
-		stringMOD* c2 = NULL;
-		stringMOD* c3 = NULL;
-		stringMOD* c4 = NULL;
+		lisAux->insertarElem(deportista);*/
+		
 
-		c1 = lisCursos->contadorEspecifico(1);
-		c2 = lisCursos->contadorEspecifico(2);
-		c3 = lisCursos->contadorEspecifico(3);
-		c4 = lisCursos->contadorEspecifico(4);
+		//Forma de jp-------------------------------------------
+		//stringMOD* c1 = NULL;
+		//stringMOD* c2 = NULL;
+		//stringMOD* c3 = NULL;
+		//stringMOD* c4 = NULL;
 
-		stringMOD* g1 = NULL;
-		stringMOD* g2 = NULL;
-		stringMOD* g3 = NULL;
-		stringMOD* g4 = NULL;
-		g1 = lisGrupos->contadorEspecifico(1);
-		g2 = lisGrupos->contadorEspecifico(2);
-		g3 = lisGrupos->contadorEspecifico(3);
-		g4 = lisGrupos->contadorEspecifico(4);
-		/*_gym->ingresarClienteAGrupos(c1->getIdent(), g1->getIdent(), Deportista);
-		_gym->ingresarClienteAGrupos(c2->getIdent(), g2->getIdent(), Deportista);
-		_gym->ingresarClienteAGrupos(c3->getIdent(), g3->getIdent(), Deportista);
-		_gym->ingresarClienteAGrupos(c4->getIdent(), g4->getIdent(), Deportista);*/
+		//c1 = lisCursos->contadorEspecifico(1);
+		//c2 = lisCursos->contadorEspecifico(2);
+		//c3 = lisCursos->contadorEspecifico(3);
+		//c4 = lisCursos->contadorEspecifico(4);
+
+		//stringMOD* g1 = NULL;
+		//stringMOD* g2 = NULL;
+		//stringMOD* g3 = NULL;
+		//stringMOD* g4 = NULL;
+		//g1 = lisGrupos->contadorEspecifico(1);
+		//g2 = lisGrupos->contadorEspecifico(2);
+		//g3 = lisGrupos->contadorEspecifico(3);
+		//g4 = lisGrupos->contadorEspecifico(4);
+		///*_gym->ingresarClienteAGrupos(c1->getIdent(), g1->getIdent(), Deportista);
+		//_gym->ingresarClienteAGrupos(c2->getIdent(), g2->getIdent(), Deportista);
+		//_gym->ingresarClienteAGrupos(c3->getIdent(), g3->getIdent(), Deportista);
+		//_gym->ingresarClienteAGrupos(c4->getIdent(), g4->getIdent(), Deportista);*/
 
 
 
 
-		Iterador<stringMOD>* iterC = NULL;
-		Iterador<stringMOD>* iterC2 = NULL;
-		Iterador<Grupo>* iterGrup = NULL;
-		Iterador<Grupo>* iterGrup2 = NULL;
-		int contc = 1;
-		iterC = lisCursos->begin();
-		iterC2 = lisCursos->end();
-		for (; iterC->getPNodo() != iterC2->getPNodo(); iterC->operator++()) {
-			if (lisCursos->contadorEspecifico(contc)->getIdent()==iterC->operator*()->getIdent()) {
-				iterGrup = _gym->getListaCurso()->encontrarEsp(iterC->operator*()->getIdent())->getListaGrupos()->begin();
-				iterGrup2 = _gym->getListaCurso()->encontrarEsp(iterC->operator*()->getIdent())->getListaGrupos()->end();
-				for (; iterGrup->getPNodo() != iterGrup2->getPNodo(); iterGrup->operator++()) {
-					if (lisGrupos->contadorEspecifico(contc)->getIdent() == iterGrup->operator*()->getIdent()) {
-						iterGrup->operator*()->ingresarDeportista(deportista);
-					}
+		//Iterador<stringMOD>* iterC = NULL;
+		//Iterador<stringMOD>* iterC2 = NULL;
+		//Iterador<Grupo>* iterGrup = NULL;
+		//Iterador<Grupo>* iterGrup2 = NULL;
+		//int contc = 1;
+		//iterC = lisCursos->begin();
+		//iterC2 = lisCursos->end();
+		//for (; iterC->getPNodo() != iterC2->getPNodo(); iterC->operator++()) {
+		//	if (lisCursos->contadorEspecifico(contc)->getIdent()==iterC->operator*()->getIdent()) {
+		//		iterGrup = _gym->getListaCurso()->encontrarEsp(iterC->operator*()->getIdent())->getListaGrupos()->begin();
+		//		iterGrup2 = _gym->getListaCurso()->encontrarEsp(iterC->operator*()->getIdent())->getListaGrupos()->end();
+		//		for (; iterGrup->getPNodo() != iterGrup2->getPNodo(); iterGrup->operator++()) {
+		//			if (lisGrupos->contadorEspecifico(contc)->getIdent() == iterGrup->operator*()->getIdent()) {
+		//				iterGrup->operator*()->ingresarDeportista(deportista);
+		//			}
 
-				}
-				lisGrupos->eliminarEspe(iterGrup->operator*()->getIdent());
-			}
-			contc++;
-			if (contc==4) {
-				break;
-			}
-		}
+		//		}
+		//		lisGrupos->eliminarEspe(iterGrup->operator*()->getIdent());
+		//	}
+		//	contc++;
+		//	if (contc==4) {
+		//		break;
+		//	}
+		//}
 		
 		/*canC = lisCursos->contador();
 		string cur;
