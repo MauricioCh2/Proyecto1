@@ -20,7 +20,7 @@ public:
 	bool guadarExpediente();
 	//lee datos---------------------------------------
 	bool cargarDatos();
-	bool cargarDeportistas();
+	
 	bool cargarCursos();
 	bool cargarGrupos();
 	bool cargarExpediente();

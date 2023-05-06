@@ -27,7 +27,7 @@ string Triatlonista::toString() {
 	s << "\t" << "Cedula:" << ".........................." << _cedula << endl;
 	s << "\t" << "Nombre:" << ".........................." << _nombre << endl;
 	s << "\t" << "Telefono:" << "........................" << _telefono << endl;
-	s << "\t" << "Fecha Nacimiento:" << "................" << _ptrFecha->toString();
+	s << "\t" << "Fecha Nacimiento:" << "................" << _ptrFecha->toString()<<endl;
 	s << _ptrCiclista->toString();
 	s << "\t" << "Sexo:" << "............................" << _sexo << endl;
 	s << "\t" << "Estatura:" << "........................" << _estatura << endl;

@@ -98,7 +98,7 @@ T* ListaT<T>::contadorEspecifico(int n) {
 	int cont = 0;
 	_actual = _primero;
 	while (_actual != NULL) {
-		cont++; // creo que esto es menos meos
+		cont++;
 		if (cont == n) {
 			break;
 		}

@@ -12,7 +12,6 @@ private:
 	string _nombre;
 	int _mensualidad;
 	ListaT<Deportista>* _lisCliente = NULL;
-	//ListaT<Grupo>* _lisGrupo = NULL;
 	ListaT<Curso>* _lisCurso = NULL;
 	ListaT<Expediente>* _lisExpediente = NULL;
 	Fecha* _fechaHoy = NULL;

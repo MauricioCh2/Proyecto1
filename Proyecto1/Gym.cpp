@@ -87,7 +87,7 @@ string Gym::reporteGrupoEspe(string cur, string grup)
 	
 	return lisG->encontrarEsp(grup)->toString();
 }
-void Gym::ingresarClienteAGrupos(string n, string cod, Deportista* dep )
+void Gym::ingresarClienteAGrupos(string n, string cod, Deportista* dep ) // n = numGrup, cod =codigo 
 {
 	
 	Curso* cur = _lisCurso->encontrarEsp(cod);
@@ -229,7 +229,7 @@ void Gym::guardarGrupos(ofstream& g)
 			 canD = 0;
 			 con = 1;
 			canD = grup->getListaDepor()->contador();
-			while (con != canD) {
+			while (con <= canD) {
 				g << grup->getListaDepor()->contadorEspecifico(con)->getIdent() << "\t";
 				con++;
 			}
@@ -267,6 +267,7 @@ void Gym::guardarExpedientes(ofstream& e )
 			<< to_string(exp->getPorcGrasaCorporal()) << "\t"
 			<< to_string(exp->getCanTriatGanador()) << "\t"
 			<< to_string(exp->getCanPartIronMan()) << "\n";
+		//falta fechas
 		//Expediente
 		/*contC = exp->getlisCursosIdent()->contador();
 		while (contC!=0) {

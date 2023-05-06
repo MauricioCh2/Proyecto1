@@ -85,55 +85,6 @@ bool Archivos::cargarDatos()
 	return ver;
 }
 
-bool Archivos::cargarDeportistas()
-{
-	ifstream f_Deportistas("../ListaDeportista.txt");
-	string  nombre, telefono;
-	string Scedula,Ssex, ShorasEn, ScanPartIron, ScanTriGana, StemP, Sestatura, SmasaMuscu, Speso, SporGrasaC, SfechaN;
-	Fecha* fechN = NULL;
-	const char* sex;
-	int cedula, horasEn, canPartIron, canTriGana;
-	double temP, estatura, masaMuscu, peso, porGrasaC;
-	Deportista* Deportista = NULL;
-
-	while (f_Deportistas.good()) {
-		getline(f_Deportistas, Scedula, '\t');
-		getline(f_Deportistas, nombre, '\t');
-		getline(f_Deportistas, SfechaN, '\t');
-		getline(f_Deportistas, ShorasEn, '\t');
-		getline(f_Deportistas, StemP, '\t');
-		getline(f_Deportistas, Ssex, '\t');
-		getline(f_Deportistas, Sestatura, '\t');
-		getline(f_Deportistas, SmasaMuscu, '\t');
-		getline(f_Deportistas, Speso, '\t');
-		getline(f_Deportistas, SporGrasaC, '\t');
-		getline(f_Deportistas, ScanTriGana, '\t');
-		getline(f_Deportistas, ScanPartIron, '\t');
-		cedula = stoi(Scedula);
-		horasEn = stoi(ShorasEn);
-		temP = stod(StemP);
-		estatura = stod(Sestatura);
-		masaMuscu = stod(SmasaMuscu);
-		peso = stod(Speso);
-		porGrasaC = stod(SporGrasaC);
-		canTriGana = stoi(ScanTriGana);
-		canPartIron = stoi(ScanPartIron);
-		sex = Ssex.c_str();
-
-
-
-		if (!Scedula.empty() && !nombre.empty())
-		{
-			Deportista = new Triatlonista(cedula, nombre, telefono, NULL, horasEn, temP, *sex, estatura, masaMuscu, peso, porGrasaC, canTriGana, canPartIron);
-
-		}
-		else { return false; }
-		//no se si aqui hace falta un throw
-
-	}
-	f_Deportistas.close();
-	return true;
-}
 
 bool Archivos::cargarCursos()
 {
@@ -206,21 +157,18 @@ bool Archivos::cargarGrupos()
 					}
 					int conD = 0;
 					int conID = 0;
-					int con = 1;
-					int con2 = 1;
+					
 					if (lisAux != NULL) {
 						conD = lisAux->contador();
 					}
 					conID = lisIdCli->contador();
-					while (conD != con) {
-						while (conID != con2) {
-							if (lisAux->contadorEspecifico(con2)->getIdent() == lisIdCli->contadorEspecifico(conID)->getIdent()) {
-								grupAux->ingresarDeportista(lisAux->contadorEspecifico(con2));
+					for (int con = 1; con <= conD; con++) {
+						for (int con2 = 1; con2 <= conID; con2++) {
+							if (lisAux->contadorEspecifico(con)->getIdent() == lisIdCli->contadorEspecifico(con2)->getIdent()) {
+								grupAux->ingresarDeportista(lisAux->contadorEspecifico(con));
 							}
-							con2++;
+							
 						}
-
-						con++;
 					}
 			}
 
@@ -232,7 +180,7 @@ bool Archivos::cargarGrupos()
 	return false;
 }
 
-bool Archivos::cargarExpediente()
+bool Archivos::cargarExpediente()// deportistas
 {
 	ifstream f_Expediente("../ListaExpediente.txt");
 
@@ -247,6 +195,7 @@ bool Archivos::cargarExpediente()
 	string grupos;
 	string IdeGrupos;
 	Deportista* deportista = NULL;
+	Expediente* expe = NULL;
 	stringMOD* IDcurso = NULL;
 	stringMOD* IDgrupo = NULL;
 	int canC = 0;
@@ -281,96 +230,13 @@ bool Archivos::cargarExpediente()
 
 			deportista = new Triatlonista(cedula, nombre, telefono, fechN, horasEn, temP, *sex, estatura, masaMuscu, peso, porGrasaC, canTriGana, canPartIron);
 			lisAux->insertarElem(deportista);
+			expe = new Expediente(cedula, nombre, telefono, fechN, horasEn, temP, *sex, estatura, masaMuscu, peso, porGrasaC, canTriGana, canPartIron);
+			_gym->getListaExpediente()->insertarElem(expe);
+			
 		}
 		else { return false; }
 
-		/*getline(f_Expediente, cursos, '/');
-		stringstream cursosS(cursos);
-		ListaT<stringMOD>* lisCursos = new ListaT<stringMOD>;
-		while (getline(cursosS, IdeCursos, '\t')) {
-			IDcurso = new stringMOD(IdeCursos);
-			lisCursos->insertarElem(IDcurso);
-		}
-		getline(f_Expediente, grupos, '\n');
-		stringstream gruposS(grupos);
-		ListaT<stringMOD>* lisGrupos = new ListaT<stringMOD>;
-		while (getline(gruposS, IdeGrupos, '\t')) {
-			IDgrupo = new stringMOD(IdeGrupos);
-			lisGrupos->insertarElem(IDgrupo);
-		}
-		lisAux->insertarElem(deportista);*/
-		
-
-		//Forma de jp-------------------------------------------
-		//stringMOD* c1 = NULL;
-		//stringMOD* c2 = NULL;
-		//stringMOD* c3 = NULL;
-		//stringMOD* c4 = NULL;
-
-		//c1 = lisCursos->contadorEspecifico(1);
-		//c2 = lisCursos->contadorEspecifico(2);
-		//c3 = lisCursos->contadorEspecifico(3);
-		//c4 = lisCursos->contadorEspecifico(4);
-
-		//stringMOD* g1 = NULL;
-		//stringMOD* g2 = NULL;
-		//stringMOD* g3 = NULL;
-		//stringMOD* g4 = NULL;
-		//g1 = lisGrupos->contadorEspecifico(1);
-		//g2 = lisGrupos->contadorEspecifico(2);
-		//g3 = lisGrupos->contadorEspecifico(3);
-		//g4 = lisGrupos->contadorEspecifico(4);
-		///*_gym->ingresarClienteAGrupos(c1->getIdent(), g1->getIdent(), Deportista);
-		//_gym->ingresarClienteAGrupos(c2->getIdent(), g2->getIdent(), Deportista);
-		//_gym->ingresarClienteAGrupos(c3->getIdent(), g3->getIdent(), Deportista);
-		//_gym->ingresarClienteAGrupos(c4->getIdent(), g4->getIdent(), Deportista);*/
-
-
-
-
-		//Iterador<stringMOD>* iterC = NULL;
-		//Iterador<stringMOD>* iterC2 = NULL;
-		//Iterador<Grupo>* iterGrup = NULL;
-		//Iterador<Grupo>* iterGrup2 = NULL;
-		//int contc = 1;
-		//iterC = lisCursos->begin();
-		//iterC2 = lisCursos->end();
-		//for (; iterC->getPNodo() != iterC2->getPNodo(); iterC->operator++()) {
-		//	if (lisCursos->contadorEspecifico(contc)->getIdent()==iterC->operator*()->getIdent()) {
-		//		iterGrup = _gym->getListaCurso()->encontrarEsp(iterC->operator*()->getIdent())->getListaGrupos()->begin();
-		//		iterGrup2 = _gym->getListaCurso()->encontrarEsp(iterC->operator*()->getIdent())->getListaGrupos()->end();
-		//		for (; iterGrup->getPNodo() != iterGrup2->getPNodo(); iterGrup->operator++()) {
-		//			if (lisGrupos->contadorEspecifico(contc)->getIdent() == iterGrup->operator*()->getIdent()) {
-		//				iterGrup->operator*()->ingresarDeportista(deportista);
-		//			}
-
-		//		}
-		//		lisGrupos->eliminarEspe(iterGrup->operator*()->getIdent());
-		//	}
-		//	contc++;
-		//	if (contc==4) {
-		//		break;
-		//	}
-		//}
-		
-		/*canC = lisCursos->contador();
-		string cur;
-		string  g;
-		while (canC!=0) {
-			
-			cur = lisCursos->contadorEspecifico(canC)->getIdent();
-			canG = lisGrupos->contador();
-			if (lisCursos->contadorEspecifico(canG)!=NULL) {
-				while (canG != 0) {
-					g = lisGrupos->contadorEspecifico(canG)->getIdent();
-					_gym->ingresarClienteAGrupos(cur,g, Deportista);
-					canG--;
-				}
-				canC--;
-			}
-		}*/
-		
-		//no se si aqui hace falta un throw
+	
 
 	}
 
