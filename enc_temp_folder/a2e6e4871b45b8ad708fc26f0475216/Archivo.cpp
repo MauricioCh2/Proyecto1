@@ -273,4 +273,3 @@ bool Archivos::cargarExpediente()// deportistas
 	f_Expediente.close();
 	return false;
 }
-//hola que tal 
