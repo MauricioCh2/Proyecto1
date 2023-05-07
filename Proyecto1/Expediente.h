@@ -69,4 +69,5 @@ public:
 	ListaT <stringMOD>* getlisGruposIdent();
 
 	ListaT <Fecha>* getlisFecha();
+	void setLisFecha(ListaT <Fecha>*);
 };

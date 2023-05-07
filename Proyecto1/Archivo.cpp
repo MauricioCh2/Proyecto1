@@ -1,3 +1,4 @@
+
 #include "Archivos.h"
 
 Archivos::Archivos(Gym* g)
@@ -200,6 +201,11 @@ bool Archivos::cargarExpediente()// deportistas
 	stringMOD* IDgrupo = NULL;
 	int canC = 0;
 	int canG = 0;
+	int dia = 0;
+	int mes = 0;
+	int annio = 0;
+	string Sdia, Smes, Sannio;
+	Fecha* fechaR = NULL;
 	while (f_Expediente.good()) {
 		getline(f_Expediente, Scedula, '\t');
 		getline(f_Expediente, nombre, '\t');
@@ -213,7 +219,7 @@ bool Archivos::cargarExpediente()// deportistas
 		getline(f_Expediente, Speso, '\t');
 		getline(f_Expediente, SporGrasaC, '\t');
 		getline(f_Expediente, ScanTriGana, '\t');
-		getline(f_Expediente, ScanPartIron, '\n');
+		getline(f_Expediente, ScanPartIron, '-');
 		if (!Scedula.empty() && !nombre.empty() && !SfechaN.empty() && !ShorasEn.empty() && !StemP.empty() && !Ssex.empty() && !Sestatura.empty() && !SmasaMuscu.empty() && !Speso.empty() && !SporGrasaC.empty() && !ScanTriGana.empty() && !ScanPartIron.empty())
 		{
 			cedula = stoi(Scedula);
@@ -227,11 +233,34 @@ bool Archivos::cargarExpediente()// deportistas
 			canPartIron = stoi(ScanPartIron);
 			sex = Ssex.c_str();
 			fechN = validarFechaA(SfechaN);
-
+			string fecha = "";
 			deportista = new Triatlonista(cedula, nombre, telefono, fechN, horasEn, temP, *sex, estatura, masaMuscu, peso, porGrasaC, canTriGana, canPartIron);
 			lisAux->insertarElem(deportista);
 			expe = new Expediente(cedula, nombre, telefono, fechN, horasEn, temP, *sex, estatura, masaMuscu, peso, porGrasaC, canTriGana, canPartIron);
 			_gym->getListaExpediente()->insertarElem(expe);
+			getline(f_Expediente, fecha, '\n');
+			if (!fecha.empty()) {
+				ListaT<Fecha>* lisFecha = new ListaT<Fecha>;
+				Fecha* IDcurso = NULL;
+
+				stringstream cursIDs(fecha);
+				while (getline(cursIDs, fecha, '\t')) {
+					stringstream fech(fecha);
+					getline(fech, Sdia, '/');
+					getline(fech, Smes, '/');
+					getline(fech, Sannio, '\n');
+					if (!fecha.empty()) {
+						dia = stoi(Sdia);
+						mes = stoi(Smes);
+						annio = stoi(Sannio);
+						fechaR = new Fecha(dia,mes,annio);
+						lisFecha->insertarElem(fechaR);
+
+						expe->setLisFecha(lisFecha);
+					}
+				}
+			}
+
 			
 		}
 		else { return false; }

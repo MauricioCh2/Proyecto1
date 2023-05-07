@@ -5,6 +5,7 @@
 #include "Utilities.h"
 #include "Lista_Template.h"
 #include "stringMOD.h"
+#include "Fecha.h"
 class Archivos {
 private: 
 	Gym* _gym;

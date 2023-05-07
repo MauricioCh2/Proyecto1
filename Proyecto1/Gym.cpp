@@ -242,15 +242,14 @@ void Gym::guardarGrupos(ofstream& g)
 void Gym::guardarExpedientes(ofstream& e )
 {
 	cout<<_lisExpediente->toString();
-	int contC = 0;
-	int contG = 0;
+	
 	Expediente* exp;
 	Iterador<Expediente>* it;
 	Iterador<Expediente>* it2;
 	string id = "";
 	it = _lisExpediente->begin();
 	it2 = _lisExpediente->end();
-	
+	int conF = 0;
 	for (; it->getPNodo() != it2->getPNodo(); it->operator++()) {
 		exp = it->operator*();
 		//Deportista//Cliente
@@ -266,9 +265,15 @@ void Gym::guardarExpedientes(ofstream& e )
 			<< to_string(exp->getPeso()) << "\t"
 			<< to_string(exp->getPorcGrasaCorporal()) << "\t"
 			<< to_string(exp->getCanTriatGanador()) << "\t"
-			<< to_string(exp->getCanPartIronMan()) << "\n";
+			<< to_string(exp->getCanPartIronMan()) << "-";
 		//falta fechas
 		//Expediente
+		conF = exp->getlisFecha()->contador();
+		while (conF>0) {
+			e << exp->getlisFecha()->contadorEspecifico(conF)->toString()<<"\t";
+			conF--;
+		}
+		e << endl;
 		/*contC = exp->getlisCursosIdent()->contador();
 		while (contC!=0) {
 			e<<exp->getlisCursosIdent()->contadorEspecifico(contC)->getIdent()<< "\t";

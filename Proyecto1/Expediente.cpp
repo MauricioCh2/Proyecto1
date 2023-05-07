@@ -124,3 +124,8 @@ ListaT<Fecha>* Expediente::getlisFecha()
 {
 	return ListaDpagos;
 }
+
+void Expediente::setLisFecha(ListaT<Fecha>* f)
+{
+	ListaDpagos = f;
+}
