@@ -100,10 +100,23 @@ void Triatlonista::setFechaDeultimoPago(Fecha* f)
 {
 	this->ListaDpagos->insertarElem(f);
 }
-string Triatlonista::imprimirPAGOS()
+string Triatlonista::imprimirPAGOS(int k)
 {
-	return this->ListaDpagos->toString();
+	if (this->ListaDpagos->listaVacia() == false) {
+		stringstream s;
+		s << "-------(Fechas de Pagos)----------" << endl;
+		s << this->ListaDpagos->toString() << endl;
+		s << "----------------------------------" << endl;
+		s << "-------(Montos Canscelados)-------" << endl;
+		for (int i = 0; i < this->ListaDpagos->contador(); i++) {
+			s << "$Cancelado: " << k << endl;
+		}
+		s << "----------------------------------" << endl;
+		return s.str();
+	}
+	return "Lista de Pagos inexsistente {Cliente Iactivo}";
 }
+
 
 
 

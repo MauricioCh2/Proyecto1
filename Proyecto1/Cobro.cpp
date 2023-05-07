@@ -33,7 +33,8 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 	switch (op)
 	{
 	case 1:
-		imprimirString("Cuantos meses le gustaria pagar por adelantado {ya que su estado actual en el gimanccio es de [Activo]} ");
+		imprimirString("---Usted esta Activo---");
+		imprimirString("Cuantos meses le gustaria pagar por adelantado? { ya que su estado actual en el gimanccio es de [Activo] } ");
 		do {
 			try {
 				mesesApagar = recivirInt();
@@ -51,16 +52,31 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 			aux->setMes(aux->getMes() - 12);
 			aux->setAno(aux->getAno() + 1);
 		}
-	break;
+		imprimirString2("Monto a pagar :");
+		imprimirInt(mensu * mesesApagar);
+		imprimirString("");
+		imprimirString("Desgloce de dicho monto: ");
+		imprimirInt2(mensu * mesesApagar);
+		imprimirString2(" (");
+		imprimirInt2(mensu);
+		imprimirString2("X");
+		imprimirInt2(mesesApagar);
+		imprimirString2(" )");
+
+		break;
 	case 2:
+		imprimirString("---Usted esta Moroso---");
 		imprimirString("Usted esta Moroso por un total de meses de : ");
 		mesesDmorosidad = (f->getMes() - tri->getFechaDeultimoPago()->getMes());
 		imprimirInt(mesesDmorosidad);
+		imprimirString("");
 		imprimirString2("Nota, la mensualidad de este Gimnacio es: ");
-		imprimirInt(mensu);
+		imprimirInt2(mensu);
+		imprimirString("");
 		imprimirString2("Su monto de Morosidad en colones: ");
 		imprimirInt(mesesApagar * mensu);
-		imprimirString("Cuantos meses le gustaria pagar dada su deuda ");
+		imprimirString("");
+		imprimirString("Cuantos meses le gustaria pagar dada su deuda?");
 		do {
 			try {
 				mesesApagar = recivirInt();
@@ -81,6 +97,16 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 			aux->setMes(aux->getMes() - 12);
 			aux->setAno(aux->getAno() + 1);
 		}
+		imprimirString2("Monto a pagar :");
+		imprimirInt(mensu * mesesApagar);
+		imprimirString("");
+		imprimirString2("Desgloce de dicho monto dados los meses que pago: ");
+		imprimirInt2(mensu * mesesApagar);
+		imprimirString2(" (");
+		imprimirInt2(mensu);
+		imprimirString2("X");
+		imprimirInt2(mesesApagar);
+		imprimirString2(" )");
 		break;
 	case 3:
 		imprimirString("---Usted esta Inactivo---");
@@ -95,7 +121,7 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 				cout << e->what() << endl;
 				limpiar();
 			}
-			if (respuesta == "SI" || respuesta == "Si" || respuesta == "si") {
+			if (respuesta == "SI" || respuesta == "Si" || respuesta == "si" || respuesta == "sI") {
 				respuestai = 1;
 			}
 		} while (ex == false);
@@ -115,18 +141,27 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 			} while (ex == false);
 			ex = false;
 			aux = f;
-			aux->setMes(f->getMes()+mesesApagar);
+			aux->setMes(f->getMes() + mesesApagar);
+			if (aux->getMes() > 12) {
+				aux->setMes(aux->getMes() - 12);
+				aux->setAno(aux->getAno() + 1);
+			}
+			imprimirString("Monto a pagar :");
+			imprimirInt(mensu * mesesApagar);
+			imprimirString2("Desgloce de dicho monto dados los meses que pago:");
+			imprimirInt2(mensu * mesesApagar);
+			imprimirString2(" (");
+			imprimirInt2(mensu);
+			imprimirString2("X");
+			imprimirInt2(mesesApagar);
+			imprimirString2(" )");
 		}
-		if (aux->getMes() > 12) {
-			aux->setMes(aux->getMes() - 12);
-			aux->setAno(aux->getAno() + 1);
-		}
-
 		break;
 
 	default: break;
 	}
 	return aux;
 }
+
 
 

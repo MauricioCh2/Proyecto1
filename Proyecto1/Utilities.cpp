@@ -5,7 +5,7 @@ int recivirInt() {
 	bool fin = false;
 	while (fin == false) {
 
-		if (cin >> i){
+		if (cin >> i) {
 			fin = true;
 			return i;
 		}
@@ -50,7 +50,7 @@ string recivirStringN() {
 				fin = true;
 				return s;
 			}
-			
+
 		}
 		throw new ErrorV('z');
 	}
@@ -65,7 +65,7 @@ string recivirGetLine() {
 char recivirChar() {
 	char c;
 	bool fin = false;
-	while (fin==false) {
+	while (fin == false) {
 		if (cin >> c) {
 			fin = true;
 			return c;
@@ -103,6 +103,10 @@ void imprimirString2(string S) {
 void imprimirInt(int i) {
 	cout << i << endl;
 }
+void imprimirInt2(int i)
+{
+	cout << i;
+}
 void imprimirChar(char c) {
 	cout << c << endl;
 }
@@ -129,7 +133,7 @@ Fecha* validarFecha() {
 	return fech;
 }
 Fecha* validarFechaA(string f) {
-	
+
 	stringstream input_stringstream(f);
 	string dia = "";
 	string mes = "";
@@ -207,7 +211,7 @@ char validarDia()
 		}
 	}
 	else {
-		throw (new ErrorV ('y'));
+		throw (new ErrorV('y'));
 	}
 
 }

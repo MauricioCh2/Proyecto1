@@ -42,7 +42,7 @@ public:
 	void setCanTriatGanador(int);
 	Fecha* getFechaDeultimoPago();
 	void setFechaDeultimoPago(Fecha*);
-	string imprimirPAGOS();
+	string imprimirPAGOS(int);
 	virtual ~Triatlonista();
 	string Listar();
 	string toString();

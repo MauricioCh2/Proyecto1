@@ -1392,6 +1392,12 @@ string Menu::menuPagos()
 
 bool Menu::opMenuPagos(int op)
 {
+	if (_gym->getMensualidadDgym() == 0) {
+		imprimirString("-------------------------------------------------------------");
+		imprimirString("ERROR: La mensualidad del gym no se a definido, lo cual es indispensable");
+		imprimirString("-------------------------------------------------------------");
+		op = 3;
+	}
 	if (_gym->getListaCurso()->listaVacia() == true) {
 		limpiar();
 		imprimirString("-------------------------------------------------------------");
@@ -1411,7 +1417,7 @@ bool Menu::opMenuPagos(int op)
 
 	Fecha* fechAux = NULL;
 	int cedulAbuscar = 0;
-	string codCurso="";
+	string codCurso = "";
 	string numGrup = "";
 	bool ex = false;
 	Iterador<Deportista>* iter;
@@ -1425,8 +1431,10 @@ bool Menu::opMenuPagos(int op)
 	case 1: // Registro nuevo de pago\n"
 		iter = _gym->getListaDepor()->begin();
 		iter2 = _gym->getListaDepor()->end();
+		imprimirString("-------------------------------------------------------------");
 		imprimirString("<5.Control  Pagos> <1.Registro de nuevo  pago>");
-		imprimirString("Seleccione el curso");
+		imprimirString("-------------------------------------------------------------");
+		imprimirString("En cual curso se encuentra el deportista que desa realizar el pago?");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
 
@@ -1491,13 +1499,15 @@ bool Menu::opMenuPagos(int op)
 				if (fechAux->getDia() != 0 && fechAux->getMes() != 0 && fechAux->getAno() != 0) {
 					iter->operator*()->setFechaDeultimoPago(fechAux);
 					ExpeAeditar->getlisFecha()->insertarElem(fechAux);
-					imprimirString("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO MENSUAL");
+					imprimirString("");
+					imprimirString2("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO DE PARTE DEL CLIENTE: ");
+					imprimirInt(cedulAbuscar);
 				}
 				else
 				{
 					imprimirString("Nota de Confirmaccion: NO SE REALIZO NINGUN PAGO ");
 				}
-				
+
 			}
 		}
 		//listar los cursos con su codigo 
@@ -1521,9 +1531,9 @@ bool Menu::opMenuPagos(int op)
 
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulAbuscar) {
-				imprimirString("El ultimo pago de este Cliente esta regitrado en la fecha: ");
+				imprimirString("A continuación se detalla el historial de pagos: ");
 				if (iter->operator*()->getFechaDeultimoPago() != NULL) {
-					imprimirString(iter->operator*()->imprimirPAGOS());
+					imprimirString(iter->operator*()->imprimirPAGOS(_gym->getMensualidadDgym()));
 				}
 				else {
 					imprimirString("{Este cliente esta [inactivo], por lo que no se tiene regitrado un pago reciente}");
@@ -1542,6 +1552,7 @@ bool Menu::opMenuPagos(int op)
 	}
 	return false;
 }
+
 
 void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 {

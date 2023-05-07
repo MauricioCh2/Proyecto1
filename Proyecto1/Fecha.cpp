@@ -41,12 +41,14 @@ void Fecha::setAno(int a)
 	ano = a;
 }
 
+
 string Fecha::toString()
 {
 	stringstream s;
 	s << dia << "/" << mes << "/" << ano;
 	return s.str();
 }
+
 
 string Fecha::getIdent()
 {

@@ -18,6 +18,7 @@ bool recivirBool();
 void imprimirString(string);
 void imprimirString2(string);
 void imprimirInt(int);
+void imprimirInt2(int);
 void imprimirChar(char);
 void imprimirDouble(double);
 //VALIDACIONES-----------------
