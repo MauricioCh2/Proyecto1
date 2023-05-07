@@ -20,6 +20,7 @@ public:
 	virtual int contador();
 	virtual T* contadorEspecifico(int);//retorna el valor que se encuentre en x posicion
 	virtual T* encontrarEsp(string);
+	virtual bool ExisteEspesifico(string);
 	virtual bool eliminarEspe(string);
 	//virtual bool cambiaNodos(string, string);
 	string toString();
@@ -119,6 +120,21 @@ T* ListaT<T>::encontrarEsp(string s) {
 
 	}
 	return NULL;
+}
+template<class T>
+inline bool ListaT<T>::ExisteEspesifico(string s)
+{
+	T* t;
+	_actual = _primero;
+	while (_actual != NULL) {
+		t = dynamic_cast<T*>(_actual->getInfo());
+		if (t->getIdent() == s) {
+			return true;
+		}
+		_actual = _actual->getSig();
+
+	}
+	return false;
 }
 template <class T>
 bool ListaT<T>::eliminarEspe(string i) {

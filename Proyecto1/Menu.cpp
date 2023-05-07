@@ -244,6 +244,10 @@ bool Menu::opMenuDeportista(int op)
 				}
 			} while (ex == false);
 			ex = false;
+			if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
+				imprimirString("----Ese curso no existe----");
+				break; break;
+			}
 			
 		
 		imprimirString("Para dicho curso quedan los siguientes grupos disponibles: ");
@@ -265,6 +269,11 @@ bool Menu::opMenuDeportista(int op)
 				}
 			} while (ex == false);
 			ex = false;
+			if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
+				imprimirString("----Ese grupo de ese curso no existe----");
+				break; break;
+			}
+			
 			if (numGrup == "salir") {
 				break;
 			}
@@ -311,6 +320,10 @@ bool Menu::opMenuDeportista(int op)
 			}
 		}while (ex == false);
 		ex = false;
+		if (_gym->getListaDepor()->ExisteEspesifico(to_string(cedula)) == true) {
+			imprimirString("ERROR: Esa Cedula ya exsiste en el sistema");
+			break; break;
+		}
 		imprimirString("Nombre: ");
 		do {
 			try {
@@ -501,6 +514,10 @@ bool Menu::opMenuDeportista(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
+			imprimirString("----Ese curso no existe----");
+			break; break;
+		}
 		imprimirString("Seleccione el grupo: ");
 		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
@@ -516,6 +533,10 @@ bool Menu::opMenuDeportista(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
+			imprimirString("----Ese grupo de ese curso no existe----");
+			break; break;
+		}
 		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
 		imprimirString(_gym->imprimirListadoDeClientesDUnGrupo(codCurso, numGrup));
 
@@ -530,7 +551,10 @@ bool Menu::opMenuDeportista(int op)
 				limpiar();
 			}
 		} while (ex == false);
-
+		if (_gym->getListaDepor()->ExisteEspesifico(to_string(cedulaAbuscar)) == false) {
+			imprimirString("ERROR: Esa Cedula no existe em el sistema");
+			break; break;
+		}
 		iterexp = _gym->getListaExpediente()->begin();
 		iter2exp = _gym->getListaExpediente()->end();
 
@@ -635,6 +659,11 @@ bool Menu::opMenuDeportista(int op)
 			}
 		} while (ex == false);
 
+		if (_gym->getListaDepor()->ExisteEspesifico(to_string(cedulaAbuscar)) == false) {
+			imprimirString("ERROR: Esa Cedula no existe en el sistema");
+			break; break;
+		}
+
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulaAbuscar) {
 				imprimirString("La infomacion de ese deportista es espesifico es: ");
@@ -698,6 +727,12 @@ bool Menu::opMenuCursos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		
+		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == true) {
+			imprimirString("----Ese curso ya exisiste----");
+			break; break;
+		}
+		
 		imprimirString("Nombre del Curso");
 		do {
 			try {
@@ -762,6 +797,10 @@ bool Menu::opMenuCursos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		if (_gym->getListaCurso()->ExisteEspesifico(ident) == false) {
+			imprimirString("----Ese curso no existe----");
+			break; break;
+		}
 		imprimirString(_gym->imprimirListaEspe(ident));
 		enter();
 		limpiarPantalla();
@@ -790,6 +829,11 @@ bool Menu::opMenuCursos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		if (_gym->getListaCurso()->ExisteEspesifico(ident) == false) {
+			imprimirString("----Ese curso no existe----");
+			break; break;
+		}
+		
 
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getIdent() == ident) {
@@ -896,6 +940,10 @@ bool Menu::opMenuGrupos(int op)
 					}
 				} while (ex == false);
 				ex = false;
+				if (_gym->getListaCurso()->ExisteEspesifico(curso) == false) {
+					imprimirString("----Ese curso no existe----");
+					break; break;
+				}
 				if (curso == "salir") {
 					break;
 				}
@@ -1089,9 +1137,10 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-		
-	
-
+		if (_gym->getListaCurso()->ExisteEspesifico(identDcurso) == false) {
+			imprimirString("----Ese curso no existe----");
+			break; break;
+		}
 
 		if (_gym->getListaDgruposDcurso(identDcurso) == NULL) {
 			imprimirString("El curso que escogio no tiene Grupos, por lo tanto no es posible editar un Grupo");
@@ -1113,7 +1162,10 @@ bool Menu::opMenuGrupos(int op)
 				}
 			} while (ex == false);
 			ex = false;
-
+			if (_gym->getListaDgruposDcurso(identDcurso)->ExisteEspesifico(numGrup) == false) {
+				imprimirString("----Ese grupo de ese curso no existe----");
+				break; break;
+			}
 			iterGrupo = _gym->getListaDgruposDcurso(identDcurso)->begin();
 			iter2Grupo = _gym->getListaDgruposDcurso(identDcurso)->end();
 			for (; iterGrupo->getPNodo() != iter2Grupo->getPNodo(); iterGrupo->operator++()) {
@@ -1143,6 +1195,10 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		if (_gym->getListaDepor()->ExisteEspesifico(cedCliente) == false) {
+			imprimirString("ERROR: Esa Cedula no existe en el sistema");
+			break; break;
+		}
 		imprimirString("Curso: ");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
@@ -1157,7 +1213,12 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-		imprimirString("Para ese grupo existen los siguientes grupos: ");
+
+		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
+			imprimirString("----Ese curso no existe----");
+			break; break;
+		}
+		imprimirString("Para ese curso existen los siguientes grupos: ");
 		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
 		imprimirString("Seleccione un grupo o digute 'salir' para salir: ");
@@ -1176,8 +1237,9 @@ bool Menu::opMenuGrupos(int op)
 			if (numGrup == "salir") {
 				break;
 			}
-			if (_gym->verDisponivilidadGrupos(codCurso, numGrup) != true) {
-				imprimirString("Ese grupo no esta disponible digite otro ");
+			if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
+				imprimirString("----Ese grupo de ese curso no existe----");
+				break; break;
 			}
 		} while (_gym->verDisponivilidadGrupos(codCurso, numGrup) != true);
 		if (numGrup == "salir") {
@@ -1244,6 +1306,10 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
+			imprimirString("----Ese curso no existe----");
+			break; break;
+		}
 		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
 		imprimirString("Cual grupo desea ver? ");
@@ -1258,7 +1324,10 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-
+		if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
+			imprimirString("----Ese grupo de ese curso no existe----");
+			break; break;
+		}
 		imprimirString(_gym->reporteGrupoEspe(codCurso, numGrup));
 		enter();
 		limpiar();
@@ -1281,7 +1350,10 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-		
+		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
+			imprimirString("----Ese curso no existe----");
+			break; break;
+		}
 		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
 		imprimirString("Seleccione un grupo: ");
@@ -1296,6 +1368,12 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+
+
+		if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
+			imprimirString("----Ese grupo de ese curso no existe----");
+			break; break;
+		}
 		imprimirString(_gym->imprimirClientesDeUnGrupo(codCurso,numGrup));
 		enter();
 		limpiarPantalla();
@@ -1317,7 +1395,10 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
-
+		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
+			imprimirString("----Ese curso no existe----");
+			break; break;
+		}
 		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
 		imprimirString("Seleccione un grupo: ");
@@ -1332,6 +1413,10 @@ bool Menu::opMenuGrupos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
+			imprimirString("----Ese grupo de ese curso no existe----");
+			break; break;
+		}
 		imprimirString("<Listado de clientes dentro del grupo> ");
 		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
 		imprimirString(_gym->imprimirListadoDeClientesDUnGrupo(codCurso, numGrup));
@@ -1348,6 +1433,10 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 
+		if (_gym->getListaDepor()->ExisteEspesifico(cedCliente) == false) {
+			imprimirString("ERROR: Esa Cedula no existe en el sistema");
+			break; break;
+		}
 		IDcurso = new stringMOD(codCurso);
 		IDgrupo = new stringMOD(numGrup);
 		cedint = stoi(cedCliente);
@@ -1364,8 +1453,9 @@ bool Menu::opMenuGrupos(int op)
 				}
 			}
 		}
+
+
 		_gym->cancelarMatricula(codCurso, numGrup, cedCliente);
-		imprimirString("Opcion en desarrollo");
 		break;
 	case 7:
 		limpiarPantalla();
@@ -1396,9 +1486,10 @@ bool Menu::opMenuPagos(int op)
 		imprimirString("-------------------------------------------------------------");
 		imprimirString("ERROR: La mensualidad del gym no se a definido, lo cual es indispensable");
 		imprimirString("-------------------------------------------------------------");
+		enter();
 		op = 3;
 	}
-	if (_gym->getListaCurso()->listaVacia() == true) {
+	else if (_gym->getListaCurso()->listaVacia() == true) {
 		limpiar();
 		imprimirString("-------------------------------------------------------------");
 		imprimirString("ERROR: No es posible trabajar con Deportistas sin primero ingresar algun Cursos");
@@ -1449,6 +1540,11 @@ bool Menu::opMenuPagos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
+			imprimirString("----Ese curso no existe----");
+			break; break;
+		}
+		
 		imprimirString("Seleccione el grupo: ");
 		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t\t<Disp>");
 		imprimirString(_gym->imprimirListadoGrupo(codCurso));
@@ -1464,6 +1560,11 @@ bool Menu::opMenuPagos(int op)
 			}
 		} while (ex == false);
 		ex = false;
+		if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
+			imprimirString("----Ese grupo de ese curso no existe----");
+			break; break;
+		}
+
 		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
 		imprimirString("Deportistas disponibles en este grupo para realisar el pago: ");
 		imprimirString(_gym->imprimirListadoDeClientesDUnGrupo(codCurso, numGrup));
@@ -1480,6 +1581,10 @@ bool Menu::opMenuPagos(int op)
 				limpiar();
 			}
 		} while (ex == false);
+		if (_gym->getListaDepor()->ExisteEspesifico(to_string(cedulAbuscar)) == false) {
+			imprimirString("ERROR: Esa Cedula no existe en el sistema");
+			break; break;
+		}
 
 		iterexp = _gym->getListaExpediente()->begin();
 		iter2exp = _gym->getListaExpediente()->end();
@@ -1528,6 +1633,11 @@ bool Menu::opMenuPagos(int op)
 				limpiar();
 			}
 		} while (ex == false);
+
+		if (_gym->getListaDepor()->ExisteEspesifico(to_string(cedulAbuscar)) == false) {
+			imprimirString("ERROR: Esa Cedula no existe en el sistema");
+			break; break;
+		}
 
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulAbuscar) {
@@ -1608,6 +1718,10 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 			}
 		} while (ex == false);
 		ex = false;
+		if (_gym->getListaDepor()->ExisteEspesifico(to_string(cedula)) == true) {
+			imprimirString("ERROR: Esa Cedula ya existe en el sistema");
+			break; break;
+		}
 		Clon->setCedula(cedula);
 		expeCon->setCedula(cedula);
 		break;
@@ -1814,7 +1928,6 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 		expeCon->setCanTriatGanador(canTriaGanados);
 		break;
 
-
 		default:break;
 		}
 
@@ -1887,7 +2000,10 @@ void Menu::atualizarINFOcurso(Curso* original)
 			}
 		} while (ex == false);
 		ex = false;
-
+		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == true) {
+			imprimirString("ERROR:ese codigo de curso ya exisite");
+			break; break;
+		}
 		Clon->setIdent(codCurso);
 		break;
 	case 2:

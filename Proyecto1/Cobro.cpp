@@ -47,9 +47,8 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 		} while (ex == false);
 		ex = false;
 		aux->setDia(f->getDia());
-		aux->setMes(f->getMes());
-		aux->setAno(f->getAno());
 		aux->setMes(f->getMes() + mesesApagar);
+		aux->setAno(f->getAno());
 		if (aux->getMes() > 12) {
 			aux->setMes(aux->getMes() - 12);
 			aux->setAno(aux->getAno() + 1);
