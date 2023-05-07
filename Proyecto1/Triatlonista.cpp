@@ -100,7 +100,7 @@ void Triatlonista::setFechaDeultimoPago(Fecha* f)
 {
 	this->ListaDpagos->insertarElem(f);
 }
-string Triatlonista::imprimirPAGOS(int k)
+string Triatlonista::imprimirPAGOS(int k)///Pratica con itre
 {
 	if (this->ListaDpagos->listaVacia() == false) {
 		stringstream s;
