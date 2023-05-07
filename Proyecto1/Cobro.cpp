@@ -46,7 +46,9 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 			}
 		} while (ex == false);
 		ex = false;
-		aux = f;
+		aux->setDia(f->getDia());
+		aux->setMes(f->getMes());
+		aux->setAno(f->getAno());
 		aux->setMes(f->getMes() + mesesApagar);
 		if (aux->getMes() > 12) {
 			aux->setMes(aux->getMes() - 12);
@@ -89,9 +91,13 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 		} while (ex == false);
 		ex = false;
 		if (mesesApagar == mesesDmorosidad) {
-			aux = f;
+			aux->setDia(f->getDia());
+			aux->setMes(f->getMes());
+			aux->setAno(f->getAno());
 		}
-		aux = f;
+		aux->setDia(f->getDia());
+		aux->setMes(f->getMes());
+		aux->setAno(f->getAno());
 		aux->setMes(tri->getFechaDeultimoPago()->getMes() + mesesApagar);
 		if (aux->getMes() > 12) {
 			aux->setMes(aux->getMes() - 12);
@@ -140,7 +146,9 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 				}
 			} while (ex == false);
 			ex = false;
-			aux = f;
+			aux->setDia(f->getDia());
+			aux->setMes(f->getMes());
+			aux->setAno(f->getAno());
 			aux->setMes(f->getMes() + mesesApagar);
 			if (aux->getMes() > 12) {
 				aux->setMes(aux->getMes() - 12);
