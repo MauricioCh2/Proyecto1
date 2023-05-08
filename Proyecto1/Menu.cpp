@@ -3,7 +3,7 @@
 void Menu::inicio() {
 	bool fin = false;
 	bool ex = false;
-	imprimirString("Bienvenido al GYM de triatlon");
+	imprimirString("\x1b[33m Bienvenido al GYM de triatlon");
 
 	imprimirString("Digite la Fecha en formato dia/mes/annio");
 	do {
@@ -19,55 +19,6 @@ void Menu::inicio() {
 	_gym = new Gym(fecha);
 	arch = new Archivos(_gym);
 	arch->cargarDatos();
-	//cout<<fecha->toString()<< "prueba ";
-	//Fecha* f1 = new Fecha(1, 4, 23);
-	//Deportista* c1 = new Triatlonista(111, "a", "1", f1, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	//Fecha* f2 = new Fecha(1, 4, 23);
-	//Deportista* c2 = new Triatlonista(222, "a", "1", f2, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	//Fecha* f3 = new Fecha(1, 4, 23);
-	//Deportista* c3 = new Triatlonista(333, "a", "1", f3, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	//Fecha* f4 = new Fecha(30, 3, 23);
-	//Deportista* c4 = new Triatlonista(444, "a", "1", f4, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	//Fecha* f5 = new Fecha(30, 3, 23);
-	//Deportista* c5 = new Triatlonista(555, "a", "1", f5, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	//Fecha* f6 = new Fecha(1, 1, 23);
-	//Deportista* c6 = new Triatlonista(666, "a", "1", f6, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	//Fecha* f7 = new Fecha(1, 1, 23);
-	//Deportista* c7 = new Triatlonista(777, "a", "1", f7, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	//Fecha* f8 = new Fecha(1, 1, 23);
-	//Deportista* c8 = new Triatlonista(888, "a", "1", f8, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	//Fecha* f9 = new Fecha(1, 1, 23);
-	//Deportista* c9 = new Triatlonista(999, "a", "1", f9, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	//Fecha* f10 = new Fecha(1, 1, 23);
-	//Deportista* c10 = new Triatlonista(100, "a", "1", f10, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	//Fecha* f11 = new Fecha(1, 1, 23);
-	//Deportista* c11 = new Triatlonista(000, "a", "1", f11, 1, 23, 'h', 1.10, 10, 10, 10, 1, 1);
-	//c1->setFechaDeultimoPago(f1);
-	//c2->setFechaDeultimoPago(f2);
-	//c3->setFechaDeultimoPago(f3);
-	//c4->setFechaDeultimoPago(f4);
-	//c5->setFechaDeultimoPago(f5);
-
-	//c6->setFechaDeultimoPago(f6);
-	//c7->setFechaDeultimoPago(f7);
-	//c8->setFechaDeultimoPago(f8);
-	//c9->setFechaDeultimoPago(f9);
-	////c10 Inactivo
-	////c11 Inactivo
-
-
-	//_gym->ingresarListaClientes(c1);
-	//_gym->ingresarListaClientes(c2);
-	//_gym->ingresarListaClientes(c3);
-	//_gym->ingresarListaClientes(c4);
-	//_gym->ingresarListaClientes(c5);
-	//_gym->ingresarListaClientes(c6);
-	//_gym->ingresarListaClientes(c7);
-	//_gym->ingresarListaClientes(c8);
-	//_gym->ingresarListaClientes(c9);
-	//_gym->ingresarListaClientes(c10);
-	//_gym->ingresarListaClientes(c11);
-
 	while (!fin) {
 		llamarMenus();	}
 }
@@ -75,7 +26,8 @@ void Menu::inicio() {
 
 string Menu::menuPrincipal() {
 	stringstream s;
-	  s << "	   <Menu Principal>		  " << endl
+	limpiarPantalla();
+	  s << "\x1b[33m	   <Menu Principal>		  \x1B[37m" << endl
 		<< "[1]Administracion General-------------" << endl
 		<< "[2]Control de Deportista--------------" << endl
 		<< "[3]Control de Cursos------------------" << endl
@@ -92,7 +44,7 @@ string Menu::menuPrincipal() {
 //Administracion General--------------------------------------------------
 string Menu::menuAdministracion() {
 	stringstream s;
-	  s << "	   <Menu Administracion>		  " << endl
+	  s << "\x1b[33m	   <Menu Administracion>		  \x1B[37m" << endl
 		<< "[1]Nombre del Gimnasio----------------" << endl
 		<< "[2]Monto de mensualidad---------------" << endl
 		<< "[3]Atras----------------------------\n\n"
@@ -107,7 +59,7 @@ bool Menu::opMenuAdministracion(int op) {
 	bool ex = false;
 	switch (op) {
 	case 1://Nombre del Gimnasio
-		imprimirString("<1. Administracion General > <1. Nombre del Gimnasio>  ");
+		imprimirString("\x1b[33m <1. Administracion General > <1. Nombre del Gimnasio>  ");
 		imprimirString("Ingrese el nombre del Gimnasio :");
 		ignorarCin();
 		nombre = recivirGetLine();
@@ -117,7 +69,7 @@ bool Menu::opMenuAdministracion(int op) {
 
 		break;
 	case 2://Monto de mensualidad
-		imprimirString("<1. Administracion General>  <2. Monto de mensualidad >  ");
+		imprimirString("\x1b[33m <1. Administracion General>  <2. Monto de mensualidad >  ");
 		imprimirString("Ingrese el Monto de mensualidad:");
 		do {
 			try {
@@ -147,7 +99,7 @@ bool Menu::opMenuAdministracion(int op) {
 //Control  Deportistas --------------------------------------------------
 string Menu::menuDeportista() {
 	stringstream s;
-		s << "	   <Menu Deportista>		  " << endl
+	s << "\x1b[33m	   <Menu Deportista>		  \x1B[37m" << endl
 		<< "[1]Ingreso de nuevo deportista--------" << endl
 		<< "[2]Modificacion de deportista---------" << endl
 		<< "[3]Listado de deportista--------------" << endl
@@ -172,14 +124,14 @@ bool Menu::opMenuDeportista(int op)
 	if (_gym->getListaCurso()->listaVacia() == true) {
 		limpiar();
 		imprimirString("-------------------------------------------------------------");
-		imprimirString("ERROR: No es posible trabajar con Deportistas sin primero ingresar algun Cursos");
+		imprimirString("\x1b[31mERROR: No es posible trabajar con Deportistas sin primero ingresar algun Cursos\x1B[37m");
 		imprimirString("-------------------------------------------------------------");
 		enter();
 		op = 5;
 	}
 	else if (_gym->getListaCurso()->getPriemero()->getInfo()->getListaGrupos() == NULL) {
 		imprimirString("-------------------------------------------------------------");
-		imprimirString("ERROR: No es posible trabajar con Deportistas sin primero ingresar algun Grupo");
+		imprimirString("\x1b[31mERROR: No es posible trabajar con Deportistas sin primero ingresar algun Grupo\x1B[37m");
 		imprimirString("(Nota: Para crear un grupo es necesario tener al menus un Curso)");
 		imprimirString("-------------------------------------------------------------");
 		enter();
@@ -224,7 +176,7 @@ bool Menu::opMenuDeportista(int op)
 	Expediente* exaux = NULL;
 	switch (op) {
 	case 1: // Ingreso nuevo deportista 
-		imprimirString("<2.Control Deportistas>  <1.Ingreso nuevo deportista>");
+		imprimirString("\x1b[33m<2.Control Deportistas>  <1.Ingreso nuevo deportista>");
 		do {
 
 			imprimirString("Lista de cursos");
@@ -244,7 +196,7 @@ bool Menu::opMenuDeportista(int op)
 			} while (ex == false);
 			ex = false;
 			if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
-				imprimirString("----Ese curso no existe----");
+				imprimirString("\x1B[31m ----Ese curso no existe----");
 				break; break;
 			}
 			
@@ -269,7 +221,7 @@ bool Menu::opMenuDeportista(int op)
 			} while (ex == false);
 			ex = false;
 			if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
-				imprimirString("----Ese grupo de ese curso no existe----");
+				imprimirString("\x1B[31m ----Ese grupo de ese curso no existe----");
 				break; break;
 			}
 			
@@ -293,7 +245,7 @@ bool Menu::opMenuDeportista(int op)
 					ex = true;
 				}
 				catch (...) {
-					imprimirString("Error con el formato de fecha (ejemplo: 15/4/23 )");
+					imprimirString("\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 )");
 					limpiar();
 				}
 			} while (ex == false);
@@ -320,7 +272,7 @@ bool Menu::opMenuDeportista(int op)
 		}while (ex == false);
 		ex = false;
 		if (_gym->getListaDepor()->ExisteEspesifico(to_string(cedula)) == true) {
-			imprimirString("ERROR: Esa Cedula ya exsiste en el sistema");
+			imprimirString("\x1B[31m ERROR: Esa Cedula ya exsiste en el sistema");
 			break; break;
 		}
 		imprimirString("Nombre: ");
@@ -356,7 +308,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (...) {
-				cout << "Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+				cout << "\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
 				limpiar();
 			}
 		}while (ex == false);
@@ -497,7 +449,7 @@ bool Menu::opMenuDeportista(int op)
 		iter = _gym->getListaDepor()->begin();
 		iter2 = _gym->getListaDepor()->end();
 		
-		imprimirString("<2.Control Deportistas>  <2.Modificacion de deportista>");
+		imprimirString("\x1b[33m <2.Control Deportistas>  <2.Modificacion de deportista>");
 		imprimirString("Seleccione el curso");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
@@ -514,7 +466,7 @@ bool Menu::opMenuDeportista(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
-			imprimirString("----Ese curso no existe----");
+			imprimirString("\x1B[31m ----Ese curso no existe----");
 			break; break;
 		}
 		imprimirString("Seleccione el grupo: ");
@@ -533,7 +485,7 @@ bool Menu::opMenuDeportista(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
-			imprimirString("----Ese grupo de ese curso no existe----");
+			imprimirString("\x1B[31m ----Ese grupo de ese curso no existe----");
 			break; break;
 		}
 		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
@@ -551,7 +503,7 @@ bool Menu::opMenuDeportista(int op)
 			}
 		} while (ex == false);
 		if (_gym->getListaDepor()->ExisteEspesifico(to_string(cedulaAbuscar)) == false) {
-			imprimirString("ERROR: Esa Cedula no existe em el sistema");
+			imprimirString("\x1B[31m ERROR: Esa Cedula no existe em el sistema");
 			break; break;
 		}
 		iterexp = _gym->getListaExpediente()->begin();
@@ -572,13 +524,14 @@ bool Menu::opMenuDeportista(int op)
 		}
 
 		
-
+		enter();
+		limpiarPantalla();
 		break;
 	case 3: //Listado de deportistas
 
 		iter = _gym->getListaDepor()->begin();
 		iter2 = _gym->getListaDepor()->end();
-		imprimirString("<2.Control Deportistas>  <3.Listado de deportistas>");
+		imprimirString("\x1b[33m <2.Control Deportistas>  <3.Listado de deportistas>");
 		imprimirString(subMenuListas());
 		opSub = recivirInt();
 		switch (opSub){
@@ -639,11 +592,13 @@ bool Menu::opMenuDeportista(int op)
 		}
 		delete iter;
 		delete iter2;
+		enter();
+		limpiarPantalla();
 		break;
 	case 4: //Detalle de deportista especificp
 		iter = _gym->getListaDepor()->begin();
 		iter2 = _gym->getListaDepor()->end();
-		imprimirString("<2.Control Deportistas>  <4.Detalle deportista especifico>");
+		imprimirString("\x1b[33m <2.Control Deportistas>  <4.Detalle deportista especifico>");
 		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
 		imprimirString(_gym->getListaDepor()->Listar());
 		imprimirString("Cual seria la cedula del Deportista?\n");
@@ -659,7 +614,7 @@ bool Menu::opMenuDeportista(int op)
 		} while (ex == false);
 
 		if (_gym->getListaDepor()->ExisteEspesifico(to_string(cedulaAbuscar)) == false) {
-			imprimirString("ERROR: Esa Cedula no existe en el sistema");
+			imprimirString("\x1B[31m ERROR: Esa Cedula no existe en el sistema");
 			break; break;
 		}
 
@@ -669,7 +624,8 @@ bool Menu::opMenuDeportista(int op)
 				imprimirString(iter->operator*()->toString());
 			}
 		}
-		
+		enter();
+		limpiarPantalla();
 		break;
 	case 5: //Atras
 		limpiarPantalla();
@@ -687,7 +643,7 @@ bool Menu::opMenuDeportista(int op)
 string Menu::menuCursos()
 {
 	stringstream s;
-	s << "	   <Menu Cursos>		  " << endl
+	s << "\x1b[33m	   <Menu Cursos>		  \x1B[37m" << endl
 		<< "[1]Ingreso nuevo curso----------------" << endl
 		<< "[2]Reporte de curso especifico--------" << endl
 		<< "[3]Modificacion de curso especifico---" << endl
@@ -713,7 +669,7 @@ bool Menu::opMenuCursos(int op)
 
 	switch (op) {
 	case 1: // Ingreso nuevo curso;
-		imprimirString("< 3.Control Cursos> < 1.Ingreso nuevo curso >");
+		imprimirString("\x1b[33m < 3.Control Cursos> < 1.Ingreso nuevo curso >");
 		imprimirString("Codigo del Curso");
 		do {
 			try {
@@ -728,7 +684,7 @@ bool Menu::opMenuCursos(int op)
 		ex = false;
 		
 		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == true) {
-			imprimirString("----Ese curso ya exisiste----");
+			imprimirString("\x1B[31m ----Ese curso ya exisiste----");
 			break; break;
 		}
 		
@@ -779,7 +735,7 @@ bool Menu::opMenuCursos(int op)
 		limpiarPantalla();
 		break;
 	case 2: //Reporte de curso específico 
-		imprimirString("< 3.Control Cursos> < 2.Reporte de curso especifico>\n");
+		imprimirString("\x1b[33m < 3.Control Cursos> < 2.Reporte de curso especifico>\n");
 		imprimirString("Listado de cursos");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
@@ -797,7 +753,7 @@ bool Menu::opMenuCursos(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaCurso()->ExisteEspesifico(ident) == false) {
-			imprimirString("----Ese curso no existe----");
+			imprimirString("\x1B[31m----Ese curso no existe----");
 			break; break;
 		}
 		imprimirString(_gym->imprimirListaEspe(ident));
@@ -810,7 +766,7 @@ bool Menu::opMenuCursos(int op)
 
 		iter = _gym->getListaCurso()->begin();
 		iter2 = _gym->getListaCurso()->end();
-		imprimirString("< 3.Control Cursos> < 3. Modificación de  curso especifico >");
+		imprimirString("\x1b[33m < 3.Control Cursos> < 3. Modificación de  curso especifico >");
 		imprimirString("Listado de cursos");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
@@ -829,7 +785,7 @@ bool Menu::opMenuCursos(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaCurso()->ExisteEspesifico(ident) == false) {
-			imprimirString("----Ese curso no existe----");
+			imprimirString("\x1B[31m ----Ese curso no existe----");
 			break; break;
 		}
 		
@@ -842,7 +798,8 @@ bool Menu::opMenuCursos(int op)
 		}
 		delete iter;
 		delete iter2;
-		
+		enter();
+		limpiarPantalla();
 		break;
 	default:
 		break;
@@ -856,7 +813,7 @@ bool Menu::opMenuCursos(int op)
 string Menu::menuGrupos()
 {
 	stringstream s;
-	s << "	   <Menu Grupos>		  " << endl
+	s << "\x1b[33m	   <Menu Grupos>		  \x1B[37m" << endl
 		<< "[1]Ingreso nuevo grupo-----------------------" << endl
 		<< "[2]Modificacion de  grupo especifico---------" << endl
 		<< "[3]Matricula en grupo especifico-------------" << endl
@@ -873,7 +830,7 @@ bool Menu::opMenuGrupos(int op)
 	if (_gym->getListaCurso()->listaVacia() == true) {
 		limpiar();
 		imprimirString("-------------------------------------------------------------");
-		imprimirString("ERROR: No es posible trbajar con grupos sin primero ingresar algun Cursos");
+		imprimirString("\x1B[31m ERROR: No es posible trbajar con grupos sin primero ingresar algun Cursos");
 		imprimirString("-------------------------------------------------------------");
 		enter();
 		op = 7;
@@ -918,7 +875,7 @@ bool Menu::opMenuGrupos(int op)
 	Deportista* depAux = NULL;
 	switch (op) {
 	case 1: // Ingreso nuevo grupo;
-		imprimirString("< 4.Control Grupos> < 1.Ingreso nuevo grupo>");
+		imprimirString("\x1b[33m < 4.Control Grupos> < 1.Ingreso nuevo grupo>");
 			
 		do {
 			
@@ -940,7 +897,7 @@ bool Menu::opMenuGrupos(int op)
 				} while (ex == false);
 				ex = false;
 				if (_gym->getListaCurso()->ExisteEspesifico(curso) == false) {
-					imprimirString("----Ese curso no existe----");
+					imprimirString("\x1B[31m ----Ese curso no existe----");
 					break; break;
 				}
 				if (curso == "salir") {
@@ -1005,7 +962,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (...) {
-				cout << "Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+				cout << "\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
 				limpiar();
 			}
 		} while (ex == false);
@@ -1118,7 +1075,7 @@ bool Menu::opMenuGrupos(int op)
 	case 2: //Modificacion de  grupo especifico
 		iterCurso = _gym->getListaCurso()->begin();
 		iter2Curso = _gym->getListaCurso()->end();
-		imprimirString("< 4.Control Grupos>  <2. Modificacion  de  grupo especifico>");
+		imprimirString("\x1b[33m < 4.Control Grupos>  <2. Modificacion  de  grupo especifico>");
 		imprimirString("De cual Curso proviene el Grupo que desea modificar?: ");
 		
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
@@ -1137,7 +1094,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaCurso()->ExisteEspesifico(identDcurso) == false) {
-			imprimirString("----Ese curso no existe----");
+			imprimirString("\x1B[31m ----Ese curso no existe----");
 			break; break;
 		}
 
@@ -1162,7 +1119,7 @@ bool Menu::opMenuGrupos(int op)
 			} while (ex == false);
 			ex = false;
 			if (_gym->getListaDgruposDcurso(identDcurso)->ExisteEspesifico(numGrup) == false) {
-				imprimirString("----Ese grupo de ese curso no existe----");
+				imprimirString("\x1B[31m ----Ese grupo de ese curso no existe----");
 				break; break;
 			}
 			iterGrupo = _gym->getListaDgruposDcurso(identDcurso)->begin();
@@ -1173,13 +1130,14 @@ bool Menu::opMenuGrupos(int op)
 				}
 			}
 		}
-		
+		enter();
+		limpiarPantalla();
 		break;
 	case 3://Matricula en grupo especifico
 		cedCliente = "";
 		codCurso = "";
 		numGrup = "";
-		imprimirString("< 5.Control Grupos> < 3. Matricula en grupo especifico>");
+		imprimirString("\x1b[33m < 5.Control Grupos> < 3. Matricula en grupo especifico>");
 		imprimirString("<Listado de clientes> ");
 		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
 		imprimirString(_gym->getListaDepor()->Listar());
@@ -1195,7 +1153,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaDepor()->ExisteEspesifico(cedCliente) == false) {
-			imprimirString("ERROR: Esa Cedula no existe en el sistema");
+			imprimirString("\x1B[31m ERROR: Esa Cedula no existe en el sistema");
 			break; break;
 		}
 		imprimirString("Curso: ");
@@ -1214,7 +1172,7 @@ bool Menu::opMenuGrupos(int op)
 		ex = false;
 
 		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
-			imprimirString("----Ese curso no existe----");
+			imprimirString("\x1B[31m ----Ese curso no existe----");
 			break; break;
 		}
 		imprimirString("Para ese curso existen los siguientes grupos: ");
@@ -1237,7 +1195,7 @@ bool Menu::opMenuGrupos(int op)
 				break;
 			}
 			if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
-				imprimirString("----Ese grupo de ese curso no existe----");
+				imprimirString("\x1B[31m ----Ese grupo de ese curso no existe----");
 				break; break;
 			}
 		} while (_gym->verDisponivilidadGrupos(codCurso, numGrup) != true);
@@ -1286,9 +1244,11 @@ bool Menu::opMenuGrupos(int op)
 		}
 
 		_gym->ingresarClienteAGrupos(numGrup, codCurso, depAux);
+		enter();
+		limpiarPantalla();
 		break;
 	case 4: //Reporte de grupo especifico 
-		imprimirString("< 5.Control Grupos> < 4.Reporte de grupo especifico >");
+		imprimirString("\x1b[33m < 5.Control Grupos> < 4.Reporte de grupo especifico >");
 		codCurso = "";
 		numGrup = "";
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
@@ -1306,7 +1266,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
-			imprimirString("----Ese curso no existe----");
+			imprimirString("\x1B[31m ----Ese curso no existe----");
 			break; break;
 		}
 		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
@@ -1324,7 +1284,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
-			imprimirString("----Ese grupo de ese curso no existe----");
+			imprimirString("\x1B[31m ----Ese grupo de ese curso no existe----");
 			break; break;
 		}
 		imprimirString(_gym->reporteGrupoEspe(codCurso, numGrup));
@@ -1333,7 +1293,7 @@ bool Menu::opMenuGrupos(int op)
 		limpiarPantalla();
 		break;
 	case 5: //Reporte deportistas matriculados en grupo
-		imprimirString("< 5.Control Grupos> < 5. Reporte deportistas matriculados por grupo>");
+		imprimirString("\x1b[33m < 5.Control Grupos> < 5. Reporte deportistas matriculados por grupo>");
 		imprimirString("Seleccione un curso");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
@@ -1350,7 +1310,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
-			imprimirString("----Ese curso no existe----");
+			imprimirString(" \x1B[31m ----Ese curso no existe----");
 			break; break;
 		}
 		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
@@ -1370,7 +1330,7 @@ bool Menu::opMenuGrupos(int op)
 
 
 		if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
-			imprimirString("----Ese grupo de ese curso no existe----");
+			imprimirString("\x1B[31m ----Ese grupo de ese curso no existe----");
 			break; break;
 		}
 		imprimirString(_gym->imprimirClientesDeUnGrupo(codCurso,numGrup));
@@ -1378,7 +1338,7 @@ bool Menu::opMenuGrupos(int op)
 		limpiarPantalla();
 		break;
 	case 6://Cancelacion de  matricula en grupo
-		imprimirString("< 5.Control Grupos>  <6. Cancelacion de  matricula en grupo>");
+		imprimirString("\x1b[33m < 5.Control Grupos>  <6. Cancelacion de  matricula en grupo>");
 		imprimirString("Seleccione un curso");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
 		imprimirString(_gym->imprimirListadoCursos());
@@ -1395,7 +1355,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
-			imprimirString("----Ese curso no existe----");
+			imprimirString("\x1B[31m ----Ese curso no existe----");
 			break; break;
 		}
 		imprimirString("<Num>\t<Dia>\t<Horario>\t<CupMax>\t<Disp>");
@@ -1413,7 +1373,7 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
-			imprimirString("----Ese grupo de ese curso no existe----");
+			imprimirString("\x1B[31m ----Ese grupo de ese curso no existe----");
 			break; break;
 		}
 		imprimirString("<Listado de clientes dentro del grupo> ");
@@ -1433,7 +1393,7 @@ bool Menu::opMenuGrupos(int op)
 		ex = false;
 
 		if (_gym->getListaDepor()->ExisteEspesifico(cedCliente) == false) {
-			imprimirString("ERROR: Esa Cedula no existe en el sistema");
+			imprimirString("\x1B[31m ERROR: Esa Cedula no existe en el sistema");
 			break; break;
 		}
 		IDcurso = new stringMOD(codCurso);
@@ -1455,6 +1415,8 @@ bool Menu::opMenuGrupos(int op)
 
 
 		_gym->cancelarMatricula(codCurso, numGrup, cedCliente);
+		enter();
+		limpiarPantalla();
 		break;
 	case 7:
 		limpiarPantalla();
@@ -1470,7 +1432,7 @@ bool Menu::opMenuGrupos(int op)
 string Menu::menuPagos()
 {
 	stringstream s;
-	s << "	   <Menu Pagos>		  " << endl
+	s << "\x1b[33m	   <Menu Pagos>		  \x1B[37m" << endl
 		<< "[1]Registro nuevo de pago-------------" << endl
 		<< "[2]Reporte de pagos por deportista----" << endl
 		<< "[3]Atras------------------------------\n\n"
@@ -1483,7 +1445,7 @@ bool Menu::opMenuPagos(int op)
 {
 	if (_gym->getMensualidadDgym() == 0) {
 		imprimirString("-------------------------------------------------------------");
-		imprimirString("ERROR: La mensualidad del gym no se a definido, lo cual es indispensable");
+		imprimirString("\x1B[31m ERROR: La mensualidad del gym no se a definido, lo cual es indispensable");
 		imprimirString("-------------------------------------------------------------");
 		enter();
 		op = 3;
@@ -1491,14 +1453,14 @@ bool Menu::opMenuPagos(int op)
 	else if (_gym->getListaCurso()->listaVacia() == true) {
 		limpiar();
 		imprimirString("-------------------------------------------------------------");
-		imprimirString("ERROR: No es posible trabajar con Deportistas sin primero ingresar algun Cursos");
+		imprimirString("\x1B[31m ERROR: No es posible trabajar con Deportistas sin primero ingresar algun Cursos");
 		imprimirString("-------------------------------------------------------------");
 		enter();
 		op = 3;
 	}
 	else if (_gym->getListaCurso()->getPriemero()->getInfo()->getListaGrupos() == NULL) {
 		imprimirString("-------------------------------------------------------------");
-		imprimirString("ERROR: No es posible trabajar con Deportistas sin primero ingresar algun Grupo");
+		imprimirString("\x1B[31m ERROR: No es posible trabajar con Deportistas sin primero ingresar algun Grupo");
 		imprimirString("(Nota: Para crear un grupo es necesario tener al menus un Curso)");
 		imprimirString("-------------------------------------------------------------");
 		enter();
@@ -1523,7 +1485,7 @@ bool Menu::opMenuPagos(int op)
 		iter = _gym->getListaDepor()->begin();
 		iter2 = _gym->getListaDepor()->end();
 		imprimirString("-------------------------------------------------------------");
-		imprimirString("<5.Control  Pagos> <1.Registro de nuevo  pago>");
+		imprimirString("\x1b[33m <5.Control  Pagos> <1.Registro de nuevo  pago>");
 		imprimirString("-------------------------------------------------------------");
 		imprimirString("En cual curso se encuentra el deportista que desa realizar el pago?");
 		imprimirString("<Codigo>\t<Curso>\t\t<Nivel>");
@@ -1541,7 +1503,7 @@ bool Menu::opMenuPagos(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == false) {
-			imprimirString("----Ese curso no existe----");
+			imprimirString("\x1B[31m ----Ese curso no existe----");
 			break; break;
 		}
 		
@@ -1561,7 +1523,7 @@ bool Menu::opMenuPagos(int op)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaDgruposDcurso(codCurso)->ExisteEspesifico(numGrup) == false) {
-			imprimirString("----Ese grupo de ese curso no existe----");
+			imprimirString("\x1B[31m ----Ese grupo de ese curso no existe----");
 			break; break;
 		}
 
@@ -1582,7 +1544,7 @@ bool Menu::opMenuPagos(int op)
 			}
 		} while (ex == false);
 		if (_gym->getListaDepor()->ExisteEspesifico(to_string(cedulAbuscar)) == false) {
-			imprimirString("ERROR: Esa Cedula no existe en el sistema");
+			imprimirString("\x1B[31m ERROR: Esa Cedula no existe en el sistema");
 			break; break;
 		}
 
@@ -1622,7 +1584,7 @@ bool Menu::opMenuPagos(int op)
 	case 2:
 		iter = _gym->getListaDepor()->begin();
 		iter2 = _gym->getListaDepor()->end();
-		imprimirString("<5.Control  Pagos> <2.Reporte de pagos por deportista>");
+		imprimirString("\x1b[33m <5.Control  Pagos> <2.Reporte de pagos por deportista>");
 		imprimirString("Cedula del Cliente: ");
 		do {
 			try {
@@ -1637,7 +1599,7 @@ bool Menu::opMenuPagos(int op)
 		} while (ex == false);
 
 		if (_gym->getListaDepor()->ExisteEspesifico(to_string(cedulAbuscar)) == false) {
-			imprimirString("ERROR: Esa Cedula no existe en el sistema");
+			imprimirString("\x1B[31m ERROR: Esa Cedula no existe en el sistema");
 			break; break;
 		}
 
@@ -1722,7 +1684,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaDepor()->ExisteEspesifico(to_string(cedula)) == true) {
-			imprimirString("ERROR: Esa Cedula ya existe en el sistema");
+			imprimirString("\x1B[31m ERROR: Esa Cedula ya existe en el sistema");
 			break; break;
 		}
 		Clon->setCedula(cedula);
@@ -1770,7 +1732,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (...) {
-				cout << "Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+				cout << "\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
 				limpiar();
 			}
 		} while (ex == false);
@@ -1943,7 +1905,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 string Menu::QueQuiereEditarTri()
 {
 	stringstream s;
-	s << "	   <Que quiere editar>		  " << endl
+	s << "\x1b[33m	   <Que quiere editar>		  \x1B[37m" << endl
 		<< "[1]Editar Cedula-----------------------" << endl
 		<< "[2]Editar Nombre---------" << endl
 		<< "[3]Editar telefono-------------" << endl
@@ -2004,7 +1966,7 @@ void Menu::atualizarINFOcurso(Curso* original)
 		} while (ex == false);
 		ex = false;
 		if (_gym->getListaCurso()->ExisteEspesifico(codCurso) == true) {
-			imprimirString("ERROR:ese codigo de curso ya exisite");
+			imprimirString("\x1B[31m ERROR:ese codigo de curso ya exisite");
 			break; break;
 		}
 		Clon->setIdent(codCurso);
@@ -2161,7 +2123,7 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					ex = true;
 				}
 				catch (...) {
-					cout << "Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+					cout << "\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
 					limpiar();
 				}
 			} while (ex == false);
@@ -2289,7 +2251,7 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 string Menu::QueQuiereEditarCurso()
 {
 	stringstream s;
-	s << "	   <Que quiere editar>		  " << endl
+	s << "\x1b[33m	   <Que quiere editar>		  \x1B[37m" << endl
 		<< "[1]Editar Codigo de Curso-----------------------" << endl
 		<< "[2]Editar Nombre de Curso---------" << endl
 		<< "[3]Editar Nivel de Curso-------------" << endl
@@ -2304,7 +2266,7 @@ string Menu::QueQuiereEditarCurso()
 string Menu::QueQuiereEditarGrupo()
 {
 	stringstream s;
-	s << "	   <Que quiere editar>		  " << endl
+	s << "\x1b[33m	   <Que quiere editar>		  \x1B[37m" << endl
 		<< "[1]Editar Cedula de Instructor-----------------------" << endl
 		<< "[2]Editar Nombre de Instructor---------" << endl
 		<< "[3]Editar CupoMaximo-------------" << endl
@@ -2353,6 +2315,8 @@ bool Menu::llamarMenus() {
 		} while (ex == false);
 		ex = false;
 		opMenuAdministracion(op);
+		enter();
+
 		break;
 	case 2://Control de Deportistas
 		limpiarPantalla();
@@ -2369,6 +2333,8 @@ bool Menu::llamarMenus() {
 		} while (ex == false);
 		ex = false;
 		opMenuDeportista(op);
+		enter();
+
 		break;
 	case 3://Control de Cursos
 		limpiarPantalla();
@@ -2385,6 +2351,8 @@ bool Menu::llamarMenus() {
 		} while (ex == false);
 		ex = false;
 		opMenuCursos(op);
+		enter();
+
 		break;
 	case 4://Control de Grupos
 		limpiarPantalla();
@@ -2401,6 +2369,7 @@ bool Menu::llamarMenus() {
 		} while (ex == false);
 		ex = false;
 		opMenuGrupos(op);
+		enter();
 
 		break;
 	case 5://Control Pagos
@@ -2418,7 +2387,7 @@ bool Menu::llamarMenus() {
 		} while (ex == false);
 		ex = false;
 		opMenuPagos(op);
-
+		enter();
 		break;
 	case 6: //Guardar en Archivos y salir
 		limpiarPantalla();

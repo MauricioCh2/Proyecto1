@@ -95,7 +95,7 @@ double recivirDouble() {
 }
 //IMPRIMIR---------------------
 void imprimirString(string s) {
-	cout << s << endl;
+	cout << s << "\x1B[37m" << endl;
 }
 void imprimirString2(string S) {
 	cout << S;
