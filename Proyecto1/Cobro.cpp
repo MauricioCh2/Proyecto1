@@ -46,10 +46,10 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 			}
 		} while (ex == false);
 		ex = false;
-		aux->setDia(f->getDia());
-		aux->setMes(f->getMes() + mesesApagar);
-		aux->setAno(f->getAno());
-		if (aux->getMes() > 12) {
+		aux->setDia(tri->getFechaDeultimoPago()->getDia());
+		aux->setMes(tri->getFechaDeultimoPago()->getMes() + mesesApagar);
+		aux->setAno(tri->getFechaDeultimoPago()->getAno());
+		while (aux->getMes() > 12) {
 			aux->setMes(aux->getMes() - 12);
 			aux->setAno(aux->getAno() + 1);
 		}
@@ -94,11 +94,10 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 			aux->setMes(f->getMes());
 			aux->setAno(f->getAno());
 		}
-		aux->setDia(f->getDia());
-		aux->setMes(f->getMes());
-		aux->setAno(f->getAno());
+		aux->setDia(tri->getFechaDeultimoPago()->getDia());
 		aux->setMes(tri->getFechaDeultimoPago()->getMes() + mesesApagar);
-		if (aux->getMes() > 12) {
+		aux->setAno(tri->getFechaDeultimoPago()->getAno());
+		while (aux->getMes() > 12) {
 			aux->setMes(aux->getMes() - 12);
 			aux->setAno(aux->getAno() + 1);
 		}
@@ -149,7 +148,7 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 			aux->setMes(f->getMes());
 			aux->setAno(f->getAno());
 			aux->setMes(f->getMes() + mesesApagar);
-			if (aux->getMes() > 12) {
+			while (aux->getMes() > 12) {
 				aux->setMes(aux->getMes() - 12);
 				aux->setAno(aux->getAno() + 1);
 			}

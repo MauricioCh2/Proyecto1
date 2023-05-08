@@ -10,7 +10,10 @@ protected:
 	int _cantTriatGanador;
 	Ciclista* _ptrCiclista;;
 	Nadador* _ptrNad;
-	ListaT<Fecha>* ListaDpagos = NULL;
+	ListaT<Fecha>* ListaDpagos ;
+	Iterador<Fecha>* iter1 ;
+	Iterador<Fecha>* iter2;
+
 public:
 	Triatlonista(int, string, string, Fecha*, int, double, char, double, double, double, double, int, int);
 

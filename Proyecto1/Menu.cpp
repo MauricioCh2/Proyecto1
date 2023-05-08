@@ -69,8 +69,7 @@ void Menu::inicio() {
 	//_gym->ingresarListaClientes(c11);
 
 	while (!fin) {
-		llamarMenus();
-	}
+		llamarMenus();	}
 }
 
 
@@ -1507,6 +1506,7 @@ bool Menu::opMenuPagos(int op)
 	}
 
 	Fecha* fechAux = NULL;
+	Fecha* fechAux2 = new Fecha(0,0,0);
 	int cedulAbuscar = 0;
 	string codCurso = "";
 	string numGrup = "";
@@ -1600,10 +1600,12 @@ bool Menu::opMenuPagos(int op)
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulAbuscar) {
 				fechAux = Cobro::getFechaDeultimoPago(iter->operator*(), this->fecha, _gym->getMensualidadDgym());
-
-				if (fechAux->getDia() != 0 && fechAux->getMes() != 0 && fechAux->getAno() != 0) {
-					iter->operator*()->setFechaDeultimoPago(fechAux);
-					ExpeAeditar->getlisFecha()->insertarElem(fechAux);
+				fechAux2->setDia(fechAux->getDia());
+				fechAux2->setMes(fechAux->getMes());
+				fechAux2->setAno(fechAux->getAno());
+				if (fechAux2->getDia() != 0 && fechAux2->getMes() != 0 && fechAux2->getAno() != 0) {
+					iter->operator*()->setFechaDeultimoPago(fechAux2);
+					ExpeAeditar->getlisFecha()->insertarElem(fechAux2);
 					imprimirString("");
 					imprimirString2("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO DE PARTE DEL CLIENTE: ");
 					imprimirInt(cedulAbuscar);
@@ -1660,6 +1662,7 @@ bool Menu::opMenuPagos(int op)
 
 		break;
 	}
+
 	return false;
 }
 

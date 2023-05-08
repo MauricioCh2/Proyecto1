@@ -9,6 +9,8 @@ Triatlonista::Triatlonista(int ced, string nombre, string tel, Fecha* fech, int 
 	this->_cantTriatGanador = triaGan;
 	this->_ptrFecha = fech;
 	this->ListaDpagos = new ListaT<Fecha>;
+	iter1 = NULL;
+	iter2 = NULL;
 }
 Triatlonista:: ~Triatlonista() {
 	delete _ptrNad;
@@ -91,10 +93,15 @@ void Triatlonista::setCanTriatGanador(int canGanadas) { _cantTriatGanador = canG
 
 Fecha* Triatlonista::getFechaDeultimoPago()
 {
+	Nodo<Fecha>* aux = ListaDpagos->getPriemero();
 	if (ListaDpagos->listaVacia() == true) {
 		return NULL;
 	}
-	return ListaDpagos->getPriemero()->getInfo();
+
+	while(aux->getSig() != NULL) {
+		aux = aux->getSig();
+	}
+	return aux->getInfo();
 }
 void Triatlonista::setFechaDeultimoPago(Fecha* f)
 {
@@ -102,10 +109,15 @@ void Triatlonista::setFechaDeultimoPago(Fecha* f)
 }
 string Triatlonista::imprimirPAGOS(int k)///Pratica con itre
 {
+	this->iter1 = this->ListaDpagos->begin();
+	this->iter2 = this->ListaDpagos->end();
+
 	if (this->ListaDpagos->listaVacia() == false) {
 		stringstream s;
 		s << "-------(Fechas de Pagos)----------" << endl;
-		s << this->ListaDpagos->toString() << endl;
+		for (; this->iter1->getPNodo() != this->iter2->getPNodo(); this->iter1->operator++()) {
+			s << iter1->operator*()->toString()<< endl;
+		}
 		s << "----------------------------------" << endl;
 		s << "-------(Montos Canscelados)-------" << endl;
 		for (int i = 0; i < this->ListaDpagos->contador(); i++) {
@@ -115,6 +127,8 @@ string Triatlonista::imprimirPAGOS(int k)///Pratica con itre
 		return s.str();
 	}
 	return "Lista de Pagos inexsistente {Cliente Iactivo}";
+	delete iter1;
+	delete iter2;
 }
 
 
