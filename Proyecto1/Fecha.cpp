@@ -41,9 +41,33 @@ void Fecha::setAno(int a)
 	ano = a;
 }
 
+
 string Fecha::toString()
 {
 	stringstream s;
-	s << dia << "/" << mes << "/" << ano << endl;
+	s << dia << "/" << mes << "/" << ano;
 	return s.str();
+}
+
+
+string Fecha::getIdent()
+{
+	throw new string("buenas tardes");
+	return "";
+}
+
+bool Fecha::operator<(const Fecha& f)const 
+{
+	if (ano < f.ano) {
+		return true;
+	}
+	else if (ano == f.ano and mes < f.mes ) {
+		return true;
+	}
+	else if (ano == f.ano and mes == f.mes and dia < f.dia) {
+		return true;
+	}else {
+	
+		return false;
+	}
 }

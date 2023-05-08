@@ -5,7 +5,7 @@ int recivirInt() {
 	bool fin = false;
 	while (fin == false) {
 
-		if (cin >> i){
+		if (cin >> i) {
 			fin = true;
 			return i;
 		}
@@ -30,10 +30,42 @@ string recivirString() {
 	}
 	return "";
 }
+string recivirStringN() {
+	string s;
+	bool fin = false;
+	while (fin == false) {
+		if (cin >> s) {
+			if (s == "salir") {
+				return s;
+			}
+			else {
+				for (char c : s) {
+					if (!isdigit(c)) {
+						throw new ErrorV('s');
+
+						return "";
+					}
+				}
+
+				fin = true;
+				return s;
+			}
+
+		}
+		throw new ErrorV('z');
+	}
+	return "";
+}
+string recivirGetLine() {
+	string s;
+	getline(cin, s);
+	return s;
+}
+
 char recivirChar() {
 	char c;
 	bool fin = false;
-	while (fin==false) {
+	while (fin == false) {
 		if (cin >> c) {
 			fin = true;
 			return c;
@@ -63,10 +95,17 @@ double recivirDouble() {
 }
 //IMPRIMIR---------------------
 void imprimirString(string s) {
-	cout << s << endl;
+	cout << s << "\x1B[37m" << endl;
+}
+void imprimirString2(string S) {
+	cout << S;
 }
 void imprimirInt(int i) {
 	cout << i << endl;
+}
+void imprimirInt2(int i)
+{
+	cout << i;
 }
 void imprimirChar(char c) {
 	cout << c << endl;
@@ -84,7 +123,7 @@ Fecha* validarFecha() {
 	int d, m, a;
 	getline(input_stringstream, dia, '/');
 	getline(input_stringstream, mes, '/');
-	getline(input_stringstream, annio, '/');
+	getline(input_stringstream, annio, '\n');
 	d = validarDia(dia);
 	m = validarMes(mes);
 	a = validarAnnio(annio);
@@ -92,8 +131,24 @@ Fecha* validarFecha() {
 
 
 	return fech;
+}
+Fecha* validarFechaA(string f) {
+
+	stringstream input_stringstream(f);
+	string dia = "";
+	string mes = "";
+	string annio = "";
+	int d, m, a;
+	getline(input_stringstream, dia, '/');
+	getline(input_stringstream, mes, '/');
+	getline(input_stringstream, annio, '\n');
+	d = validarDia(dia);
+	m = validarMes(mes);
+	a = validarAnnio(annio);
+	Fecha* fech = new Fecha(d, m, a);
 
 
+	return fech;
 }
 
 int validarDia(string s) {
@@ -145,12 +200,18 @@ int validarAnnio(string s) {
 char validarDia()
 {
 	char d;
-	cin >> d;
-	if (d == 'l' || d == 'm' || d == 'k' || d == 'j' || d == 'v' || d == 's' || d == 'd') {
-		return d;
+	if (cin >> d) {
+
+		if (d == 'l' || d == 'm' || d == 'k' || d == 'j' || d == 'v' || d == 's' || d == 'd') {
+			return d;
+		}
+		else
+		{
+			throw (new ErrorV('y'));
+		}
 	}
 	else {
-		//throw (Excepcion 'C');
+		throw (new ErrorV('y'));
 	}
 
 }
@@ -161,29 +222,71 @@ int validarHora(string h) {
 	int hora;
 	stringstream input_stringstream(h);
 	getline(input_stringstream, Shora, ':');
-	getline(input_stringstream, Smin, ':');
-	hora = stoi("hora");
-	if (hora < 24) {
-		return hora;
+	getline(input_stringstream, Smin, ' ');
+
+	for (char c : Shora) {
+		if (!isdigit(c)) {
+			throw new ErrorV('h');
+		}
 	}
-	else {
-		throw new string("ERROR: Digite una hora valida\n");
+
+	for (char c : Smin) {
+		if (!isdigit(c)) {
+			throw new ErrorV('h');
+		}
 	}
+
+	try {
+		hora = stoi(Shora);
+	}
+	catch (const invalid_argument& e) {
+		throw new ErrorV('h');
+	}
+	catch (const out_of_range& e) {
+		throw new ErrorV('h');
+	}
+
+	if (hora < 0 || hora >= 24) {
+		throw new ErrorV('h');
+	}
+
+	return hora;
 }
+
 int validarMinuto(string m) {
 	string Shora = "";
 	string Smin = "";
-	int min;
+	int min = 0;
 	stringstream input_stringstream(m);
 	getline(input_stringstream, Shora, ':');
-	getline(input_stringstream, Smin, ':');
-	min = stoi("hora");
-	if (min < 60) {
-		return min;
+	getline(input_stringstream, Smin, ' ');
+
+	for (char c : Shora) {
+		if (!isdigit(c)) {
+			throw new ErrorV('m');
+		}
 	}
-	else {
-		throw new string("ERROR: Digite un minuto valido\n");
+
+	for (char c : Smin) {
+		if (!isdigit(c)) {
+			throw new ErrorV('m');
+		}
 	}
+
+	try {
+		min = stoi(Smin);
+	}
+	catch (const invalid_argument& e) {
+		throw new ErrorV('m');
+	}
+	catch (const out_of_range& e) {
+		throw new ErrorV('m');
+	}
+
+	if (min < 0 || min >= 60) {
+		throw new ErrorV('m');
+	}
+	return min;
 }
 //Otros-------------------------------
 void enter() {
@@ -195,4 +298,7 @@ void limpiarPantalla() {
 void limpiar() {
 	cin.clear();
 	cin.ignore(1024, '\n');
+}
+void ignorarCin() {
+	cin.ignore();
 }

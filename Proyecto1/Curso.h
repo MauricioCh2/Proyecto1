@@ -2,30 +2,57 @@
 #include <iostream>
 #include <sstream>
 #include "Fecha.h"
-#include "Lista_Template.h"
+//#include "Iterador.h"
 #include "Grupo.h"
+#include "Execpciones.h"
 //#include "Lista_Template.h"
+
+
 using namespace std;
 
 class Curso {
 private:
-    string _descripcion;
+    //Constructor
+    string _codCurso;
+    string _nombreCurso;
     string _nivel;
-    int _cupMax;
-    Fecha* _fecha;
-    int _hora;
-    //ListaT<Grupo>* _lisCurso = NULL;//Junan Pablo Cartin 
+    int _canGrupos;//tamaño
+    string _descripcion;
+    // otros
+    int _numGrupo;
+    ListaT<Grupo>* _lisGrupos = NULL;
+    Iterador<Grupo>* it1;
+    Iterador<Grupo>* it2;
+
+   
+
 public:
-    Curso(string, string, int, Fecha*, int);
+    Curso(string, string, string, int, string);
     ~Curso();
+    //Sets-----------------
+    void setIdent(string);
+    void setNombreDcurso(string);
     void setDescripcion(string);
     void setNivel(string);
-    void setCup(int);
-    void setFecha(Fecha*);
-    void setHora(int);
+    void setCanGrup(int);
+    
+   
+    //gets
+    string getIdent();
+    string getNombreDcurso();
     string getDescripcion();
     string getNivel();
-    int getCup();
-    Fecha* getFecha();
-    int getHora();
+    int getCanGrup();
+   
+    //curso
+    string Listar();
+    string toString();
+   
+    //Lista-------------------------------
+    void setListaGrupos(ListaT<Grupo>*);
+    ListaT<Grupo>* getListaGrupos();
+    bool verficarEspacio();
+    bool ingresarGrupo(Grupo*);
+    Grupo* operator[](int);
+
 };

@@ -1,6 +1,6 @@
 #include "Execpciones.h"
 
-ErrorV::ErrorV(int m)
+ErrorV::ErrorV(char m)
 {
 	motivo = m;
 }
@@ -8,16 +8,20 @@ ErrorV::ErrorV(int m)
 const char* ErrorV::what() const throw()
 {
 	switch (motivo) {
-		case 'c': return "ERROR DE char";
-		case 'i': return "ERROR DE int";
-		case 'd': return "ERROR DE double";
-		case 's': return "ERROR DE string";
-		case 'f': return "ERROR DE Fecha";
-		case 'C': return "ERROR DE char";
-		case 'I': return "ERROR DE int";
-		case 'D': return "ERROR DE double";
-		case 'S': return "ERROR DE string";
-		case 'F': return "ERROR DE Fecha";
-		default: return "ERROR DESCONOSIDO";
+		case 'c': return "\x1B[31m ERROR DE char \x1B[37m";
+		case 'i': return "\x1B[31m ERROR DE int \x1B[37m";
+		case 'd': return "\x1B[31m ERROR DE double \x1B[37m";
+		case 's': return "\x1B[31m ERROR DE string \x1B[37m";
+		case 'z': return "\x1B[31m ERROR digite unicamente valores numericos \x1B[37m";
+		case 'f': return "\x1B[31m ERROR DE Fecha \x1B[37m";
+		case 'G': return "\x1B[31m ERROR DE CUPO \x1B[37m";
+		case 'I': return "\x1B[31m ERROR DE int \x1B[37m";
+		case 'D': return "\x1B[31m ERROR DE double \x1B[37m";
+		case 'S': return "\x1B[31m ERROR DE string \x1B[37m";
+		case 'F': return "\x1B[31m ERROR DE Fecha \x1B[37m";
+		case 'h': return "\x1B[31m ERROR DE hora \x1B[37m";
+		case 'm': return "\x1B[31m ERROR DE minuto \x1B[37m";
+		case 'y': return "\x1B[31m ERROR DE Dia \x1B[37m";
+		default: return "\x1B[31m ERROR DESCONOSIDO \x1B[37m";
 	}
 }

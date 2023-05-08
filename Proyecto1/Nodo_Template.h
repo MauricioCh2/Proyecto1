@@ -17,6 +17,7 @@ public:
 	void setSiguiente(Nodo<T>*);
 	Nodo<T>* getSig();
 	string toStringNodo() const;
+	string ListarN() const;
 
 	
 };
@@ -52,5 +53,11 @@ Nodo<T>* Nodo<T>::getSig() {
 }
 template <class T>
 string Nodo<T>::toStringNodo()const {
+	
 	return _info->toString();
+}
+template <class T>
+
+string Nodo<T>::ListarN()const {
+	return _info->Listar();
 }

@@ -3,8 +3,7 @@
 #include <sstream>
 #include "Nodo_Template.h"
 #include "Iterador.h"
-#include "Triatlonista.h"
-#include "Triatlonista.h"
+
 
 using namespace std;
 template <class T>
@@ -19,12 +18,20 @@ public:
 	virtual bool eliminarUltimo();
 	virtual bool listaVacia();
 	virtual int contador();
+	virtual T* contadorEspecifico(int);//retorna el valor que se encuentre en x posicion
+	virtual T* encontrarEsp(string);
+	virtual bool ExisteEspesifico(string);
+	virtual bool eliminarEspe(string);
+	//virtual bool cambiaNodos(string, string);
 	string toString();
+	string Listar();
+
 	Nodo<T>* getPriemero();
+
 	Iterador<T>* begin();     // Colocar un iterador al inicio
 	Iterador<T>* end();
 	//Archivos
-	void guardarDeportistas(ofstream&);
+	//void guardarDeportistas(ofstream&);
 };
 template <class T>
 ListaT<T>::ListaT() {
@@ -85,14 +92,100 @@ int ListaT<T>::contador() {
 		_actual = _actual->getSig();
 	}
 	return cont;
+	
 }
+template <class T>
+T* ListaT<T>::contadorEspecifico(int n) {
+	int cont = 0;
+	_actual = _primero;
+	while (_actual != NULL) {
+		cont++;
+		if (cont == n) {
+			break;
+		}
+		_actual = _actual->getSig();
+	}
+	return _actual->getInfo();
+}
+template <class T>
+T* ListaT<T>::encontrarEsp(string s) {
+	_actual = _primero;
+	T* t;
+	while (_actual != NULL) {
+		t = dynamic_cast<T*>(_actual->getInfo());
+		if (t->getIdent() == s) {
+			return t;
+		}
+		_actual = _actual->getSig();
 
+	}
+	return NULL;
+}
+template<class T>
+inline bool ListaT<T>::ExisteEspesifico(string s)
+{
+	T* t;
+	_actual = _primero;
+	while (_actual != NULL) {
+		t = dynamic_cast<T*>(_actual->getInfo());
+		if (t->getIdent() == s) {
+			return true;
+		}
+		_actual = _actual->getSig();
+
+	}
+	return false;
+}
+template <class T>
+bool ListaT<T>::eliminarEspe(string i) {
+	Nodo<T>* pAnterior = NULL;
+	T* t;
+	_actual = _primero;
+	//si la lista esta vacia
+	if (_primero == NULL) {
+		return false;
+	}
+	// si el elemento esta de primero
+	t = dynamic_cast<T*>(_primero->getInfo());
+	if (t->getIdent() == i) {
+		_actual = _actual->getSig();
+		delete (_primero);
+		_primero = _actual;
+		return true;
+	}
+	// en caso de no ser el primero recorrera la lista
+	while (_actual != NULL && t->getIdent() != i) {
+		pAnterior = _actual;
+		_actual = _actual->getSig();
+		t = dynamic_cast <T*>(_actual->getInfo());
+	}
+
+	if (_actual == NULL) { return false; }//Si no lo encontro	
+	else {// el nodo fue encontrado
+		pAnterior->setSiguiente(_actual->getSig());
+		delete _actual;
+		return true;
+	}
+	return false;
+
+
+}
 template <class T>
 string ListaT<T>::toString() {
 	stringstream s;
 	_actual = _primero;
 	while (_actual != NULL) {
 		s << _actual->toStringNodo();
+		_actual = _actual->getSig();
+	}
+	return s.str();
+}
+template <class T>
+string ListaT<T>::Listar() {
+	stringstream s;
+	_actual = _primero;
+	while (_actual != NULL) {
+		s << _actual->ListarN();
 		_actual = _actual->getSig();
 	}
 	return s.str();
@@ -113,31 +206,31 @@ template<class T>
 Iterador<T>* ListaT<T>::end() {
 	return new Iterador<T>();
 }
-template <class T>
-void ListaT<T>::guardarDeportistas(ofstream& depo) {
-	_actual = _primero;
-	while (_actual != NULL) {
-		if (Triatlonista* dep = dynamic_cast<Triatlonista*>(_actual->getInfo())) {
-
-			//deportista-------------------------------------
-			depo << dep->getNombre() << "\t"
-				<< dep->getCedula() << "\t"
-				<< dep->getTelefono() << "\t"
-				<< dep->getFecha() << "\t"
-				//ciclista----------------------------------------
-				<< dep->getHorasDeEntrenamiento() << "\t"
-				<< dep->getTempPromedio() << "\t"
-				//corredor----------------------------------------
-				<< dep->getSexo() << "\t"
-				<< dep->getEstatura() << "\t"
-				//nadado------------------------------------------
-				<< dep->getMasaMuscular() << "\t"
-				<< dep->getPeso() << "\t"
-				<< dep->getPorcGrasaCorporal() << "\t"
-				//triatlonista------------------------------------
-				<< dep->getCanPartIronMan() << "\t"
-				<< dep->getCanTriatGanador() << endl;
-		}
-		_actual = _actual->getSig();
-	}
-}
+//template <class T>
+//void ListaT<T>::guardarDeportistas(ofstream& depo) {
+//	_actual = _primero;
+//	while (_actual != NULL) {
+//		if (Triatlonista* dep = dynamic_cast<Triatlonista*>(_actual->getInfo())) {
+//
+//			//deportista-------------------------------------
+//			depo << dep->getNombre() << "\t"
+//				<< dep->getCedula() << "\t"
+//				<< dep->getTelefono() << "\t"
+//				<< dep->getFechaNacimiento() << "\t"
+//				//ciclista----------------------------------------
+//				<< dep->getHorasDeEntrenamiento() << "\t"
+//				<< dep->getTempPromedio() << "\t"
+//				//corredor----------------------------------------
+//				<< dep->getSexo() << "\t"
+//				<< dep->getEstatura() << "\t"
+//				//nadado------------------------------------------
+//				<< dep->getMasaMuscular() << "\t"
+//				<< dep->getPeso() << "\t"
+//				<< dep->getPorcGrasaCorporal() << "\t"
+//				//triatlonista------------------------------------
+//				<< dep->getCanPartIronMan() << "\t"
+//				<< dep->getCanTriatGanador() << endl;
+//		}
+//		_actual = _actual->getSig();
+//	}
+//}

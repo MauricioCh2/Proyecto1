@@ -26,19 +26,22 @@ Nada de esto es necesario pero para llevar un orden y que se vea coquete no esta
 #pragma once
 #include <iostream>
 #include <sstream>
-
+#include "Cobro.h"
 #include "Utilities.h"
 #include "Gym.h"
 #include "Fecha.h"
 #include "Triatlonista.h"
-//#include "Archivos.h"
+#include "Lista_Template.h"
+#include "Archivos.h"
 using namespace std;
 
 class Menu {
 private:
+	Archivos* arch;
 	Fecha* fecha;
 	Gym* _gym;
 public:
+	//Fecha* getFechaActual();
 	//Inicio------------------------------------------------------------
 	void inicio();
 	bool llamarMenus();
@@ -61,8 +64,12 @@ public:
 	bool opMenuPagos(int);
 	//Guardar en Archivos y salir 
 	//realmente esto no requiere metodo 
-	Triatlonista* atualizarINFO();
-	int EstadoDcliente(Deportista* );
+	void atualizarINFO(Deportista*,Expediente*);
+	string QueQuiereEditarTri();
+	void atualizarINFOcurso(Curso*);
+	void atualizarINFOgrupo(Grupo*);
+	string QueQuiereEditarCurso();
+	string QueQuiereEditarGrupo();
 
-
+	
 };

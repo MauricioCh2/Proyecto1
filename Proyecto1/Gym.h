@@ -1,33 +1,62 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include <sstream>
-//esta va a ser la que tenga las listas de todo 
-
+#include <fstream>
 #include "Deportista.h"
-#include "Lista_Template.h"
 //#include "Grupo.h"
 #include "Curso.h"
+#include "Expediente.h"
+#include "Iterador.h"
 
 
 class Gym {
-	//sera que guardamos la fecha aqui?, se lo podriamos pasar por parametros y todo
-	//Lista de clientes
 private:
 	string _nombre;
 	int _mensualidad;
 	ListaT<Deportista>* _lisCliente = NULL;
-	//ListaT<Grupo>* _lisGrupo = NULL;
 	ListaT<Curso>* _lisCurso = NULL;
-public: 
+	ListaT<Expediente>* _lisExpediente = NULL;
+	Fecha* _fechaHoy = NULL;
+public:
+	//GYM-----------------------------------------------------------
 	Gym();
+	Gym(Fecha*);
+	Fecha* getFecha();
+	//Administracion------------------------------------------------
 	string getNombreDgym();
 	void setNombreDgym(string);
 	int getMensualidadDgym();
 	void setMensualidadDgym(int);
+	//Cursos--------------------------------------------------------
+	void ingresarCursos(Curso*);
+	string imprimirListaCursos();
+	string imprimirListaEspe(string);
+	string imprimirListadoCursos();
+	
+	ListaT<Curso>* getListaCurso();
+	//Grupos--------------------------------------------------------
+	bool verDisponivilidadCursos(string);
+	void ingresarGrupo(string,Grupo*);
+	string imprimirListadoGrupo(string);
+	int PruebaCantGrupos(string c);
+	string reporteGrupoEspe(string,string);
+	void ingresarClienteAGrupos(string,string, Deportista*);
+	string imprimirClientesDeUnGrupo(string, string);
 	//Clientes------------------------------------------------------
-	void ingresarListaClientes(Deportista*);
+	bool verDisponivilidadGrupos(string, string);
 	string imprimirListaClientes();
 
+	//string imprimirListadoDeportistas();
+	//listo  
+	ListaT<Grupo>* getListaDgruposDcurso(string);
+	string imprimirListadoDeClientesDUnGrupo(string,string);
+	void cancelarMatricula(string,string,string);
+
+
 	ListaT<Deportista>* getListaDepor();
+	ListaT<Expediente>* getListaExpediente();
+
+	//ARCHIVOS-------------------------
+	void guardarCursos(ofstream&);
+	void guardarGrupos(ofstream&);
+	void guardarExpedientes(ofstream&);
+
 };
