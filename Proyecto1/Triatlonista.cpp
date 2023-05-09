@@ -39,6 +39,8 @@ string Triatlonista::toString() {
 	s << "----------------------------------------------------------------" << endl;
 	if (ListaDpagos->listaVacia() != true) {
 		s << "La ultima fecha de un pago registardo es:\n " << ListaDpagos->toString() << endl;
+
+		s << "La ultima fecha de un pago registardo es:\n " << ListaDpagos->encontrarPen()->toString() << endl;
 	}
 	return s.str();
 }
