@@ -3,7 +3,7 @@
 #include "Corredor.h"
 #include "Nadador.h"
 #include "Fecha.h"
-
+#include <cmath>
 class Triatlonista : public Corredor {
 protected:
 	int _cantPartIronMan;

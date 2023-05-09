@@ -132,35 +132,15 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 		imprimirString2("Nota, la mensualidad de este Gimnacio es: ");
 		imprimirInt(mensu);
 		if (respuestai == 1) {
-			imprimirString("Cuantos meses le gustaria pagar?");
-			do {
-				try {
-					mesesApagar = recivirInt();
-					ex = true;
-				}
-				catch (ErrorV* e) {
-					cout << e->what() << endl;
-					limpiar();
-				}
-			} while (ex == false);
-			ex = false;
 			aux->setDia(f->getDia());
 			aux->setMes(f->getMes());
 			aux->setAno(f->getAno());
-			aux->setMes(f->getMes() + mesesApagar);
-			while (aux->getMes() > 12) {
-				aux->setMes(aux->getMes() - 12);
-				aux->setAno(aux->getAno() + 1);
-			}
 			imprimirString("Monto a pagar :");
-			imprimirInt(mensu * mesesApagar);
+			imprimirInt(mensu);
 			imprimirString2("Desgloce de dicho monto dados los meses que pago:");
-			imprimirInt2(mensu * mesesApagar);
-			imprimirString2(" (");
 			imprimirInt2(mensu);
-			imprimirString2("X");
-			imprimirInt2(mesesApagar);
-			imprimirString2(" )");
+			imprimirString("(Cuenta con una plazo de un mes, antes del siguente pago)");
+			imprimirString("Bienvencido al GYM :)");
 		}
 		break;
 

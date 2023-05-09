@@ -15,6 +15,7 @@ public:
 	ListaT();
 	virtual ~ListaT();
 	void insertarElem(T*);// nota aqui no se puede poner con const
+	void insertarDultimo(T*);
 	virtual bool eliminarUltimo();
 	virtual bool listaVacia();
 	virtual int contador();
@@ -42,6 +43,31 @@ template <class T>
 void ListaT<T>::insertarElem(T* p) {
 	_actual = _primero;
 	_primero = new Nodo<T>(p, _primero);
+}
+template<class T>
+inline void ListaT<T>::insertarDultimo(T* p)
+{
+	_actual = _primero;
+	if (_primero == NULL)
+	{
+		_primero = new Nodo<T>(p, _primero);
+	}
+	else
+	{
+		if (_primero->getSig() == NULL)
+		{
+			
+			_primero->setSiguiente(new Nodo<T>(p, NULL));
+		}
+		else
+		{
+			while (_actual->getSig() != NULL)
+			{
+				_actual = _actual->getSig();
+			}
+			_actual->setSiguiente(new Nodo<T>(p, NULL));
+		}
+	}
 }
 template <class T>
 ListaT<T>::~ListaT() {
