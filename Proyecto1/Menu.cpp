@@ -1571,7 +1571,7 @@ bool Menu::opMenuPagos(int op)
 					fechAux2->setAno(fechAux->getAno());
 					if (fechAux2->getDia() != 0 && fechAux2->getMes() != 0 && fechAux2->getAno() != 0) {
 						iter->operator*()->setFechaDeultimoPago(fechAux2);
-						ExpeAeditar->getlisFecha()->insertarElem(fechAux2);
+						ExpeAeditar->getlisFecha()->insertarDultimo(fechAux2);
 						imprimirString("");
 						imprimirString2("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO DE PARTE DEL CLIENTE: ");
 						imprimirInt(cedulAbuscar);

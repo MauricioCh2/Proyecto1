@@ -254,7 +254,7 @@ bool Archivos::cargarExpediente()// deportistas
 						mes = stoi(Smes);
 						annio = stoi(Sannio);
 						fechaR = new Fecha(dia,mes,annio);
-						lisFecha->insertarElem(fechaR);
+						lisFecha->insertarDultimo(fechaR);
 
 						expe->setLisFecha(lisFecha);
 					}
