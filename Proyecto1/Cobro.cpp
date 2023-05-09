@@ -139,7 +139,7 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					imprimirString(e->what());
+					cout << e->what() << endl;
 					limpiar();
 				}
 			} while (ex == false);
@@ -147,16 +147,9 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 			aux->setDia(f->getDia());
 			aux->setMes(f->getMes());
 			aux->setAno(f->getAno());
-			aux->setMes(f->getMes() + mesesApagar);
-			while (aux->getMes() > 12) {
-				aux->setMes(aux->getMes() - 12);
-				aux->setAno(aux->getAno() + 1);
-			}
 			imprimirString("Monto a pagar :");
 			imprimirInt(mensu * mesesApagar);
 			imprimirString2("Desgloce de dicho monto dados los meses que pago:");
-			imprimirInt2(mensu * mesesApagar);
-			imprimirString2(" (");
 			imprimirInt2(mensu);
 			imprimirString2("X");
 			imprimirInt2(mesesApagar);

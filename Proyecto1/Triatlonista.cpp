@@ -105,31 +105,57 @@ Fecha* Triatlonista::getFechaDeultimoPago()
 }
 void Triatlonista::setFechaDeultimoPago(Fecha* f)
 {
-	this->ListaDpagos->insertarElem(f);
+	this->ListaDpagos->insertarDultimo(f);
 }
 string Triatlonista::imprimirPAGOS(int k)///Pratica con itre
 {
-	this->iter1 = this->ListaDpagos->begin();
-	this->iter2 = this->ListaDpagos->end();
+		this->iter1 = this->ListaDpagos->begin();
+		this->iter2 = this->ListaDpagos->end();
+		int meses = 1;
+		Fecha* anterior;
 
-	if (this->ListaDpagos->listaVacia() == false) {
-		stringstream s;
-		s << "-------(Fechas de Pagos)----------" << endl;
-		for (; this->iter1->getPNodo() != this->iter2->getPNodo(); this->iter1->operator++()) {
-			s << iter1->operator*()->toString()<< endl;
+		if (this->ListaDpagos->listaVacia() == false) {
+			stringstream s;
+			s << "-------(Fechas de Pagos)----------" << endl;
+			s << "---Primera fecha de pago---" << endl;
+			for (; this->iter1->getPNodo() != this->iter2->getPNodo(); this->iter1->operator++()) {
+				s << iter1->operator*()->toString() << endl;
+			}
+			s << "---Ultima Fecha de Pago---" << endl;
+			s << "----------------------------------" << endl;
+			this->iter1 = this->ListaDpagos->begin();
+			this->iter2 = this->ListaDpagos->end();
+			s << "-------(Montos Canscelados)-------" << endl;
+			s << "---Primer monto cancelado---" << endl;
+			anterior = this->iter1->getPNodo()->getInfo();
+
+			for (int i = 0; i < this->ListaDpagos->contador(); i++) {
+				if (anterior == this->iter1->getPNodo()->getInfo()) {
+					s << "Cancelado: $" << k * meses << endl;
+				}
+				else {
+
+					if (anterior->getAno() != iter1->getPNodo()->getInfo()->getAno()) {
+						s << "Cancelado: $" << k * (12 + abs(iter1->getPNodo()->getInfo()->getMes() - anterior->getMes())) << endl;
+					}
+					else{
+						meses = this->iter1->getPNodo()->getInfo()->getMes() - anterior->getMes();
+						s << "Cancelado: $" << k * meses << endl;
+					}
+					anterior = this->iter1->getPNodo()->getInfo();
+				}
+				this->iter1->operator++();
+			}
+			
+			s << "---Ultimo monto cancelado---" << endl;
+			s << "----------------------------------" << endl;
+			return s.str();
 		}
-		s << "----------------------------------" << endl;
-		s << "-------(Montos Canscelados)-------" << endl;
-		for (int i = 0; i < this->ListaDpagos->contador(); i++) {
-			s << "$Cancelado: " << k << endl;
-		}
-		s << "----------------------------------" << endl;
-		return s.str();
-	}
-	return "Lista de Pagos inexsistente {Cliente Iactivo}";
-	delete iter1;
-	delete iter2;
+		return "Lista de Pagos inexsistente {Cliente Iactivo}";
+		delete iter1;
+		delete iter2;
 }
+
 
 
 

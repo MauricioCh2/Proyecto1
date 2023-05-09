@@ -1561,19 +1561,20 @@ bool Menu::opMenuPagos(int op)
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulAbuscar) {
 				fechAux = Cobro::getFechaDeultimoPago(iter->operator*(), this->fecha, _gym->getMensualidadDgym());
-				fechAux2->setDia(fechAux->getDia());
-				fechAux2->setMes(fechAux->getMes());
-				fechAux2->setAno(fechAux->getAno());
-				if (fechAux2->getDia() != 0 && fechAux2->getMes() != 0 && fechAux2->getAno() != 0) {
-					iter->operator*()->setFechaDeultimoPago(fechAux2);
-					ExpeAeditar->getlisFecha()->insertarElem(fechAux2);
-					imprimirString("");
-					imprimirString2("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO DE PARTE DEL CLIENTE: ");
-					imprimirInt(cedulAbuscar);
-				}
-				else
-				{
+				if (fechAux->getAno() == 0 || fechAux->getMes() == 0 || fechAux->getDia() == 0) {
 					imprimirString("Nota de Confirmaccion: NO SE REALIZO NINGUN PAGO ");
+				}
+				else {
+					fechAux2->setDia(fechAux->getDia());
+					fechAux2->setMes(fechAux->getMes());
+					fechAux2->setAno(fechAux->getAno());
+					if (fechAux2->getDia() != 0 && fechAux2->getMes() != 0 && fechAux2->getAno() != 0) {
+						iter->operator*()->setFechaDeultimoPago(fechAux2);
+						ExpeAeditar->getlisFecha()->insertarDultimo(fechAux2);
+						imprimirString("");
+						imprimirString2("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO DE PARTE DEL CLIENTE: ");
+						imprimirInt(cedulAbuscar);
+					}
 				}
 
 			}
