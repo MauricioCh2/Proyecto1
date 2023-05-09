@@ -12,7 +12,7 @@ void Menu::inicio() {
 			ex = true;
 		}
 		catch (...) {
-			imprimirString("Error con el formato de fecha (ejemplo: 15/4/23 )  << endl");
+			imprimirString("\x1b[31m Error con el formato de fecha (ejemplo: 15/4/23 )");
 			limpiar();
 		}
 	} while (ex == false);
@@ -77,7 +77,8 @@ bool Menu::opMenuAdministracion(int op) {
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
+
 				limpiar();
 			}
 		} while (ex == false);
@@ -190,7 +191,7 @@ bool Menu::opMenuDeportista(int op)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
 					limpiar();
 				}
 			} while (ex == false);
@@ -215,7 +216,7 @@ bool Menu::opMenuDeportista(int op)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
 					limpiar();
 				}
 			} while (ex == false);
@@ -266,7 +267,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		}while (ex == false);
@@ -283,7 +284,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -295,7 +296,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 
 				limpiar();
 			}
@@ -308,7 +309,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (...) {
-				cout << "\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+				imprimirString("\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 ) ");
 				limpiar();
 			}
 		}while (ex == false);
@@ -321,7 +322,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -333,7 +334,7 @@ bool Menu::opMenuDeportista(int op)
 					ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -351,7 +352,7 @@ bool Menu::opMenuDeportista(int op)
 				}
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -363,7 +364,7 @@ bool Menu::opMenuDeportista(int op)
 					ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -376,7 +377,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		}while (ex == false);
@@ -388,7 +389,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -400,7 +401,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -413,7 +414,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -425,7 +426,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		}while (ex == false);
@@ -460,7 +461,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -479,7 +480,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -488,7 +489,7 @@ bool Menu::opMenuDeportista(int op)
 			imprimirString("\x1B[31m ----Ese grupo de ese curso no existe----");
 			break; break;
 		}
-		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
+		imprimirString("Cedula\t Nombre\t Telefono");
 		imprimirString(_gym->imprimirListadoDeClientesDUnGrupo(codCurso, numGrup));
 
 		imprimirString("Cual seria la cedula del Deportista?\n");
@@ -498,7 +499,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -608,7 +609,7 @@ bool Menu::opMenuDeportista(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -677,7 +678,7 @@ bool Menu::opMenuCursos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -696,7 +697,7 @@ bool Menu::opMenuCursos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -708,7 +709,7 @@ bool Menu::opMenuCursos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -720,7 +721,7 @@ bool Menu::opMenuCursos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -747,7 +748,7 @@ bool Menu::opMenuCursos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -779,7 +780,7 @@ bool Menu::opMenuCursos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -891,7 +892,7 @@ bool Menu::opMenuGrupos(int op)
 						ex = true;
 					}
 					catch (ErrorV* e) {
-						cout << e->what() << endl;
+						imprimirString(e->what());
 						limpiar();
 					}
 				} while (ex == false);
@@ -925,7 +926,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -938,7 +939,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -950,7 +951,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -962,7 +963,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (...) {
-				cout << "\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+				imprimirString( "\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 ) ");
 				limpiar();
 			}
 		} while (ex == false);
@@ -974,7 +975,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -987,7 +988,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1000,7 +1001,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		
@@ -1010,7 +1011,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		
@@ -1021,7 +1022,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		
@@ -1036,7 +1037,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		
@@ -1046,7 +1047,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		
@@ -1056,7 +1057,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1087,7 +1088,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1112,7 +1113,7 @@ bool Menu::opMenuGrupos(int op)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
 					limpiar();
 				}
 			} while (ex == false);
@@ -1146,7 +1147,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1164,7 +1165,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1185,7 +1186,7 @@ bool Menu::opMenuGrupos(int op)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
 					limpiar();
 				}
 			} while (ex == false);
@@ -1259,7 +1260,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1277,7 +1278,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1303,7 +1304,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1321,7 +1322,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1348,7 +1349,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1366,7 +1367,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1376,7 +1377,7 @@ bool Menu::opMenuGrupos(int op)
 			break; break;
 		}
 		imprimirString("<Listado de clientes dentro del grupo> ");
-		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
+		imprimirString("Cedula\t Nombre\t Telefono ");
 		imprimirString(_gym->imprimirListadoDeClientesDUnGrupo(codCurso, numGrup));
 		imprimirString("Digite la cedula del cliente que desea eliminar?");
 		do {
@@ -1385,7 +1386,7 @@ bool Menu::opMenuGrupos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1496,7 +1497,7 @@ bool Menu::opMenuPagos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1516,7 +1517,7 @@ bool Menu::opMenuPagos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1526,10 +1527,9 @@ bool Menu::opMenuPagos(int op)
 			break; break;
 		}
 
-		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
+		imprimirString("Cedula\t Nombre\t Telefono");
 		imprimirString("Deportistas disponibles en este grupo para realisar el pago: ");
 		imprimirString(_gym->imprimirListadoDeClientesDUnGrupo(codCurso, numGrup));
-		imprimirString("Cedula\t Nombre\t Telefono\t CanGrupos ");
 		imprimirString("Cedula del Cliente: ");
 		do {
 			try {
@@ -1538,7 +1538,7 @@ bool Menu::opMenuPagos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1592,7 +1592,7 @@ bool Menu::opMenuPagos(int op)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1662,7 +1662,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1677,7 +1677,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1698,7 +1698,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1714,7 +1714,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 
 				limpiar();
 			}
@@ -1731,7 +1731,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (...) {
-				cout << "\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+				imprimirString("\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 ) ");
 				limpiar();
 			}
 		} while (ex == false);
@@ -1748,7 +1748,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1764,7 +1764,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1786,7 +1786,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				}
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1802,7 +1802,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1819,7 +1819,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1835,7 +1835,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1851,7 +1851,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1868,7 +1868,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1884,7 +1884,7 @@ void Menu::atualizarINFO(Deportista* depAactaulizar, Expediente* expeCon)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1943,7 +1943,7 @@ void Menu::atualizarINFOcurso(Curso* original)
 			ex = true;
 		}
 		catch (ErrorV* e) {
-			cout << e->what() << endl;
+			imprimirString(e->what());
 			limpiar();
 		}
 	} while (ex == false);
@@ -1959,7 +1959,7 @@ void Menu::atualizarINFOcurso(Curso* original)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1979,7 +1979,7 @@ void Menu::atualizarINFOcurso(Curso* original)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -1995,7 +1995,7 @@ void Menu::atualizarINFOcurso(Curso* original)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+								imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -2011,7 +2011,7 @@ void Menu::atualizarINFOcurso(Curso* original)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -2060,7 +2060,8 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 			ex = true;
 		}
 		catch (ErrorV* e) {
-			cout << e->what() << endl;
+			imprimirString(e->what());
+
 			limpiar();
 		}
 	} while (ex == false);
@@ -2076,7 +2077,8 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-				cout << e->what() << endl;
+					imprimirString(e->what());
+
 					limpiar();
 				}	
 			} while (ex == false);
@@ -2092,7 +2094,8 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 				ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
+
 					limpiar();
 				}
 			} while (ex == false);
@@ -2107,7 +2110,8 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
+
 					limpiar();
 				}
 			} while (ex == false);
@@ -2122,7 +2126,7 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					ex = true;
 				}
 				catch (...) {
-					cout << "\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 ) " << endl;
+					imprimirString("\x1B[31m Error con el formato de fecha (ejemplo: 15/4/23 ) ");
 					limpiar();
 				}
 			} while (ex == false);
@@ -2137,7 +2141,8 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
+
 						limpiar();
 				}
 			} while (ex == false);
@@ -2154,7 +2159,8 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
+
 					limpiar();
 				}
 			} while (ex == false);
@@ -2169,7 +2175,8 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
+
 					limpiar();
 				}
 			
@@ -2178,7 +2185,8 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
+
 					limpiar();
 				}
 			} while (ex == false);
@@ -2190,7 +2198,8 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
+
 					limpiar();
 				}
 			} while (ex == false);
@@ -2208,7 +2217,8 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
+
 					limpiar();
 				}
 			} while (ex == false);
@@ -2220,7 +2230,8 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
+
 					limpiar();
 				}
 			} while (ex == false);
@@ -2232,7 +2243,8 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
+
 					limpiar();
 				}
 			} while (ex == false);
@@ -2290,7 +2302,8 @@ bool Menu::llamarMenus() {
 			ex = true;
 		}
 		catch (ErrorV* e) {
-			cout << e->what() << endl;
+			imprimirString(e->what());
+
 			limpiar();
 		}
 	} while (ex == false);
@@ -2306,13 +2319,14 @@ bool Menu::llamarMenus() {
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
+
 				limpiar();
 			}
 		} while (ex == false);
 		ex = false;
 		opMenuAdministracion(op);
-		enter();
+		
 
 		break;
 	case 2://Control de Deportistas
@@ -2324,13 +2338,14 @@ bool Menu::llamarMenus() {
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
+
 				limpiar();
 			}
 		} while (ex == false);
 		ex = false;
 		opMenuDeportista(op);
-		enter();
+		
 
 		break;
 	case 3://Control de Cursos
@@ -2342,13 +2357,14 @@ bool Menu::llamarMenus() {
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
+
 				limpiar();
 			}
 		} while (ex == false);
 		ex = false;
 		opMenuCursos(op);
-		enter();
+		
 
 		break;
 	case 4://Control de Grupos
@@ -2360,13 +2376,14 @@ bool Menu::llamarMenus() {
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
+
 				limpiar();
 			}
 		} while (ex == false);
 		ex = false;
 		opMenuGrupos(op);
-		enter();
+		
 
 		break;
 	case 5://Control Pagos
@@ -2378,13 +2395,13 @@ bool Menu::llamarMenus() {
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
 		ex = false;
 		opMenuPagos(op);
-		enter();
+		
 		break;
 	case 6: //Guardar en Archivos y salir
 		limpiarPantalla();

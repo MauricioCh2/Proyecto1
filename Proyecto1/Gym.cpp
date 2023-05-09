@@ -241,7 +241,7 @@ void Gym::guardarGrupos(ofstream& g)
 
 void Gym::guardarExpedientes(ofstream& e )
 {
-	cout<<_lisExpediente->toString();
+	
 	
 	Expediente* exp;
 	Iterador<Expediente>* it;

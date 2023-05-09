@@ -20,7 +20,7 @@ Triatlonista:: ~Triatlonista() {
 string Triatlonista::Listar()
 {
 	stringstream s;
-	s << _cedula << "\t" << _nombre << "\t" << _telefono << "\t" << "canGrupos" << endl;
+	s << _cedula << "\t" << _nombre << "\t" << _telefono << endl;
 	return s.str();
 }
 string Triatlonista::toString() {

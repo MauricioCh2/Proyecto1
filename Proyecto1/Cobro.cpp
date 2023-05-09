@@ -41,7 +41,7 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -84,7 +84,7 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 		} while (ex == false);
@@ -122,7 +122,7 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 				ex = true;
 			}
 			catch (ErrorV* e) {
-				cout << e->what() << endl;
+				imprimirString(e->what());
 				limpiar();
 			}
 			if (respuesta == "SI" || respuesta == "Si" || respuesta == "si" || respuesta == "sI") {
@@ -139,7 +139,7 @@ Fecha* Cobro::getFechaDeultimoPago(Deportista* tri, Fecha* f, int mensu)
 					ex = true;
 				}
 				catch (ErrorV* e) {
-					cout << e->what() << endl;
+					imprimirString(e->what());
 					limpiar();
 				}
 			} while (ex == false);

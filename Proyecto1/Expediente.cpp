@@ -46,7 +46,7 @@ string Expediente::toString() {
 	s << "\t" << "Cedula" << ".........................." << this->_cedula << endl;
 	s << "\t" << "Nombre" << ".........................." << this->_nombre << endl;
 	s << "\t" << "Telefono" << "........................" << this->_telefono << endl;
-	s << "\t" << "Fecha Nacimiento" << "................" << this->_ptrFechadeNaci << endl;;
+	s << "\t" << "Fecha Nacimiento" << "................" << this->_ptrFechadeNaci->toString() << endl;;
 	s << "\t" << "Horas entrnadas" << "................." << this->_horasEntrenam << endl;
 	s << "\t" << "Temperatura promedio" << "............" << this->_temPromedio << endl;
 	s << "\t" << "Sexo" << "............................" << this->_sexo << endl;

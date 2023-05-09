@@ -21,27 +21,14 @@ bool Archivos::guardarDatos()
 	return ver;
 }
 
-bool Archivos::guardarDeportistas()
-{
-	bool ver = true;
-	ofstream dep;
-	dep.open("../ListaDeportista.txt", ios::out | ios::trunc);
-	if (dep.fail()) {
-		imprimirString("Error al guardar :(");
-	}
-	if (dep.good()) {
-		//_gym->getListaDepor()->guardarDeportistas(dep);
-	}
-	dep.close();
-	return ver;
-}
+
 bool Archivos::guardarCursos()
 {
 	bool ver = false;
 	ofstream cursos;
 	cursos.open("../ListaCursos.txt", ios::out | ios::trunc);
 	if (cursos.fail()) {
-		cout<<"Error al abrir :("; 
+		imprimirString("Error al abrir :("); 
 		return ver;
 	}
 	_gym->guardarCursos(cursos);
@@ -54,7 +41,8 @@ bool Archivos::guardarGrupos()
 	ofstream grupos;
 	grupos.open("../ListaGrupos.txt", ios::out | ios::trunc);
 	if (grupos.fail()) {
-		cout << "Error al abrir :(";
+		imprimirString("Error al abrir :(");
+
 		return ver;
 	}
 	_gym->guardarGrupos(grupos);
@@ -67,7 +55,8 @@ bool Archivos::guadarExpediente()
 	ofstream expediente;
 	expediente.open("../ListaExpediente.txt", ios::out | ios::trunc);
 	if (expediente.fail()) {
-		cout << "Error al abrir :(";
+		imprimirString("Error al abrir :(");
+
 		return ver;
 	}
 	_gym->guardarExpedientes(expediente);
@@ -255,7 +244,7 @@ bool Archivos::cargarExpediente()// deportistas
 						annio = stoi(Sannio);
 						fechaR = new Fecha(dia,mes,annio);
 						lisFecha->insertarElem(fechaR);
-
+						deportista->setFechaDeultimoPago(fechaR);
 						expe->setLisFecha(lisFecha);
 					}
 				}

@@ -15,7 +15,6 @@ public:
 	~Archivos();
 	//Guardar datos-----------------------------------
 	bool guardarDatos();
-	bool guardarDeportistas();
 	bool guardarCursos();
 	bool guardarGrupos();
 	bool guadarExpediente();
