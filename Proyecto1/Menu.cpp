@@ -993,7 +993,8 @@ bool Menu::opMenuGrupos(int op)
 		} while (ex == false);
 		ex = false;
 		imprimirString("Digite la hora de inicio en hora militar (hora:minuto):");
-		do {
+		do{
+		
 			try {
 				horInicio = recivirString();
 				ex = true;
@@ -1002,10 +1003,8 @@ bool Menu::opMenuGrupos(int op)
 				cout << e->what() << endl;
 				limpiar();
 			}
-		} while (ex == false);
-		ex = false;
-
-		do {
+		
+		
 			try {
 				horIn = validarHora(horInicio);
 				ex = true;
@@ -1014,6 +1013,8 @@ bool Menu::opMenuGrupos(int op)
 				cout << e->what() << endl;
 				limpiar();
 			}
+		
+	
 			ignorarCin();
 			try {
 				minIn = validarMinuto(horInicio);
@@ -1023,6 +1024,7 @@ bool Menu::opMenuGrupos(int op)
 				cout << e->what() << endl;
 				limpiar();
 			}
+		
 		} while (ex == false);
 		ex = false;
 
@@ -1037,10 +1039,8 @@ bool Menu::opMenuGrupos(int op)
 				cout << e->what() << endl;
 				limpiar();
 			}
-		} while (ex == false);
-		ex = false;
+		
 
-		do {
 			try {
 				horFin = validarHora(horaFinal);
 				ex = true;
@@ -1049,9 +1049,8 @@ bool Menu::opMenuGrupos(int op)
 				cout << e->what() << endl;
 				limpiar();
 			}
-		} while (ex == false);
-		ex = false;
-		do {
+		
+	
 			try {
 				minFin = validarMinuto(horaFinal);
 				ex = true;
@@ -2173,9 +2172,7 @@ void Menu::atualizarINFOgrupo(Grupo* original)
 					cout << e->what() << endl;
 					limpiar();
 				}
-			} while (ex == false);
-			ex = false;
-			do {
+			
 				try {
 					horIn = validarHora(horInicio);
 					ex = true;
