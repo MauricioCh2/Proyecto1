@@ -119,10 +119,15 @@ string Triatlonista::imprimirPAGOS(int k)///Pratica con itre
 			s << "-------(Fechas de Pagos)----------" << endl;
 			s << "---Primera fecha de pago---" << endl;
 			for (; this->iter1->getPNodo() != this->iter2->getPNodo(); this->iter1->operator++()) {
-				s << iter1->operator*()->toString() << endl;
+				if (this->iter1->getPNodo()->getSig() == NULL) {
+					break;
+				}
+				else {
+					s << iter1->operator*()->toString() << endl;
+				}
 			}
-			s << "---Ultima Fecha de Pago---" << endl;
-			s << "----------------------------------" << endl;
+			s << "---Ultima fecha de pago---" << endl;
+			s << "--------------------------------------------------" << endl;
 			this->iter1 = this->ListaDpagos->begin();
 			this->iter2 = this->ListaDpagos->end();
 			s << "-------(Montos Canscelados)-------" << endl;
@@ -130,7 +135,10 @@ string Triatlonista::imprimirPAGOS(int k)///Pratica con itre
 			anterior = this->iter1->getPNodo()->getInfo();
 
 			for (int i = 0; i < this->ListaDpagos->contador(); i++) {
-				if (anterior == this->iter1->getPNodo()->getInfo()) {
+				if (i+1== this->ListaDpagos->contador()) {
+					break;
+				}
+				else if (anterior == this->iter1->getPNodo()->getInfo()) {
 					s << "Cancelado: $" << k * meses << endl;
 				}
 				else {
@@ -139,7 +147,7 @@ string Triatlonista::imprimirPAGOS(int k)///Pratica con itre
 						s << "Cancelado: $" << k * (12 + abs(iter1->getPNodo()->getInfo()->getMes() - anterior->getMes())) << endl;
 					}
 					else{
-						meses = this->iter1->getPNodo()->getInfo()->getMes() - anterior->getMes();
+						meses = abs(this->iter1->getPNodo()->getInfo()->getMes() - anterior->getMes());
 						s << "Cancelado: $" << k * meses << endl;
 					}
 					anterior = this->iter1->getPNodo()->getInfo();

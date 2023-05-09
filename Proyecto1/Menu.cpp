@@ -1560,6 +1560,18 @@ bool Menu::opMenuPagos(int op)
 
 		for (; iter->getPNodo() != iter2->getPNodo(); iter->operator++()) {
 			if (iter->operator*()->getCedula() == cedulAbuscar) {
+				if (Cobro::EstadoDcliente(iter->operator*(), this->fecha) == 3) {
+					fechAux = Cobro::getFechaDeultimoPago(iter->operator*(), this->fecha, _gym->getMensualidadDgym());
+					if (fechAux2->getDia() != 0 && fechAux2->getMes() != 0 && fechAux2->getAno() != 0) {
+						iter->operator*()->setFechaDeultimoPago(this->fecha);
+						ExpeAeditar->getlisFecha()->insertarDultimo(this->fecha);
+						iter->operator*()->setFechaDeultimoPago(fechAux2);
+						ExpeAeditar->getlisFecha()->insertarDultimo(fechAux2);
+						imprimirString("");
+						imprimirString2("ESTE MENSAJE CONFIRMA EL REGISTRO DE UN NUEVO PAGO DE PARTE DEL CLIENTE: ");
+						imprimirInt(cedulAbuscar);
+					}
+				}
 				fechAux = Cobro::getFechaDeultimoPago(iter->operator*(), this->fecha, _gym->getMensualidadDgym());
 				if (fechAux->getAno() == 0 || fechAux->getMes() == 0 || fechAux->getDia() == 0) {
 					imprimirString("Nota de Confirmaccion: NO SE REALIZO NINGUN PAGO ");
@@ -1608,6 +1620,7 @@ bool Menu::opMenuPagos(int op)
 				imprimirString("A continuación se detalla el historial de pagos: ");
 				if (iter->operator*()->getFechaDeultimoPago() != NULL) {
 					imprimirString(iter->operator*()->imprimirPAGOS(_gym->getMensualidadDgym()));
+					enter();
 				}
 				else {
 					imprimirString("{Este cliente esta [inactivo], por lo que no se tiene regitrado un pago reciente}");
